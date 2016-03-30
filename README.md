@@ -1,1 +1,4 @@
-# pracaMagisterska
+## Framework dla terenowych gier RGP
+
+### Wstęp
+Projekt ma na celu stworzenie biblioteki/frameworka umożliwiajcego szybkie tworzenie terenowych gier RPG. Programista korzystajacy z tego narzedzia pelnil bedzie funcje Game Mastera znanego z gier fabularnych. Jego zadaniem bedzie stworzenie ciekawego wirtualnego swiata w czym pomocne mu bedzie odciażenie go od szczegulow implementacyjnych. Framework pozwalal bedzie na stworzenie prostej gry nawet przez malo doswiadczonego pragramiste. Natomiast dla tych doswiadczonych stanowić bedzie dobra baze na dla realizacji ich bardziej ambitnych pomyslów. Biblioteka dostarczala bedzie standardowe implementacje takich elementow jak np. system walki, równoczesnie dajac programiscie mozliwosc latwego ich podmienienia. Stworzenie gry z użyciem narzedzia w najprostrzym przykadku sprowadzać sie bedzie do rozmieszczenie przeciwników na terenie danego obiektu (znacznik NFC) lub danej lokalizacji (Wspólrzedne geograficzne) oraz ustalenia klas postaci dostepnych w danej rozgrywce. Programista bardziej doswiadczony bedzie mógl tworzyc nowe klasy postaci, przedmioty itp., badź też calkowicie zmienic zasady gry. 
