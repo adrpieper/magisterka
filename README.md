@@ -8,7 +8,7 @@ Stworzenie gry z użyciem narzędzia w najprostrzym przykadku sprowadzać sie be
 
 ### Streszczenie
 
-Celem niniejszej pracy jest projekt i implentacja narzędzia pozwalający w prosty sposób tworzyć terenowe gry RPG. Aby osiągnąć ten cel stworzony został specjalny język opisu sceneriuszy oraz zadad panujących w grze. Język ten został zaprojektowany z urzyciem technologii Xtext [2]. Dzięki wykorzystaniu tego narzędzia możliwe było względnie szybkie stworzenie nowego języka zawięrającego takie elementy jak linker, kompiler. Dodatkowo język zintegrowany został z IDE Idea InteliJ co pozwala na podświetlanie oraz automatyczne sprawdzanie składni.
+Celem niniejszej pracy jest projekt i implentacja narzędzia pozwalającegoo w prosty sposób tworzyć terenowe gry RPG. Aby osiągnąć ten cel stworzony został specjalny język opisu sceneriuszy oraz zadad panujących w grze. Język ten został zaprojektowany z użyciem technologii Xtext [2]. Dzięki wykorzystaniu tego narzędzia możliwe było względnie szybkie stworzenie nowego języka zawięrającego takie elementy jak linker, kompiler. Dodatkowo język zintegrowany został z IDE Idea InteliJ co pozwala na podświetlanie oraz automatyczne sprawdzanie składni.
 
 Stworzony silnik gier wykorzystuje technologię NFC w celu lokalizacji graczy w pomieszczeniach, jak i na otwartym terenie. Silnik został zaprojektowany tak, aby projektant gry mógł traktować te dwie technologie w sposób podobny. Z jego punktu widzenia zarówno pomiesznienie oznaczone tagiem NFC, jak i współrzędne geograficzne, stanowią po prostu lokację w której gracza mogą spotkać dowolnego typu przygody. 
 
