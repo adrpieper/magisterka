@@ -1,4 +1,5 @@
-## Framework dla terenowych gier RGP
+### Tytuł
+## NazwaFrameworka - Framework dla terenowych gier RGP
 
 ### Wstęp
 
