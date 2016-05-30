@@ -24,4 +24,5 @@ Android, DSL, Xtext, Location-Based Game, Framework, Engine
 
 ### Bibliografia
 Ian F. Darwin, 2013. Android Receptury. Wydawnictwo: Helion.
+
 [Xtext](https://eclipse.org/Xtext/documentation/index.html)
