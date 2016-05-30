@@ -2,7 +2,7 @@
 
 ### Wstęp
 
-Projekt ma na celu stworzenie biblioteki/frameworka umożliwiajcego szybkie tworzenie terenowych gier RPG. Programista korzystający z tego narzędzia pełnił bedzie funkcję Game Mastera znanego z gier fabularnych. Framework pozwalał będzie na stworzenie prostej gry nawet przez mało doświadczonego programistę. Będzie to możwiwe dzieki strzorzeniu specjalnego języka DSL zaprojektowanego właśnie w tym celu. Składnia języka będzie przyjazna dla programisty-projektanta gry i pozwoli mu się skupić na stworzeniu ciekawego wirtualnego świata w czym pomocne mu będzie odciążenie go od szczegółów implementacyjnych.
+Projekt ma na celu stworzenie biblioteki/frameworka umożliwiajcego szybkie tworzenie terenowych gier RPG. Programista korzystający z tego narzędzia pełnił bedzie funkcję Game Mastera znanego z gier fabularnych. Framework pozwalał będzie na implementacje prostej gry nawet przez mało doświadczonego programistę. Będzie to możliwe dzieki stworzeniu specjalnego języka DSL zaprojektowanego właśnie w tym celu. Składnia języka będzie przyjazna dla programisty-projektanta gry i pozwoli mu się skupić na stworzeniu ciekawego wirtualnego świata w czym pomocne mu będzie odciążenie go od szczegółów implementacyjnych.
 
 Stworzenie gry z użyciem narzędzia w najprostrzym przykadku sprowadzać sie bedzie do rozmieszczenie przeciwników na terenie danego obiektu (znacznik NFC) lub danej lokalizacji (Wspólrzedne geograficzne) oraz ustalenia klas postaci dostepnych w danej rozgrywce.
 
