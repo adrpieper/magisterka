@@ -1,4 +1,3 @@
-### Tytuł
 ## NazwaFrameworka - Framework dla terenowych gier RGP
 
 ### Wstęp
