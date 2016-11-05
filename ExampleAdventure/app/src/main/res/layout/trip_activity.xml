@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Trip..."
+            android:id="@+id/textView" android:layout_gravity="center_horizontal"/>
+    <fragment android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:name="pl.edu.ug.inf.am.trip.view.LocationSelectFragment" android:id="@+id/selectLocation"
+              android:layout_gravity="center_horizontal" tools:layout="@android:layout/list_content"
+              android:layout_weight="1"/>
+    <fragment android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:name="pl.edu.ug.inf.am.trip.view.LocationSelectFragment" android:id="@+id/playerReviewFragment"
+              android:layout_gravity="center_horizontal" tools:layout="@layout/player_review_fragment"
+              android:layout_weight="1"/>
+
+</LinearLayout>

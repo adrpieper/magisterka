@@ -1,0 +1,16 @@
+
+monster GreenDragon {
+    power : 100
+    hp : 200
+    exp : 10
+}
+
+
+item Sword2 {
+    + 12 to str
+    value 100
+}
+
+item Shield2 {
+    value 12
+}

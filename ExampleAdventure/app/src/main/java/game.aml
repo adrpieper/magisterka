@@ -1,0 +1,30 @@
+monster Orc {
+    power : 20
+    hp : 100
+    exp : 10
+}
+
+monster Dragon {
+    power : 100
+    hp : 200
+    exp : 10
+}
+
+monster Troll {
+    power : 10
+    hp : 100
+    exp : 10
+}
+
+location Forrest tagged as Forrest
+location Castle tagged as Castle
+location Mountains tagged as Moutains
+
+item Sword {
+    + 12 to str
+    value 100
+}
+
+item Shield {
+    value 121
+}

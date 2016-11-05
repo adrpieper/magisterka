@@ -1,0 +1,43 @@
+type Knight {
+
+}
+
+item Sword {
+    + 12 to str
+    value 12
+}
+
+
+item Shield {
+    + 2 to str
+    value 6
+}
+
+monster Orc {
+    power : 10
+    hp : 12
+    exp : 14
+    loot :
+    gold 12-32
+    Sword 12 %,
+    Shield 23 %
+}
+
+location For tagged as For
+
+adventure in the For {
+    ask "Do you want to fight?"
+    "Yes, I do" => fight with Orc
+    "No, I don't" => fight with Orc, Orc
+
+}
+
+location Las in radius of 12 meters from ?
+
+adventure in the Las {
+    if you're stronger then 2
+        ask "Czy mnie lubisz?"
+        "Tak" => fight with Orc
+    else
+        fight with Orc, Orc
+}
