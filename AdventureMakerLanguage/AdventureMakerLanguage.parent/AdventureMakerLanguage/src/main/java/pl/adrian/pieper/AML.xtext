@@ -9,7 +9,7 @@ Element:
     Location | CharacterType | Monster | Adventure | Item;
 
 Location:
-	'location' name = ID place = Place;
+    'location' name = ID place = Place;
 
 Place:
     GPSLoc | TagLoc;
@@ -23,14 +23,23 @@ TagLoc:
 ;
 
 CharacterType:
-	'type' name=ID '{'
+    'type' name=ID '{'
 
-	'}';
+    '}';
 
 Monster:
     'monster' name=ID '{'
-        stats=Stats
+    stats=Stats
+    (loot=Loot)?
     '}';
+
+Loot:
+    'loot' ':' ('gold' goldMin=INT '-' goldMax=INT)? (items+=LootItem (',' items+=LootItem)*)
+;
+
+LootItem:
+    type=[Item] chance=INT '%'
+;
 
 Stats:
     'power' ':' power=INT
@@ -38,16 +47,38 @@ Stats:
     'exp' ':' exp=INT;
 
 Adventure:
-    'adventure' 'in' location=[Location] '{'
-        (oponents+=[Monster] (',' oponents+=[Monster])*)?
+    'adventure in the' location=[Location] '{'
+        startStage=Stage
     '}';
 
+Stage:
+    MakeDecision | Test | Fight ;
+
+Test:
+    Condition pos=Stage 'else' neg=Stage;
+
+Condition:
+    'if you\'re stronger then' value=INT
+;
+
+MakeDecision:
+    'ask' question=STRING
+    (case=DecisionCase)+
+;
+
+DecisionCase:
+    answer=STRING '=>' stage=Stage
+;
+
+Fight:
+    'fight with' (oponents+=[Monster] (',' oponents+=[Monster])*)?
+;
 
 Item:
     'item' name=ID '{'
-        (bonuses+=Bonus)*
-        (restrictions+=Restriction)?
-        'value' (value=INT)
+    (bonuses+=Bonus)*
+    (restrictions+=Restriction)?
+    'value' (value=INT)
     '}';
 
 Restriction:
@@ -55,13 +86,13 @@ Restriction:
 
 PositiveRest:
     'can be used only by' (types+=[CharacterType] (',' types+=[CharacterType])*)
-    ;
+;
 
 NegativeRest:
     'can\'t be used by' (types+=[CharacterType] (',' types+=[CharacterType])*)
-    ;
+;
 
 Bonus:
     '+' value=INT 'to' type=('int' | 'str')
-    ;
+;
 

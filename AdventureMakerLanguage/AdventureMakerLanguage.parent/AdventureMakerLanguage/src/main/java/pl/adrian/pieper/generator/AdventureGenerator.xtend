@@ -18,7 +18,7 @@ class AdventureGenerator extends SingleClassGenerator{
             "pl.aml.Adventure"
         )
         addStaticImports(
-            "pl.aml.Monster.*",
+            "pl.aml.MonsterType.*",
             "pl.aml.Location.*"
         )
     }
@@ -47,10 +47,7 @@ class AdventureGenerator extends SingleClassGenerator{
     private def generate(Adventure adventure){
         return '''
         new Adventure (
-            «adventure.getLocation.name.toUpperCase»,
-            «FOR op : adventure.getOponents SEPARATOR ','»
-                «op.name.toUpperCase»
-            «ENDFOR»
+            «adventure.getLocation.name.toUpperCase»
         )
         '''
     }
