@@ -1,0 +1,4 @@
+include 'AdventureMakerLanguage'
+include 'AdventureMakerLanguage.ide'
+include 'AdventureMakerLanguage.idea'
+include 'AdventureMakerLanguage.web'

@@ -1,0 +1,67 @@
+grammar pl.adrian.pieper.AML with org.eclipse.xtext.common.Terminals
+
+generate aML "http://www.adrian.pl/pieper/AML"
+
+Model:
+    elements+=Element*;
+
+Element:
+    Location | CharacterType | Monster | Adventure | Item;
+
+Location:
+	'location' name = ID place = Place;
+
+Place:
+    GPSLoc | TagLoc;
+
+GPSLoc:
+    'in radius of' radius=INT 'meters from' '?'
+;
+
+TagLoc:
+    'tagged as' tag = ID
+;
+
+CharacterType:
+	'type' name=ID '{'
+
+	'}';
+
+Monster:
+    'monster' name=ID '{'
+        stats=Stats
+    '}';
+
+Stats:
+    'power' ':' power=INT
+    'hp' ':' hp=INT
+    'exp' ':' exp=INT;
+
+Adventure:
+    'adventure' 'in' location=[Location] '{'
+        (oponents+=[Monster] (',' oponents+=[Monster])*)?
+    '}';
+
+
+Item:
+    'item' name=ID '{'
+        (bonuses+=Bonus)*
+        (restrictions+=Restriction)?
+        'value' (value=INT)
+    '}';
+
+Restriction:
+    PositiveRest | NegativeRest;
+
+PositiveRest:
+    'can be used only by' (types+=[CharacterType] (',' types+=[CharacterType])*)
+    ;
+
+NegativeRest:
+    'can\'t be used by' (types+=[CharacterType] (',' types+=[CharacterType])*)
+    ;
+
+Bonus:
+    '+' value=INT 'to' type=('int' | 'str')
+    ;
+

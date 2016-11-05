@@ -1,0 +1,93 @@
+<idea-plugin version="2">
+	<extensions defaultExtensionNs="org.eclipse.xtext.idea">
+		<package
+			uri="http://www.adrian.pl/pieper/AML"
+			class="pl.adrian.pieper.aML.AMLPackage"
+		/>
+		<resourceFactory 
+			type="aml"
+			class="org.eclipse.xtext.resource.IResourceFactory"
+			factoryClass="pl.adrian.pieper.idea.AMLExtensionFactory"
+		/>
+		<resourceServiceProvider
+			uriExtension="aml"
+			class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
+			factoryClass="pl.adrian.pieper.idea.AMLExtensionFactory"
+		/>
+
+		<lang.setup
+			language="pl.adrian.pieper.AML"
+			implementationClass="pl.adrian.pieper.idea.AMLIdeaSetup"
+		/>
+	</extensions>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<psi.treeChangePreprocessor implementation="pl.adrian.pieper.idea.lang.psi.AMLCodeBlockModificationListener"/>
+
+		<fileTypeFactory implementation="pl.adrian.pieper.idea.lang.AMLFileTypeFactory"/>
+		<stubElementTypeHolder class="pl.adrian.pieper.idea.lang.AMLElementTypeProvider"/>
+		<lang.ast.factory 
+			language="pl.adrian.pieper.AML"
+			factoryClass="pl.adrian.pieper.idea.AMLExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"
+		/>
+		<lang.parserDefinition 
+			language="pl.adrian.pieper.AML"
+			factoryClass="pl.adrian.pieper.idea.AMLExtensionFactory"
+			implementationClass="pl.adrian.pieper.idea.lang.parser.AMLParserDefinition"
+		/>
+		<lang.findUsagesProvider 
+			language="pl.adrian.pieper.AML"
+			factoryClass="pl.adrian.pieper.idea.AMLExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"
+		/>
+		<lang.refactoringSupport 
+			language="pl.adrian.pieper.AML"
+			factoryClass="pl.adrian.pieper.idea.AMLExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"
+		/>
+		<lang.namesValidator 
+			language="pl.adrian.pieper.AML"
+			factoryClass="pl.adrian.pieper.idea.AMLExtensionFactory"
+			implementationClass="com.intellij.lang.refactoring.NamesValidator"
+		/>
+		<lang.syntaxHighlighterFactory key="pl.adrian.pieper.AML" implementationClass="pl.adrian.pieper.idea.highlighting.AMLSyntaxHighlighterFactory" />
+		<lang.braceMatcher 
+			language="pl.adrian.pieper.AML"
+			factoryClass="pl.adrian.pieper.idea.AMLExtensionFactory"
+			implementationClass="com.intellij.lang.PairedBraceMatcher"
+		/>
+		<annotator 
+			language="pl.adrian.pieper.AML"
+			factoryClass="pl.adrian.pieper.idea.AMLExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"
+		/>
+		<completion.contributor language="pl.adrian.pieper.AML" implementationClass="pl.adrian.pieper.idea.completion.AMLCompletionContributor"/>
+		<pom.declarationSearcher implementation="pl.adrian.pieper.idea.lang.pom.AMLPomDeclarationSearcher"/>
+
+		<lang.psiStructureViewFactory 
+			language="pl.adrian.pieper.AML"
+			factoryClass="pl.adrian.pieper.idea.AMLExtensionFactory"
+			implementationClass="com.intellij.lang.PsiStructureViewFactory"
+		/>
+		<facetType implementation="pl.adrian.pieper.idea.facet.AMLFacetType"/>
+      	<lang.documentationProvider 
+      		language="pl.adrian.pieper.AML"
+      		factoryClass="pl.adrian.pieper.idea.AMLExtensionFactory"
+      		implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"
+      	/>
+		<colorSettingsPage implementation="pl.adrian.pieper.idea.highlighting.AMLColorSettingsPage"/>
+		<highlightVisitor implementation="pl.adrian.pieper.idea.highlighting.AMLSemanticHighlightVisitor"/>
+
+		<lang.formatter 
+			language="pl.adrian.pieper.AML"
+			factoryClass="pl.adrian.pieper.idea.AMLExtensionFactory"
+			implementationClass="com.intellij.formatting.FormattingModelBuilder"
+		/>
+		<lang.commenter 
+			language="pl.adrian.pieper.AML"
+			factoryClass="pl.adrian.pieper.idea.AMLExtensionFactory"
+			implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"
+		/>
+	</extensions>
+</idea-plugin>
