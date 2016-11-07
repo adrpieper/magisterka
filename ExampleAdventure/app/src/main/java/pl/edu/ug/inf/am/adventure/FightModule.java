@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.adventure;
 
-import pl.aml.Monster;
+import pl.aml.MonsterType;
 import pl.edu.ug.inf.am.adventure.model.EnemyModel;
 import pl.edu.ug.inf.am.adventure.model.FightModel;
 import pl.edu.ug.inf.am.adventure.model.ResultModel;
@@ -27,7 +27,7 @@ public class FightModule {
     public FightModel createFightModel() {
         GameState gameState = gameStateManager.getGameState();
         AdventureState adventureState = gameState.getStageState();
-        return new FightModel(new EnemyModel(Monster.ORC), new PlayerModel(gameState.getPlayerState()));
+        return new FightModel(new EnemyModel(MonsterType.ORC), new PlayerModel(gameState.getPlayerState()));
     }
 
     public void fight(FightModel fightModel) {

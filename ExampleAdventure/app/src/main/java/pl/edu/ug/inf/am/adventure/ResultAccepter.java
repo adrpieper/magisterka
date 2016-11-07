@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.adventure;
 
-import pl.aml.Monster;
+import pl.aml.MonsterType;
 import pl.edu.ug.inf.am.adventure.model.ResultModel;
 import pl.edu.ug.inf.am.player.state.PlayerState;
 import pl.edu.ug.inf.am.stage.GameStage;
@@ -27,7 +27,7 @@ public class ResultAccepter {
 
         final AdventureState stageState = gameStateManager.getGameState().getStageState();
         int exp = 0;
-        for (Monster monster : stageState.getKilledMonsters()) {
+        for (MonsterType monster : stageState.getKilledMonsters()) {
             exp += 100;
         }
         return new ResultModel(exp);
