@@ -1,0 +1,10 @@
+.*
+!.gitignore
+*build*
+!*builder*
+!*build.gradle*
+*wrapper*
+*xtend-gen*
+*xtext-gen*
+!AML.xtext
+*generated*
