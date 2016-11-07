@@ -9,4 +9,8 @@ public class Adventure {
 
         this.location = location;
     }
+
+    public Location getLocation() {
+        return location;
+    }
 }

@@ -29,7 +29,7 @@ public class AdventureCreator {
     }
 
     private AdventureState createWith(Adventure adventure){
-        return new AdventureState(adventure.getLocation(), adventure.getMonsters());
+        return new AdventureState(adventure.getLocation());
     }
 
 }

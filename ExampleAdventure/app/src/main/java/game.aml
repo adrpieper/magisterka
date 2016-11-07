@@ -28,3 +28,9 @@ item Sword {
 item Shield {
     value 121
 }
+
+adventure in the Castle {
+    ask "Do you want to fight?"
+    "Yes" => fight with Dragon
+    "No" => fight with Orc
+}
