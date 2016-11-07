@@ -8,3 +8,4 @@ gradle-wrapper.jar
 *xtext-gen*
 !AML.xtext
 *generated*
+*gradlew*
