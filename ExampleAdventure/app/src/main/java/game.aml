@@ -1,36 +1,50 @@
-monster Orc {
-    power : 20
-    hp : 100
-    exp : 10
+location Forrest tagged as For100
+location Park in radius of 10 meters from ?
+
+active skill BigShot {
+    effect : take 12 damage
+    mp : 12
+    cooldown : 1 turns
 }
 
-monster Dragon {
-    power : 100
-    hp : 200
-    exp : 10
+character type Knight {
+    stats on start:
+     12 hp
+     13 mp
+     14 str
+     15 int
+    stats per lvl:
+    + 1 hp
+    + 2 mp
+    + 4 str
+    + 1 int
+    skills tree:
+    BigShot
+    BigShot => {
+        BigShot
+        BigShot
+    }
 }
-
-monster Troll {
-    power : 10
-    hp : 100
-    exp : 10
-}
-
-location Forrest tagged as Forrest
-location Castle tagged as Castle
-location Mountains tagged as Moutains
 
 item Sword {
     + 12 to str
+    can be used only by Knight
     value 100
+
 }
 
-item Shield {
-    value 121
+
+monster Troll {
+    power : 10
+    hp : 20
+    exp : 100
+    loot : gold 12 - 13 Sword 12 %
 }
 
-adventure in the Castle {
-    ask "Do you want to fight?"
-    "Yes" => fight with Dragon
-    "No" => fight with Orc
+
+adventure in the Forrest {
+    if you're not smarter than 12
+        ask "If cos"
+            "Yes" => fight with Troll, Troll
+            "Not" => fight with Troll
 }
