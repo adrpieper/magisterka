@@ -3,7 +3,7 @@
 *build*
 !*builder*
 !*build.gradle*
-*wrapper*
+gradle-wrapper.jar
 *xtend-gen*
 *xtext-gen*
 !AML.xtext
