@@ -1,5 +1,32 @@
-type Knight {
+active skill DoubleBlade {
+    effect : take 120 hitpoints for 3 turns
+    mp : 10
+    cooldown : 2 turns
+}
 
+passive skill MagicAura
+
+
+character type Knight {
+    stats on start:
+    120 hp
+    20 mp
+    13 str
+    8 int
+    stats per lvl:
+    + 15 hp
+    + 5 mp
+    + 2 str
+    + 1 int
+    skills tree:
+    MagicAura => {
+        DoubleBlade => {
+            DoubleBlade
+            MagicAura
+        }
+        MagicAura
+    }
+    DoubleBlade
 }
 
 item Sword {
@@ -17,10 +44,7 @@ monster Orc {
     power : 10
     hp : 12
     exp : 14
-    loot :
-    gold 12-32
-    Sword 12 %,
-    Shield 23 %
+    loot : gold 12-32 Sword 12 %, Shield 23 %
 }
 
 location For tagged as For
@@ -35,7 +59,7 @@ adventure in the For {
 location Las in radius of 12 meters from ?
 
 adventure in the Las {
-    if you're stronger then 2
+    if you're not weaker than 2
         ask "Czy mnie lubisz?"
         "Tak" => fight with Orc
     else

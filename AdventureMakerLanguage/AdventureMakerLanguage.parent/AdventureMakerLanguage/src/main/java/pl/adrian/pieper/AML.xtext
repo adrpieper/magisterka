@@ -6,7 +6,7 @@ Model:
     elements+=Element*;
 
 Element:
-    Location | CharacterType | Monster | Adventure | Item;
+    Location | CharacterType | Monster | Adventure | Item | Skill;
 
 Location:
     'location' name = ID place = Place;
@@ -22,10 +22,47 @@ TagLoc:
     'tagged as' tag = ID
 ;
 
-CharacterType:
-    'type' name=ID '{'
+Skill:
+    ActiveSkill | PassiveSkill
+;
 
+ActiveSkill:
+    'active' 'skill' name=ID '{'
+        'effect' ':' effect+=Effect (',' effect+=Effect)*
+        'mp' ':' mpCost=INT
+        ('cooldown' ':' cooldown=INT 'turns')?
+    '}'
+;
+
+Effect:
+    'take' hp=INT 'damage' ('for' times=INT 'turns')?
+;
+
+PassiveSkill:
+    'passive' 'skill' name=ID
+;
+
+CharacterType:
+    'character' 'type' name=ID '{'
+        'stats on start:'
+            hp=INT 'hp'
+            mp=INT 'mp'
+            str=INT 'str'
+            int=INT 'int'
+        'stats per lvl:'
+            '+' hpPerLevel=INT 'hp'
+            '+' mpPerLevel=INT 'mp'
+            '+' strPerLevel=INT 'str'
+            '+' intPerLevel=INT 'int'
+        'skills tree:'
+        (skillsTrees+=SkillsNode)*
     '}';
+
+SkillsNode:
+    skill=[Skill] ('=>'
+    '{' ( childs +=SkillsNode)* '}')?
+;
+
 
 Monster:
     'monster' name=ID '{'
@@ -55,10 +92,17 @@ Stage:
     MakeDecision | Test | Fight ;
 
 Test:
-    Condition pos=Stage 'else' neg=Stage;
+    Condition pos=Stage ('else' neg=Stage)?;
 
 Condition:
-    'if you\'re stronger then' value=INT
+    'if you\'re' (negation?='not')? contitionType=ConditionType 'than' value=INT
+;
+
+enum ConditionType:
+    STRONGER='stronger' |
+    WEAKER='weaker' |
+    SMARTER='smarter' |
+    DUMBER='dumber'
 ;
 
 MakeDecision:
