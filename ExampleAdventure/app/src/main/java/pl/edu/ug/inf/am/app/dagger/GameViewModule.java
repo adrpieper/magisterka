@@ -2,11 +2,10 @@ package pl.edu.ug.inf.am.app.dagger;
 
 import dagger.Module;
 import dagger.Provides;
+import pl.aml.AStageDisplayer;
 import pl.edu.ug.inf.am.adventure.AdventureViewManager;
-import pl.edu.ug.inf.am.view.StageViewManagers;
-import pl.edu.ug.inf.am.view.ViewManage;
-import pl.edu.ug.inf.am.view.ViewManageImpl;
-import pl.edu.ug.inf.am.view.GameActivity;
+import pl.edu.ug.inf.am.adventure.controller.AStageDisplayerImpl;
+import pl.edu.ug.inf.am.view.*;
 import pl.edu.ug.inf.am.stage.GameStage;
 import pl.edu.ug.inf.am.trip.TripStageViewManager;
 
@@ -19,6 +18,18 @@ public class GameViewModule {
 
     public GameViewModule(GameActivity gameActivity) {
         this.gameActivity = gameActivity;
+    }
+
+    @Provides
+    @Singleton
+    public AStageDisplayer provideAStageDisplayer(DiComponent diComponent, FragmentDisplayer fragmentDisplayer) {
+        return new AStageDisplayerImpl(diComponent, fragmentDisplayer);
+    }
+
+    @Provides
+    @Singleton
+    public FragmentDisplayer provideFragmentDisplayer() {
+        return gameActivity;
     }
 
     @Provides
@@ -41,7 +52,7 @@ public class GameViewModule {
 
     @Provides
     @Singleton
-    public ViewManage provideViewManage(StageViewManagers stageViewManagers, DiComponent diComponent){
-        return new ViewManageImpl(gameActivity,stageViewManagers);
+    public MainController provideViewManage(StageViewManagers stageViewManagers, DiComponent diComponent){
+        return new MainControllerImpl(gameActivity,stageViewManagers);
     }
 }

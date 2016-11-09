@@ -1,38 +1,26 @@
 package pl.edu.ug.inf.am.adventure;
 
-import pl.edu.ug.inf.am.adventure.view.AdventureFragment;
-import pl.edu.ug.inf.am.state.GameStateManager;
-import pl.edu.ug.inf.am.app.dagger.DiComponent;
+import pl.aml.AStageDisplayer;
+import pl.edu.ug.inf.am.adventure.state.AdventureState;
 import pl.edu.ug.inf.am.view.GameActivity;
 import pl.edu.ug.inf.am.view.StageViewManager;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
-/**
- * Created by Adi on 2016-11-02.
- */
+@Singleton
 public class AdventureViewManager implements StageViewManager<AdventureState> {
 
-    private final DiComponent diComponent;
-    private final GameStateManager gameStateManager;
+    private final AStageDisplayer aStageDisplayer;
 
     @Inject
-    public AdventureViewManager(DiComponent diComponent, GameStateManager gameStateManager) {
-        this.diComponent = diComponent;
-        this.gameStateManager = gameStateManager;
+    public AdventureViewManager(AStageDisplayer aStageDisplayer) {
+        this.aStageDisplayer = aStageDisplayer;
     }
+
 
     @Override
     public void showState(AdventureState state, GameActivity gameActivity) {
-
-        if (state.isEnd()) {
-            WinFragment winFragment = new WinFragment();
-            diComponent.inject(winFragment);
-            gameActivity.showFragment(winFragment);
-        }else {
-            AdventureFragment adventureFragment = new AdventureFragment();
-            diComponent.inject(adventureFragment);
-            gameActivity.showFragment(adventureFragment);
-        }
+        state.getAStage().show(aStageDisplayer);
     }
 }

@@ -2,9 +2,6 @@ package pl.edu.ug.inf.am.adventure.model;
 
 import pl.edu.ug.inf.am.player.model.PlayerModel;
 
-/**
- * Created by Adi on 2016-09-19.
- */
 public class FightModel {
 
     private final EnemyModel enemyModel;

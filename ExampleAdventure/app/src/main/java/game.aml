@@ -1,5 +1,5 @@
 location Forrest tagged as For100
-location Park in radius of 10 meters from ?
+location Castle tagged as Castle
 
 active skill BigShot {
     effect : take 12 damage
@@ -35,6 +35,13 @@ item Sword {
 
 
 monster Troll {
+    power : 10
+    hp : 20
+    exp : 100
+    loot : gold 12 - 13 Sword 12 %
+}
+
+monster Orc {
     power : 10
     hp : 20
     exp : 100

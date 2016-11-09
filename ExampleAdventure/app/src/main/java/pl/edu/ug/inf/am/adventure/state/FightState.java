@@ -1,26 +1,19 @@
-package pl.edu.ug.inf.am.adventure;
+package pl.edu.ug.inf.am.adventure.state;
 
-import pl.aml.Location;
 import pl.aml.MonsterType;
-import pl.edu.ug.inf.am.stage.StageState;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Adi on 2016-11-02.
- */
-public class AdventureState extends StageState {
-    private final Location location;
+public class FightState extends AStageState {
     private int enemyHealth = 100;
     private boolean isEnd = false;
     private List<MonsterType> monstersToKill = new ArrayList<>();
     private List<MonsterType> killedMonsters = new ArrayList<>();
     private MonsterType actualMonster;
 
-    public AdventureState(Location location, MonsterType... monsters) {
-        this.location = location;
+    public FightState(MonsterType... monsters) {
         this.monstersToKill.addAll(Arrays.asList(monsters));
     }
 
@@ -33,10 +26,6 @@ public class AdventureState extends StageState {
     }
 
     public void addKilledMonster(MonsterType monster) {}
-
-    public Location getLocation() {
-        return location;
-    }
 
     public void setEnemyHealth(int enemyHealth) {
         this.enemyHealth = enemyHealth;
@@ -56,5 +45,9 @@ public class AdventureState extends StageState {
 
     public boolean isEnd() {
         return isEnd;
+    }
+
+    public int getEnemyHealth() {
+        return enemyHealth;
     }
 }

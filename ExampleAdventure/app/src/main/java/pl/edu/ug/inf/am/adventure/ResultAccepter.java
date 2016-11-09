@@ -2,10 +2,11 @@ package pl.edu.ug.inf.am.adventure;
 
 import pl.aml.MonsterType;
 import pl.edu.ug.inf.am.adventure.model.ResultModel;
+import pl.edu.ug.inf.am.adventure.state.AdventureState;
+import pl.edu.ug.inf.am.adventure.state.FightState;
 import pl.edu.ug.inf.am.player.state.PlayerState;
 import pl.edu.ug.inf.am.stage.GameStage;
 import pl.edu.ug.inf.am.stage.StageManager;
-import pl.edu.ug.inf.am.stage.StageState;
 import pl.edu.ug.inf.am.state.GameStateManager;
 
 import javax.inject.Inject;
@@ -24,11 +25,11 @@ public class ResultAccepter {
     }
 
     public ResultModel createResultModel() {
-
-        final AdventureState stageState = gameStateManager.getGameState().getStageState();
+        AdventureState adventureState = gameStateManager.getGameState().getStageState();
+        final FightState fightState = adventureState.getState();
         int exp = 0;
-        for (MonsterType monster : stageState.getKilledMonsters()) {
-            exp += 100;
+        for (MonsterType monster : fightState.getKilledMonsters()) {
+            exp += monster.getExp();
         }
         return new ResultModel(exp);
     }

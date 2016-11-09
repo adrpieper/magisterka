@@ -1,12 +1,12 @@
 package pl.edu.ug.inf.am.adventure;
 
 import pl.aml.Adventure;
-import pl.aml.AdventuresFactory;
+import pl.aml.Example;
 import pl.aml.Location;
+import pl.edu.ug.inf.am.adventure.state.AdventureState;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.List;
 
 @Singleton
 public class AdventureCreator {
@@ -18,18 +18,15 @@ public class AdventureCreator {
 
     public AdventureState createNew(Location location){
 
-        final List<Adventure> adventures = new AdventuresFactory().createAdventures();
 
-        for (Adventure adventure : adventures) {
-            if (adventure.getLocation().equals(location))
-                return createWith(adventure);
-        }
 
-        return null;
+        return createWith(new Example().example());
     }
 
     private AdventureState createWith(Adventure adventure){
-        return new AdventureState(adventure.getLocation());
+        AdventureState adventureState = new AdventureState();
+        adventureState.setAStage(adventure.getFirstStage());
+        return adventureState;
     }
 
 }

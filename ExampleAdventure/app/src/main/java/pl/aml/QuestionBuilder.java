@@ -1,11 +1,12 @@
 package pl.aml;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionBuilder implements AStageBuilder{
 
     private String question;
-    private List<QuestionAnswer> answers;
+    private List<QuestionAnswer> answers = new ArrayList<>();
 
     public QuestionBuilder(String question) {
         this.question = question;

@@ -1,11 +1,19 @@
 package pl.aml;
 
-public class QuestionAnswer implements AStage{
+public class QuestionAnswer{
     private final String answer;
     private final AStage aStage;
 
     public QuestionAnswer(String answer, AStage aStage) {
         this.answer = answer;
         this.aStage = aStage;
+    }
+
+    public AStage getAStage() {
+        return aStage;
+    }
+
+    public String getAnswer() {
+        return answer;
     }
 }

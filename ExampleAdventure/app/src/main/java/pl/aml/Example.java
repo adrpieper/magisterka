@@ -6,15 +6,15 @@ import static pl.aml.MonsterType.*;
 
 public class Example {
 
-    public void example() {
+    public Adventure example() {
 
-        aNewAdventure()
+        return aNewAdventure()
             .in(CASTLE)
             .startsFrom(
                 aQuestion("Do you want to fight?")
                     .withAnswer("Yes", aFightWith(ORC, TROLL))
                     .withAnswer("No", end())
-            );
+            ).build();
     }
 
 }

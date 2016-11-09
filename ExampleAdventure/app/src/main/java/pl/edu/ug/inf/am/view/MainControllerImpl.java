@@ -3,12 +3,12 @@ package pl.edu.ug.inf.am.view;
 import pl.edu.ug.inf.am.state.GameState;
 
 
-public class ViewManageImpl implements ViewManage {
+public class MainControllerImpl implements MainController {
 
     private final GameActivity gameActivity;
     private final StageViewManagers stageViewManagers;
 
-    public ViewManageImpl(GameActivity gameActivity, StageViewManagers stageViewManagers) {
+    public MainControllerImpl(GameActivity gameActivity, StageViewManagers stageViewManagers) {
         this.gameActivity = gameActivity;
         this.stageViewManagers = stageViewManagers;
     }

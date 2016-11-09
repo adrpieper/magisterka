@@ -25,4 +25,8 @@ public class AdventureBuilder {
         this.firstStage = firstStage;
         return this;
     }
+
+    public Adventure build(){
+        return new Adventure(location, firstStage);
+    }
 }

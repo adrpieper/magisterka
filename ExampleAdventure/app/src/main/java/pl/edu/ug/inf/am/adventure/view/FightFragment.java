@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import pl.edu.ug.inf.am.R;
-import pl.edu.ug.inf.am.adventure.FightModule;
+import pl.edu.ug.inf.am.adventure.FightController;
 import pl.edu.ug.inf.am.adventure.model.EnemyModel;
 import pl.edu.ug.inf.am.adventure.model.FightModel;
 import pl.edu.ug.inf.am.databinding.EnemyViewBinding;
@@ -17,10 +17,10 @@ import pl.edu.ug.inf.am.view.GameFragment;
 
 import javax.inject.Inject;
 
-public class AdventureFragment extends GameFragment{
+public class FightFragment extends GameFragment{
 
     @Inject
-    FightModule adventureModelModule;
+    FightController adventureModelModule;
     private FightModel fightModel;
 
     @Nullable
