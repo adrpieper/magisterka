@@ -1,15 +1,18 @@
 package pl.edu.ug.inf.am.adventure.view;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
+import android.widget.*;
+import pl.adrian.bindinge.Adapters;
+import pl.adrian.bindinge.ModelBinder;
+import pl.adrian.bindinge.ViewFactories;
+import pl.adrian.bindinge.ViewFactory;
 import pl.aml.Location;
 import pl.aml.Question;
 import pl.aml.QuestionAnswer;
@@ -30,7 +33,7 @@ public class QuestionFragment extends Fragment {
         final QuestionLayoutBinding binding = QuestionLayoutBinding.inflate(inflater);
 
         binding.questionTextView.setText(question.getQuestion());
-        binding.answersListView.setAdapter(new AnswersAdapter(question.getAnswers()));
+        binding.answersListView.setAdapter(createAdapter(question));
         binding.answersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -40,42 +43,22 @@ public class QuestionFragment extends Fragment {
         return binding.getRoot();
     }
 
-    class AnswersAdapter extends BaseAdapter {
-
-
-        private final QuestionAnswer[] answers;
-
-        public AnswersAdapter(QuestionAnswer[] answers) {
-
-            this.answers = answers;
-        }
-
-        @Override
-        public int getCount() {
-            return answers.length;
-        }
-
-        @Override
-        public QuestionAnswer getItem(int position) {
-            return answers[position];
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            TextView textView;
-            if (convertView instanceof TextView){
-                textView = (TextView) convertView;
-            }else {
-                textView = new TextView(getActivity());
-            }
-            textView.setText(getItem(position).getAnswer());
-            return textView;
-        }
+    private ListAdapter createAdapter(Question question) {
+        return Adapters.createFor(getActivity(), TextView.class, question.getAnswers())
+                .withBinder(createBinder())
+                .withViewFactory(ViewFactories.textViewFactory())
+                .bind();
     }
+
+    @NonNull
+    private static ModelBinder<TextView, QuestionAnswer> createBinder() {
+        return new ModelBinder<TextView, QuestionAnswer>() {
+            @Override
+            public void bind(TextView view, QuestionAnswer model) {
+                view.setText(model.getAnswer());
+            }
+        };
+    }
+
+
 }
