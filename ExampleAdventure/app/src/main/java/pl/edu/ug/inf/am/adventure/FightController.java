@@ -1,14 +1,12 @@
 package pl.edu.ug.inf.am.adventure;
 
-import pl.edu.ug.inf.am.GameStageStateProvider;
+import pl.aml.MonsterType;
 import pl.edu.ug.inf.am.adventure.logic.FightLogic;
 import pl.edu.ug.inf.am.adventure.model.EnemyModel;
 import pl.edu.ug.inf.am.adventure.model.FightModel;
+import pl.edu.ug.inf.am.adventure.state.AdventureStateManager;
 import pl.edu.ug.inf.am.adventure.state.FightState;
 import pl.edu.ug.inf.am.player.model.PlayerModel;
-import pl.edu.ug.inf.am.player.state.PlayerState;
-import pl.edu.ug.inf.am.state.GameStateManager;
-import pl.edu.ug.inf.am.view.MainController;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,43 +14,43 @@ import javax.inject.Singleton;
 @Singleton
 public class FightController {
 
-    private final GameStateManager gameStateManager;
-    private final GameStageStateProvider stateProvider;
-    private final MainController mainController;
+    private final AdventureStateManager adventureStateManager;
+    private final AStagePresenter aStagePresenter;
     private final FightLogic fightLogic;
 
     @Inject
-    public FightController(GameStateManager gameStateManager, GameStageStateProvider stateProvider, MainController mainController, FightLogic fightLogic) {
-        this.gameStateManager = gameStateManager;
-        this.stateProvider = stateProvider;
-        this.mainController = mainController;
+    public FightController(AdventureStateManager adventureStateManager, AStagePresenter aStagePresenter, FightLogic fightLogic) {
+        this.adventureStateManager = adventureStateManager;
+        this.aStagePresenter = aStagePresenter;
         this.fightLogic = fightLogic;
     }
 
     public FightModel createFightModel() {
-        FightState fightState = stateProvider.getAdventureState().getState();
+        FightState fightState = adventureStateManager.getState();
         return new FightModel(
             new EnemyModel(fightState.getActualMonster(), fightState.getEnemyHealth()),
-            new PlayerModel(gameStateManager.getGameState().getPlayerState())
+            new PlayerModel(adventureStateManager.getPlayerState()),
+            fightState.getResult()
         );
     }
 
+    public void nextEnemy(FightModel fightModel) {
+
+        final MonsterType monsterType = fightLogic.nextEnemy();
+        fightModel.setEnemy(new EnemyModel(monsterType));
+        fightModel.setResult(FightState.Result.FIGHT);
+    }
+
     public void fight(FightModel fightModel) {
-        final EnemyModel enemy = fightModel.getEnemyModel();
-        final PlayerModel player = fightModel.getPlayerModel();
 
-        FightState state = stateProvider.getAdventureState().getState();
-        PlayerState playerState = gameStateManager.getGameState().getPlayerState();
-        final FightResultDTO result = fightLogic.fight(state, playerState);
+        final FightResultDTO result = fightLogic.fight();
 
-        enemy.health.set(result.enemyHp);
-        player.hp.set(result.playerHp);
-        state.setEnemyHealth(result.enemyHp);
-        playerState.setHealt(result.playerHp);
-
-        if (result.enemyHp == 0 || result.playerHp == 0){
-            state.setIsEnd(true);
-            mainController.show(gameStateManager.getGameState());
+        if (result.result.isEnd()) {
+            aStagePresenter.showWin();
+        }else {
+            fightModel.getEnemy().hp.set(result.enemyHp);
+            fightModel.getPlayer().hp.set(result.playerHp);
+            fightModel.setResult(result.result);
         }
     }
 

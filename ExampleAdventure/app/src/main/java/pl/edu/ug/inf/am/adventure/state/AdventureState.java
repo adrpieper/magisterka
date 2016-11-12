@@ -3,9 +3,13 @@ package pl.edu.ug.inf.am.adventure.state;
 import pl.aml.AStage;
 import pl.edu.ug.inf.am.stage.StageState;
 
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Stack;
+
 public class AdventureState extends StageState {
-    private AStage AStage;
     private AStageState state;
+    private Stack<AStage> stagesStack = new Stack<>();
 
     public void setState(AStageState state) {
         this.state = state;
@@ -15,11 +19,13 @@ public class AdventureState extends StageState {
         return (T) state;
     }
 
-    public void setAStage(pl.aml.AStage AStage) {
-        this.AStage = AStage;
+    public void addStages(Collection<AStage> stageFactories){
+        for (AStage stage : stageFactories) {
+            stagesStack.push(stage);
+        }
     }
 
-    public <T extends AStage> T getAStage() {
-        return (T) AStage;
+    public Stack<AStage> getStagesStack() {
+        return stagesStack;
     }
 }

@@ -2,8 +2,7 @@ package pl.edu.ug.inf.am.adventure.controller;
 
 import pl.aml.Question;
 import pl.aml.QuestionAnswer;
-import pl.edu.ug.inf.am.GameStageStateProvider;
-import pl.edu.ug.inf.am.adventure.state.AdventureState;
+import pl.edu.ug.inf.am.adventure.state.AdventureStateManager;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -12,12 +11,12 @@ import javax.inject.Singleton;
 public class QuestionController {
 
     private final AdventureStageStarter adventureStageStarter;
-    private final GameStageStateProvider stateProvider;
+    private final AdventureStateManager stateManager;
 
     @Inject
-    public QuestionController(AdventureStageStarter adventureStageStarter, GameStageStateProvider stateProvider) {
+    public QuestionController(AdventureStageStarter adventureStageStarter, AdventureStateManager stateManager) {
         this.adventureStageStarter = adventureStageStarter;
-        this.stateProvider = stateProvider;
+        this.stateManager = stateManager;
     }
 
     public void answer(QuestionAnswer questionAnswer){
@@ -25,6 +24,6 @@ public class QuestionController {
     }
 
     public Question getQuestion(){
-        return stateProvider.getAdventureState().getAStage();
+        return stateManager.getStage();
     }
 }

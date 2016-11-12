@@ -1,8 +1,7 @@
 package pl.aml;
 
-/**
- * Created by adrian on 07.11.16.
- */
+import java.util.Arrays;
+
 public class AFight implements AStage {
     private MonsterType[] opponents;
 
@@ -10,17 +9,8 @@ public class AFight implements AStage {
         this.opponents = opponents;
     }
 
-    public MonsterType[] getOpponents() {
-        return opponents;
-    }
-
     @Override
-    public void show(AStageDisplayer manager) {
-        manager.show(this);
-    }
-
-    @Override
-    public void init(AStageInitializer initializer) {
-        initializer.init(this);
+    public void run(AdventureEngine initializer) {
+        initializer.fight(Arrays.asList(opponents));
     }
 }

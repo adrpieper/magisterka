@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="pl.edu.ug.inf.am.adventure.state.FightState.Result"/>
+        <variable name="fight" type="pl.edu.ug.inf.am.adventure.model.FightModel"/>
+    </data>
+    <LinearLayout
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
 
-    <include
-            android:id="@+id/enemy_view"
+        <include
+                android:id="@+id/enemy_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/enemy_view"
+                bind:enemy="@{fight.enemy}"
+                android:layout_gravity="center_horizontal|top" />
+        <include
+            android:id="@+id/player_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/enemy_view"
+            layout="@layout/player_view"
+            bind:player="@{fight.player}"
             android:layout_gravity="center_horizontal|top" />
-    <include
-        android:id="@+id/player_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/player_view"
-        android:layout_gravity="center_horizontal|top" />
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Attack"
-            android:id="@+id/attack_button" android:layout_gravity="center_horizontal"/>
-</LinearLayout>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{fight.result == Result.FIGHT ? "attack" : "next enemy"}'
+                android:id="@+id/attack_button" android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+</layout>

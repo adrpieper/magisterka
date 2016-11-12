@@ -41,9 +41,9 @@ monster Troll {
     loot : gold 12 - 13 Sword 12 %
 }
 
-monster Orc {
+monster Dragon {
     power : 10
-    hp : 20
+    hp : 200
     exp : 100
     loot : gold 12 - 13 Sword 12 %
 }

@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.app.dagger;
 
 import dagger.Component;
-import pl.edu.ug.inf.am.adventure.WinFragment;
+import pl.edu.ug.inf.am.adventure.view.WinFragment;
 import pl.edu.ug.inf.am.adventure.view.FightFragment;
 import pl.edu.ug.inf.am.adventure.view.QuestionFragment;
 import pl.edu.ug.inf.am.state.GameStateManager;

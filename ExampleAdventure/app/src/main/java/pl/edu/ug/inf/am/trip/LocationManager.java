@@ -1,6 +1,7 @@
 package pl.edu.ug.inf.am.trip;
 
-import pl.aml.AStageInitializer;
+import pl.aml.Adventure;
+import pl.aml.AdventureEngine;
 import pl.aml.Location;
 import pl.edu.ug.inf.am.adventure.AdventureCreator;
 import pl.edu.ug.inf.am.adventure.state.AdventureState;
@@ -15,20 +16,20 @@ public class LocationManager {
 
     private final StageManager stageManager;
     private final AdventureCreator adventureCreator;
-    private final AStageInitializer initializer;
+    private final AdventureEngine adventureEngine;
 
     @Inject
-    public LocationManager(StageManager stageManager, AdventureCreator adventureCreator, AStageInitializer initializer) {
+    public LocationManager(StageManager stageManager, AdventureCreator adventureCreator, AdventureEngine adventureEngine) {
         this.stageManager = stageManager;
         this.adventureCreator = adventureCreator;
-        this.initializer = initializer;
+        this.adventureEngine = adventureEngine;
     }
 
     public void enterInto(Location location) {
 
-        final AdventureState adventureState = adventureCreator.createNew(location);
-        adventureState.getAStage().init(initializer);
-        stageManager.changeStage(GameStage.ADVENTURE, adventureState);
+        Adventure adventure = adventureCreator.createNew(location);
+        adventure.getFirstStage().run(adventureEngine);
+        stageManager.changeStage(GameStage.ADVENTURE, new AdventureState());
 
     }
 }

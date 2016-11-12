@@ -16,24 +16,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{"hp: "+enemy.health}'
+            android:text='@{"hp: "+enemy.hp}'
             android:id="@+id/healthTextView" />
-
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar"
-            android:max="100"
-            android:progress="@{enemy.health}"/>
 
         <SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/seekBar"
             android:layout_gravity="center_horizontal"
-            android:max="100"
-            android:progress="@{enemy.health}"
+            android:max="@{enemy.maxHp}"
+            android:progress="@{enemy.hp}"
             android:interpolator="@android:anim/accelerate_interpolator"/>
     </LinearLayout>
 </layout>

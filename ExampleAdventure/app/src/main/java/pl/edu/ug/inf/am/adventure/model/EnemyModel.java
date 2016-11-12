@@ -4,24 +4,21 @@ import android.databinding.ObservableInt;
 import pl.aml.MonsterType;
 
 public class EnemyModel {
-    public final ObservableInt health = new ObservableInt();
-    private final String name;
+    public final ObservableInt hp = new ObservableInt();
+    public final String name;
+    public final int maxHp;
 
     public EnemyModel(MonsterType monster){
         this(monster, monster.getHp());
     }
 
-    public EnemyModel(MonsterType actualMonster, int enemyHealth) {
-        this(actualMonster.name(), enemyHealth);
+    public EnemyModel(MonsterType actualMonster, int hp) {
+        this(actualMonster.name(), actualMonster.getHp(), hp);
     }
 
-    public EnemyModel(String name, int health) {
-        this.health.set(health);
+    public EnemyModel(String name, int maxHp, int hp) {
+        this.maxHp = maxHp;
+        this.hp.set(hp);
         this.name = name;
-    }
-
-
-    public String getName() {
-        return name;
     }
 }

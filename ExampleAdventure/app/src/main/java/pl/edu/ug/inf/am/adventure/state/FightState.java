@@ -3,18 +3,18 @@ package pl.edu.ug.inf.am.adventure.state;
 import pl.aml.MonsterType;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class FightState extends AStageState {
     private int enemyHealth = 100;
-    private boolean isEnd = false;
+    private Result result = Result.FIGHT;
     private List<MonsterType> monstersToKill = new ArrayList<>();
     private List<MonsterType> killedMonsters = new ArrayList<>();
     private MonsterType actualMonster;
 
-    public FightState(MonsterType... monsters) {
-        this.monstersToKill.addAll(Arrays.asList(monsters));
+    public FightState(Collection<MonsterType> monsters) {
+        this.monstersToKill.addAll(monsters);
     }
 
     public List<MonsterType> getKilledMonsters() {
@@ -31,9 +31,6 @@ public class FightState extends AStageState {
         this.enemyHealth = enemyHealth;
     }
 
-    public void setIsEnd(boolean isEnd) {
-        this.isEnd = isEnd;
-    }
 
     public void setActualMonster(MonsterType actualMonster) {
         this.actualMonster = actualMonster;
@@ -43,11 +40,36 @@ public class FightState extends AStageState {
         return actualMonster;
     }
 
-    public boolean isEnd() {
-        return isEnd;
-    }
-
     public int getEnemyHealth() {
         return enemyHealth;
+    }
+
+    public void removeMonsterToKill(MonsterType monsterType) {
+        monstersToKill.remove(monsterType);
+    }
+
+    public void setResult(Result result) {
+        this.result = result;
+    }
+
+    public Result getResult() {
+        return result;
+    }
+
+    public enum Result {
+        WIN(true),
+        LOST(true),
+        ENEMY_KILLED(false),
+        FIGHT(false);
+
+        private final boolean isEnd;
+
+        Result(boolean isEnd) {
+            this.isEnd = isEnd;
+        }
+
+        public boolean isEnd() {
+            return isEnd;
+        }
     }
 }

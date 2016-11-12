@@ -1,13 +1,12 @@
 package pl.edu.ug.inf.am.adventure;
 
+import pl.aml.End;
 import pl.aml.MonsterType;
+import pl.edu.ug.inf.am.adventure.controller.AdventureStageStarter;
+import pl.edu.ug.inf.am.adventure.state.AdventureStateManager;
 import pl.edu.ug.inf.am.adventure.model.ResultModel;
-import pl.edu.ug.inf.am.adventure.state.AdventureState;
 import pl.edu.ug.inf.am.adventure.state.FightState;
 import pl.edu.ug.inf.am.player.state.PlayerState;
-import pl.edu.ug.inf.am.stage.GameStage;
-import pl.edu.ug.inf.am.stage.StageManager;
-import pl.edu.ug.inf.am.state.GameStateManager;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -15,18 +14,17 @@ import javax.inject.Singleton;
 @Singleton
 public class ResultAccepter {
 
-    private final GameStateManager gameStateManager;
-    private final StageManager stageManager;
+    private final AdventureStateManager adventureStateManager;
+    private final AdventureStageStarter adventureStageStarter;
 
     @Inject
-    public ResultAccepter(GameStateManager gameStateManager, StageManager stageManager) {
-        this.gameStateManager = gameStateManager;
-        this.stageManager = stageManager;
+    public ResultAccepter(AdventureStateManager adventureStateManager, AdventureStageStarter adventureStageStarter) {
+        this.adventureStateManager = adventureStateManager;
+        this.adventureStageStarter = adventureStageStarter;
     }
 
     public ResultModel createResultModel() {
-        AdventureState adventureState = gameStateManager.getGameState().getStageState();
-        final FightState fightState = adventureState.getState();
+        final FightState fightState = adventureStateManager.getState();
         int exp = 0;
         for (MonsterType monster : fightState.getKilledMonsters()) {
             exp += monster.getExp();
@@ -35,9 +33,9 @@ public class ResultAccepter {
     }
 
     public void acceptResult(ResultModel result) {
-        final PlayerState playerState = gameStateManager.getGameState().getPlayerState();
+        final PlayerState playerState = adventureStateManager.getPlayerState();
         int actualExp = playerState.getExperience();
         playerState.setExperience(actualExp + result.getGainedExp());
-        stageManager.changeStage(GameStage.TRIP, null);
+        adventureStageStarter.start(new End());;
     }
 }

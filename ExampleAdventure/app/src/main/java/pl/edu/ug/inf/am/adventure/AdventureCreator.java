@@ -16,18 +16,10 @@ public class AdventureCreator {
 
     }
 
-    public AdventureState createNew(Location location){
-
-
-
-        return createWith(new Example().example());
+    public Adventure createNew(Location location){
+        return new Example().example();
     }
 
-    private AdventureState createWith(Adventure adventure){
-        AdventureState adventureState = new AdventureState();
-        adventureState.setAStage(adventure.getFirstStage());
-        return adventureState;
-    }
 
 }
 

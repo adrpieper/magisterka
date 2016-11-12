@@ -1,5 +1,7 @@
 package pl.aml;
 
+import pl.edu.ug.inf.am.adventure.AStagePresenter;
+
 public class Question implements AStage {
 
     private final String question;
@@ -11,13 +13,13 @@ public class Question implements AStage {
     }
 
     @Override
-    public void show(AStageDisplayer manager) {
+    public void show(AStagePresenter manager) {
         manager.show(this);
     }
 
     @Override
-    public void init(AStageInitializer initializer) {
-        initializer.init(this);
+    public void run(AdventureEngine initializer) {
+        initializer.ask(question,answers);
     }
 
     public String getQuestion() {

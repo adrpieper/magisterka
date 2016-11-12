@@ -1,4 +1,4 @@
-package pl.edu.ug.inf.am.adventure;
+package pl.edu.ug.inf.am.adventure.view;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import pl.edu.ug.inf.am.R;
+import pl.edu.ug.inf.am.adventure.ResultAccepter;
 import pl.edu.ug.inf.am.adventure.model.ResultModel;
 import pl.edu.ug.inf.am.databinding.FightResultViewBinding;
 
