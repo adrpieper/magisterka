@@ -1,23 +1,18 @@
 package pl.edu.ug.inf.am.adventure.state;
 
 import pl.aml.AStage;
-import pl.edu.ug.inf.am.stage.StageState;
+import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
 
+import javax.inject.Inject;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Stack;
 
-public class AdventureState extends StageState {
-    private AStageState state;
+@PerAdventure
+public class AdventureState {
     private Stack<AStage> stagesStack = new Stack<>();
 
-    public void setState(AStageState state) {
-        this.state = state;
-    }
-
-    public <T extends AStageState> T getState() {
-        return (T) state;
-    }
+    @Inject
+    public AdventureState() {}
 
     public void addStages(Collection<AStage> stageFactories){
         for (AStage stage : stageFactories) {
@@ -25,7 +20,11 @@ public class AdventureState extends StageState {
         }
     }
 
-    public Stack<AStage> getStagesStack() {
-        return stagesStack;
+    public AStage popFirstStage() {
+        return stagesStack.pop();
+    }
+
+    public boolean hasMoreStages() {
+        return !stagesStack.isEmpty();
     }
 }

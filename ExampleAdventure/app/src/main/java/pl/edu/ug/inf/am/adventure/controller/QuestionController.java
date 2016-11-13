@@ -1,29 +1,29 @@
 package pl.edu.ug.inf.am.adventure.controller;
 
-import pl.aml.Question;
+import pl.aml.AdventureEngine;
 import pl.aml.QuestionAnswer;
-import pl.edu.ug.inf.am.adventure.state.AdventureStateManager;
+import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
+import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
-@Singleton
+@PerAdventureStage
 public class QuestionController {
 
-    private final AdventureStageStarter adventureStageStarter;
-    private final AdventureStateManager stateManager;
+    private final AdventureEngine engine;
+    private final QuestionState questionState;
 
     @Inject
-    public QuestionController(AdventureStageStarter adventureStageStarter, AdventureStateManager stateManager) {
-        this.adventureStageStarter = adventureStageStarter;
-        this.stateManager = stateManager;
+    public QuestionController(AdventureEngine engine, QuestionState questionState) {
+        this.engine = engine;
+        this.questionState = questionState;
     }
 
     public void answer(QuestionAnswer questionAnswer){
-        adventureStageStarter.start(questionAnswer.getAStage());
+        questionAnswer.getAStage().run(engine);
     }
 
-    public Question getQuestion(){
-        return stateManager.getStage();
+    public QuestionState getQuestion(){
+        return questionState;
     }
 }

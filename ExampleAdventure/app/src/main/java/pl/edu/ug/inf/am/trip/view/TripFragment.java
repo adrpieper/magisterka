@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import pl.edu.ug.inf.am.databinding.TripFragmentBinding;
+import pl.edu.ug.inf.am.trip.controller.TripNavigator;
 
 import javax.inject.Inject;
 

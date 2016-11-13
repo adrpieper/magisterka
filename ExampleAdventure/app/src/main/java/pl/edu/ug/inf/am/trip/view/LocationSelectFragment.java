@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import pl.aml.Location;
-import pl.edu.ug.inf.am.trip.LocationManager;
-import pl.edu.ug.inf.am.view.GameFragment;
+import pl.edu.ug.inf.am.trip.controller.LocationManager;
+import pl.edu.ug.inf.am.game.view.GameFragment;
 
 import javax.inject.Inject;
 

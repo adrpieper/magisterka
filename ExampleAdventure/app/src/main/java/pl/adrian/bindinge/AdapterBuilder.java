@@ -2,7 +2,6 @@ package pl.adrian.bindinge;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.ListAdapter;
 
 import java.util.List;
 
@@ -30,6 +29,6 @@ public class AdapterBuilder<ViewType extends View, ModelType> {
     }
 
     public ListAdapter bind() {
-        return new ArrayAdapter(viewClass, binder, viewFactory, context, objects);
+        return new ListAdapter(viewClass, binder, viewFactory, context, objects);
     }
 }

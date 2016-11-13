@@ -1,65 +1,53 @@
 package pl.edu.ug.inf.am.adventure;
 
 import pl.aml.*;
-import pl.edu.ug.inf.am.adventure.controller.AdventureStageStarter;
-import pl.edu.ug.inf.am.adventure.state.AdventureStateManager;
-import pl.edu.ug.inf.am.adventure.state.FightState;
-import pl.edu.ug.inf.am.adventure.state.QuestionState;
-import pl.edu.ug.inf.am.stage.GameStage;
-import pl.edu.ug.inf.am.stage.StageManager;
+import pl.edu.ug.inf.am.adventure.stage.AdventureStagesManager;
+import pl.edu.ug.inf.am.adventure.state.AdventureState;
+import pl.edu.ug.inf.am.adventure.fight.state.FightState;
+import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
+import pl.edu.ug.inf.am.game.stage.GameStagesManager;
 
-import java.util.Collection;
 import java.util.List;
 
 public class AdventureEngineImpl implements AdventureEngine {
 
-    private final AdventureStateManager adventureStateManager;
-    private final AdventureStageStarter adventureStageStarter;
-    private final AStagePresenter aStagePresenter;
-    private final StageManager stageManager;
+    private final AdventureState adventureState;
+    private final AdventureStagesManager adventureStagesManager;
 
-    public AdventureEngineImpl(AdventureStateManager adventureStateManager, AdventureStageStarter adventureStageStarter, AStagePresenter aStagePresenter, StageManager stageManager) {
-        this.adventureStateManager = adventureStateManager;
-        this.adventureStageStarter = adventureStageStarter;
-        this.aStagePresenter = aStagePresenter;
-        this.stageManager = stageManager;
+    public AdventureEngineImpl(AdventureState adventureState, AdventureStagesManager adventureStagesManager) {
+        this.adventureState = adventureState;
+        this.adventureStagesManager = adventureStagesManager;
     }
 
 
     @Override
-    public void fight(Collection<MonsterType> opponents) {
-        final FightState state = new FightState(opponents);
-        final MonsterType actualMonster = state.getMonstersToKill().get(0);
-        state.setActualMonster(actualMonster);
-        state.setEnemyHealth(actualMonster.getHp());
-        adventureStateManager.setState(state);
-        aStagePresenter.showFight();
+    public void fight(List<MonsterType> opponents) {
+        adventureStagesManager.startFight(new FightState(opponents));
     }
 
     @Override
     public void end() {
-        if (adventureStateManager.getStagesStack().isEmpty()) {
-            stageManager.changeStage(GameStage.TRIP, null);
+        if (adventureState.hasMoreStages()) {
+            runFirstOnStack();
         }
         else {
-            runFirstOnStack();
+            adventureStagesManager.endAdventure();
         }
     }
 
     @Override
     public void addStages(List<AStage> stages) {
-        adventureStateManager.addStages(stages);
+        adventureState.addStages(stages);
         runFirstOnStack();
     }
 
     @Override
-    public void ask(String question, Collection<QuestionAnswer> answers) {
-        adventureStateManager.setState(new QuestionState(question,answers));
-        aStagePresenter.showQuestion();
+    public void ask(String question, List<QuestionAnswer> answers) {
+        adventureStagesManager.startQuestion(new QuestionState(question,answers));
     }
 
     private void runFirstOnStack() {
-        adventureStateManager.getStagesStack().pop().run(this);
+        adventureState.popFirstStage().run(this);
     }
 
 }

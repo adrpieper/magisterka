@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme"
         android:name=".app.App">
 
-        <activity android:name="pl.edu.ug.inf.am.view.GameActivity" android:label="@string/app_name">
+        <activity android:name=".game.view.GameActivity" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,12 +1,18 @@
 package pl.edu.ug.inf.am.player.state;
 
-/**
- * Created by Adi on 2016-11-02.
- */
+import pl.edu.ug.inf.am.game.dagger.PerGame;
+
+import javax.inject.Inject;
+
+@PerGame
 public class PlayerState {
     private int healt = 100;
     private String name = "Edek";
     private int experience;
+
+    @Inject
+    public PlayerState() {
+    }
 
     public void setHealt(int healt) {
         this.healt = healt;
@@ -19,7 +25,6 @@ public class PlayerState {
     public String getName() {
         return name;
     }
-
 
     public int getExperience() {
         return experience;

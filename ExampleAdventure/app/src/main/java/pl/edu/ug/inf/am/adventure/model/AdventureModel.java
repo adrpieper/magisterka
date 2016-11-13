@@ -1,6 +1,7 @@
 package pl.edu.ug.inf.am.adventure.model;
 
 import pl.aml.Location;
+import pl.edu.ug.inf.am.adventure.fight.model.EnemyModel;
 
 /**
  * Created by Adi on 2016-09-19.
