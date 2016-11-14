@@ -4,20 +4,29 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 import pl.edu.ug.inf.am.app.dagger.AppComponent;
+import pl.edu.ug.inf.am.app.dagger.DaggerAppComponent;
+import pl.edu.ug.inf.am.common.ComponentsManager;
 import pl.edu.ug.inf.am.game.view.GameActivity;
 
 public class App extends Application {
 
     private AppComponent appComponent;
 
+    public static <T> T getComponent(Class<T> componentInterface) {
+        return componentsManager.get(componentInterface);
+    }
+
+    private static ComponentsManager componentsManager;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        appComponent = null;
+        appComponent = DaggerAppComponent.builder().build();
+        componentsManager = appComponent.componentsManager();
+        componentsManager.add(AppComponent.class, appComponent);
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle bundle) {
-
             }
 
             @Override
@@ -28,7 +37,7 @@ public class App extends Application {
             @Override
             public void onActivityResumed(Activity activity) {
                 if (activity instanceof GameActivity) {
-                    appComponent.appStagesManager().startOrResumeGame((GameActivity) activity);
+                    appComponent.subComponentsManager().startOrResumeGame((GameActivity) activity);
                 }
             }
 
@@ -54,7 +63,4 @@ public class App extends Application {
         });
     }
 
-    public AppComponent getAppComponent() {
-        return appComponent;
-    }
 }

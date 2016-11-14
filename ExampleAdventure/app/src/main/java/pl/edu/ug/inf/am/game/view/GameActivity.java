@@ -9,6 +9,8 @@ import pl.edu.ug.inf.am.R;
 
 public class GameActivity extends Activity {
 
+    private static final String CENTER_FRAGMENT_TAG = "C_F_T";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +19,8 @@ public class GameActivity extends Activity {
 
     public void showFragment(Fragment gameFragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.center_fragment, gameFragment);
+        fragmentTransaction.replace(R.id.center_fragment, gameFragment, CENTER_FRAGMENT_TAG);
         fragmentTransaction.commit();
     }
+
 }

@@ -18,6 +18,10 @@ public class AmlInternalDSL {
         return new AFight(opponnents);
     }
 
+    public static ConditionBuilder check(APredicate predicate) {
+        return new ConditionBuilder().withPredicate(predicate);
+    }
+
     public static End end(){
         return new End();
     }

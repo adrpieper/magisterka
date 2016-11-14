@@ -22,16 +22,6 @@ public class TripStage implements StageLifecycle<Void> {
     }
 
     @Override
-    public void onResume() {
-        tripNavigator.showTrip();
-    }
-
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
     public void onEnd() {
 
     }

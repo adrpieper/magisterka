@@ -11,7 +11,7 @@ public class Example {
         return aNewAdventure()
             .in(CASTLE)
             .startsFrom(
-                aQuestion("Do you want to end?")
+                aQuestion("Do you want to removeSubcomponent?")
                     .withAnswer("Yes", aFightWith(TROLL,DRAGON))
                     .withAnswer("No", end())
             ).build();

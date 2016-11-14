@@ -10,7 +10,7 @@ active skill BigShot {
 character type Knight {
     stats on start:
      12 hp
-     13 mp
+     11 mp
      14 str
      15 int
     stats per lvl:

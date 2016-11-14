@@ -6,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import pl.edu.ug.inf.am.app.App;
 import pl.edu.ug.inf.am.databinding.TripFragmentBinding;
 import pl.edu.ug.inf.am.trip.controller.TripNavigator;
+import pl.edu.ug.inf.am.trip.dagger.TripComponent;
 
 import javax.inject.Inject;
 
@@ -15,6 +17,10 @@ public class TripFragment extends Fragment{
 
     @Inject
     TripNavigator tripNavigator;
+
+    public TripFragment() {
+        App.getComponent(TripComponent.class).inject(this);
+    }
 
     @Nullable
     @Override

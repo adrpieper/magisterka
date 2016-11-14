@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import pl.edu.ug.inf.am.R;
 import pl.edu.ug.inf.am.adventure.fight.controller.ResultAccepter;
+import pl.edu.ug.inf.am.adventure.fight.dagger.FightComponent;
 import pl.edu.ug.inf.am.adventure.fight.model.ResultModel;
+import pl.edu.ug.inf.am.app.App;
 import pl.edu.ug.inf.am.databinding.FightResultViewBinding;
 
 import javax.inject.Inject;
@@ -17,6 +19,10 @@ public class WinFragment extends Fragment {
 
     @Inject
     ResultAccepter resultAccepter;
+
+    public WinFragment() {
+        App.getComponent(FightComponent.class).inject(this);
+    }
 
     @Nullable
     @Override

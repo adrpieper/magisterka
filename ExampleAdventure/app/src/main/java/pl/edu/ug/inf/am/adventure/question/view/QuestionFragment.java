@@ -13,7 +13,9 @@ import pl.adrian.bindinge.ModelBinder;
 import pl.adrian.bindinge.ViewFactories;
 import pl.aml.QuestionAnswer;
 import pl.edu.ug.inf.am.adventure.controller.QuestionController;
+import pl.edu.ug.inf.am.adventure.question.dagger.QuestionComponent;
 import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
+import pl.edu.ug.inf.am.app.App;
 import pl.edu.ug.inf.am.databinding.QuestionLayoutBinding;
 
 import javax.inject.Inject;
@@ -22,6 +24,10 @@ public class QuestionFragment extends Fragment {
 
     @Inject
     QuestionController controller;
+
+    public QuestionFragment() {
+        App.getComponent(QuestionComponent.class).inject(this);
+    }
 
     @Nullable
     @Override

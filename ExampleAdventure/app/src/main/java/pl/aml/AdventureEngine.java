@@ -9,4 +9,6 @@ public interface AdventureEngine {
     void addStages(List<AStage> stages);
 
     void ask(String question, List<QuestionAnswer> answers);
+
+    boolean check(APredicate predicate);
 }

@@ -1,15 +1,16 @@
 package pl.edu.ug.inf.am.app.dagger;
 
 import dagger.Component;
-import pl.edu.ug.inf.am.app.stage.AppStagesManager;
+import pl.edu.ug.inf.am.common.ComponentsManager;
+import pl.edu.ug.inf.am.common.HasSubComponents;
 import pl.edu.ug.inf.am.game.dagger.GameComponent;
 
 @PerApp
 @Component
-public interface AppComponent {
+public interface AppComponent extends HasSubComponents{
 
-
-    AppStagesManager appStagesManager();
-
+    ComponentsManager componentsManager();
     GameComponent gameComponent();
+    AppSubComponentManager subComponentsManager();
+
 }

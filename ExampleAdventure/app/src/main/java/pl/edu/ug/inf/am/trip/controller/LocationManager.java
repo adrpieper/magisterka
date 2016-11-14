@@ -4,7 +4,7 @@ import pl.aml.Adventure;
 import pl.aml.Location;
 import pl.edu.ug.inf.am.game.logic.AdventureCreator;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;
-import pl.edu.ug.inf.am.game.stage.GameStagesManager;
+import pl.edu.ug.inf.am.game.dagger.GameSubComponentManager;
 
 import javax.inject.Inject;
 
@@ -12,10 +12,10 @@ import javax.inject.Inject;
 public class LocationManager {
 
     private final AdventureCreator adventureCreator;
-    private final GameStagesManager gameStagesManager;
+    private final GameSubComponentManager gameStagesManager;
 
     @Inject
-    public LocationManager(AdventureCreator adventureCreator, GameStagesManager gameStagesManager) {
+    public LocationManager(AdventureCreator adventureCreator, GameSubComponentManager gameStagesManager) {
         this.adventureCreator = adventureCreator;
         this.gameStagesManager = gameStagesManager;
     }

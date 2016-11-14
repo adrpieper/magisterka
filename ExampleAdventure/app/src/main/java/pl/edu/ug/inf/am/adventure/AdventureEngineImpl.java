@@ -1,22 +1,23 @@
 package pl.edu.ug.inf.am.adventure;
 
 import pl.aml.*;
-import pl.edu.ug.inf.am.adventure.stage.AdventureStagesManager;
+import pl.edu.ug.inf.am.adventure.dagger.AdventureSubComponentManager;
 import pl.edu.ug.inf.am.adventure.state.AdventureState;
 import pl.edu.ug.inf.am.adventure.fight.state.FightState;
 import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
-import pl.edu.ug.inf.am.game.stage.GameStagesManager;
 
 import java.util.List;
 
 public class AdventureEngineImpl implements AdventureEngine {
 
     private final AdventureState adventureState;
-    private final AdventureStagesManager adventureStagesManager;
+    private final AdventureSubComponentManager adventureStagesManager;
+    private final AContext aContext;
 
-    public AdventureEngineImpl(AdventureState adventureState, AdventureStagesManager adventureStagesManager) {
+    public AdventureEngineImpl(AdventureState adventureState, AdventureSubComponentManager adventureStagesManager, AContext aContext) {
         this.adventureState = adventureState;
         this.adventureStagesManager = adventureStagesManager;
+        this.aContext = aContext;
     }
 
 
@@ -44,6 +45,11 @@ public class AdventureEngineImpl implements AdventureEngine {
     @Override
     public void ask(String question, List<QuestionAnswer> answers) {
         adventureStagesManager.startQuestion(new QuestionState(question,answers));
+    }
+
+    @Override
+    public boolean check(APredicate predicate) {
+        return predicate.isTrue(aContext);
     }
 
     private void runFirstOnStack() {
