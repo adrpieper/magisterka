@@ -1,5 +1,6 @@
 package pl.edu.ug.inf.am.adventure.dagger;
 
+import pl.aml.MonsterType;
 import pl.edu.ug.inf.am.adventure.dagger.AdventureComponent;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
 import pl.edu.ug.inf.am.adventure.fight.dagger.FightComponent;
@@ -14,6 +15,7 @@ import pl.edu.ug.inf.am.common.SubComponentManager;
 import pl.edu.ug.inf.am.game.dagger.GameSubComponentManager;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @PerAdventure
 public class AdventureSubComponentManager extends SubComponentManager {
@@ -34,9 +36,11 @@ public class AdventureSubComponentManager extends SubComponentManager {
         questionComponent.gameView().showFragment(new QuestionFragment());
     }
 
-    public void startFight(FightState state) {
-        FightComponent fightComponent = adventureComponent.fightComponent(new FightModule(state));
+    public void startFight(List<MonsterType> monsters) {
+
+        FightComponent fightComponent = adventureComponent.fightComponent();
         setSubcomponent(FightComponent.class, fightComponent);
+        fightComponent.fightModel().setMonstersToKill(monsters);
         fightComponent.fightNavigator().showFight();
     }
 

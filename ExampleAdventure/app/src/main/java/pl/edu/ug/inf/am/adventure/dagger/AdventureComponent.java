@@ -14,6 +14,6 @@ public interface AdventureComponent {
     AdventureEngine adventureEngine();
 
     QuestionComponent questionComponent(QuestionModule questionModule);
-    FightComponent fightComponent(FightModule fightModule);
+    FightComponent fightComponent();
 
 }

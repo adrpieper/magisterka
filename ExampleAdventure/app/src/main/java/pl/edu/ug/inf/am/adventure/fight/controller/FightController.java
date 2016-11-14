@@ -15,45 +15,21 @@ import javax.inject.Inject;
 @PerAdventureStage
 public class FightController {
 
-    private final FightState fightState;
-    private final PlayerState playerState;
+    private final FightModel fightModel;
     private final FightNavigator fightNavigator;
     private final FightLogic fightLogic;
 
     @Inject
-    public FightController(FightState fightState, PlayerState playerState, FightNavigator fightNavigator, FightLogic fightLogic) {
-        this.fightState = fightState;
-        this.playerState = playerState;
+    public FightController(FightModel fightModel, FightNavigator fightNavigator, FightLogic fightLogic) {
+        this.fightModel = fightModel;
         this.fightNavigator = fightNavigator;
         this.fightLogic = fightLogic;
     }
 
-
-    public FightModel createFightModel() {
-        return new FightModel(
-            new EnemyModel(fightState.getActualMonster(), fightState.getEnemyHealth()),
-            new PlayerModel(playerState),
-            fightState.getResult()
-        );
-    }
-
-    public void nextEnemy(FightModel fightModel) {
-
-        final MonsterType monsterType = fightLogic.nextEnemy();
-        fightModel.setEnemy(new EnemyModel(monsterType));
-        fightModel.setResult(FightState.Result.FIGHT);
-    }
-
-    public void fight(FightModel fightModel) {
-
-        final FightResultDTO result = fightLogic.fight();
-
-        if (result.result.isEnd()) {
+    public void fight() {
+        fightLogic.fight();
+        if (fightModel.getResult().isEnd()) {
             fightNavigator.showWin();
-        }else {
-            fightModel.getEnemy().hp.set(result.enemyHp);
-            fightModel.getPlayer().hp.set(result.playerHp);
-            fightModel.setResult(result.result);
         }
     }
 

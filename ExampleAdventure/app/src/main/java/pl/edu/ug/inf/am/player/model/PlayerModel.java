@@ -10,7 +10,7 @@ public class PlayerModel {
     private final String name;
 
     public PlayerModel(PlayerState playerState) {
-        this.hp.set(playerState.getHealt());
+        this.hp.set(playerState.getHp().getValue());
         this.power = 1;
         this.name = playerState.getName();
     }

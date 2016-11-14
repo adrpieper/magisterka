@@ -19,14 +19,13 @@ public class AppSubComponentManager extends SubComponentManager {
         this.appComponent = appComponent;
     }
 
-    public void startOrResumeGame(GameActivity gameActivity) {
-        if (getComponentInterface() != GameComponent.class){
-            gameComponent = appComponent.gameComponent();
-            gameComponent.gameViewContainer().bindActivity(gameActivity);
-            setSubcomponent(GameComponent.class, gameComponent);
-            gameComponent.subComponentsManager().startTrip();
-        }else {
-            gameComponent.gameViewContainer().bindActivity(gameActivity);
-        }
+    public void prepareNewGame(){
+        gameComponent = appComponent.gameComponent();
+        setSubcomponent(GameComponent.class, gameComponent);
+    }
+
+    public void runGame(GameActivity gameActivity) {
+        gameComponent.gameViewContainer().bindActivity(gameActivity);
+        gameComponent.gameInitializer().init();
     }
 }

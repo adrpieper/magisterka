@@ -2,23 +2,26 @@ package pl.edu.ug.inf.am.adventure.fight.model;
 
 import android.databinding.ObservableInt;
 import pl.aml.MonsterType;
+import pl.edu.ug.inf.am.adventure.model.BarModel;
 
 public class EnemyModel {
-    public final ObservableInt hp = new ObservableInt();
-    public final String name;
-    public final int maxHp;
+    private final BarModel hp;
+    private final MonsterType monster;
 
     public EnemyModel(MonsterType monster){
-        this(monster, monster.getHp());
+        this.monster = monster;
+        this.hp = new BarModel(monster.getHp());
     }
 
-    public EnemyModel(MonsterType actualMonster, int hp) {
-        this(actualMonster.name(), actualMonster.getHp(), hp);
+    public BarModel getHp() {
+        return hp;
     }
 
-    public EnemyModel(String name, int maxHp, int hp) {
-        this.maxHp = maxHp;
-        this.hp.set(hp);
-        this.name = name;
+    public MonsterType getMonster() {
+        return monster;
+    }
+
+    public void setHp(int hp) {
+        this.hp.setValue(hp);
     }
 }

@@ -32,12 +32,13 @@ public class FightState {
         return monstersToKill;
     }
 
-    public void addKilledMonster(MonsterType monster) {}
+    public void addKilledMonster(MonsterType monster) {
+        killedMonsters.add(monster);
+    }
 
     public void setEnemyHealth(int enemyHealth) {
         this.enemyHealth = enemyHealth;
     }
-
 
     public void setActualMonster(MonsterType actualMonster) {
         this.actualMonster = actualMonster;

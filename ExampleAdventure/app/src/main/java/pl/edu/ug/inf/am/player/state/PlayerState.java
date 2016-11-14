@@ -6,7 +6,8 @@ import javax.inject.Inject;
 
 @PerGame
 public class PlayerState {
-    private int healt = 100;
+    private final BarState hp = new BarState(200);
+    private final BarState mp = new BarState(100);
     private String name = "Edek";
     private int experience;
 
@@ -14,12 +15,12 @@ public class PlayerState {
     public PlayerState() {
     }
 
-    public void setHealt(int healt) {
-        this.healt = healt;
+    public BarState getHp() {
+        return hp;
     }
 
-    public int getHealt() {
-        return healt;
+    public BarState getMp() {
+        return mp;
     }
 
     public String getName() {
@@ -33,4 +34,5 @@ public class PlayerState {
     public void setExperience(int experience) {
         this.experience = experience;
     }
+
 }

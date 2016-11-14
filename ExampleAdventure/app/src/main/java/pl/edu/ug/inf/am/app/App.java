@@ -24,9 +24,14 @@ public class App extends Application {
         appComponent = DaggerAppComponent.builder().build();
         componentsManager = appComponent.componentsManager();
         componentsManager.add(AppComponent.class, appComponent);
+        appComponent.subComponentsManager().prepareNewGame();
+
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle bundle) {
+                if (activity instanceof GameActivity) {
+                    appComponent.subComponentsManager().runGame((GameActivity) activity);
+                }
             }
 
             @Override
@@ -36,9 +41,6 @@ public class App extends Application {
 
             @Override
             public void onActivityResumed(Activity activity) {
-                if (activity instanceof GameActivity) {
-                    appComponent.subComponentsManager().startOrResumeGame((GameActivity) activity);
-                }
             }
 
             @Override

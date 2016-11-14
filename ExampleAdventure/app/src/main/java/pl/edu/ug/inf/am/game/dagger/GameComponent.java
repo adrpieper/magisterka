@@ -3,6 +3,7 @@ package pl.edu.ug.inf.am.game.dagger;
 import dagger.Subcomponent;
 import pl.edu.ug.inf.am.adventure.dagger.AdventureComponent;
 import pl.edu.ug.inf.am.common.HasSubComponents;
+import pl.edu.ug.inf.am.game.logic.GameInitializer;
 import pl.edu.ug.inf.am.game.view.GameViewContainer;
 import pl.edu.ug.inf.am.trip.dagger.TripComponent;
 
@@ -10,6 +11,7 @@ import pl.edu.ug.inf.am.trip.dagger.TripComponent;
 @Subcomponent(modules = {GameViewModule.class})
 public interface GameComponent extends HasSubComponents {
 
+    GameInitializer gameInitializer();
     TripComponent tripComponent();
     AdventureComponent adventureComponent();
     GameViewContainer gameViewContainer();
