@@ -23,6 +23,6 @@ public class AmlInternalDSL {
     }
 
     public static End end(){
-        return new End();
+        return End.instance();
     }
 }

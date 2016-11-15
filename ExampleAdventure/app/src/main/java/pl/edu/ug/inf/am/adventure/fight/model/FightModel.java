@@ -5,9 +5,7 @@ import android.databinding.Bindable;
 import pl.aml.MonsterType;
 import pl.edu.ug.inf.am.BR;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
-import pl.edu.ug.inf.am.adventure.fight.state.FightState;
 import pl.edu.ug.inf.am.adventure.model.AdventurePlayerModel;
-import pl.edu.ug.inf.am.player.model.PlayerModel;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -18,16 +16,14 @@ public class FightModel extends BaseObservable {
 
     private EnemyModel enemy;
     private final AdventurePlayerModel player;
-    private FightState.Result result;
+    private FightStatus fightStatus;
     private List<MonsterType> monstersToKill = new ArrayList<>();
     private List<MonsterType> killedMonsters = new ArrayList<>();
     private MonsterType actualMonster;
 
     @Inject
-    public FightModel(EnemyModel enemy, AdventurePlayerModel playerModel, FightState.Result result) {
-        this.enemy = enemy;
+    public FightModel(AdventurePlayerModel playerModel) {
         this.player = playerModel;
-        this.result = result;
     }
 
     @Bindable
@@ -41,8 +37,8 @@ public class FightModel extends BaseObservable {
     }
 
     @Bindable
-    public FightState.Result getResult() {
-        return result;
+    public FightStatus getFightStatus() {
+        return fightStatus;
     }
 
     public void setEnemy(EnemyModel enemy) {
@@ -50,8 +46,8 @@ public class FightModel extends BaseObservable {
         notifyPropertyChanged(BR.enemy);
     }
 
-    public void setResult(FightState.Result result) {
-        this.result = result;
+    public void setFightStatus(FightStatus fightStatus) {
+        this.fightStatus = fightStatus;
         notifyPropertyChanged(BR.result);
     }
 
@@ -60,23 +56,23 @@ public class FightModel extends BaseObservable {
         this.monstersToKill = new ArrayList<>(monstersToKill);
         MonsterType actualMonster = monstersToKill.get(0);
         setActualMonster(actualMonster);
-        result = FightState.Result.FIGHT;
+        fightStatus = FightStatus.FIGHT;
     }
 
     public void killActualMonster() {
         monstersToKill.remove(actualMonster);
         killedMonsters.add(actualMonster);
         if (hasMoreMonstersToKill()) {
-            setResult(FightState.Result.ENEMY_KILLED);
+            setFightStatus(FightStatus.ENEMY_KILLED);
         }else {
-            setResult(FightState.Result.WIN);
+            setFightStatus(FightStatus.WIN);
         }
     }
 
     public void nextMonster() {
         MonsterType nextMonster = monstersToKill.get(0);
         setActualMonster(nextMonster);
-        setResult(FightState.Result.FIGHT);
+        setFightStatus(FightStatus.FIGHT);
     }
 
     public boolean hasMoreMonstersToKill() {
@@ -92,7 +88,7 @@ public class FightModel extends BaseObservable {
         player.setHp(playerHp);
 
         if (playerHp == 0){
-            setResult(FightState.Result.LOST);
+            setFightStatus(FightStatus.LOST);
         }
     }
 
@@ -100,4 +96,10 @@ public class FightModel extends BaseObservable {
         this.actualMonster = actualMonster;
         setEnemy(new EnemyModel(actualMonster));
     }
+
+    public List<MonsterType> getKilledMonsters() {
+        return killedMonsters;
+    }
+
+
 }

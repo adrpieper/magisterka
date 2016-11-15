@@ -1,5 +1,6 @@
 package pl.edu.ug.inf.am.adventure.dagger;
 
+import pl.aml.AStage;
 import pl.aml.MonsterType;
 import pl.edu.ug.inf.am.adventure.dagger.AdventureComponent;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
@@ -36,11 +37,12 @@ public class AdventureSubComponentManager extends SubComponentManager {
         questionComponent.gameView().showFragment(new QuestionFragment());
     }
 
-    public void startFight(List<MonsterType> monsters) {
+    public void startFight(List<MonsterType> monsters, AStage doOnWin, AStage doOnLost) {
 
         FightComponent fightComponent = adventureComponent.fightComponent();
         setSubcomponent(FightComponent.class, fightComponent);
         fightComponent.fightModel().setMonstersToKill(monsters);
+        fightComponent.fightNavigator().setAfterFightStages(doOnWin, doOnLost);
         fightComponent.fightNavigator().showFight();
     }
 

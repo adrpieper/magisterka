@@ -7,20 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import pl.edu.ug.inf.am.R;
-import pl.edu.ug.inf.am.adventure.fight.controller.ResultAccepter;
+import pl.edu.ug.inf.am.adventure.fight.controller.ResultController;
 import pl.edu.ug.inf.am.adventure.fight.dagger.FightComponent;
-import pl.edu.ug.inf.am.adventure.fight.model.ResultModel;
+import pl.edu.ug.inf.am.adventure.fight.state.ResultDTO;
 import pl.edu.ug.inf.am.app.App;
 import pl.edu.ug.inf.am.databinding.FightResultViewBinding;
 
 import javax.inject.Inject;
 
-public class WinFragment extends Fragment {
+public class ResultFragment extends Fragment {
 
     @Inject
-    ResultAccepter resultAccepter;
+    ResultController resultController;
 
-    public WinFragment() {
+    public ResultFragment() {
         App.getComponent(FightComponent.class).inject(this);
     }
 
@@ -28,18 +28,14 @@ public class WinFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fight_result_view, container, false);
-        FightResultViewBinding binding = FightResultViewBinding.bind(view);
-        final ResultModel result = resultAccepter.createResultModel();
-        binding.setResult(result);
-
+        FightResultViewBinding binding = FightResultViewBinding.inflate(inflater);
+        binding.setResult(resultController.getResultDTO());
         binding.okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resultAccepter.acceptResult(result);
+                resultController.acceptResult();
             }
         });
-
-        return view;
+        return binding.getRoot();
     }
 }

@@ -1,6 +1,5 @@
 package pl.edu.ug.inf.am.adventure.fight.model;
 
-import android.databinding.ObservableInt;
 import pl.aml.MonsterType;
 import pl.edu.ug.inf.am.adventure.model.BarModel;
 

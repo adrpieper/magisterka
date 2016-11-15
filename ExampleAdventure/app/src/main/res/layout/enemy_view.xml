@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="enemy" type="pl.edu.ug.inf.am.adventure.fight.model.EnemyModel"/>
     </data>
@@ -8,25 +9,19 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{enemy.name}"
-            android:id="@+id/nameTextView" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{enemy.monster.name}"
+                android:id="@+id/nameTextView" android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/small_margin"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text='@{"hp: "+enemy.hp}'
-            android:id="@+id/healthTextView" />
-
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBar"
-            android:layout_gravity="center_horizontal"
-            android:max="@{enemy.maxHp}"
-            android:progress="@{enemy.hp}"
-            android:interpolator="@android:anim/accelerate_interpolator"/>
+        <include
+                android:id="@+id/bar_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/bar_view"
+                bind:bar='@{enemy.bar}'
+                android:layout_gravity="center_horizontal|top" android:layout_margin="@dimen/small_margin"/>
     </LinearLayout>
 </layout>
 

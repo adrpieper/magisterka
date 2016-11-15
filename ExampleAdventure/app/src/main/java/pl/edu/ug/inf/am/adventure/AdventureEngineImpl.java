@@ -3,7 +3,6 @@ package pl.edu.ug.inf.am.adventure;
 import pl.aml.*;
 import pl.edu.ug.inf.am.adventure.dagger.AdventureSubComponentManager;
 import pl.edu.ug.inf.am.adventure.state.AdventureState;
-import pl.edu.ug.inf.am.adventure.fight.state.FightState;
 import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class AdventureEngineImpl implements AdventureEngine {
 
 
     @Override
-    public void fight(List<MonsterType> opponents) {
+    public void fight(List<MonsterType> opponents, AStage doOnWin, AStage doOnLost) {
         adventureStagesManager.startFight(opponents);
     }
 

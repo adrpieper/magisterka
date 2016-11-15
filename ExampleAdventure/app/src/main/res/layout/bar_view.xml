@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="bar" type="pl.edu.ug.inf.am.adventure.model.BarModel"/>
+    </data>
+    <LinearLayout
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{bar.value + "/" + bar.maxValue}' />
+
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:max="@{bar.maxValue}"
+                android:progress="@{bar.value}"
+                android:interpolator="@android:anim/accelerate_interpolator"/>
+    </LinearLayout>
+</layout>
+
+

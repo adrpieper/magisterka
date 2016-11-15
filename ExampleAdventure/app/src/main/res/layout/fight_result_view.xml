@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="result" type="pl.edu.ug.inf.am.adventure.fight.model.ResultModel"/>
+        <variable name="result" type="pl.edu.ug.inf.am.adventure.fight.state.ResultDTO"/>
     </data>
     <LinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"Battle " +result.result.name()}'
+                android:id="@+id/result_text_view" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -17,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="OK"
-            android:id="@+id/ok_button" />
+            android:id="@+id/ok_button"/>
 
     </LinearLayout>
 </layout>

@@ -21,13 +21,13 @@
             android:id="@+id/player_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/player_view"
+            layout="@layout/adventure_player_view"
             bind:player="@{fight.player}"
             android:layout_gravity="center_horizontal|top" />
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{fight.result == Result.FIGHT ? "attack" : "next enemy"}'
+                android:text='@{fight.fightStatus == Result.FIGHT ? "attack" : "next enemy"}'
                 android:id="@+id/attack_button" android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </layout>

@@ -20,6 +20,9 @@ public class FightFragment extends Fragment {
     @Inject
     FightController fightController;
 
+    @Inject
+    FightModel fightModel;
+
     public FightFragment() {
         App.getComponent(FightComponent.class).inject(this);
     }
@@ -28,18 +31,16 @@ public class FightFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final FightModel fightModel = fightController.createFightModel();
-
         FightFragmentBinding binding = FightFragmentBinding.inflate(inflater);
         binding.setFight(fightModel);
 
         binding.attackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (fightModel.getResult() == FightState.Result.FIGHT){
-                    fightController.fight(fightModel);
+                if (fightModel.getFightStatus() == FightState.Result.FIGHT){
+                    fightController.fight();
                 } else {
-                    fightController.nextEnemy(fightModel);
+                    fightModel.nextMonster();
                 }
             }
         });
