@@ -20,8 +20,19 @@ public class FightController {
         this.resultController = resultController;
     }
 
-    public void fight() {
-        fightLogic.fight();
+    public void nextMonster() {
+        fightLogic.nextMonster();
+    }
+
+    public void enemyAttack() {
+        fightLogic.enemyAttack();
+        if (fightModel.getFightStatus().isEnd()) {
+            resultController.calculateAndShowResult();
+        }
+    }
+
+    public void playerAttack() {
+        fightLogic.playerAttack();
         if (fightModel.getFightStatus().isEnd()) {
             resultController.calculateAndShowResult();
         }

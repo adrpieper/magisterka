@@ -22,7 +22,7 @@ public class AdventureEngineImpl implements AdventureEngine {
 
     @Override
     public void fight(List<MonsterType> opponents, AStage doOnWin, AStage doOnLost) {
-        adventureStagesManager.startFight(opponents);
+        adventureStagesManager.startFight(opponents, doOnWin, doOnLost);
     }
 
     @Override

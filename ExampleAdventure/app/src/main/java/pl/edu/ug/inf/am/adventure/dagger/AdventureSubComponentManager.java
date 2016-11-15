@@ -2,14 +2,10 @@ package pl.edu.ug.inf.am.adventure.dagger;
 
 import pl.aml.AStage;
 import pl.aml.MonsterType;
-import pl.edu.ug.inf.am.adventure.dagger.AdventureComponent;
-import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
 import pl.edu.ug.inf.am.adventure.fight.dagger.FightComponent;
-import pl.edu.ug.inf.am.adventure.fight.dagger.FightModule;
 import pl.edu.ug.inf.am.adventure.question.dagger.QuestionComponent;
 import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
 import pl.edu.ug.inf.am.adventure.question.dagger.QuestionModule;
-import pl.edu.ug.inf.am.adventure.fight.state.FightState;
 import pl.edu.ug.inf.am.adventure.question.view.QuestionFragment;
 import pl.edu.ug.inf.am.common.ComponentsManager;
 import pl.edu.ug.inf.am.common.SubComponentManager;
@@ -41,7 +37,7 @@ public class AdventureSubComponentManager extends SubComponentManager {
 
         FightComponent fightComponent = adventureComponent.fightComponent();
         setSubcomponent(FightComponent.class, fightComponent);
-        fightComponent.fightModel().setMonstersToKill(monsters);
+        fightComponent.fightLogic().setOpponentsToKill(monsters);
         fightComponent.fightNavigator().setAfterFightStages(doOnWin, doOnLost);
         fightComponent.fightNavigator().showFight();
     }

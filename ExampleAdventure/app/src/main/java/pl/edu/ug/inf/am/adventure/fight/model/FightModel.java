@@ -51,48 +51,24 @@ public class FightModel extends BaseObservable {
         notifyPropertyChanged(BR.result);
     }
 
-    public void setMonstersToKill(List<MonsterType> monstersToKill) {
-        this.monstersToKill.clear();
+    public void settOpponentsToKill(List<MonsterType> monstersToKill) {
         this.monstersToKill = new ArrayList<>(monstersToKill);
-        MonsterType actualMonster = monstersToKill.get(0);
-        setActualMonster(actualMonster);
-        fightStatus = FightStatus.FIGHT;
     }
 
-    public void killActualMonster() {
+    public void moveActualMonsterToKilled() {
         monstersToKill.remove(actualMonster);
         killedMonsters.add(actualMonster);
-        if (hasMoreMonstersToKill()) {
-            setFightStatus(FightStatus.ENEMY_KILLED);
-        }else {
-            setFightStatus(FightStatus.WIN);
-        }
     }
 
-    public void nextMonster() {
-        MonsterType nextMonster = monstersToKill.get(0);
-        setActualMonster(nextMonster);
-        setFightStatus(FightStatus.FIGHT);
+    public MonsterType getNextMonsterToKill() {
+        return monstersToKill.get(0);
     }
 
     public boolean hasMoreMonstersToKill() {
         return !monstersToKill.isEmpty();
     }
 
-    public void showFightResult(int enemyHp, int playerHp) {
-        if (enemyHp == 0){
-            killActualMonster();
-        }
-
-        enemy.setHp(enemyHp);
-        player.setHp(playerHp);
-
-        if (playerHp == 0){
-            setFightStatus(FightStatus.LOST);
-        }
-    }
-
-    private void setActualMonster(MonsterType actualMonster) {
+    public void setActualOpponent(MonsterType actualMonster) {
         this.actualMonster = actualMonster;
         setEnemy(new EnemyModel(actualMonster));
     }
@@ -102,4 +78,15 @@ public class FightModel extends BaseObservable {
     }
 
 
+    public void setEnemyHp(int enemyHp) {
+        this.enemy.setHp(enemyHp);
+    }
+
+    public int getEnemyHp() {
+        return enemy.getHp().getValue();
+    }
+
+    public int getPlayerHp() {
+        return player.getHp().getValue();
+    }
 }
