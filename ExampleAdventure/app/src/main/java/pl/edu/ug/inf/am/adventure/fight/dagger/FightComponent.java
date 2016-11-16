@@ -3,8 +3,7 @@ package pl.edu.ug.inf.am.adventure.fight.dagger;
 import dagger.Subcomponent;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 import pl.edu.ug.inf.am.adventure.fight.controller.FightNavigator;
-import pl.edu.ug.inf.am.adventure.fight.logic.FightLogic;
-import pl.edu.ug.inf.am.adventure.fight.model.FightModel;
+import pl.edu.ug.inf.am.adventure.fight.logic.FightFlowSteps;
 import pl.edu.ug.inf.am.adventure.fight.view.FightFragment;
 import pl.edu.ug.inf.am.adventure.fight.view.ResultFragment;
 
@@ -13,7 +12,7 @@ import pl.edu.ug.inf.am.adventure.fight.view.ResultFragment;
 public interface FightComponent {
 
     FightNavigator fightNavigator();
-    FightLogic fightLogic();
+    FightFlowSteps fightLogic();
     void inject(FightFragment fightFragment);
     void inject(ResultFragment resultFragment);
 }

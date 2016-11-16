@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import pl.edu.ug.inf.am.adventure.fight.controller.FightController;
 import pl.edu.ug.inf.am.adventure.fight.dagger.FightComponent;
+import pl.edu.ug.inf.am.adventure.fight.model.FightConsoleModel;
 import pl.edu.ug.inf.am.adventure.fight.model.FightModel;
 import pl.edu.ug.inf.am.adventure.fight.model.FightStatus;
 import pl.edu.ug.inf.am.app.App;
@@ -21,7 +22,8 @@ public class FightFragment extends Fragment {
 
     @Inject
     FightController fightController;
-
+    @Inject
+    FightConsoleModel consoleModel;
     @Inject
     FightModel fightModel;
     private Button attackButton;
@@ -36,7 +38,7 @@ public class FightFragment extends Fragment {
 
         FightFragmentBinding binding = FightFragmentBinding.inflate(inflater);
         binding.setFight(fightModel);
-
+        binding.setConsole(consoleModel);
         attackButton = binding.attackButton;
         attackButton.setOnClickListener(new View.OnClickListener() {
             @Override

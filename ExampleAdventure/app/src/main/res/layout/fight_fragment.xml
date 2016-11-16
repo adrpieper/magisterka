@@ -4,12 +4,19 @@
     <data>
         <import type="pl.edu.ug.inf.am.adventure.fight.model.FightStatus"/>
         <variable name="fight" type="pl.edu.ug.inf.am.adventure.fight.model.FightModel"/>
+        <variable name="console" type="pl.edu.ug.inf.am.adventure.fight.model.FightConsoleModel"/>
     </data>
     <LinearLayout
                   android:orientation="vertical"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent">
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{console.message}"
+                android:id="@+id/message_view"
+                android:layout_gravity="center_horizontal" android:layout_margin="@dimen/small_margin"/>
         <include
                 android:id="@+id/enemy_view"
                 android:layout_width="match_parent"
