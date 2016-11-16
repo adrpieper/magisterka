@@ -20,7 +20,7 @@ public class FightController {
         this.resultController = resultController;
     }
 
-    public void nextMonster() {
+    public void nextOpponent() {
         fightLogic.nextMonster();
     }
 

@@ -32,6 +32,9 @@ public class AdventurePlayerModel extends BaseObservable {
         return playerState.getName();
     }
 
+    public int getLevel() {
+        return playerState.getLevel();
+    }
     public void setHp(int hp) {
         this.hp.setValue(hp);
     }

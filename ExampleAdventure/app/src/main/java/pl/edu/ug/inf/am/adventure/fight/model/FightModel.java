@@ -48,7 +48,7 @@ public class FightModel extends BaseObservable {
 
     public void setFightStatus(FightStatus fightStatus) {
         this.fightStatus = fightStatus;
-        notifyPropertyChanged(BR.result);
+        notifyPropertyChanged(BR.fightStatus);
     }
 
     public void settOpponentsToKill(List<MonsterType> monstersToKill) {

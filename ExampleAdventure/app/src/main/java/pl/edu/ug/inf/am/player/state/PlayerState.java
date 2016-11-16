@@ -10,6 +10,7 @@ public class PlayerState {
     private final BarState mp = new BarState(100);
     private String name = "Edek";
     private int experience;
+    private int level = 1;
 
     @Inject
     public PlayerState() {
@@ -35,4 +36,7 @@ public class PlayerState {
         this.experience = experience;
     }
 
+    public int getLevel() {
+        return level;
+    }
 }

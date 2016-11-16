@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data>
-        <import type="pl.edu.ug.inf.am.adventure.fight.state.FightState.Result"/>
+        <import type="pl.edu.ug.inf.am.adventure.fight.model.FightStatus"/>
         <variable name="fight" type="pl.edu.ug.inf.am.adventure.fight.model.FightModel"/>
     </data>
     <LinearLayout
@@ -27,7 +27,7 @@
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{fight.fightStatus == Result.FIGHT ? "attack" : "next enemy"}'
+                android:text='@{fight.fightStatus == FightStatus.FIGHT ? "attack" : "next enemy"}'
                 android:id="@+id/attack_button" android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </layout>

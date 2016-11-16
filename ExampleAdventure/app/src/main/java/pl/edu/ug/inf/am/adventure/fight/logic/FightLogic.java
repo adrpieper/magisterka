@@ -42,16 +42,15 @@ public class FightLogic {
 
         int enemyHp = fightModel.getEnemyHp() - 10;
 
-        if (enemyHp == 0) {
-            fightModel.moveActualMonsterToKilled();
-        }
-
         fightModel.setEnemyHp(enemyHp);
 
-        if (fightModel.hasMoreMonstersToKill()) {
-            fightModel.setFightStatus(FightStatus.ENEMY_KILLED);
-        }else {
-            fightModel.setFightStatus(FightStatus.WIN);
+        if (enemyHp == 0) {
+            fightModel.moveActualMonsterToKilled();
+            if (fightModel.hasMoreMonstersToKill()) {
+                fightModel.setFightStatus(FightStatus.ENEMY_KILLED);
+            }else {
+                fightModel.setFightStatus(FightStatus.WIN);
+            }
         }
     }
 }
