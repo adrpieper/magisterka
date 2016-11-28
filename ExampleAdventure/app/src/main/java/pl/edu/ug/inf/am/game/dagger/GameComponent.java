@@ -8,7 +8,7 @@ import pl.edu.ug.inf.am.game.view.GameViewContainer;
 import pl.edu.ug.inf.am.trip.dagger.TripComponent;
 
 @PerGame
-@Subcomponent(modules = {GameViewModule.class})
+@Subcomponent(modules = {GameViewModule.class, GameDataModule.class})
 public interface GameComponent extends HasSubComponents {
 
     GameInitializer gameInitializer();
