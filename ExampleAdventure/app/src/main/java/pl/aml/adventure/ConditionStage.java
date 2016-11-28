@@ -1,4 +1,4 @@
-package pl.aml;
+package pl.aml.adventure;
 
 public class ConditionStage implements AStage {
     private final APredicate predicate;

@@ -1,4 +1,4 @@
-package pl.aml;
+package pl.aml.adventure;
 
 import java.util.Arrays;
 

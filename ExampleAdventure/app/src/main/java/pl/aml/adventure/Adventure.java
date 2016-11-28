@@ -1,4 +1,6 @@
-package pl.aml;
+package pl.aml.adventure;
+
+import pl.aml.Location;
 
 public class Adventure {
 

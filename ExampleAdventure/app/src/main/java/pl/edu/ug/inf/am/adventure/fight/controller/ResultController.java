@@ -1,6 +1,5 @@
 package pl.edu.ug.inf.am.adventure.fight.controller;
 
-import pl.aml.AdventureEngine;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 import pl.edu.ug.inf.am.adventure.fight.logic.ResultCalculator;
 import pl.edu.ug.inf.am.adventure.fight.state.Result;

@@ -1,7 +1,7 @@
-package pl.edu.ug.inf.am.adventure.controller;
+package pl.edu.ug.inf.am.adventure.question.controller;
 
-import pl.aml.AdventureEngine;
-import pl.aml.QuestionAnswer;
+import pl.aml.adventure.AdventureEngine;
+import pl.aml.adventure.QuestionAnswer;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
 

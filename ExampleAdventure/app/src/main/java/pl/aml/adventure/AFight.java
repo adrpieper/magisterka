@@ -1,4 +1,6 @@
-package pl.aml;
+package pl.aml.adventure;
+
+import pl.aml.MonsterType;
 
 import java.util.Arrays;
 

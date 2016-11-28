@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.adventure.state;
 
-import pl.aml.AStage;
+import pl.aml.adventure.AStage;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
 
 import javax.inject.Inject;

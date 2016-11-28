@@ -17,8 +17,10 @@ public class FightFlowSteps {
     private DamageCalculator damageCalculator;
 
     @Inject
-    public FightFlowSteps(FightModel fight) {
+    public FightFlowSteps(FightModel fight, FightConsoleModel console, DamageCalculator damageCalculator) {
         this.fight = fight;
+        this.console = console;
+        this.damageCalculator = damageCalculator;
     }
 
     public void setOpponentsToKill(List<MonsterType> opponentsToKill) {

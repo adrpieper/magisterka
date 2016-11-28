@@ -1,4 +1,4 @@
-package pl.aml;
+package pl.aml.adventure;
 
 public class QuestionAnswer{
     private final String answer;

@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.game.logic;
 
-import pl.aml.Adventure;
-import pl.aml.Example;
+import pl.aml.adventure.Adventure;
+import pl.aml.adventure.Example;
 import pl.aml.Location;
 import pl.edu.ug.inf.am.game.dagger.PerGame;
 

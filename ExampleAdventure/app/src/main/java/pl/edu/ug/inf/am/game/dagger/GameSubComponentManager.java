@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.game.dagger;
 
-import pl.aml.Adventure;
+import pl.aml.adventure.Adventure;
 import pl.edu.ug.inf.am.adventure.dagger.AdventureComponent;
 import pl.edu.ug.inf.am.common.ComponentsManager;
 import pl.edu.ug.inf.am.common.SubComponentManager;

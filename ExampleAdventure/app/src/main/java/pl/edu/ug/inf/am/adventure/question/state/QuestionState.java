@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.adventure.question.state;
 
-import pl.aml.QuestionAnswer;
+import pl.aml.adventure.QuestionAnswer;
 
 import java.util.List;
 

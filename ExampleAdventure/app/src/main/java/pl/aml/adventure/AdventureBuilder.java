@@ -1,4 +1,6 @@
-package pl.aml;
+package pl.aml.adventure;
+
+import pl.aml.Location;
 
 /**
  * Created by adrian on 07.11.16.

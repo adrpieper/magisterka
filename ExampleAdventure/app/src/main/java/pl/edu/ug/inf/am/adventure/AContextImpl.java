@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.adventure;
 
-import pl.aml.AContext;
+import pl.aml.adventure.AContext;
 
 public class AContextImpl implements AContext {
 

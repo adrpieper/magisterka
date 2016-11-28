@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.adventure.fight.controller;
 
-import pl.aml.AStage;
-import pl.aml.AdventureEngine;
+import pl.aml.adventure.AStage;
+import pl.aml.adventure.AdventureEngine;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 import pl.edu.ug.inf.am.adventure.fight.view.ResultFragment;
 import pl.edu.ug.inf.am.adventure.fight.view.FightFragment;

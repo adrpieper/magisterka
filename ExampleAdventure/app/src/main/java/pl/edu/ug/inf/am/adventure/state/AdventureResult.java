@@ -18,4 +18,8 @@ public class AdventureResult {
     public void addExperience(int gainedExp) {
         this.gainedExp += gainedExp;
     }
+
+    public int getGainedExp() {
+        return gainedExp;
+    }
 }

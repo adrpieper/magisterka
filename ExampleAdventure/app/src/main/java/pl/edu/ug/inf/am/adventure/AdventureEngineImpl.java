@@ -1,6 +1,7 @@
 package pl.edu.ug.inf.am.adventure;
 
 import pl.aml.*;
+import pl.aml.adventure.*;
 import pl.edu.ug.inf.am.adventure.dagger.AdventureSubComponentManager;
 import pl.edu.ug.inf.am.adventure.state.AdventureState;
 import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
@@ -31,7 +32,7 @@ public class AdventureEngineImpl implements AdventureEngine {
             runFirstOnStack();
         }
         else {
-            adventureStagesManager.endAdventure();
+            adventureStagesManager.showAdventureResult();
         }
     }
 
