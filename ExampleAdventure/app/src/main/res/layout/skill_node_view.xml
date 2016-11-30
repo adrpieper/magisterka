@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="pl.aml.character.SkillType" />
+        <variable name="skillNode" type="pl.aml.character.SkillNode"/>
+        <variable name="skills" type="pl.edu.ug.inf.am.trip.model.SkillsModel"/>
+    </data>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{skillNode.skillType.name}'
+            android:background='@{skills.skills.contains(skillNode.skillType) ? @drawable/gold_gradient: @drawable/grey_gradient}'
+            android:padding="4dp" android:id="@+id/skill_name_view"/>
+
+</layout>
+
+

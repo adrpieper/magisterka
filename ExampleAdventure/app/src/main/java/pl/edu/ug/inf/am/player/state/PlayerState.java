@@ -6,6 +6,7 @@ import pl.aml.character.Stats;
 import pl.edu.ug.inf.am.game.dagger.PerGame;
 
 import javax.inject.Inject;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ public class PlayerState {
     private final BarState hp = new BarState(200);
     private final BarState mp = new BarState(100);
     private final CharacterType characterType;
-    private final Set<SkillType> unlockedSkills = new HashSet<>();
+    private final Set<SkillType> skills = EnumSet.noneOf(SkillType.class);
     private String name = "Edek";
     private int experience;
     private int level = 1;
@@ -25,12 +26,8 @@ public class PlayerState {
         this.characterType = characterType;
     }
 
-    public void addSkill(SkillType skillType) {
-        unlockedSkills.add(skillType);
-    }
-
-    public Set<SkillType> getUnlockedSkills() {
-        return unlockedSkills;
+    public Set<SkillType> getSkills() {
+        return skills;
     }
 
     public CharacterType getCharacterType() {
@@ -61,14 +58,6 @@ public class PlayerState {
         return level;
     }
 
-    public void addSkillPoints(int skillPoints) {
-        this.skillPoints += skillPoints;
-    }
-
-    public void removeSkillPoints(int skillPoints) {
-        this.skillPoints -= skillPoints;
-    }
-
     public int getSkillPoints() {
         return skillPoints;
     }
@@ -83,5 +72,14 @@ public class PlayerState {
 
     public Stats getStats() {
         return stats;
+    }
+
+    public void setSkillPoints(int skillPoints) {
+        this.skillPoints = skillPoints;
+    }
+
+    public void setSkills(Set<SkillType> skills) {
+        this.skills.clear();
+        this.skills.addAll(skills);
     }
 }

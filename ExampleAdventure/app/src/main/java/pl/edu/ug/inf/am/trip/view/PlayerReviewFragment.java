@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import pl.edu.ug.inf.am.app.App;
-import pl.edu.ug.inf.am.player.model.PlayerModel;
 import pl.edu.ug.inf.am.databinding.PlayerReviewFragmentBinding;
 import pl.edu.ug.inf.am.player.state.PlayerState;
 import pl.edu.ug.inf.am.trip.dagger.TripComponent;
@@ -29,7 +28,7 @@ public class PlayerReviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final PlayerReviewFragmentBinding binder = PlayerReviewFragmentBinding.inflate(inflater);
-        binder.setPlayer(new PlayerModel(playerState));
+        binder.setPlayer(playerState);
         return binder.getRoot();
     }
 }

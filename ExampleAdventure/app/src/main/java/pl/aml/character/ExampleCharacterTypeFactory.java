@@ -9,9 +9,10 @@ public class ExampleCharacterTypeFactory implements CharacterTypeFactory {
         Stats statsPerStart = new Stats(1,2,3);
 
         SkillNode mainNode = new SkillNode(SkillType.BASIC_HIT,
-                new SkillNode(SkillType.POISON_HIT),
-                new SkillNode(SkillType.SUPER_POISON_HIT));
-        SkillTree skillTree = new SkillTree(mainNode);
+                new SkillNode(SkillType.POISON_HIT, SkillType.BASIC_HIT),
+                new SkillNode(SkillType.SUPER_POISON_HIT, SkillType.BASIC_HIT));
+        SkillNode secondNode = new SkillNode(SkillType.POISON_HIT);
+        SkillTree skillTree = new SkillTree(mainNode,secondNode);
         return new CharacterType(statsOnStart, statsPerStart, skillTree);
     }
 }

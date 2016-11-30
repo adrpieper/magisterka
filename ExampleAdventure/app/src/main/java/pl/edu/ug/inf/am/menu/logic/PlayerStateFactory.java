@@ -1,10 +1,12 @@
 package pl.edu.ug.inf.am.menu.logic;
 
 import pl.aml.character.CharacterType;
+import pl.aml.character.SkillType;
 import pl.edu.ug.inf.am.menu.dagger.PerMenu;
 import pl.edu.ug.inf.am.player.state.PlayerState;
 
 import javax.inject.Inject;
+import java.util.EnumSet;
 
 @PerMenu
 public class PlayerStateFactory {
@@ -18,7 +20,8 @@ public class PlayerStateFactory {
         PlayerState playerState = new PlayerState(characterType);
 
         playerState.setStats(characterType.getStatsOnStart());
-
+        playerState.setSkills(EnumSet.of(SkillType.BASIC_HIT));
+        playerState.setSkillPoints(1);
         return playerState;
     }
 }

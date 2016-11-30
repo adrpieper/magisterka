@@ -46,7 +46,7 @@ public class AdventureResultController {
 
     private void gainLevel(int newLevel,int gainedLevels){
         if (gainedLevels > 0) {
-            playerState.addSkillPoints(gainedLevels);
+            playerState.setSkillPoints(playerState.getSkillPoints() + playerState.getSkillPoints());
             playerState.setLevel(newLevel);
             CharacterType characterType = playerState.getCharacterType();
             Stats statsOnStart = characterType.getStatsOnStart();

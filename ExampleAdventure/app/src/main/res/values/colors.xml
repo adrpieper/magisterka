@@ -3,4 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="lockedSkill">#A4A4A4</color>
+    <color name="unlockedSkill">#F0F0A0</color>
 </resources>
