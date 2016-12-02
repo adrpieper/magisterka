@@ -5,20 +5,26 @@
             android:layout_height="match_parent" android:padding="@dimen/small_margin">
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Locations"
-            android:id="@+id/show_locations_button" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Locations"
+                android:id="@+id/show_locations_button"/>
 
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Player"
-                android:id="@+id/show_player_button" />
+                android:id="@+id/show_player_button"/>
         <fragment android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:name="pl.edu.ug.inf.am.gps.view.GPSFragment" android:id="@+id/fragment2"
-                  android:layout_gravity="center_horizontal" tools:layout="@layout/abc_list_menu_item_radio"/>
+                  android:layout_gravity="center_horizontal"
+                  tools:layout="@layout/abc_list_menu_item_radio"/>
+        <fragment android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:name="pl.edu.ug.inf.am.nfc.view.NFCFragment" android:id="@+id/fragment3"
+                  android:layout_gravity="center_horizontal"
+                  tools:layout="@layout/abc_list_menu_item_radio"/>
     </LinearLayout>
 </layout>
 

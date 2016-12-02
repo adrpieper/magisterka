@@ -4,12 +4,14 @@ import dagger.Subcomponent;
 import pl.edu.ug.inf.am.adventure.dagger.AdventureComponent;
 import pl.edu.ug.inf.am.common.HasSubComponents;
 import pl.edu.ug.inf.am.game.logic.GameInitializer;
+import pl.edu.ug.inf.am.game.view.GameActivity;
 import pl.edu.ug.inf.am.game.view.GameViewContainer;
 import pl.edu.ug.inf.am.gps.view.GPSFragment;
+import pl.edu.ug.inf.am.nfc.view.NFCFragment;
 import pl.edu.ug.inf.am.trip.dagger.TripComponent;
 
 @PerGame
-@Subcomponent(modules = {GameViewModule.class, GameDataModule.class})
+@Subcomponent(modules = {GameContextModule.class, GameDataModule.class})
 public interface GameComponent extends HasSubComponents {
 
     GameInitializer gameInitializer();
@@ -19,4 +21,8 @@ public interface GameComponent extends HasSubComponents {
     GameSubComponentManager subComponentsManager();
 
     void inject(GPSFragment gpsFragment);
+
+    void inject(NFCFragment nfcFragment);
+
+    void inject(GameActivity gameActivity);
 }
