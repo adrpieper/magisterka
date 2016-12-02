@@ -42,7 +42,7 @@ public class AdventureSubComponentManager extends SubComponentManager {
 
         FightComponent fightComponent = adventureComponent.fightComponent();
         setSubcomponent(FightComponent.class, fightComponent);
-        fightComponent.fightLogic().setOpponentsToKill(monsters);
+        fightComponent.fightPreparation().prepare(monsters);
         fightComponent.fightNavigator().setAfterFightStages(doOnWin, doOnLost);
         fightComponent.fightNavigator().showFight();
     }

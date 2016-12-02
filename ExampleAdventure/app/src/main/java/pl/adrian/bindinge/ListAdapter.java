@@ -8,14 +8,12 @@ import android.widget.BaseAdapter;
 import java.util.List;
 
 public class ListAdapter<ViewType extends View, ModelType> extends BaseAdapter {
-    private final Class<ViewType> viewClass;
     private final ModelBinder<ViewType, ModelType> binder;
     private final ViewFactory<ViewType> viewFactory;
     private final Context context;
     private final List<ModelType> objects;
 
-    public ListAdapter(Class<ViewType> viewClass, ModelBinder<ViewType, ModelType> binder, ViewFactory<ViewType> viewFactory, Context context, List<ModelType> objects) {
-        this.viewClass = viewClass;
+    public ListAdapter(ModelBinder<ViewType, ModelType> binder, ViewFactory<ViewType> viewFactory, Context context, List<ModelType> objects) {
         this.binder = binder;
         this.viewFactory = viewFactory;
         this.context = context;
@@ -41,7 +39,7 @@ public class ListAdapter<ViewType extends View, ModelType> extends BaseAdapter {
     public View getView(int i, View oldView, ViewGroup viewGroup) {
 
         ViewType view;
-        if (viewClass.isInstance(oldView)) {
+        if (oldView != null) {
             view = (ViewType) oldView;
         }else {
             view = viewFactory.createView(context);

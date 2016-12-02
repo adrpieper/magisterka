@@ -1,8 +1,13 @@
 package pl.edu.ug.inf.am.adventure.fight.controller;
 
+import android.os.Handler;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
-import pl.edu.ug.inf.am.adventure.fight.logic.FightFlowSteps;
+import pl.edu.ug.inf.am.adventure.fight.logic.FightBasicSteps;
+import pl.edu.ug.inf.am.adventure.fight.logic.FightOpponentsManager;
+import pl.edu.ug.inf.am.adventure.fight.logic.SkillsLogic;
 import pl.edu.ug.inf.am.adventure.fight.model.FightModel;
+import pl.edu.ug.inf.am.adventure.fight.model.FightStatus;
+import pl.edu.ug.inf.am.adventure.fight.model.SkillModel;
 
 import javax.inject.Inject;
 
@@ -10,32 +15,67 @@ import javax.inject.Inject;
 public class FightController {
 
     private final FightModel fightModel;
-    private final FightFlowSteps fightFlowSteps;
+    private final FightOpponentsManager opponentsManager;
+    private final FightBasicSteps fightBasicSteps;
     private final ResultController resultController;
-
+    private final SkillsLogic skillsLogic;
+    private final Handler handler;
     @Inject
-    public FightController(FightModel fightModel, FightFlowSteps fightFlowSteps, ResultController resultController) {
+    public FightController(FightModel fightModel, FightOpponentsManager opponentsManager, FightBasicSteps fightBasicSteps, ResultController resultController, SkillsLogic skillsLogic) {
         this.fightModel = fightModel;
-        this.fightFlowSteps = fightFlowSteps;
+        this.opponentsManager = opponentsManager;
+        this.fightBasicSteps = fightBasicSteps;
         this.resultController = resultController;
+        this.skillsLogic = skillsLogic;
+        this.handler = new Handler();
     }
 
     public void nextOpponent() {
-        fightFlowSteps.nextMonster();
+        opponentsManager.nextMonster();
+        skillsLogic.degreaseCooldowns();
     }
 
     public void enemyAttack() {
-        fightFlowSteps.enemyAttack();
-        if (fightModel.getFightStatus().isEnd()) {
-            resultController.calculateAndShowResult();
-        }
+        fightBasicSteps.enemyAttack();
+        endEnemyTurn();
     }
 
     public void playerAttack() {
-        fightFlowSteps.playerAttack();
-        if (fightModel.getFightStatus().isEnd()) {
+        fightBasicSteps.playerBasicAttack();
+        endPlayerTurn();
+    }
+
+    public void useSkill(SkillModel skill) {
+        skillsLogic.playerUse(skill);
+        endPlayerTurn();
+    }
+
+    private void endEnemyTurn() {
+        if (fightModel.getFightStatus() == FightStatus.LOST) {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    resultController.calculateAndShowResult();
+                }
+            }, 1000);
+        }
+    }
+    private void endPlayerTurn() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                checkResult();
+            }
+        }, 1000);
+    }
+
+    private void checkResult() {
+        if (fightModel.getFightStatus() == FightStatus.ENEMY_KILLED) {
+            nextOpponent();
+        }else if (fightModel.getFightStatus() == FightStatus.ENEMY_TURN) {
+            enemyAttack();
+        }else if (fightModel.getFightStatus() == FightStatus.WIN) {
             resultController.calculateAndShowResult();
         }
     }
-
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="skillModel" type="pl.edu.ug.inf.am.adventure.fight.model.SkillModel"/>
+    </data>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background='@{skillModel.canUse ? @drawable/gold_gradient: @drawable/grey_gradient}'>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:text='@{skillModel.name}'
+                android:id="@+id/skill_name_view"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{"cooldown : " + skillModel.cooldown}'
+                android:id="@+id/skill_cooldown_view"/>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:text='@{"mana cost : " + skillModel.mpCost}'
+                android:id="@+id/skill_mana_cost_view"/>
+    </LinearLayout>
+
+
+</layout>
+
+

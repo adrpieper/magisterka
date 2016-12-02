@@ -3,9 +3,11 @@ package pl.edu.ug.inf.am.adventure.fight.model;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import pl.aml.MonsterType;
+import pl.aml.character.SkillType;
 import pl.edu.ug.inf.am.BR;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 import pl.edu.ug.inf.am.adventure.model.AdventurePlayerModel;
+import pl.edu.ug.inf.am.trip.model.SkillsModel;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -20,10 +22,12 @@ public class FightModel extends BaseObservable {
     private List<MonsterType> monstersToKill = new ArrayList<>();
     private List<MonsterType> killedMonsters = new ArrayList<>();
     private MonsterType actualMonster;
+    private List<SkillModel> skillsModels;
 
     @Inject
     public FightModel(AdventurePlayerModel playerModel) {
         this.player = playerModel;
+        skillsModels = new ArrayList<>();
     }
 
     @Bindable
@@ -77,7 +81,6 @@ public class FightModel extends BaseObservable {
         return killedMonsters;
     }
 
-
     public void setEnemyHp(int enemyHp) {
         this.enemy.setHp(enemyHp);
     }
@@ -88,5 +91,25 @@ public class FightModel extends BaseObservable {
 
     public int getPlayerHp() {
         return player.getHp().getValue();
+    }
+
+    public List<SkillModel> getSkillsModels() {
+        return skillsModels;
+    }
+
+    public void setSkillsModels(List<SkillModel> skillsModels) {
+        this.skillsModels = skillsModels;
+    }
+
+    public int getPlayerMp() {
+        return player.getMp().getValue();
+    }
+
+    public void setPlayerMp(int playerMp) {
+        player.getMp().setValue(playerMp);
+    }
+
+    public void setPlayerHp(int playerHp) {
+        this.player.getHp().setValue(playerHp);
     }
 }

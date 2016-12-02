@@ -1,11 +1,13 @@
 package pl.adrian.bindinge;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.zip.Inflater;
 
 public class ViewFactories {
 
@@ -48,4 +50,12 @@ public class ViewFactories {
         return new RuntimeException("Nie można utworzyć instancji.", e);
     }
 
+    public static ViewFactory<View> createFor(final int layoutRes) {
+        return new ViewFactory<View>() {
+            @Override
+            public View createView(Context context) {
+                return LayoutInflater.from(context).inflate(layoutRes, null, false);
+            }
+        };
+    }
 }

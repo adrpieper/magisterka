@@ -4,7 +4,8 @@ public enum FightStatus {
     WIN(true),
     LOST(true),
     ENEMY_KILLED(false),
-    FIGHT(false);
+    ENEMY_TURN(false),
+    PLAYER_TURN(false);
 
     private final boolean isEnd;
 
