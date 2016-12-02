@@ -5,6 +5,7 @@ import pl.edu.ug.inf.am.adventure.dagger.AdventureComponent;
 import pl.edu.ug.inf.am.common.HasSubComponents;
 import pl.edu.ug.inf.am.game.logic.GameInitializer;
 import pl.edu.ug.inf.am.game.view.GameViewContainer;
+import pl.edu.ug.inf.am.gps.view.GPSFragment;
 import pl.edu.ug.inf.am.trip.dagger.TripComponent;
 
 @PerGame
@@ -17,4 +18,5 @@ public interface GameComponent extends HasSubComponents {
     GameViewContainer gameViewContainer();
     GameSubComponentManager subComponentsManager();
 
+    void inject(GPSFragment gpsFragment);
 }

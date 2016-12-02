@@ -37,6 +37,7 @@ public class FightController {
 
     public void enemyAttack() {
         fightBasicSteps.enemyAttack();
+        skillsLogic.degreaseCooldowns();
         endEnemyTurn();
     }
 
