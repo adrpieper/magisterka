@@ -1,6 +1,7 @@
 package pl.edu.ug.inf.am.adventure.fight.logic;
 
 import pl.aml.character.FightEngine;
+import pl.aml.character.FightValues;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 import pl.edu.ug.inf.am.adventure.fight.model.FightConsoleModel;
 import pl.edu.ug.inf.am.adventure.fight.model.FightModel;
@@ -10,13 +11,14 @@ import javax.inject.Inject;
 
 @PerAdventureStage
 public class FightEngineImpl implements FightEngine {
-    private FightModel fight;
-    private FightConsoleModel console;
-
+    private final FightModel fight;
+    private final FightConsoleModel console;
+    private final FightValues fightValues;
     @Inject
-    public FightEngineImpl(FightModel fight, FightConsoleModel console) {
+    public FightEngineImpl(FightModel fight, FightConsoleModel console, FightValuesImpl fightValues) {
         this.fight = fight;
         this.console = console;
+        this.fightValues = fightValues;
     }
 
     @Override
@@ -50,5 +52,10 @@ public class FightEngineImpl implements FightEngine {
             fight.setFightStatus(FightStatus.PLAYER_TURN);
             console.setMessage("Player gets " + damage + " damage." );
         }
+    }
+
+    @Override
+    public FightValues getValues() {
+        return fightValues;
     }
 }

@@ -1,9 +1,24 @@
 package pl.aml.character;
 
 public enum SkillType {
-    BASIC_HIT(new Damage(10), 2, 2),
-    POISON_HIT(new Damage(20), 4, 3),
-    SUPER_POISON_HIT(new Damage(30), 10, 5);
+    BASIC_HIT(new Damage() {
+        @Override
+        protected int calculateDamage(FightValues fightValues) {
+            return fightValues.playerLevel() * 15;
+        }
+    }, 2, 2),
+    POISON_HIT(new Damage() {
+        @Override
+        protected int calculateDamage(FightValues fightValues) {
+            return fightValues.playerLevel() * 25;
+        }
+    }, 4, 3),
+    SUPER_POISON_HIT(new Damage() {
+        @Override
+        protected int calculateDamage(FightValues fightValues) {
+            return fightValues.playerLevel() * 50;
+        }
+    }, 10, 5);
 
     private final Effect effect;
     private int mpCost;

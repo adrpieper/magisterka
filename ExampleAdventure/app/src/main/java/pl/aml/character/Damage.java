@@ -1,14 +1,14 @@
 package pl.aml.character;
 
-public class Damage implements Effect{
-    private final int amount;
+public abstract class Damage implements Effect{
 
-    public Damage(int amount) {
-        this.amount = amount;
+    public Damage() {
     }
 
     @Override
     public void use(FightEngine engine) {
-        engine.takeDamage(amount);
+        engine.takeDamage(calculateDamage(engine.getValues()));
     }
+
+    protected abstract int calculateDamage(FightValues fightValues);
 }
