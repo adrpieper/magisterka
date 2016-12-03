@@ -4,6 +4,5 @@ public interface AContext {
 
     int playerInt();
     int playerStr();
-
-
+    int playerAgi();
 }

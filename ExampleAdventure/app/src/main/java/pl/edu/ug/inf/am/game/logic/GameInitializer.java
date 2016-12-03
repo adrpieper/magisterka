@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.game.logic;
 
-import pl.edu.ug.inf.am.game.GameState;
+import pl.edu.ug.inf.am.game.state.GameState;
 import pl.edu.ug.inf.am.game.dagger.GameSubComponentManager;
 import pl.edu.ug.inf.am.game.dagger.PerGame;
 

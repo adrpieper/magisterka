@@ -2,6 +2,7 @@ package pl.edu.ug.inf.am.adventure.model;
 
 import android.databinding.BaseObservable;
 import pl.aml.character.SkillType;
+import pl.aml.character.Stats;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
 import pl.edu.ug.inf.am.player.state.PlayerState;
 
@@ -40,6 +41,12 @@ public class AdventurePlayerModel extends BaseObservable {
     public void setHp(int hp) {
         this.hp.setValue(hp);
     }
+
+    public Stats getStats() {
+        return playerState.getStats();
+    }
+
+
 
     public Set<SkillType> getSkills() {
         return playerState.getSkills();

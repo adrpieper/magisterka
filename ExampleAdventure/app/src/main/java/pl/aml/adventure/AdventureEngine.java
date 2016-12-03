@@ -1,6 +1,7 @@
 package pl.aml.adventure;
 
 import pl.aml.MonsterType;
+import pl.aml.adventure.factory.AdventureInstance;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface AdventureEngine {
     void ask(String question, List<QuestionAnswer> answers);
 
     boolean check(APredicate predicate);
+
+    void addAventure(AdventureInstance adventureInstance);
 }

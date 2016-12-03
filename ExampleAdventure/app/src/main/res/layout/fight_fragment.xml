@@ -23,14 +23,14 @@
                 android:layout_height="wrap_content"
                 layout="@layout/enemy_view"
                 bind:enemy="@{fight.enemy}"
-                android:layout_gravity="center_horizontal|top" />
+                android:layout_gravity="center_horizontal|top" android:layout_margin="@dimen/small_margin"/>
         <include
-            android:id="@+id/player_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/adventure_player_view"
-            bind:player="@{fight.player}"
-            android:layout_gravity="center_horizontal|top" />
+                android:id="@+id/player_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/adventure_player_view"
+                bind:player="@{fight.player}"
+                android:layout_gravity="center_horizontal|top" android:layout_margin="@dimen/small_margin"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,7 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:enabled='@{fight.fightStatus == FightStatus.PLAYER_TURN}'>
+                android:enabled='@{fight.fightStatus == FightStatus.PLAYER_TURN}'
+                android:layout_margin="@dimen/small_margin" android:background="@drawable/default_frame_gradient">
         </ListView>
     </LinearLayout>
 </layout>

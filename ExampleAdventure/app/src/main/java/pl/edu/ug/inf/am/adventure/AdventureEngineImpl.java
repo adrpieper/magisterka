@@ -1,7 +1,9 @@
 package pl.edu.ug.inf.am.adventure;
 
+import com.google.common.collect.Lists;
 import pl.aml.*;
 import pl.aml.adventure.*;
+import pl.aml.adventure.factory.AdventureInstance;
 import pl.edu.ug.inf.am.adventure.dagger.AdventureSubComponentManager;
 import pl.edu.ug.inf.am.adventure.state.AdventureState;
 import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
@@ -11,11 +13,13 @@ import java.util.List;
 public class AdventureEngineImpl implements AdventureEngine {
 
     private final AdventureState adventureState;
+    private final AdventuresManager adventuresManager;
     private final AdventureSubComponentManager adventureStagesManager;
     private final AContext aContext;
 
-    public AdventureEngineImpl(AdventureState adventureState, AdventureSubComponentManager adventureStagesManager, AContext aContext) {
+    public AdventureEngineImpl(AdventureState adventureState, AdventuresManager adventuresManager, AdventureSubComponentManager adventureStagesManager, AContext aContext) {
         this.adventureState = adventureState;
+        this.adventuresManager = adventuresManager;
         this.adventureStagesManager = adventureStagesManager;
         this.aContext = aContext;
     }
@@ -38,7 +42,7 @@ public class AdventureEngineImpl implements AdventureEngine {
 
     @Override
     public void addStages(List<AStage> stages) {
-        adventureState.addStages(stages);
+        adventureState.addStages(Lists.reverse(stages));
         runFirstOnStack();
     }
 
@@ -56,4 +60,8 @@ public class AdventureEngineImpl implements AdventureEngine {
         adventureState.popFirstStage().run(this);
     }
 
+    @Override
+    public void addAventure(AdventureInstance adventureInstance) {
+        adventuresManager.add(adventureInstance);
+    }
 }

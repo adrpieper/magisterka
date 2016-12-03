@@ -1,4 +1,4 @@
-package pl.edu.ug.inf.am.game;
+package pl.edu.ug.inf.am.game.state;
 
 import pl.edu.ug.inf.am.game.dagger.PerGame;
 

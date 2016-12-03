@@ -23,7 +23,7 @@ public class AdventureBuilder {
         return startsFrom(aStageBuilder.build());
     }
 
-    private AdventureBuilder startsFrom(AStage firstStage) {
+    public AdventureBuilder startsFrom(AStage firstStage) {
         this.firstStage = firstStage;
         return this;
     }

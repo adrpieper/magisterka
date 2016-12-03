@@ -24,6 +24,19 @@ public class AmlInternalDSL {
         return new ConditionBuilder().withPredicate(predicate);
     }
 
+    public static AStage multi(AStageBuilder... aStageBuilders){
+        AStage[] stages = new AStage[aStageBuilders.length];
+        for (int i = 0; i < aStageBuilders.length; i++) {
+            stages[i] = aStageBuilders[i].build();
+        }
+
+        return multi(stages);
+    }
+
+    public static AStage multi(AStage... stages) {
+        return new MultiStages(stages);
+    }
+
     public static End end(){
         return End.instance();
     }

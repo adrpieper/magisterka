@@ -11,16 +11,32 @@ public class ConditionBuilder implements AStageBuilder{
         return this;
     }
 
-    public void ifFalse(AStage doOnFalse) {
+    public ConditionBuilder ifFalse(AStage doOnFalse) {
         this.doOnFalse = doOnFalse;
+        return this;
     }
 
-    public void ifTrue(AStage doOnTrue) {
+    public ConditionBuilder ifFalse(AStageBuilder doOnFalse) {
+        return ifFalse(doOnFalse.build());
+    }
+
+    public ConditionBuilder ifTrue(AStage doOnTrue) {
         this.doOnTrue = doOnTrue;
+        return this;
+    }
+
+    public ConditionBuilder ifTrue(AStageBuilder doOnTrue) {
+        return ifTrue(doOnTrue.build());
     }
 
     @Override
     public ConditionStage build() {
+        if (doOnFalse == null){
+            doOnFalse = End.instance();
+        }
+        if (doOnTrue == null) {
+            doOnTrue = End.instance();
+        }
         return new ConditionStage(predicate, doOnTrue, doOnFalse);
     }
 }

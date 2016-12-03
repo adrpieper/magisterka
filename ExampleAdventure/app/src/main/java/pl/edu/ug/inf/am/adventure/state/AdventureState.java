@@ -14,8 +14,8 @@ public class AdventureState {
     @Inject
     public AdventureState() {}
 
-    public void addStages(Collection<AStage> stageFactories){
-        for (AStage stage : stageFactories) {
+    public void addStages(Collection<AStage> stages){
+        for (AStage stage : stages) {
             stagesStack.push(stage);
         }
     }
