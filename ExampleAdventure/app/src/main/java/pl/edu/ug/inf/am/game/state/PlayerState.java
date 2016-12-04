@@ -1,4 +1,4 @@
-package pl.edu.ug.inf.am.player.state;
+package pl.edu.ug.inf.am.game.state;
 
 import pl.aml.character.CharacterType;
 import pl.aml.character.SkillType;

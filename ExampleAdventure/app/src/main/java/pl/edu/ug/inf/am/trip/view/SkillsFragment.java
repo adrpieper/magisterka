@@ -16,7 +16,6 @@ import pl.edu.ug.inf.am.R;
 import pl.edu.ug.inf.am.app.App;
 import pl.edu.ug.inf.am.databinding.SkillFragmentBinding;
 import pl.edu.ug.inf.am.databinding.SkillNodeViewBinding;
-import pl.edu.ug.inf.am.player.state.PlayerState;
 import pl.edu.ug.inf.am.trip.controller.SkillsController;
 import pl.edu.ug.inf.am.trip.dagger.TripComponent;
 import pl.edu.ug.inf.am.trip.model.SkillsModel;
@@ -24,9 +23,6 @@ import pl.edu.ug.inf.am.trip.model.SkillsModel;
 import javax.inject.Inject;
 
 public class SkillsFragment extends Fragment{
-
-    @Inject
-    PlayerState playerState;
 
     @Inject
     SkillsController controller;
@@ -47,7 +43,7 @@ public class SkillsFragment extends Fragment{
 
         SkillFragmentBinding binding = SkillFragmentBinding.inflate(inflater);
         binding.setSkills(skillsModel);
-        binding.treeFrame.addView(createTreeView(playerState.getCharacterType().getSkillTree()));
+        binding.treeFrame.addView(createTreeView(skillsModel.getSkillTree()));
         binding.acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

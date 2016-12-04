@@ -1,14 +1,12 @@
 package pl.edu.ug.inf.am.adventure;
 
-import com.google.common.collect.Lists;
-import pl.aml.*;
+import pl.aml.MonsterType;
 import pl.aml.adventure.*;
 import pl.aml.adventure.factory.AdventureInstance;
 import pl.edu.ug.inf.am.adventure.dagger.AdventureSubComponentManager;
-import pl.edu.ug.inf.am.adventure.state.AdventureState;
 import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
+import pl.edu.ug.inf.am.adventure.state.AdventureState;
 
-import java.util.Collections;
 import java.util.List;
 
 public class AdventureEngineImpl implements AdventureEngine {
@@ -64,7 +62,7 @@ public class AdventureEngineImpl implements AdventureEngine {
     }
 
     @Override
-    public void addAventure(AdventureInstance adventureInstance) {
+    public void addAdventure(AdventureInstance adventureInstance) {
         adventuresManager.add(adventureInstance);
     }
 }

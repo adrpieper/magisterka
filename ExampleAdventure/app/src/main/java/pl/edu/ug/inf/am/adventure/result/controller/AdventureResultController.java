@@ -7,7 +7,7 @@ import pl.edu.ug.inf.am.adventure.dagger.AdventureSubComponentManager;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 import pl.edu.ug.inf.am.adventure.model.AdventurePlayerModel;
 import pl.edu.ug.inf.am.adventure.state.AdventureResult;
-import pl.edu.ug.inf.am.player.state.PlayerState;
+import pl.edu.ug.inf.am.game.state.PlayerState;
 
 import javax.inject.Inject;
 

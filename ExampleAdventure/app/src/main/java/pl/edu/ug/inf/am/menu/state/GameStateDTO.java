@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.menu.state;
 
 import pl.edu.ug.inf.am.game.state.AvailableAdventures;
-import pl.edu.ug.inf.am.player.state.PlayerState;
+import pl.edu.ug.inf.am.game.state.PlayerState;
 
 public class GameStateDTO {
     private final PlayerState playerState;

@@ -4,7 +4,7 @@ import android.databinding.BaseObservable;
 import pl.aml.character.SkillType;
 import pl.aml.character.Stats;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
-import pl.edu.ug.inf.am.player.state.PlayerState;
+import pl.edu.ug.inf.am.game.state.PlayerState;
 
 import javax.inject.Inject;
 import java.util.Set;

@@ -11,6 +11,6 @@ public class AdventureAdder implements AStage{
 
     @Override
     public void run(AdventureEngine engine) {
-        engine.addAventure(adventureInstance);
+        engine.addAdventure(adventureInstance);
     }
 }

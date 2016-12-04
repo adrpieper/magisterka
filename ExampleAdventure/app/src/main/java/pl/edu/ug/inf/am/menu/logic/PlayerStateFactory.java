@@ -3,7 +3,7 @@ package pl.edu.ug.inf.am.menu.logic;
 import pl.aml.character.CharacterType;
 import pl.aml.character.SkillType;
 import pl.edu.ug.inf.am.menu.dagger.PerMenu;
-import pl.edu.ug.inf.am.player.state.PlayerState;
+import pl.edu.ug.inf.am.game.state.PlayerState;
 
 import javax.inject.Inject;
 import java.util.EnumSet;

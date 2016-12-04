@@ -1,4 +1,4 @@
-package pl.edu.ug.inf.am.player.state;
+package pl.edu.ug.inf.am.game.state;
 
 public class BarState {
     private int maxValue;

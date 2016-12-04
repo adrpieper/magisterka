@@ -3,7 +3,7 @@ package pl.edu.ug.inf.am.adventure.model;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import pl.edu.ug.inf.am.BR;
-import pl.edu.ug.inf.am.player.state.BarState;
+import pl.edu.ug.inf.am.game.state.BarState;
 
 public class BarModel extends BaseObservable{
     private final int maxValue;

@@ -2,9 +2,10 @@ package pl.edu.ug.inf.am.trip.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import pl.aml.character.SkillTree;
 import pl.aml.character.SkillType;
 import pl.edu.ug.inf.am.BR;
-import pl.edu.ug.inf.am.player.state.PlayerState;
+import pl.edu.ug.inf.am.game.state.PlayerState;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;
 
 import javax.inject.Inject;
@@ -62,5 +63,9 @@ public class SkillsModel extends BaseObservable{
     private void setSkills(Set<SkillType> skills) {
         this.skills = EnumSet.copyOf(skills);
         notifyPropertyChanged(BR.skills);
+    }
+
+    public SkillTree getSkillTree() {
+        return playerState.getCharacterType().getSkillTree();
     }
 }
