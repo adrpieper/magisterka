@@ -7,6 +7,7 @@ import pl.edu.ug.inf.am.common.SubComponentManager;
 import pl.edu.ug.inf.am.game.dagger.GameComponent;
 import pl.edu.ug.inf.am.game.dagger.GameDataModule;
 import pl.edu.ug.inf.am.game.view.GameActivity;
+import pl.edu.ug.inf.am.menu.state.GameStateDTO;
 import pl.edu.ug.inf.am.player.state.PlayerState;
 
 import javax.inject.Inject;
@@ -25,8 +26,12 @@ public class AppSubComponentManager extends SubComponentManager {
 
     public void prepareNewGame(){
         CharacterType characterType = new ExampleCharacterTypeFactory().create();
-        PlayerState playerState = appComponent.menuComponent().playerStateFactory().createNew(characterType);
-        GameDataModule gameDataModule = new GameDataModule(playerState);
+        GameStateDTO gameStateDTO = appComponent.menuComponent().newGameCreator().createNew(characterType);
+        startGame(gameStateDTO);
+    }
+
+    private void startGame(GameStateDTO gameStateDTO) {
+        GameDataModule gameDataModule = new GameDataModule(gameStateDTO);
         gameComponent = appComponent.gameComponent(gameDataModule);
         setSubcomponent(GameComponent.class, gameComponent);
     }

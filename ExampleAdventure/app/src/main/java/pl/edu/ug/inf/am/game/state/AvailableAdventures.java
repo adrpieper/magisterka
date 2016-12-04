@@ -11,11 +11,9 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-@PerGame
 public class AvailableAdventures {
     private final Map<Location,List<AdventureInstance>> adventures;
 
-    @Inject
     public AvailableAdventures() {
         this.adventures = new EnumMap(Location.class);
         for (Location location : Location.values()) {

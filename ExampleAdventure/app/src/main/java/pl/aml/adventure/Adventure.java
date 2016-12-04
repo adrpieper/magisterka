@@ -1,25 +1,11 @@
 package pl.aml.adventure;
 
-import pl.aml.Location;
-
 public class Adventure {
 
-    private final Location location;
     private final AStage firstStage;
 
-    @Deprecated
-    public Adventure(Location location){
-        this(location, null);
-    }
-
-    public Adventure(Location location, AStage firstStage){
-
-        this.location = location;
+    public Adventure(AStage firstStage){
         this.firstStage = firstStage;
-    }
-
-    public Location getLocation() {
-        return location;
     }
 
     public AStage getFirstStage() {

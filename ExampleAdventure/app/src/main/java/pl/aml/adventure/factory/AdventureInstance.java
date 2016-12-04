@@ -5,10 +5,10 @@ import pl.aml.adventure.definition.AdventureDefinition;
 
 public class AdventureInstance {
     private final Location location;
-    private final Class<AdventureDefinition> definition;
+    private final Class<? extends AdventureDefinition> definition;
     private final int frequency;
 
-    public AdventureInstance(Location location, Class<AdventureDefinition> definition, int frequency) {
+    public AdventureInstance(Location location, Class<? extends AdventureDefinition> definition, int frequency) {
         this.location = location;
         this.definition = definition;
         this.frequency = frequency;
@@ -18,7 +18,7 @@ public class AdventureInstance {
         return location;
     }
 
-    public Class<AdventureDefinition> getDefinition() {
+    public Class<? extends AdventureDefinition> getDefinition() {
         return definition;
     }
 
