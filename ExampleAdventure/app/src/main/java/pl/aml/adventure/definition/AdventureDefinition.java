@@ -1,8 +1,8 @@
 package pl.aml.adventure.definition;
 
-import pl.aml.adventure.AdventureBuilder;
+import pl.aml.adventure.AStage;
 
 public interface AdventureDefinition {
 
-    void define(AdventureBuilder adventure);
+    AStage define();
 }

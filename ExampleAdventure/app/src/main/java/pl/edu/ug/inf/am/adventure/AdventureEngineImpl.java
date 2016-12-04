@@ -8,6 +8,7 @@ import pl.edu.ug.inf.am.adventure.dagger.AdventureSubComponentManager;
 import pl.edu.ug.inf.am.adventure.state.AdventureState;
 import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
 
+import java.util.Collections;
 import java.util.List;
 
 public class AdventureEngineImpl implements AdventureEngine {
@@ -42,7 +43,9 @@ public class AdventureEngineImpl implements AdventureEngine {
 
     @Override
     public void addStages(List<AStage> stages) {
-        adventureState.addStages(Lists.reverse(stages));
+        for (int i = stages.size()-1; i >= 0; i--) {
+            adventureState.addStage(stages.get(i));
+        }
         runFirstOnStack();
     }
 

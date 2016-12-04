@@ -1,12 +1,11 @@
 package pl.aml.adventure;
 
+import pl.aml.Location;
 import pl.aml.MonsterType;
+import pl.aml.adventure.definition.AdventureDefinition;
+import pl.aml.adventure.factory.AdventureInstance;
 
 public class AmlInternalDSL {
-
-    public static AdventureBuilder aNewAdventure() {
-        return new AdventureBuilder();
-    }
 
     public static QuestionBuilder aQuestion(String question) {
         return new QuestionBuilder(question);
@@ -17,7 +16,11 @@ public class AmlInternalDSL {
     }
 
     public static AFight aFightWith(MonsterType... opponnents){
-        return new AFight(opponnents);
+        return new AFightBuilder().with(opponnents).build();
+    }
+
+    public static AFightBuilder aFight(){
+        return new AFightBuilder();
     }
 
     public static ConditionBuilder check(APredicate predicate) {
@@ -31,6 +34,10 @@ public class AmlInternalDSL {
         }
 
         return multi(stages);
+    }
+
+    public static AStage add(Location location, Class<? extends AdventureDefinition> definition) {
+        return new AdventureAdder(new AdventureInstance(location, definition, 1));
     }
 
     public static AStage multi(AStage... stages) {
