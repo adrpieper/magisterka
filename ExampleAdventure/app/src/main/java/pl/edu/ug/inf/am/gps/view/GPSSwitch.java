@@ -1,12 +1,9 @@
 package pl.edu.ug.inf.am.gps.view;
 
-import android.app.Fragment;
+import android.content.Context;
 import android.location.Location;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
+import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.Toast;
 import pl.edu.ug.inf.am.app.App;
@@ -16,27 +13,32 @@ import pl.edu.ug.inf.am.gps.GPS;
 
 import javax.inject.Inject;
 
-public class GPSFragment extends Fragment {
+public class GPSSwitch extends Switch {
 
     @Inject
     GPS gps;
 
-    public GPSFragment() {
-        App.getComponent(GameComponent.class).inject(this);
+    public GPSSwitch(Context context) {
+        super(context);
+        init();
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        final Switch aSwitch = new Switch(getActivity());
+    public GPSSwitch(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+
+
+    private void init() {
+        App.getComponent(GameComponent.class).inject(this);
         gps.setListener(new GPS.GPSListener() {
             @Override
             public void onLocationChanged(Location location) {
-                Toast.makeText(getActivity(), location.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), location.toString(), Toast.LENGTH_LONG).show();
             }
         });
-        aSwitch.setChecked(gps.isRunning());
-        aSwitch.setOnClickListener(new View.OnClickListener() {
+        setChecked(gps.isRunning());
+        setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -46,11 +48,10 @@ public class GPSFragment extends Fragment {
                         gps.start();
                     }
                 } catch (CantUseGPSException e) {
-                    Toast.makeText(getActivity(), "Can't use gps", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Can't use gps", Toast.LENGTH_SHORT).show();
                 }
-                aSwitch.setChecked(gps.isRunning());
+                setChecked(gps.isRunning());
             }
         });
-        return aSwitch;
     }
 }

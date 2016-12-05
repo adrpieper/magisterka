@@ -37,6 +37,18 @@ public class GameActivity extends Activity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        nfc.start(this);
+    }
+
+    @Override
+    protected void onPause() {
+        nfc.stop(this);
+        super.onPause();
+    }
+
+    @Override
     protected void onNewIntent(Intent intent) {
         nfc.handleIntent(intent);
     }

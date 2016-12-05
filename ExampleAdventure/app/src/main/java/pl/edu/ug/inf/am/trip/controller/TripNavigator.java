@@ -4,6 +4,7 @@ import pl.edu.ug.inf.am.game.view.GameView;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;
 import pl.edu.ug.inf.am.trip.view.LocationSelectFragment;
 import pl.edu.ug.inf.am.trip.view.PlayerReviewFragment;
+import pl.edu.ug.inf.am.trip.view.SkillsFragment;
 import pl.edu.ug.inf.am.trip.view.TripFragment;
 
 import javax.inject.Inject;
@@ -29,4 +30,6 @@ public class TripNavigator {
     public void showTrip() {
         gameView.showFragment(new TripFragment());
     }
+
+    public void showSkill() { gameView.showFragment(new SkillsFragment());}
 }

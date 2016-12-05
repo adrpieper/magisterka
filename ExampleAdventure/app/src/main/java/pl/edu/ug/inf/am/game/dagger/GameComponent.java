@@ -6,7 +6,7 @@ import pl.edu.ug.inf.am.common.HasSubComponents;
 import pl.edu.ug.inf.am.game.logic.GameInitializer;
 import pl.edu.ug.inf.am.game.view.GameActivity;
 import pl.edu.ug.inf.am.game.view.GameViewContainer;
-import pl.edu.ug.inf.am.gps.view.GPSFragment;
+import pl.edu.ug.inf.am.gps.view.GPSSwitch;
 import pl.edu.ug.inf.am.nfc.view.NFCFragment;
 import pl.edu.ug.inf.am.trip.dagger.TripComponent;
 
@@ -20,7 +20,7 @@ public interface GameComponent extends HasSubComponents {
     GameViewContainer gameViewContainer();
     GameSubComponentManager subComponentsManager();
 
-    void inject(GPSFragment gpsFragment);
+    void inject(GPSSwitch gpsSwitch);
 
     void inject(NFCFragment nfcFragment);
 
