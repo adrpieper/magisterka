@@ -31,6 +31,6 @@ public class AdventureResultController {
     }
 
     public void acceptLevelAchieved() {
-        adventureSubComponentManager.endAdventure();
+        adventureSubComponentManager.goToSkills();
     }
 }

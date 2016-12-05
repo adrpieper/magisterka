@@ -56,4 +56,8 @@ public class AdventureSubComponentManager extends SubComponentManager {
     public void endAdventure() {
         gameStagesManager.startTrip();
     }
+
+    public void goToSkills() {
+        gameStagesManager.startSkills();
+    }
 }

@@ -37,6 +37,6 @@ public class LevelAchievedFragment extends Fragment{
                 controller.acceptLevelAchieved();
             }
         });
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return binding.getRoot();
     }
 }

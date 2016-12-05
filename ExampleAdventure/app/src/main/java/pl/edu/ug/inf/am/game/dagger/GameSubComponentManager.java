@@ -19,6 +19,12 @@ public class GameSubComponentManager extends SubComponentManager {
         this.gameComponent = gameComponent;
     }
 
+    public void startSkills() {
+        TripComponent component = gameComponent.tripComponent();
+        setSubcomponent(TripComponent.class, component);
+        component.tripNavigator().showSkill();
+    }
+
     public void startTrip() {
         TripComponent component = gameComponent.tripComponent();
         setSubcomponent(TripComponent.class, component);

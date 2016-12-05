@@ -27,15 +27,19 @@ public class ResultApplier {
         if (adventureResult.isAccepted()){
             throw new RuntimeException("Result can't be accepted twice");
         }
-        playerState.getHp().setValue(playerModel.getHp().getValue());
-        playerState.getMp().setValue(playerModel.getMp().getValue());
-        int gainedExp = adventureResult.getGainedExp();
-        gainExp(gainedExp);
+        acceptLoses();
+        gainExp();
         adventureResult.setAccepted(true);
     }
 
+    private void acceptLoses() {
+        playerState.getHp().setValue(playerModel.getHp().getValue());
+        playerState.getMp().setValue(playerModel.getMp().getValue());
+    }
 
-    private void gainExp(int gainedExp) {
+
+    private void gainExp() {
+        int gainedExp = adventureResult.getGainedExp();
         int newExp = playerState.getExperience() + gainedExp;
         playerState.setExperience(newExp);
         int newLevel = newExp/100;
@@ -46,7 +50,8 @@ public class ResultApplier {
 
     private void gainLevel(int newLevel,int gainedLevels){
         if (gainedLevels > 0) {
-            playerState.setSkillPoints(playerState.getSkillPoints() + playerState.getSkillPoints());
+            adventureResult.setLevelAchieved(newLevel);
+            playerState.setSkillPoints(playerState.getSkillPoints() + gainedLevels);
             playerState.setLevel(newLevel);
             CharacterType characterType = playerState.getCharacterType();
             Stats statsOnStart = characterType.getStatsOnStart();
