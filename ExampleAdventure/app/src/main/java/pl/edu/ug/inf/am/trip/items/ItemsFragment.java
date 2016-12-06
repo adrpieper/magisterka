@@ -38,7 +38,7 @@ public class ItemsFragment extends Fragment {
 
         ItemsFragmentBinding binding = ItemsFragmentBinding.inflate(inflater);
         final ItemsModel model = itemsController.createModel();
-
+        binding.setItems(model);
 
         Adapters.createFor(binding.slotsListView, new ArrayList<>(model.getSlots()))
                 .withListener(new AdapterBuilder.OnDataClickListener<SlotModel>() {
@@ -57,13 +57,7 @@ public class ItemsFragment extends Fragment {
                         itemsController.takeOnItem(object, model);
                     }
                 })
-                .withViewFactory(ViewFactories.textViewFactory())
-                .withBinder(new ModelBinder<TextView, ItemType>() {
-                    @Override
-                    public void bind(TextView view, ItemType model) {
-                        view.setText(model.name());
-                    }
-                })
+                .withBinding(R.layout.item_view, BR.item)
                 .bind();
 
 

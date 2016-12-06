@@ -48,7 +48,7 @@ public class ItemsState {
     }
 
     public void emptySlot(SlotType slotType) {
-        itemsOnSlot.put(slotType,null);
+        itemsOnSlot.remove(slotType);
     }
 
     public void addItemsToBag(List<ItemType> collectedItems) {

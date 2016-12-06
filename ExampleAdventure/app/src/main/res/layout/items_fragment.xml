@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="result" type="pl.edu.ug.inf.am.adventure.fight.state.ResultDTO"/>
+        <variable name="items" type="pl.edu.ug.inf.am.trip.items.model.ItemsModel"/>
     </data>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="match_parent" android:padding="@dimen/small_margin"
@@ -19,6 +19,14 @@
                   android:id="@+id/slots_list_view"
                   android:background="@drawable/default_frame_gradient"
                   android:layout_weight="1"/>
+        <include
+                android:id="@+id/stats_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/stats_view"
+                bind:stats='@{items.stats}'
+                android:layout_below="@+id/powerTextView" android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

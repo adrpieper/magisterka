@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import pl.edu.ug.inf.am.adventure.dagger.AdventureComponent;
+import pl.adrian.bindinge.Adapters;
+import pl.edu.ug.inf.am.BR;
+import pl.edu.ug.inf.am.R;
 import pl.edu.ug.inf.am.adventure.result.controller.AdventureResultController;
 import pl.edu.ug.inf.am.adventure.result.dagger.AdventureResultComponent;
 import pl.edu.ug.inf.am.adventure.state.AdventureResult;
@@ -39,6 +41,11 @@ public class AdventureResultFragment extends Fragment {
                 controller.acceptResult();
             }
         });
+
+        Adapters.createFor(binding.itemsListView, result.getCollectedItems())
+                .withBinding(R.layout.item_view, BR.item)
+                .bind();
+
         return binding.getRoot();
     }
 }

@@ -3,23 +3,40 @@
     <data>
         <variable name="result" type="pl.edu.ug.inf.am.adventure.state.AdventureResult"/>
     </data>
-    <LinearLayout
+    <RelativeLayout
             android:orientation="vertical" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" android:padding="@dimen/small_margin">
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text='@{"exp: " + result.gainedExp}'
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/small_margin"/>
-        <Button
+                android:id="@+id/gained_exp_text_view"
+                android:gravity="center" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+
+        <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/accept_button" android:layout_gravity="center_horizontal"/>
+                android:id="@+id/items_list_view" android:background="@drawable/default_frame_gradient"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_above="@+id/accept_button" android:layout_below="@+id/collected_items_text_view"/>
 
-    </LinearLayout>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/accept_button" android:layout_gravity="center_horizontal"
+                android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
+                android:text="@string/ok"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Collected Items"
+                android:id="@+id/collected_items_text_view"
+                android:layout_below="@+id/gained_exp_text_view" android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
 </layout>
 
 
