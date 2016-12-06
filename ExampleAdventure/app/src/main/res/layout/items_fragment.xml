@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="result" type="pl.edu.ug.inf.am.adventure.fight.state.ResultDTO"/>
+    </data>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent" android:padding="@dimen/small_margin"
+                  android:orientation="vertical" android:measureWithLargestChild="false">
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Slots"
+                  android:id="@+id/textView3"
+                  android:layout_gravity="center_horizontal"
+                  android:textSize="32dp"
+                  android:paddingTop="8dp"/>
+        <ListView android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:id="@+id/slots_list_view"
+                  android:background="@drawable/default_frame_gradient"
+                  android:layout_weight="1"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Items in bag"
+                android:id="@+id/title_text_view"
+                android:textSize="32dp"
+                android:paddingTop="8dp" android:layout_gravity="center_horizontal"/>
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/bag_items_list_view"
+                android:background="@drawable/default_frame_gradient"
+                android:layout_weight="1"/>
+    </LinearLayout>
+</layout>

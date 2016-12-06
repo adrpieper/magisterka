@@ -29,6 +29,7 @@ public class ResultApplier {
         }
         acceptLoses();
         gainExp();
+        playerState.getItemsState().addItemsToBag(adventureResult.getCollectedItems());
         adventureResult.setAccepted(true);
     }
 

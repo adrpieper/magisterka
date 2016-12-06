@@ -1,4 +1,4 @@
-package pl.edu.ug.inf.am.trip.model;
+package pl.edu.ug.inf.am.trip.skills.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;

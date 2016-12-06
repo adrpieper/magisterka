@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.adventure.dagger;
 
 import pl.aml.adventure.AStage;
-import pl.aml.MonsterType;
+import pl.aml.opponent.OpponentType;
 import pl.edu.ug.inf.am.adventure.fight.dagger.FightComponent;
 import pl.edu.ug.inf.am.adventure.question.dagger.QuestionComponent;
 import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
@@ -38,7 +38,7 @@ public class AdventureSubComponentManager extends SubComponentManager {
         gameView.showFragment(new QuestionFragment());
     }
 
-    public void startFight(List<MonsterType> monsters, AStage doOnWin, AStage doOnLost) {
+    public void startFight(List<OpponentType> monsters, AStage doOnWin, AStage doOnLost) {
 
         FightComponent fightComponent = adventureComponent.fightComponent();
         setSubcomponent(FightComponent.class, fightComponent);

@@ -1,13 +1,13 @@
 package pl.aml.adventure;
 
-import pl.aml.MonsterType;
+import pl.aml.opponent.OpponentType;
 
 public class AFightBuilder implements AStageBuilder{
-    private MonsterType[] opponents;
+    private OpponentType[] opponents;
     private AStage doOnWin = End.instance();
     private AStage doOnLost = End.instance();
 
-    public AFightBuilder with(MonsterType... opponents) {
+    public AFightBuilder with(OpponentType... opponents) {
         this.opponents = opponents;
         return this;
     }

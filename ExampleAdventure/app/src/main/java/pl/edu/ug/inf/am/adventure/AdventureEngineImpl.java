@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.adventure;
 
-import pl.aml.MonsterType;
+import pl.aml.opponent.OpponentType;
 import pl.aml.adventure.*;
 import pl.aml.adventure.factory.AdventureInstance;
 import pl.edu.ug.inf.am.adventure.dagger.AdventureSubComponentManager;
@@ -25,7 +25,7 @@ public class AdventureEngineImpl implements AdventureEngine {
 
 
     @Override
-    public void fight(List<MonsterType> opponents, AStage doOnWin, AStage doOnLost) {
+    public void fight(List<OpponentType> opponents, AStage doOnWin, AStage doOnLost) {
         adventureStagesManager.startFight(opponents, doOnWin, doOnLost);
     }
 

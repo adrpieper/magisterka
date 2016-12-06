@@ -1,7 +1,7 @@
 package pl.aml.adventure;
 
 import pl.aml.Location;
-import pl.aml.MonsterType;
+import pl.aml.opponent.OpponentType;
 import pl.aml.adventure.definition.AdventureDefinition;
 import pl.aml.adventure.factory.AdventureInstance;
 
@@ -15,7 +15,7 @@ public class AmlInternalDSL {
         return new QuestionAnswer(answer, stage);
     }
 
-    public static AFight aFightWith(MonsterType... opponnents){
+    public static AFight aFightWith(OpponentType... opponnents){
         return new AFightBuilder().with(opponnents).build();
     }
 

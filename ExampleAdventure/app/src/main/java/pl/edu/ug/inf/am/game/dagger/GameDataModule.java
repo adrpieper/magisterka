@@ -3,6 +3,7 @@ package pl.edu.ug.inf.am.game.dagger;
 import dagger.Module;
 import dagger.Provides;
 import pl.edu.ug.inf.am.game.state.AvailableAdventures;
+import pl.edu.ug.inf.am.game.state.ItemsState;
 import pl.edu.ug.inf.am.menu.state.GameStateDTO;
 import pl.edu.ug.inf.am.game.state.PlayerState;
 
@@ -11,7 +12,6 @@ public class GameDataModule {
 
     private final PlayerState playerState;
     private final AvailableAdventures availableAdventures;
-
 
     public GameDataModule(GameStateDTO gameStateDTO) {
         playerState = gameStateDTO.getPlayerState();
@@ -22,6 +22,12 @@ public class GameDataModule {
     @Provides
     public PlayerState providePlayerState() {
         return playerState;
+    }
+
+    @PerGame
+    @Provides
+    public ItemsState provideItemsState() {
+        return playerState.getItemsState();
     }
 
     @PerGame

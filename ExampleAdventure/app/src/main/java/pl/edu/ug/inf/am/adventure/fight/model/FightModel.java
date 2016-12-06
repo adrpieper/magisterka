@@ -2,12 +2,13 @@ package pl.edu.ug.inf.am.adventure.fight.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import pl.aml.MonsterType;
+import pl.aml.opponent.OpponentType;
 import pl.aml.character.SkillType;
+import pl.aml.opponent.OpponentType;
 import pl.edu.ug.inf.am.BR;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 import pl.edu.ug.inf.am.adventure.model.AdventurePlayerModel;
-import pl.edu.ug.inf.am.trip.model.SkillsModel;
+import pl.edu.ug.inf.am.trip.skills.model.SkillsModel;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -19,9 +20,9 @@ public class FightModel extends BaseObservable {
     private EnemyModel enemy;
     private final AdventurePlayerModel player;
     private FightStatus fightStatus;
-    private List<MonsterType> monstersToKill = new ArrayList<>();
-    private List<MonsterType> killedMonsters = new ArrayList<>();
-    private MonsterType actualMonster;
+    private List<OpponentType> monstersToKill = new ArrayList<>();
+    private List<OpponentType> killedMonsters = new ArrayList<>();
+    private OpponentType actualMonster;
     private List<SkillModel> skillsModels;
 
     @Inject
@@ -55,7 +56,7 @@ public class FightModel extends BaseObservable {
         notifyPropertyChanged(BR.fightStatus);
     }
 
-    public void settOpponentsToKill(List<MonsterType> monstersToKill) {
+    public void settOpponentsToKill(List<OpponentType> monstersToKill) {
         this.monstersToKill = new ArrayList<>(monstersToKill);
     }
 
@@ -64,7 +65,7 @@ public class FightModel extends BaseObservable {
         killedMonsters.add(actualMonster);
     }
 
-    public MonsterType getNextMonsterToKill() {
+    public OpponentType getNextMonsterToKill() {
         return monstersToKill.get(0);
     }
 
@@ -72,12 +73,12 @@ public class FightModel extends BaseObservable {
         return !monstersToKill.isEmpty();
     }
 
-    public void setActualOpponent(MonsterType actualMonster) {
+    public void setActualOpponent(OpponentType actualMonster) {
         this.actualMonster = actualMonster;
         setEnemy(new EnemyModel(actualMonster));
     }
 
-    public List<MonsterType> getKilledMonsters() {
+    public List<OpponentType> getKilledMonsters() {
         return killedMonsters;
     }
 

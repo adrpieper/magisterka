@@ -1,9 +1,10 @@
 package pl.edu.ug.inf.am.adventure.state;
 
-import pl.aml.ItemType;
+import pl.aml.items.ItemType;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 @PerAdventure
@@ -14,7 +15,7 @@ public class AdventureResult {
 
     private boolean accepted;
     private int gainedExp;
-    private List<ItemType> collectedItems;
+    private List<ItemType> collectedItems = new ArrayList<>();
     private int levelAchieved = -1;
 
     public void setLevelAchieved(int levelAchieved) {
@@ -39,5 +40,13 @@ public class AdventureResult {
 
     public int getGainedExp() {
         return gainedExp;
+    }
+
+    public void addItems(List<ItemType> gainedItems) {
+        collectedItems.addAll(gainedItems);
+    }
+
+    public List<ItemType> getCollectedItems() {
+        return collectedItems;
     }
 }

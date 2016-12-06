@@ -1,23 +1,23 @@
 package pl.aml.adventure;
 
-import pl.aml.MonsterType;
+import pl.aml.opponent.OpponentType;
 
 import java.util.Arrays;
 
 public class AFight implements AStage {
-    private final MonsterType[] opponents;
+    private final OpponentType[] opponents;
     private final AStage doOnWin;
     private final AStage doOnLost;
 
-    AFight(MonsterType[] opponents) {
+    AFight(OpponentType[] opponents) {
         this(opponents, End.instance(), End.instance());
     }
 
-    AFight(MonsterType[] opponents, AStage doOnWin) {
+    AFight(OpponentType[] opponents, AStage doOnWin) {
         this(opponents, doOnWin, End.instance());
     }
 
-    AFight(MonsterType[] opponents, AStage doOnWin, AStage doOnLost) {
+    AFight(OpponentType[] opponents, AStage doOnWin, AStage doOnLost) {
         this.opponents = opponents;
         this.doOnWin = doOnWin;
         this.doOnLost = doOnLost;

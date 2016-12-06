@@ -1,4 +1,4 @@
-package pl.edu.ug.inf.am.trip.view;
+package pl.edu.ug.inf.am.trip.skills;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -16,9 +16,8 @@ import pl.edu.ug.inf.am.R;
 import pl.edu.ug.inf.am.app.App;
 import pl.edu.ug.inf.am.databinding.SkillFragmentBinding;
 import pl.edu.ug.inf.am.databinding.SkillNodeViewBinding;
-import pl.edu.ug.inf.am.trip.controller.SkillsController;
 import pl.edu.ug.inf.am.trip.dagger.TripComponent;
-import pl.edu.ug.inf.am.trip.model.SkillsModel;
+import pl.edu.ug.inf.am.trip.skills.model.SkillsModel;
 
 import javax.inject.Inject;
 

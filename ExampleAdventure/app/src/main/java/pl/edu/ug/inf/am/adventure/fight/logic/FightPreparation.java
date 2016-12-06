@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.adventure.fight.logic;
 
-import pl.aml.MonsterType;
+import pl.aml.opponent.OpponentType;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 
 import javax.inject.Inject;
@@ -17,7 +17,7 @@ public class FightPreparation {
         this.opponentsManager = opponentsManager;
     }
 
-    public void prepare(List<MonsterType> opponents) {
+    public void prepare(List<OpponentType> opponents) {
         opponentsManager.setOpponentsToKill(opponents);
         skillsLogic.createSkillsList();
     }

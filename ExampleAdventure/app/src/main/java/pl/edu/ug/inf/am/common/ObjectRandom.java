@@ -12,10 +12,6 @@ public class ObjectRandom {
     private final Random random;
 
     @Inject
-    public ObjectRandom() {
-        this(new Random());
-    }
-
     public ObjectRandom(Random random) {
         this.random = random;
     }

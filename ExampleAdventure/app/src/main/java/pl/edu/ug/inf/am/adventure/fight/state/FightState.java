@@ -1,7 +1,6 @@
 package pl.edu.ug.inf.am.adventure.fight.state;
 
-import pl.aml.MonsterType;
-import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
+import pl.aml.opponent.OpponentType;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 
 import java.util.ArrayList;
@@ -12,27 +11,27 @@ import java.util.List;
 public class FightState {
     private int enemyHealth;
     private Result result;
-    private List<MonsterType> monstersToKill = new ArrayList<>();
-    private List<MonsterType> killedMonsters = new ArrayList<>();
-    private MonsterType actualMonster;
+    private List<OpponentType> monstersToKill = new ArrayList<>();
+    private List<OpponentType> killedMonsters = new ArrayList<>();
+    private OpponentType actualMonster;
 
-    public FightState(Collection<MonsterType> monsters) {
+    public FightState(Collection<OpponentType> monsters) {
         this.monstersToKill.addAll(monsters);
-        MonsterType actualMonster = monstersToKill.get(0);
+        OpponentType actualMonster = monstersToKill.get(0);
         setActualMonster(actualMonster);
         setEnemyHealth(actualMonster.getHp());
         result = Result.FIGHT;
     }
 
-    public List<MonsterType> getKilledMonsters() {
+    public List<OpponentType> getKilledMonsters() {
         return killedMonsters;
     }
 
-    public List<MonsterType> getMonstersToKill() {
+    public List<OpponentType> getMonstersToKill() {
         return monstersToKill;
     }
 
-    public void addKilledMonster(MonsterType monster) {
+    public void addKilledMonster(OpponentType monster) {
         killedMonsters.add(monster);
     }
 
@@ -40,11 +39,11 @@ public class FightState {
         this.enemyHealth = enemyHealth;
     }
 
-    public void setActualMonster(MonsterType actualMonster) {
+    public void setActualMonster(OpponentType actualMonster) {
         this.actualMonster = actualMonster;
     }
 
-    public MonsterType getActualMonster() {
+    public OpponentType getActualMonster() {
         return actualMonster;
     }
 
@@ -52,8 +51,8 @@ public class FightState {
         return enemyHealth;
     }
 
-    public void removeMonsterToKill(MonsterType monsterType) {
-        monstersToKill.remove(monsterType);
+    public void removeMonsterToKill(OpponentType opponentType) {
+        monstersToKill.remove(opponentType);
     }
 
     public void setResult(Result result) {
@@ -65,7 +64,7 @@ public class FightState {
     }
 
     public void nextMonster() {
-        MonsterType nextMonster = monstersToKill.get(0);
+        OpponentType nextMonster = monstersToKill.get(0);
         setActualMonster(nextMonster);
         setEnemyHealth(nextMonster.getHp());
         setResult(FightState.Result.FIGHT);

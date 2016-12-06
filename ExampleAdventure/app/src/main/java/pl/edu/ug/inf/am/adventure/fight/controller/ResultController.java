@@ -38,6 +38,7 @@ public class ResultController {
     public void calculateAndShowResult() {
         resultDTO = fightModel.calculateResult();
         adventureResult.addExperience(resultDTO.getGainedExp());
+        adventureResult.addItems(resultDTO.getGainedItems());
         fightNavigator.showResult();
     }
 }

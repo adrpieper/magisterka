@@ -1,12 +1,12 @@
 package pl.aml.adventure;
 
-import pl.aml.MonsterType;
+import pl.aml.opponent.OpponentType;
 import pl.aml.adventure.factory.AdventureInstance;
 
 import java.util.List;
 
 public interface AdventureEngine {
-    void fight(List<MonsterType> opponents, AStage doOnWin, AStage doOnLost);
+    void fight(List<OpponentType> opponents, AStage doOnWin, AStage doOnLost);
     void end();
     void addStages(List<AStage> stages);
 

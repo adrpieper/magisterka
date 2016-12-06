@@ -1,6 +1,7 @@
 package pl.adrian.bindinge;
 
 import android.content.Context;
+import android.databinding.ObservableList;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -72,6 +73,10 @@ public class AdapterBuilder<ModelType> {
         public void bind() {
             ListAdapter adapter = new ListAdapter(binder, viewFactory, context, objects);
             absListView.setAdapter(adapter);
+            if (objects instanceof ObservableList) {
+                ObservableList observableList = (ObservableList) objects;
+                observableList.addOnListChangedCallback(new ObservableListCallback(adapter));
+            }
         }
     }
 }

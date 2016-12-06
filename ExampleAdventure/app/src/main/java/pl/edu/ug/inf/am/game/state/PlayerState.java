@@ -5,9 +5,7 @@ import pl.aml.character.SkillType;
 import pl.aml.character.Stats;
 import pl.edu.ug.inf.am.game.dagger.PerGame;
 
-import javax.inject.Inject;
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.Set;
 
 @PerGame
@@ -21,6 +19,7 @@ public class PlayerState {
     private int level = 1;
     private int skillPoints;
     private Stats stats;
+    private final ItemsState itemsState = new ItemsState();
 
     public PlayerState(CharacterType characterType) {
         this.characterType = characterType;
@@ -81,5 +80,9 @@ public class PlayerState {
     public void setSkills(Set<SkillType> skills) {
         this.skills.clear();
         this.skills.addAll(skills);
+    }
+
+    public ItemsState getItemsState() {
+        return itemsState;
     }
 }

@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.adventure.fight.state;
 
-import pl.aml.ItemType;
+import pl.aml.items.ItemType;
 
 import java.util.List;
 
@@ -17,6 +17,10 @@ public class ResultDTO {
 
     public int getGainedExp() {
         return gainedExp;
+    }
+
+    public List<ItemType> getGainedItems() {
+        return gainedItems;
     }
 
     public Result getResult() {

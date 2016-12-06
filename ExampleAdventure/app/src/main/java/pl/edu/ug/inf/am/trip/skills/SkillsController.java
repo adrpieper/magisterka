@@ -1,9 +1,10 @@
-package pl.edu.ug.inf.am.trip.controller;
+package pl.edu.ug.inf.am.trip.skills;
 
 import pl.aml.character.SkillNode;
 import pl.aml.character.SkillType;
+import pl.edu.ug.inf.am.trip.controller.TripNavigator;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;
-import pl.edu.ug.inf.am.trip.model.SkillsModel;
+import pl.edu.ug.inf.am.trip.skills.model.SkillsModel;
 
 import javax.inject.Inject;
 

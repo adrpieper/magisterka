@@ -45,6 +45,12 @@ public class TripFragment extends Fragment{
                 tripNavigator.showSkill();
             }
         });
+        binding.showItemsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tripNavigator.showItems();
+            }
+        });
         return binding.getRoot();
     }
 }
