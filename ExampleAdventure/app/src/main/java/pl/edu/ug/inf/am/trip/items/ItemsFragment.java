@@ -19,6 +19,7 @@ import pl.edu.ug.inf.am.databinding.ItemsFragmentBinding;
 import pl.edu.ug.inf.am.trip.dagger.TripComponent;
 import pl.edu.ug.inf.am.trip.items.model.ItemsModel;
 import pl.edu.ug.inf.am.trip.items.model.SlotModel;
+import pl.edu.ug.inf.am.trip.model.StatsModel;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -27,6 +28,9 @@ public class ItemsFragment extends Fragment {
 
     @Inject
     ItemsController itemsController;
+
+    @Inject
+    StatsModel statsModel;
 
     public ItemsFragment() {
         App.getComponent(TripComponent.class).inject(this);
@@ -38,7 +42,7 @@ public class ItemsFragment extends Fragment {
 
         ItemsFragmentBinding binding = ItemsFragmentBinding.inflate(inflater);
         final ItemsModel model = itemsController.createModel();
-        binding.setItems(model);
+        binding.setStats(statsModel);
 
         Adapters.createFor(binding.slotsListView, new ArrayList<>(model.getSlots()))
                 .withListener(new AdapterBuilder.OnDataClickListener<SlotModel>() {

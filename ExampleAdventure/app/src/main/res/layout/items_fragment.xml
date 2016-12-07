@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="items" type="pl.edu.ug.inf.am.trip.items.model.ItemsModel"/>
+        <variable name="stats" type="pl.edu.ug.inf.am.trip.model.StatsModel"/>
     </data>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="match_parent" android:padding="@dimen/small_margin"
@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 layout="@layout/stats_view"
-                bind:stats='@{items.stats}'
+                bind:stats='@{stats.bonus}'
                 android:layout_below="@+id/powerTextView" android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"/>
         <TextView

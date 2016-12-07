@@ -15,6 +15,5 @@ public interface TripComponent {
     void inject(LocationSelectFragment locationSelectFragment);
     void inject(PlayerReviewFragment playerReviewFragment);
     void inject(SkillsFragment skillsFragment);
-
     void inject(ItemsFragment itemsFragment);
 }

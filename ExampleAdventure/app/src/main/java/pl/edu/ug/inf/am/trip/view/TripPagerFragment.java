@@ -3,6 +3,7 @@ package pl.edu.ug.inf.am.trip.view;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
@@ -19,13 +20,26 @@ import static pl.adrian.util.Reflection.newInstance;
 
 public class TripPagerFragment extends Fragment {
 
+    public static final String SELECTED_PAGE = "SELECTED_PAGE";
+    public static final int SKILLS_PAGE = 1;
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, final Bundle savedInstanceState) {
 
-        ViewPager viewPager = new ViewPager(getActivity());
+        final ViewPager viewPager = new ViewPager(getActivity());
         viewPager.setAdapter(new Adapter(getActivity().getFragmentManager()));
         viewPager.setId(R.id.trip_pager_view);
+
+        if (savedInstanceState != null) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    viewPager.setCurrentItem(savedInstanceState.getInt(SELECTED_PAGE, 0));
+                }
+            }, 500);
+        }
         return viewPager;
     }
 

@@ -7,18 +7,21 @@ import pl.edu.ug.inf.am.game.state.ItemsState;
 import pl.edu.ug.inf.am.game.state.PlayerStatsState;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;
 import pl.edu.ug.inf.am.trip.items.model.ItemsModel;
+import pl.edu.ug.inf.am.trip.model.StatsModel;
 
 import javax.inject.Inject;
 
 @PerTrip
 public class ItemsController {
 
+    private final StatsModel statsModel;
     private final ItemsState itemsState;
     private final PlayerStatsState playerStatsState;
     private final PlayerStatsUpdater statsUpdater;
 
     @Inject
-    public ItemsController(ItemsState itemsState, PlayerStatsState playerStatsState, PlayerStatsUpdater statsUpdater) {
+    public ItemsController(StatsModel statsModel, ItemsState itemsState, PlayerStatsState playerStatsState, PlayerStatsUpdater statsUpdater) {
+        this.statsModel = statsModel;
         this.itemsState = itemsState;
         this.playerStatsState = playerStatsState;
         this.statsUpdater = statsUpdater;
@@ -26,7 +29,7 @@ public class ItemsController {
 
     public ItemsModel createModel() {
         ItemsModel itemsModel = new ItemsModel(itemsState);
-        calculateStats(itemsModel);
+        calculateStats();
         return itemsModel;
     }
 
@@ -37,17 +40,17 @@ public class ItemsController {
         itemsModel.removeItemFromBag(itemType);
         itemsState.putItemOnSlot(itemType);
         itemsModel.putItemOnSlot(itemType);
-        calculateStats(itemsModel);
+        calculateStats();
     }
 
     public void takeOffItem(SlotType slotType, ItemsModel itemsModel){
         removeItem(slotType, itemsModel);
-        calculateStats(itemsModel);
+        calculateStats();
     }
 
-    private void calculateStats(ItemsModel itemsModel) {
+    private void calculateStats() {
         statsUpdater.updateBonusStats();
-        itemsModel.setStats(playerStatsState.getBonus());
+        statsModel.setBonus(playerStatsState.getBonus());
     }
 
     private void removeItem(SlotType slotType, ItemsModel itemsModel) {
