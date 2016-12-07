@@ -1,6 +1,7 @@
 package pl.aml.character;
 
 public class Stats {
+    private static final Stats defaultValue = new Stats(0,0,0);
     private final int intelligence;
     private final int strength;
     private final int agility;
@@ -31,5 +32,17 @@ public class Stats {
         if (statType == StatType.AGILITY)
             return agility;
         throw new RuntimeException();
+    }
+
+    public static Stats defaultValue() {
+        return defaultValue;
+    }
+
+    public Stats plus(Stats stats) {
+        return new Stats(
+                intelligence + stats.intelligence,
+                strength + stats.strength,
+                agility + stats.agility
+        );
     }
 }

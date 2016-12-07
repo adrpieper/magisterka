@@ -6,6 +6,7 @@ import pl.aml.character.Stats;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 import pl.edu.ug.inf.am.adventure.model.AdventurePlayerModel;
 import pl.edu.ug.inf.am.adventure.state.AdventureResult;
+import pl.edu.ug.inf.am.game.player.PlayerStatsUpdater;
 import pl.edu.ug.inf.am.game.state.PlayerState;
 
 import javax.inject.Inject;
@@ -15,12 +16,14 @@ public class ResultApplier {
     private AdventureResult adventureResult;
     private PlayerState playerState;
     private AdventurePlayerModel playerModel;
+    private PlayerStatsUpdater statsUpdater;
 
     @Inject
-    public ResultApplier(AdventureResult adventureResult, PlayerState playerState, AdventurePlayerModel playerModel) {
+    public ResultApplier(AdventureResult adventureResult, PlayerState playerState, AdventurePlayerModel playerModel, PlayerStatsUpdater statsUpdater) {
         this.adventureResult = adventureResult;
         this.playerState = playerState;
         this.playerModel = playerModel;
+        this.statsUpdater = statsUpdater;
     }
 
     public void acceptResult() {
@@ -54,25 +57,8 @@ public class ResultApplier {
             adventureResult.setLevelAchieved(newLevel);
             playerState.setSkillPoints(playerState.getSkillPoints() + gainedLevels);
             playerState.setLevel(newLevel);
-            CharacterType characterType = playerState.getCharacterType();
-            Stats statsOnStart = characterType.getStatsOnStart();
-            Stats statsPerLevel = characterType.getStatsPerLevel();
-            int newIntelligence = count(StatType.INTELLIGENCE, statsOnStart, statsPerLevel, newLevel);
-            int newStrength = count(StatType.STRENGTH, statsOnStart, statsPerLevel, newLevel);
-            int newAgility = count(StatType.AGILITY, statsOnStart, statsPerLevel, newLevel);
-            setStats(new Stats(newIntelligence, newStrength, newAgility));
+            statsUpdater.updateBasicStats();
         }
-    }
-
-    private void setStats(Stats newStats){
-        playerState.setStats(newStats);
-        playerState.getHp().setMaxValue(newStats.getStrength()*100);
-        playerState.getMp().setMaxValue(newStats.getIntelligence()*100);
-
-    }
-
-    private int count (StatType statType, Stats statsOnStart, Stats statsPerLevel,int level) {
-        return statsOnStart.get(statType)+level*statsPerLevel.get(statType);
     }
 
     public boolean isResultAchieved() {

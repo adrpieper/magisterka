@@ -26,12 +26,13 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
         <include
-                android:id="@+id/stats_view"
+                android:id="@+id/full_stats_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                layout="@layout/stats_view"
+                layout="@layout/full_stats_view"
                 bind:stats='@{player.stats}'
-                android:layout_below="@+id/powerTextView" android:layout_alignParentLeft="true"
+                android:layout_below="@+id/powerTextView"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"/>
     </RelativeLayout>
 </layout>

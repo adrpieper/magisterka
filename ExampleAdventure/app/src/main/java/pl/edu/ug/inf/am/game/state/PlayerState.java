@@ -18,7 +18,7 @@ public class PlayerState {
     private int experience;
     private int level = 1;
     private int skillPoints;
-    private Stats stats;
+    private final PlayerStatsState stats = new PlayerStatsState();
     private final ItemsState itemsState = new ItemsState();
 
     public PlayerState(CharacterType characterType) {
@@ -65,11 +65,7 @@ public class PlayerState {
         this.level = level;
     }
 
-    public void setStats(Stats stats) {
-        this.stats = stats;
-    }
-
-    public Stats getStats() {
+    public PlayerStatsState getStats() {
         return stats;
     }
 

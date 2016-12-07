@@ -5,6 +5,7 @@ import pl.aml.character.SkillType;
 import pl.aml.character.Stats;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
 import pl.edu.ug.inf.am.game.state.PlayerState;
+import pl.edu.ug.inf.am.game.state.PlayerStatsState;
 
 import javax.inject.Inject;
 import java.util.Set;
@@ -14,6 +15,7 @@ public class AdventurePlayerModel extends BaseObservable {
 
     private final BarModel hp;
     private final BarModel mp;
+    private final Stats stats;
     private final PlayerState playerState;
 
     @Inject
@@ -21,6 +23,7 @@ public class AdventurePlayerModel extends BaseObservable {
         this.playerState = playerState;
         hp = new BarModel(playerState.getHp());
         mp = new BarModel(playerState.getMp());
+        this.stats = playerState.getStats().getFull();
     }
 
     public BarModel getHp() {
@@ -43,7 +46,7 @@ public class AdventurePlayerModel extends BaseObservable {
     }
 
     public Stats getStats() {
-        return playerState.getStats();
+        return stats;
     }
 
 

@@ -9,16 +9,13 @@ import pl.aml.items.ItemType;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
 /**
  * Created by Adi on 2016-12-06.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class StatsGeneratorTest {
+public class ItemsStatsGeneratorTest {
     @InjectMocks
-    private StatsGenerator underTest;
+    private ItemsStatsGenerator underTest;
 
     @Test
     public void fromItems() throws Exception {

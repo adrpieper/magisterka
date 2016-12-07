@@ -2,8 +2,9 @@ package pl.edu.ug.inf.am.trip.items;
 
 import pl.aml.items.ItemType;
 import pl.aml.items.SlotType;
-import pl.edu.ug.inf.am.game.items.StatsGenerator;
+import pl.edu.ug.inf.am.game.player.PlayerStatsUpdater;
 import pl.edu.ug.inf.am.game.state.ItemsState;
+import pl.edu.ug.inf.am.game.state.PlayerStatsState;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;
 import pl.edu.ug.inf.am.trip.items.model.ItemsModel;
 
@@ -13,12 +14,14 @@ import javax.inject.Inject;
 public class ItemsController {
 
     private final ItemsState itemsState;
-    private final StatsGenerator statsGenerator;
+    private final PlayerStatsState playerStatsState;
+    private final PlayerStatsUpdater statsUpdater;
 
     @Inject
-    public ItemsController(ItemsState itemsState, StatsGenerator statsGenerator) {
+    public ItemsController(ItemsState itemsState, PlayerStatsState playerStatsState, PlayerStatsUpdater statsUpdater) {
         this.itemsState = itemsState;
-        this.statsGenerator = statsGenerator;
+        this.playerStatsState = playerStatsState;
+        this.statsUpdater = statsUpdater;
     }
 
     public ItemsModel createModel() {
@@ -43,7 +46,8 @@ public class ItemsController {
     }
 
     private void calculateStats(ItemsModel itemsModel) {
-        itemsModel.setStats(statsGenerator.fromItems(itemsState.getItemsOnSlot().values()));
+        statsUpdater.updateBonusStats();
+        itemsModel.setStats(playerStatsState.getBonus());
     }
 
     private void removeItem(SlotType slotType, ItemsModel itemsModel) {

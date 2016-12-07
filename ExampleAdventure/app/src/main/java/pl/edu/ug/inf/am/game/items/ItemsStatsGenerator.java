@@ -8,10 +8,10 @@ import pl.edu.ug.inf.am.game.dagger.PerGame;
 import javax.inject.Inject;
 import java.util.Collection;
 @PerGame
-public class StatsGenerator {
+public class ItemsStatsGenerator {
 
     @Inject
-    public StatsGenerator() {
+    public ItemsStatsGenerator() {
     }
 
     public Stats fromItems(Collection<ItemType> items) {
