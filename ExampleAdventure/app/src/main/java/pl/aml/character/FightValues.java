@@ -1,6 +1,7 @@
 package pl.aml.character;
 
-public interface FightValues {
+import pl.aml.adventure.AContext;
 
-    int playerLevel();
+public interface FightValues extends AContext {
+
 }

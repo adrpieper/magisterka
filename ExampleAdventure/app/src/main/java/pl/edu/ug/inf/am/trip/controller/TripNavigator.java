@@ -2,11 +2,7 @@ package pl.edu.ug.inf.am.trip.controller;
 
 import pl.edu.ug.inf.am.game.view.GameView;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;
-import pl.edu.ug.inf.am.trip.items.ItemsFragment;
-import pl.edu.ug.inf.am.trip.view.LocationSelectFragment;
-import pl.edu.ug.inf.am.trip.view.PlayerReviewFragment;
-import pl.edu.ug.inf.am.trip.skills.SkillsFragment;
-import pl.edu.ug.inf.am.trip.view.TripFragment;
+import pl.edu.ug.inf.am.trip.view.TripPagerFragment;
 
 import javax.inject.Inject;
 
@@ -21,18 +17,22 @@ public class TripNavigator {
     }
 
     public void showLocations() {
-        gameView.showFragment(new LocationSelectFragment());
+        gameView.showFragment(new TripPagerFragment());
     }
 
     public void showPlayer() {
-        gameView.showFragment(new PlayerReviewFragment());
+        gameView.showFragment(new TripPagerFragment());
     }
 
     public void showTrip() {
-        gameView.showFragment(new TripFragment());
+        gameView.showFragment(new TripPagerFragment());
     }
 
-    public void showSkill() { gameView.showFragment(new SkillsFragment());}
+    public void showSkill() {
+        gameView.showFragment(new TripPagerFragment());
+    }
 
-    public void showItems() { gameView.showFragment(new ItemsFragment());}
+    public void showItems() {
+        gameView.showFragment(new TripPagerFragment());
+    }
 }

@@ -15,8 +15,8 @@ public class AdventureModule {
 
     @Provides
     @PerAdventure
-    public AContext provideAContext(AdventurePlayerModel player){
-        return new AContextImpl(player);
+    public AContext provideAContext(AContextImpl context){
+        return context;
     }
 
     @Provides

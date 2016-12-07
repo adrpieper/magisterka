@@ -1,14 +1,24 @@
 package pl.edu.ug.inf.am.adventure;
 
-import pl.aml.adventure.AContext;
+import pl.aml.character.FightValues;
+import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
 import pl.edu.ug.inf.am.adventure.model.AdventurePlayerModel;
 
-public class AContextImpl implements AContext {
+import javax.inject.Inject;
+
+@PerAdventure
+public class AContextImpl implements FightValues {
 
     private final AdventurePlayerModel player;
 
+    @Inject
     public AContextImpl(AdventurePlayerModel player) {
         this.player = player;
+    }
+
+    @Override
+    public int playerLvl() {
+        return player.getLevel();
     }
 
     @Override

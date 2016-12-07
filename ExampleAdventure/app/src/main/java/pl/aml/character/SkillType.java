@@ -4,19 +4,19 @@ public enum SkillType {
     BASIC_HIT(new Damage() {
         @Override
         protected int calculateDamage(FightValues fightValues) {
-            return fightValues.playerLevel() * 15;
+            return fightValues.playerStr() * 15;
         }
     }, 2, 2),
     POISON_HIT(new Damage() {
         @Override
         protected int calculateDamage(FightValues fightValues) {
-            return fightValues.playerLevel() * 25;
+            return fightValues.playerStr() * 25;
         }
     }, 4, 3),
     SUPER_POISON_HIT(new Damage() {
         @Override
         protected int calculateDamage(FightValues fightValues) {
-            return fightValues.playerLevel() * 50;
+            return fightValues.playerStr() * 50;
         }
     }, 10, 5);
 

@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="lockedSkill">#A4A4A4</color>
     <color name="unlockedSkill">#F0F0A0</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>

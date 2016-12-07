@@ -2,6 +2,7 @@ package pl.edu.ug.inf.am.adventure.fight.logic;
 
 import pl.aml.character.FightEngine;
 import pl.aml.character.FightValues;
+import pl.edu.ug.inf.am.adventure.AContextImpl;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 import pl.edu.ug.inf.am.adventure.fight.model.FightConsoleModel;
 import pl.edu.ug.inf.am.adventure.fight.model.FightModel;
@@ -15,7 +16,7 @@ public class FightEngineImpl implements FightEngine {
     private final FightConsoleModel console;
     private final FightValues fightValues;
     @Inject
-    public FightEngineImpl(FightModel fight, FightConsoleModel console, FightValuesImpl fightValues) {
+    public FightEngineImpl(FightModel fight, FightConsoleModel console, FightValues fightValues) {
         this.fight = fight;
         this.console = console;
         this.fightValues = fightValues;
