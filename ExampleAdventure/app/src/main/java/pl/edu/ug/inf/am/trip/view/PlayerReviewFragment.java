@@ -11,6 +11,7 @@ import pl.edu.ug.inf.am.app.App;
 import pl.edu.ug.inf.am.databinding.PlayerReviewFragmentBinding;
 import pl.edu.ug.inf.am.game.state.PlayerState;
 import pl.edu.ug.inf.am.trip.dagger.TripComponent;
+import pl.edu.ug.inf.am.trip.model.StatsModel;
 
 import javax.inject.Inject;
 
@@ -18,6 +19,9 @@ public class PlayerReviewFragment extends Fragment {
 
     @Inject
     PlayerState playerState;
+
+    @Inject
+    StatsModel stats;
 
     public PlayerReviewFragment() {
         App.getComponent(TripComponent.class).inject(this);
@@ -29,6 +33,7 @@ public class PlayerReviewFragment extends Fragment {
 
         final PlayerReviewFragmentBinding binder = PlayerReviewFragmentBinding.inflate(inflater);
         binder.setPlayer(playerState);
+        binder.setStats(stats);
         return binder.getRoot();
     }
 }

@@ -30,16 +30,7 @@ public class TripPagerFragment extends Fragment {
         final ViewPager viewPager = new ViewPager(getActivity());
         viewPager.setAdapter(new Adapter(getActivity().getFragmentManager()));
         viewPager.setId(R.id.trip_pager_view);
-
-        if (savedInstanceState != null) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    viewPager.setCurrentItem(savedInstanceState.getInt(SELECTED_PAGE, 0));
-                }
-            }, 500);
-        }
+        viewPager.setCurrentItem(getArguments().getInt(SELECTED_PAGE, 0));
         return viewPager;
     }
 
