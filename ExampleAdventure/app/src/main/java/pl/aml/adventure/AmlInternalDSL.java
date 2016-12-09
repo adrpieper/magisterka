@@ -1,6 +1,6 @@
 package pl.aml.adventure;
 
-import pl.aml.Location;
+import pl.aml.location.Location;
 import pl.aml.opponent.OpponentType;
 import pl.aml.adventure.definition.AdventureDefinition;
 import pl.aml.adventure.factory.AdventureInstance;

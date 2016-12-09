@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.game.state;
 
-import pl.aml.Location;
+import pl.aml.location.Location;
 import pl.aml.adventure.definition.AdventureDefinition;
 import pl.aml.adventure.factory.AdventureInstance;
 import pl.edu.ug.inf.am.game.dagger.PerGame;

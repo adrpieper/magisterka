@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.game.logic;
 
 import pl.aml.adventure.Adventure;
-import pl.aml.Location;
+import pl.aml.location.Location;
 import pl.aml.adventure.End;
 import pl.aml.adventure.factory.AdventureInstance;
 import pl.edu.ug.inf.am.common.ObjectRandom;

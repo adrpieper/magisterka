@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
@@ -16,17 +18,25 @@ import pl.edu.ug.inf.am.game.view.GameActivity;
 
 import javax.inject.Inject;
 
-import static android.content.ContentValues.TAG;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
+import static android.content.ContentValues.TAG;
+//https://code.tutsplus.com/tutorials/reading-nfc-tags-with-android--mobile-17278
 @PerGame
 public class NFC {
     private final Context context;
     private final NfcAdapter nfcAdapter;
+    private TagReaderListener listener;
 
     @Inject
     public NFC(Context context, NfcAdapter nfcAdapter ) {
         this.context = context;
         this.nfcAdapter = nfcAdapter;
+    }
+
+    public void setListener(TagReaderListener listener) {
+        this.listener = listener;
     }
 
     public boolean isRunning() {
@@ -69,23 +79,43 @@ public class NFC {
             if ("text/plain".equals(type)) {
 
                 Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-                Toast.makeText(context, tag.toString(), Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(context, "ACTION_NDEF_DISCOVERED", Toast.LENGTH_SHORT).show();
+                read(tag);
             } else {
                 Log.d(TAG, "Wrong mime type: " + type);
             }
-        } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
+        }
+    }
 
-            // In case we would still use the Tech Discovered Intent
-            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            String[] techList = tag.getTechList();
-            String searchedTech = Ndef.class.getName();
+    private void read(Tag tag) {
+        Ndef ndef = Ndef.get(tag);
+        if (ndef == null) {
+            Toast.makeText(context, "NDEF is not supported by this Tag", Toast.LENGTH_SHORT).show();
+        }
 
-            for (String tech : techList) {
-                if (searchedTech.equals(tech)) {
-                    Toast.makeText(context, tag.toString(), Toast.LENGTH_SHORT).show();
-                }
+        NdefMessage ndefMessage = ndef.getCachedNdefMessage();
+        NdefRecord[] records = ndefMessage.getRecords();
+
+        for (NdefRecord ndefRecord : records) {
+            if (ndefRecord.getTnf() == NdefRecord.TNF_WELL_KNOWN && Arrays.equals(ndefRecord.getType(), NdefRecord.RTD_TEXT)) {
+                try {
+                    if (listener != null) {
+                        listener.onRead(readText(ndefRecord));
+                    }
+                } catch (UnsupportedEncodingException e) {}
             }
         }
+    }
+
+    private String readText(NdefRecord record) throws UnsupportedEncodingException {
+
+        byte[] payload = record.getPayload();
+        String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16";
+        int languageCodeLength = payload[0] & 0063;
+        return new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
+    }
+
+    public interface TagReaderListener {
+        void onRead(String tagMessage);
     }
 }

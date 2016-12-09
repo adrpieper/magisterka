@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.menu.logic;
 
-import pl.aml.Location;
+import pl.aml.location.Location;
 import pl.aml.adventure.definition.ExampleDragon;
 import pl.aml.adventure.definition.ExampleTroll;
 import pl.aml.adventure.factory.AdventureInstance;
