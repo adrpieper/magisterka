@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.game.logic;
 
 import pl.aml.adventure.Adventure;
-import pl.aml.location.Location;
+import pl.aml.location.Place;
 import pl.aml.adventure.End;
 import pl.aml.adventure.factory.AdventureInstance;
 import pl.edu.ug.inf.am.common.ObjectRandom;
@@ -26,8 +26,8 @@ public class AdventurePicker {
         this.adventureCreator = adventureCreator;
     }
 
-    public Adventure pick(Location location) {
-        List<AdventureInstance> adventures = availableAdventures.getAdventures(location);
+    public Adventure pick(Place place) {
+        List<AdventureInstance> adventures = availableAdventures.getAdventures(place);
 
         if (adventures.isEmpty()) {
             return new Adventure(End.instance());

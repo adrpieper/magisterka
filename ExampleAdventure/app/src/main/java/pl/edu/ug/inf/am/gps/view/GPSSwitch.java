@@ -18,6 +18,7 @@ public class GPSSwitch extends Switch {
     @Inject
     GPS gps;
 
+
     public GPSSwitch(Context context) {
         super(context);
         init();
@@ -31,12 +32,6 @@ public class GPSSwitch extends Switch {
 
     private void init() {
         App.getComponent(GameComponent.class).inject(this);
-        gps.setListener(new GPS.GPSListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                Toast.makeText(getContext(), location.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
         setChecked(gps.isRunning());
         setOnClickListener(new OnClickListener() {
             @Override

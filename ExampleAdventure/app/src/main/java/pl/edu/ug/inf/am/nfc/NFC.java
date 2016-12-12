@@ -11,6 +11,7 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 import pl.edu.ug.inf.am.game.dagger.PerGame;
@@ -30,9 +31,13 @@ public class NFC {
     private TagReaderListener listener;
 
     @Inject
-    public NFC(Context context, NfcAdapter nfcAdapter ) {
+    public NFC(Context context,@Nullable NfcAdapter nfcAdapter ) {
         this.context = context;
         this.nfcAdapter = nfcAdapter;
+    }
+
+    public boolean isEnabled() {
+        return nfcAdapter != null;
     }
 
     public void setListener(TagReaderListener listener) {

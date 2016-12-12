@@ -1,13 +1,10 @@
 package pl.edu.ug.inf.am.gps;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 import pl.edu.ug.inf.am.game.dagger.PerGame;
 
@@ -26,6 +23,7 @@ public class GPS {
     public GPS(final Context context) {
         this.context = context;
         locationManager = (LocationManager) this.context.getSystemService(Context.LOCATION_SERVICE);
+
         locationListener = new LocationListener() {
 
             @Override
@@ -33,23 +31,16 @@ public class GPS {
                 if (listener != null) {
                     listener.onLocationChanged(location);
                 }
-                Toast.makeText(context, "Gps onLocationChanged " + location.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-                Toast.makeText(context, "Gps onStatusChanged ", Toast.LENGTH_SHORT).show();
-            }
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
 
             @Override
-            public void onProviderEnabled(String provider) {
-                Toast.makeText(context, "Gps onProviderEnabled ", Toast.LENGTH_SHORT).show();
-            }
+            public void onProviderEnabled(String provider) {}
 
             @Override
-            public void onProviderDisabled(String provider) {
-                Toast.makeText(context, "Gps onProviderDisabled ", Toast.LENGTH_SHORT).show();
-            }
+            public void onProviderDisabled(String provider) {}
         };
     }
 
@@ -66,7 +57,7 @@ public class GPS {
     public void start() throws CantUseGPSException {
         checkIfGpsEnabled();
         try {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
             running = true;
         }catch (SecurityException e){
             throw new CantUseGPSException();

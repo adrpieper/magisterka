@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.menu.logic;
 
-import pl.aml.location.Location;
+import pl.aml.location.Place;
 import pl.aml.adventure.definition.ExampleDragon;
 import pl.aml.adventure.definition.ExampleTroll;
 import pl.aml.adventure.factory.AdventureInstance;
@@ -18,9 +18,8 @@ public class AvailableAdventuresCreator {
 
     public AvailableAdventures create(){
         AvailableAdventures adventures = new AvailableAdventures();
-        adventures.add(new AdventureInstance(Location.CASTLE, ExampleTroll.class, 1));
-        adventures.add(new AdventureInstance(Location.FORREST, ExampleTroll.class, 1));
-        adventures.add(new AdventureInstance(Location.FORREST, ExampleDragon.class, 6));
+        adventures.add(new AdventureInstance(Place.CASTLE, ExampleTroll.class, 1));
+        adventures.add(new AdventureInstance(Place.FORREST, ExampleDragon.class, 1));
         return adventures;
     }
 }

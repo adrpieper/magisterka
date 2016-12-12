@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.trip.controller;
 
 import pl.aml.adventure.Adventure;
-import pl.aml.location.Location;
+import pl.aml.location.Place;
 import pl.edu.ug.inf.am.game.logic.AdventurePicker;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;
 import pl.edu.ug.inf.am.game.dagger.GameSubComponentManager;
@@ -21,9 +21,9 @@ public class LocationManager {
     }
 
 
-    public void enterInto(Location location) {
+    public void enterInto(Place place) {
 
-        Adventure adventure = adventurePicker.pick(location);
+        Adventure adventure = adventurePicker.pick(place);
         gameStagesManager.startAdventure(adventure);
 
 

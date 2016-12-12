@@ -1,7 +1,8 @@
-package pl.edu.ug.inf.am.trip.controller;
+package pl.edu.ug.inf.am.trip.location;
 
-import pl.aml.location.Location;
+import pl.aml.location.Place;
 import pl.edu.ug.inf.am.nfc.NFC;
+import pl.edu.ug.inf.am.trip.controller.LocationManager;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;
 
 import javax.inject.Inject;
@@ -18,9 +19,9 @@ public class NFCListener implements NFC.TagReaderListener {
 
     @Override
     public void onRead(String tagMessage) {
-        Location location = Location.forTag(tagMessage);
-        if (location != null) {
-            locationManager.enterInto(location);
+        Place place = Place.forTag(tagMessage);
+        if (place != null) {
+            locationManager.enterInto(place);
         }
     }
 }

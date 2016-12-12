@@ -2,6 +2,7 @@ package pl.edu.ug.inf.am.game.dagger;
 
 import android.content.Context;
 import android.nfc.NfcAdapter;
+import android.support.annotation.Nullable;
 import dagger.Module;
 import dagger.Provides;
 import pl.edu.ug.inf.am.game.view.GameView;
@@ -17,6 +18,7 @@ public class GameContextModule {
         return container;
     }
 
+    @Nullable
     @Provides
     @PerGame
     public NfcAdapter provideNfcAdapter(Context context){

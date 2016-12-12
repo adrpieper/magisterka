@@ -39,12 +39,16 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        nfc.start(this);
+        if (nfc.isEnabled()) {
+            nfc.start(this);
+        }
     }
 
     @Override
     protected void onPause() {
-        nfc.stop(this);
+        if (nfc.isEnabled()) {
+            nfc.stop(this);
+        }
         super.onPause();
     }
 

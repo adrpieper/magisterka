@@ -1,6 +1,6 @@
 package pl.aml.adventure;
 
-import pl.aml.location.Location;
+import pl.aml.location.Place;
 import pl.aml.opponent.OpponentType;
 import pl.aml.adventure.definition.AdventureDefinition;
 import pl.aml.adventure.factory.AdventureInstance;
@@ -36,8 +36,8 @@ public class AmlInternalDSL {
         return multi(stages);
     }
 
-    public static AStage add(Location location, Class<? extends AdventureDefinition> definition) {
-        return new AdventureAdder(new AdventureInstance(location, definition, 1));
+    public static AStage add(Place place, Class<? extends AdventureDefinition> definition) {
+        return new AdventureAdder(new AdventureInstance(place, definition, 1));
     }
 
     public static AStage multi(AStage... stages) {

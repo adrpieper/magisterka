@@ -37,6 +37,7 @@ public class TripPagerFragment extends Fragment {
     private class Adapter extends FragmentPagerAdapter{
 
         private Class<? extends Fragment> fragments[] = new Class[]{
+                GPSFragment.class,
                 PlayerReviewFragment.class,
                 SkillsFragment.class,
                 ItemsFragment.class,

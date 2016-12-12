@@ -1,21 +1,21 @@
 package pl.aml.adventure.factory;
 
-import pl.aml.location.Location;
+import pl.aml.location.Place;
 import pl.aml.adventure.definition.AdventureDefinition;
 
 public class AdventureInstance {
-    private final Location location;
+    private final Place place;
     private final Class<? extends AdventureDefinition> definition;
     private final int frequency;
 
-    public AdventureInstance(Location location, Class<? extends AdventureDefinition> definition, int frequency) {
-        this.location = location;
+    public AdventureInstance(Place place, Class<? extends AdventureDefinition> definition, int frequency) {
+        this.place = place;
         this.definition = definition;
         this.frequency = frequency;
     }
 
-    public Location getLocation() {
-        return location;
+    public Place getPlace() {
+        return place;
     }
 
     public Class<? extends AdventureDefinition> getDefinition() {
@@ -34,14 +34,14 @@ public class AdventureInstance {
         AdventureInstance that = (AdventureInstance) o;
 
         if (frequency != that.frequency) return false;
-        if (location != that.location) return false;
+        if (place != that.place) return false;
         return definition != null ? definition.equals(that.definition) : that.definition == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = location != null ? location.hashCode() : 0;
+        int result = place != null ? place.hashCode() : 0;
         result = 31 * result + (definition != null ? definition.hashCode() : 0);
         result = 31 * result + frequency;
         return result;

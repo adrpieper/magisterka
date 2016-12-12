@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import pl.aml.location.Location;
+import pl.aml.location.Place;
 import pl.edu.ug.inf.am.app.App;
 import pl.edu.ug.inf.am.trip.controller.LocationManager;
 import pl.edu.ug.inf.am.trip.dagger.TripComponent;
@@ -39,20 +39,20 @@ public class LocationSelectFragment extends Fragment {
         return listView;
     }
 
-    private void selectLocation(Location location) {
-        locationManager.enterInto(location);
+    private void selectLocation(Place place) {
+        locationManager.enterInto(place);
     }
 
     class LocationApapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return Location.values().length;
+            return Place.values().length;
         }
 
         @Override
-        public Location getItem(int position) {
-            return Location.values()[position];
+        public Place getItem(int position) {
+            return Place.values()[position];
         }
 
         @Override
