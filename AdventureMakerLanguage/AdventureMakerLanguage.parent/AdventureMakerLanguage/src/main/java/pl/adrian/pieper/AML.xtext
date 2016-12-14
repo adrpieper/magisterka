@@ -132,14 +132,39 @@ Test:
     Condition pos=Stage ('else' neg=Stage)?;
 
 Condition:
-    'if you\'re' (negation?='not')? contitionType=ConditionType 'than' value=INT
+    'if you have' formula=PlayerLogicFormula
 ;
 
-enum ConditionType:
-    STRONGER='stronger' |
-    WEAKER='weaker' |
-    SMARTER='smarter' |
-    DUMBER='dumber'
+PlayerLogicFormula:
+    value=PlayerLogicValue (rightSide=PlayerLogicRightSideExpression)?
+;
+PlayerLogicValue:
+    NegativePlayerLogicValue | PlayerLogicBrackets | PlayerLogicValueExpression
+;
+PlayerLogicBrackets:
+    '(' formula=PlayerLogicFormula ')'
+;
+
+NegativePlayerLogicValue:
+    'not' value=PlayerLogicValue
+;
+
+PlayerLogicValueExpression:
+    comparator=ComparatorType variable=VariableType 'than' value=INT
+;
+
+enum ComparatorType:
+    more='more' |
+    less='less'
+;
+
+enum LogicalOperationType:
+    AND='and' |
+    OR='or'
+;
+
+PlayerLogicRightSideExpression:
+    operation=LogicalOperationType rightSide = PlayerLogicFormula
 ;
 
 MakeDecision:
