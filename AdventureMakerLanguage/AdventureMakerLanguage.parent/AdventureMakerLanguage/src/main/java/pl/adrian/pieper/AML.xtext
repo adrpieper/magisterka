@@ -28,14 +28,51 @@ Skill:
 
 ActiveSkill:
     'active' 'skill' name=ID '{'
-        'effect' ':' effect+=Effect (',' effect+=Effect)*
+        'effect' ':' effect=Effect
         'mp' ':' mpCost=INT
         ('cooldown' ':' cooldown=INT 'turns')?
     '}'
 ;
 
 Effect:
-    'take' hp=INT 'damage' ('for' times=INT 'turns')?
+    'take' hp=DamageFormula 'damage' ('for' times=INT 'turns')?
+;
+
+DamageFormula:
+    value=Value (expression=Expression)?
+;
+
+enum OperationType:
+    plus='+' |
+    minus='-' |
+    divide='/' |
+    multiply='*'
+;
+
+Expression:
+    operation=OperationType right=DamageFormula
+;
+
+Brackets:
+    '(' formula=DamageFormula ')'
+;
+
+Value:
+    Variable | Constant | Brackets
+;
+
+enum VariableType:
+    INTELIGENCE='int' |
+    STRONG='str' |
+    AGILITY='agi'
+;
+
+Variable:
+    value = VariableType
+;
+
+Constant:
+    value = INT
 ;
 
 PassiveSkill:
