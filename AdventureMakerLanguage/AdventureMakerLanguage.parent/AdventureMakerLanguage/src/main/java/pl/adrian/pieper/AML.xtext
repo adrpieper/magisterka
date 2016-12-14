@@ -158,20 +158,8 @@ Fight:
 Item:
     'item' name=ID '{'
     (bonuses+=Bonus)*
-    (restrictions+=Restriction)?
     'value' (value=INT)
     '}';
-
-Restriction:
-    PositiveRest | NegativeRest;
-
-PositiveRest:
-    'can be used only by' (types+=[CharacterType] (',' types+=[CharacterType])*)
-;
-
-NegativeRest:
-    'can\'t be used by' (types+=[CharacterType] (',' types+=[CharacterType])*)
-;
 
 Bonus:
     '+' value=INT 'to' type=('int' | 'str')
