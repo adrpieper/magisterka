@@ -2,10 +2,17 @@ location Forrest tagged as For100
 location Castle tagged as Castle
 
 active skill BigShot {
-    effect : take 12 damage
+    effect : take (3 * int) damage
     mp : 12
     cooldown : 1 turns
 }
+
+active skill SmallShot {
+    effect : take (4 * int) damage
+    mp : 12
+    cooldown : 1 turns
+}
+
 
 character type Knight {
     stats on start:
@@ -28,11 +35,9 @@ character type Knight {
 
 item Sword {
     + 12 to str
-    can be used only by Knight
     value 100
 
 }
-
 
 monster Troll {
     power : 10
@@ -50,7 +55,7 @@ monster Dragon {
 
 
 adventure in the Forrest {
-    if you're not smarter than 12
+    if you have more int than 3
         ask "If cos"
             "Yes" => fight with Troll, Troll
             "Not" => fight with Troll

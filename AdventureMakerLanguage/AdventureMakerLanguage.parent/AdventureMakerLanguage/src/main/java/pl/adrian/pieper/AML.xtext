@@ -35,11 +35,11 @@ ActiveSkill:
 ;
 
 Effect:
-    'take' hp=DamageFormula 'damage' ('for' times=INT 'turns')?
+    'take' damageFormula=DamageFormula 'damage'
 ;
 
 DamageFormula:
-    value=Value (expression=Expression)?
+    value=DamageValue (expression=DamageRightSideExpression)?
 ;
 
 enum OperationType:
@@ -49,16 +49,16 @@ enum OperationType:
     multiply='*'
 ;
 
-Expression:
+DamageRightSideExpression:
     operation=OperationType right=DamageFormula
 ;
 
-Brackets:
+DamageBrackets:
     '(' formula=DamageFormula ')'
 ;
 
-Value:
-    Variable | Constant | Brackets
+DamageValue:
+    DamageVariable | DamageConstant | DamageBrackets
 ;
 
 enum VariableType:
@@ -67,11 +67,11 @@ enum VariableType:
     AGILITY='agi'
 ;
 
-Variable:
+DamageVariable:
     value = VariableType
 ;
 
-Constant:
+DamageConstant:
     value = INT
 ;
 
