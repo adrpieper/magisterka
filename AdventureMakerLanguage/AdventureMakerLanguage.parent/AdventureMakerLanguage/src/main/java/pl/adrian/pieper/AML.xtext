@@ -121,7 +121,7 @@ Stats:
     'exp' ':' exp=INT;
 
 Adventure:
-    'adventure in the' location=[Location] '{'
+    'adventure ' name=ID 'in the' location=[Location] '{'
         startStage=Stage
     '}';
 

@@ -9,75 +9,28 @@ import java.util.List
 import java.util.ArrayList
 import java.util.Arrays
 
-/**
- * Created by Adi on 2016-09-18.
- */
-abstract class SingleClassGenerator{
+abstract class SingleClassGenerator implements Generator{
 
     @Accessors
     final String className;
-
-    @Accessors
-    final String packageName;
-
-    @Accessors
-    final String classType;
-
-    private List<String> imports = new ArrayList;
-    private List<String> staticImports = new ArrayList;
+    private CommonClassGenerator common;
 
     new(String className, String packageName, String classType){
+        this.common = new CommonClassGenerator(packageName,classType)
         this.className = className
-        this.packageName = packageName
-        this.classType = classType
     }
 
     protected def addImports(String... imports) {
-
-        for(String i : imports){
-            this.imports.add(i);
-        }
+        common.addImports(imports)
     }
 
     protected def addStaticImports(String... staticImports) {
-
-        for(String i : staticImports){
-            this.staticImports.add(i);
-        }
+        common.addStaticImports(staticImports)
     }
 
     public def String generateBody(Resource resource)
 
-    public def doGenerate(String rootPath, Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-
-        var path =  rootPath + "/" + packageName.replaceAll("\\.","/") + "/" +  className + ".java"
-
-        fsa.generateFile(path, generateContent(resource))
+    public override def doGenerate(String rootPath, Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+        common.generateFile(rootPath,fsa, className, generateBody(resource))
     }
-
-    private def generateImports() {
-
-        return '''
-            «FOR imp : imports»
-                import «imp»;
-            «ENDFOR»
-            «FOR imp : staticImports»
-                import static «imp»;
-            «ENDFOR»
-        '''
-    }
-
-    private def generateContent(Resource resource){
-
-        return '''
-            package «packageName»;
-
-            «generateImports»
-
-            «classType» «className» {
-                «generateBody(resource)»
-            }
-        '''
-    }
-
 }

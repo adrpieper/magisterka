@@ -13,6 +13,7 @@ import sun.security.x509.KeyIdentifier
 import java.util.Arrays
 import java.util.List
 import pl.adrian.pieper.generator.skill.SkillGenerator
+import pl.adrian.pieper.generator.adventure.AdventureGenerator
 
 /**
  * Generates code from your model files on save.
@@ -32,7 +33,8 @@ class AMLGenerator extends AbstractGenerator {
             new MonsterClassGenerator("pl.aml"),
             new LocationGenerator("pl.aml"),
             new ItemGenerator("pl.aml"),
-            new SkillGenerator("pl.aml.character")
+            new SkillGenerator("pl.aml.character"),
+            new AdventureGenerator("pl.aml.adventure.definition")
         ).forEach[ doGenerate("java", resource, fsa, context) ]
     }
 }

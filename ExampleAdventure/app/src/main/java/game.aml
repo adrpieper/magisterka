@@ -54,7 +54,7 @@ monster Dragon {
 }
 
 
-adventure in the Forrest {
+adventure Question in the Forrest {
     if you have more int than 3
         ask "If cos"
             "Yes" => fight with Troll, Troll
