@@ -121,15 +121,16 @@ Stats:
     'exp' ':' exp=INT;
 
 Adventure:
-    'adventure ' name=ID 'in the' location=[Location] '{'
+    'adventure ' name=ID 'starts from'
         startStage=Stage
-    '}';
+    ;
 
 Stage:
-    MakeDecision | Test | Fight ;
+    '{' (DecisionStage | TestStage | FightStage) '}';
 
-Test:
-    Condition pos=Stage ('else' neg=Stage)?;
+TestStage:
+    contition=Condition pos=Stage ('else' neg=Stage)?
+;
 
 Condition:
     'if you have' formula=PlayerLogicFormula
@@ -167,17 +168,19 @@ PlayerLogicRightSideExpression:
     operation=LogicalOperationType rightSide = PlayerLogicFormula
 ;
 
-MakeDecision:
+DecisionStage:
     'ask' question=STRING
-    (case=DecisionCase)+
+    (answers+=DecisionAnswer)+
 ;
 
-DecisionCase:
+DecisionAnswer:
     answer=STRING '=>' stage=Stage
 ;
 
-Fight:
+FightStage:
     'fight with' (oponents+=[Monster] (',' oponents+=[Monster])*)?
+    ('if win' onWin=Stage)?
+    ('if lost' onLost=Stage)?
 ;
 
 Item:

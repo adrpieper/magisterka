@@ -28,27 +28,8 @@ class AdventureGenerator extends SingleClassGenerator{
         var adventures = resource.allContents.filter(typeof(Adventure)).toIterable
 
         return '''
-
-            public List<Adventure> createAdventures() {
-                List<Adventure> result = new ArrayList<>();
-
-                «FOR adventure : adventures»
-                    result.add(
-                        «adventure.generate»
-                    );
-                «ENDFOR»
-                return result;
-            }
-
         '''
 
     }
 
-    private def generate(Adventure adventure){
-        return '''
-        new Adventure (
-            «adventure.getLocation.name.toUpperCase»
-        )
-        '''
-    }
 }

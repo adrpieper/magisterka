@@ -7,10 +7,13 @@ import org.eclipse.emf.ecore.resource.Resource
 
 class AdventureGenerator extends MultiClassGenerator<Adventure>{
 
+    extension final AdventureStageGenerator stageGenerator;
+
     new(String packageName){
         super(packageName, "public class")
+        stageGenerator = new AdventureStageGenerator
         common.addInterfaces("AdventureDefinition")
-        common.addImports("pl.aml.adventure.AStage")
+        common.addImports("pl.aml.adventure.*")
         common.addStaticImports(
                 "pl.aml.opponent.OpponentType.*",
                 "pl.aml.adventure.AmlInternalDSL.*"
@@ -26,7 +29,7 @@ class AdventureGenerator extends MultiClassGenerator<Adventure>{
         '''
         @Override
         public AStage define() {
-            return aFightWith();
+            return «adventure.startStage.generate».build();
         }
         '''
     }

@@ -17,6 +17,10 @@ public class QuestionBuilder implements AStageBuilder{
         return this;
     }
 
+    public QuestionBuilder withAnswer(String answer, AStageBuilder stage) {
+        return withAnswer(answer, stage.build());
+    }
+
     @Override
     public AStage build() {
         return new Question(question, answers.toArray(new QuestionAnswer[answers.size()]));

@@ -1,14 +1,16 @@
 package pl.aml.adventure.definition;
 
+import pl.aml.adventure.AContext;
+import pl.aml.adventure.APredicate;
 import pl.aml.adventure.AStage;
 
+import static pl.aml.adventure.AmlInternalDSL.*;
 import static pl.aml.opponent.OpponentType.DRAGON;
-import static pl.aml.adventure.AmlInternalDSL.aFightWith;
 
 public class ExampleDragon implements AdventureDefinition{
 
     @Override
     public AStage define() {
-        return aFightWith(DRAGON);
+        return aFightWith().build();
     }
 }

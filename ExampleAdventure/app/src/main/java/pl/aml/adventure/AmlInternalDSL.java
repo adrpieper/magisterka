@@ -15,12 +15,8 @@ public class AmlInternalDSL {
         return new QuestionAnswer(answer, stage);
     }
 
-    public static AFight aFightWith(OpponentType... opponnents){
-        return new AFightBuilder().with(opponnents).build();
-    }
-
-    public static AFightBuilder aFight(){
-        return new AFightBuilder();
+    public static AFightBuilder aFightWith(OpponentType... opponnents){
+        return new AFightBuilder().with(opponnents);
     }
 
     public static ConditionBuilder check(APredicate predicate) {
