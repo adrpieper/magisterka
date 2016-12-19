@@ -31,9 +31,20 @@ public class AmlInternalDSL {
 
         return multi(stages);
     }
+    public static AStage add(Place place, Class<? extends AdventureDefinition> definition,int frequency) {
+        return new AdventureAdder(new AdventureInstance(place, definition, frequency));
+    }
 
     public static AStage add(Place place, Class<? extends AdventureDefinition> definition) {
-        return new AdventureAdder(new AdventureInstance(place, definition, 1));
+        return add(place, definition, 1);
+    }
+
+    public static AStage remove(Place place, Class<? extends AdventureDefinition> definition,int frequency) {
+        return new AdventureRemover(new AdventureInstance(place, definition, frequency));
+    }
+
+    public static AStage remove(Place place, Class<? extends AdventureDefinition> definition) {
+        return remove(place, definition, 1);
     }
 
     public static AStage multi(AStage... stages) {

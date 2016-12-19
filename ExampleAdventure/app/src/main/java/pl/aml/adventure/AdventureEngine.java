@@ -15,4 +15,6 @@ public interface AdventureEngine {
     boolean check(APredicate predicate);
 
     void addAdventure(AdventureInstance adventureInstance);
+
+    void removeAdventure(AdventureInstance adventureInstance);
 }

@@ -55,20 +55,27 @@ monster Dragon {
 
 
 adventure Question starts from {
-    if you have more int than 3
+    If you have more int than 3
         {
-            ask "If cos"
-            "Yes" => {
-                fight with Troll, Troll
-                if win {
-                    ask "HEHE"
-                    "Ja" => {fight with Dragon}
-                    "Nein" => {fight with Troll}
+            Ask "If cos"
+            Answer "Yes" to {
+                Fight with Troll, Troll
+                If win {
+                    {add Question (3) at Forrest}
+                    {Get Sword}
+                    {Show "Elo"}
                 }
-                if lost {fight with Dragon}
+                If lost {Fight with Dragon}
             }
-            "Not" => {if you have not (less agi than 2 and more str than 4)
-            {fight with Dragon}
+            Answer "Not" to {
+                If you have not (less agi than 2 and more str than 4){
+                    Fight with Dragon
+                }
         }
     }
+}
+
+adventure on start {
+    Question at Forrest
+
 }

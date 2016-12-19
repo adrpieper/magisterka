@@ -3,7 +3,15 @@ grammar pl.adrian.pieper.AML with org.eclipse.xtext.common.Terminals
 generate aML "http://www.adrian.pl/pieper/AML"
 
 Model:
+    elements+=Element* &
+    startData=StartData &
     elements+=Element*;
+
+StartData:
+    'adventure on start' '{'
+        (adventureInstances += AdventureInstance)*
+    '}'
+;
 
 Element:
     Location | CharacterType | Monster | Adventure | Item | Skill;
@@ -126,14 +134,37 @@ Adventure:
     ;
 
 Stage:
-    '{' (DecisionStage | TestStage | FightStage) '}';
+    '{' (
+            DecisionStage |
+            TestStage |
+            FightStage |
+            MultiStage |
+            RemoveAdventureInstanceStage |
+            AddAdventureInstanceStage |
+            ShowTextStage |
+            GetItemStage
+    ) '}';
+
+MultiStage:
+    (stages+=Stage)+
+;
+RemoveAdventureInstanceStage:
+    'remove' instance = AdventureInstance
+;
+AddAdventureInstanceStage:
+    'add' instance = AdventureInstance
+;
+
+AdventureInstance:
+    adventure=[Adventure] ('(' freqency=INT ')')? 'at' location=[Location]
+;
 
 TestStage:
     contition=Condition pos=Stage ('else' neg=Stage)?
 ;
 
 Condition:
-    'if you have' formula=PlayerLogicFormula
+    'If you have' formula=PlayerLogicFormula
 ;
 
 PlayerLogicFormula:
@@ -169,18 +200,26 @@ PlayerLogicRightSideExpression:
 ;
 
 DecisionStage:
-    'ask' question=STRING
+    'Ask' question=STRING
     (answers+=DecisionAnswer)+
 ;
 
 DecisionAnswer:
-    answer=STRING '=>' stage=Stage
+    'Answer' answer=STRING 'to' stage=Stage
+;
+
+ShowTextStage:
+    'Show' text=STRING
+;
+
+GetItemStage:
+    'Get' item=[Item]
 ;
 
 FightStage:
-    'fight with' (oponents+=[Monster] (',' oponents+=[Monster])*)?
-    ('if win' onWin=Stage)?
-    ('if lost' onLost=Stage)?
+    'Fight with' (oponents+=[Monster] (',' oponents+=[Monster])*)?
+    ('If win' onWin=Stage)?
+    ('If lost' onLost=Stage)?
 ;
 
 Item:
