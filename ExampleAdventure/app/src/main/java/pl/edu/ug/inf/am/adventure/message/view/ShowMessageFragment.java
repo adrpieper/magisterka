@@ -37,7 +37,7 @@ public class ShowMessageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         ShowMessageViewBinding binding = ShowMessageViewBinding.inflate(inflater);
-        binding.textView.setText(text);
+        binding.messageTextView.setText(text);
         binding.okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

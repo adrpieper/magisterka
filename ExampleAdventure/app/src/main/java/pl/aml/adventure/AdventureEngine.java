@@ -19,7 +19,7 @@ public interface AdventureEngine {
 
     void removeAdventure(AdventureInstance adventureInstance);
 
-    void playerGetItem(ItemType itemType);
+    void playerGetItem(List<ItemType> itemType);
 
     void showMessage(String message);
 }

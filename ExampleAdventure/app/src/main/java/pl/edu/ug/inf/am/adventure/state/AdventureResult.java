@@ -5,6 +5,7 @@ import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @PerAdventure

@@ -52,8 +52,8 @@ public class AmlInternalDSL {
         return new MultiStages(stages);
     }
 
-    public static AStage get(ItemType itemType) {
-        return new GetItem(itemType);
+    public static AStage get(ItemType... items) {
+        return new GetItem(items);
     }
 
     public static AStage show(String message) {

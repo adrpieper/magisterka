@@ -2,6 +2,7 @@ package pl.edu.ug.inf.am.adventure.dagger;
 
 import dagger.Subcomponent;
 import pl.aml.adventure.AdventureEngine;
+import pl.edu.ug.inf.am.adventure.award.view.AwardFragment;
 import pl.edu.ug.inf.am.adventure.fight.dagger.FightComponent;
 import pl.edu.ug.inf.am.adventure.message.view.ShowMessageFragment;
 import pl.edu.ug.inf.am.adventure.question.dagger.QuestionComponent;
@@ -19,4 +20,5 @@ public interface AdventureComponent {
     AdventureResultComponent adventureResultComponent();
 
     void inject(ShowMessageFragment showMessageFragment);
+    void inject(AwardFragment awardFragment);
 }

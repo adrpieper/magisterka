@@ -2,16 +2,18 @@ package pl.aml.adventure;
 
 import pl.aml.items.ItemType;
 
+import java.util.Arrays;
+
 public class GetItem implements AStage {
 
-    private final ItemType itemType;
+    private final ItemType[] items;
 
-    public GetItem(ItemType itemType) {
-        this.itemType = itemType;
+    public GetItem(ItemType... items) {
+        this.items = items;
     }
 
     @Override
     public void run(AdventureEngine engine) {
-        engine.playerGetItem(itemType);
+        engine.playerGetItem(Arrays.asList(items));
     }
 }
