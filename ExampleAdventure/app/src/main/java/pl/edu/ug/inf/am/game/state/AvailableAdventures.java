@@ -25,4 +25,8 @@ public class AvailableAdventures {
     public void add(AdventureInstance instance) {
         adventures.get(instance.getPlace()).add(instance);
     }
+
+    public void remove(AdventureInstance adventureInstance) {
+        throw new RuntimeException("Not implemented yet");
+    }
 }

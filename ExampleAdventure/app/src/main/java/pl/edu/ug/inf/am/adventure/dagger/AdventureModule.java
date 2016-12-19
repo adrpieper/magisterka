@@ -9,6 +9,7 @@ import pl.edu.ug.inf.am.adventure.AdventureEngineImpl;
 import pl.edu.ug.inf.am.adventure.model.AdventurePlayerModel;
 import pl.edu.ug.inf.am.adventure.state.AdventureState;
 import pl.edu.ug.inf.am.adventure.AdventuresManager;
+import pl.edu.ug.inf.am.game.state.AvailableAdventures;
 
 @Module
 public class AdventureModule {
@@ -21,7 +22,7 @@ public class AdventureModule {
 
     @Provides
     @PerAdventure
-    public AdventureEngine provideEngine(AdventureState adventureState, AdventureSubComponentManager adventureStagesManager, AContext aContext, AdventuresManager adventuresManager){
+    public AdventureEngine provideEngine(AdventureState adventureState, AdventureSubComponentManager adventureStagesManager, AContext aContext, AvailableAdventures adventuresManager){
         return new AdventureEngineImpl(adventureState, adventuresManager, adventureStagesManager, aContext);
     }
 }

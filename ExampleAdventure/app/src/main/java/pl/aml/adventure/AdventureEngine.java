@@ -1,5 +1,6 @@
 package pl.aml.adventure;
 
+import pl.aml.items.ItemType;
 import pl.aml.opponent.OpponentType;
 import pl.aml.adventure.factory.AdventureInstance;
 
@@ -17,4 +18,8 @@ public interface AdventureEngine {
     void addAdventure(AdventureInstance adventureInstance);
 
     void removeAdventure(AdventureInstance adventureInstance);
+
+    void playerGetItem(ItemType itemType);
+
+    void showMessage(String message);
 }

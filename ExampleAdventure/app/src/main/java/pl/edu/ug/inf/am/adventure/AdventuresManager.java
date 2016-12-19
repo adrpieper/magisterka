@@ -20,4 +20,6 @@ public class AdventuresManager {
         adventures.add(adventureInstance);
     }
 
+    public void remove(AdventureInstance adventureInstance) {
+    }
 }

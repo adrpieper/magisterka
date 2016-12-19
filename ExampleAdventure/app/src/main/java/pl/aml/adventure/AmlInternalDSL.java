@@ -1,5 +1,6 @@
 package pl.aml.adventure;
 
+import pl.aml.items.ItemType;
 import pl.aml.location.Place;
 import pl.aml.opponent.OpponentType;
 import pl.aml.adventure.definition.AdventureDefinition;
@@ -49,6 +50,14 @@ public class AmlInternalDSL {
 
     public static AStage multi(AStage... stages) {
         return new MultiStages(stages);
+    }
+
+    public static AStage get(ItemType itemType) {
+        return new GetItem(itemType);
+    }
+
+    public static AStage show(String message) {
+        return new ShowMessage(message);
     }
 
     public static End end(){

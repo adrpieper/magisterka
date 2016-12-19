@@ -15,6 +15,8 @@ class AdventureGenerator extends MultiClassGenerator<Adventure>{
         common.addInterfaces("AdventureDefinition")
         common.addImports("pl.aml.adventure.*")
         common.addStaticImports(
+                "pl.aml.location.Place.*",
+                "pl.aml.items.ItemType.*",
                 "pl.aml.opponent.OpponentType.*",
                 "pl.aml.adventure.AmlInternalDSL.*"
         )

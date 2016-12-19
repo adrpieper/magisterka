@@ -1,22 +1,24 @@
 package pl.edu.ug.inf.am.adventure;
 
+import pl.aml.items.ItemType;
 import pl.aml.opponent.OpponentType;
 import pl.aml.adventure.*;
 import pl.aml.adventure.factory.AdventureInstance;
 import pl.edu.ug.inf.am.adventure.dagger.AdventureSubComponentManager;
 import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
 import pl.edu.ug.inf.am.adventure.state.AdventureState;
+import pl.edu.ug.inf.am.game.state.AvailableAdventures;
 
 import java.util.List;
 
 public class AdventureEngineImpl implements AdventureEngine {
 
     private final AdventureState adventureState;
-    private final AdventuresManager adventuresManager;
+    private final AvailableAdventures adventuresManager;
     private final AdventureSubComponentManager adventureStagesManager;
     private final AContext aContext;
 
-    public AdventureEngineImpl(AdventureState adventureState, AdventuresManager adventuresManager, AdventureSubComponentManager adventureStagesManager, AContext aContext) {
+    public AdventureEngineImpl(AdventureState adventureState, AvailableAdventures adventuresManager, AdventureSubComponentManager adventureStagesManager, AContext aContext) {
         this.adventureState = adventureState;
         this.adventuresManager = adventuresManager;
         this.adventureStagesManager = adventureStagesManager;
@@ -64,5 +66,20 @@ public class AdventureEngineImpl implements AdventureEngine {
     @Override
     public void addAdventure(AdventureInstance adventureInstance) {
         adventuresManager.add(adventureInstance);
+    }
+
+    @Override
+    public void removeAdventure(AdventureInstance adventureInstance) {
+        adventuresManager.remove(adventureInstance);
+    }
+
+    @Override
+    public void playerGetItem(ItemType itemType) {
+        adventureStagesManager.playerGetItem(itemType);
+    }
+
+    @Override
+    public void showMessage(String message) {
+        adventureStagesManager.showMessage(message);
     }
 }

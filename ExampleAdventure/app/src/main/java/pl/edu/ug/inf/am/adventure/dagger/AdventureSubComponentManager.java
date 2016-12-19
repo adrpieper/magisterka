@@ -1,8 +1,10 @@
 package pl.edu.ug.inf.am.adventure.dagger;
 
 import pl.aml.adventure.AStage;
+import pl.aml.items.ItemType;
 import pl.aml.opponent.OpponentType;
 import pl.edu.ug.inf.am.adventure.fight.dagger.FightComponent;
+import pl.edu.ug.inf.am.adventure.message.view.ShowMessageFragment;
 import pl.edu.ug.inf.am.adventure.question.dagger.QuestionComponent;
 import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
 import pl.edu.ug.inf.am.adventure.question.dagger.QuestionModule;
@@ -59,5 +61,14 @@ public class AdventureSubComponentManager extends SubComponentManager {
 
     public void goToSkills() {
         gameStagesManager.startSkills();
+    }
+
+    public void playerGetItem(ItemType itemType) {
+        throw new RuntimeException("Not implemented");
+    }
+
+    public void showMessage(String message) {
+        removeSubcomponent();
+        gameView.showFragment(ShowMessageFragment.newInstance(message));
     }
 }

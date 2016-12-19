@@ -63,7 +63,7 @@ class AdventureStageGenerator {
         '''
     }
     def String generate(AdventureInstance instance) {
-        return instance.adventure.generateClassName + ".class"+ generateFreqency(instance.freqency)
+        return '''«instance.location.name.toUpperCase»,«instance.adventure.generateClassName».class«generateFreqency(instance.freqency)»'''
     }
 
     def String generateFreqency(int freq) {
