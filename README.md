@@ -26,33 +26,33 @@ Android, DSL, Xtext, Location-Based Game, Framework, Engine
 
 1. Opis problemu
   - Porównanie dostępnych rozwiązań
-   - Istniejące gry terenowe
-   - Obszary zastosowań DSL
+    - Istniejące gry terenowe
+    - Obszary zastosowań DSL
   - Możliwości zastosowania DSL w grach terenowych
 2. Projekt i analiza 
   - Wymagania 
-   - Funkcjonalne 
-   - Niefunkcjonalne
+    - Funkcjonalne 
+    - Niefunkcjonalne
   - Diagram klas
   - Projekt interfejsu użytkownika
 3. Implementacja
   - Architektura rozwiązania
-   - Xtext DSL
-   - Aplikacja
+    - Xtext DSL
+    - Aplikacja
   - Użyte technologie
-   - Java
-   - AndroidSDK
-   - JUnit, Mockito
-   - Xtext
-   - Xtend
-   - Dagger 2
+    - Java
+    - AndroidSDK
+    - JUnit, Mockito
+    - Xtext
+    - Xtend
+    - Dagger 2
 4. Testy
   - Scenariusz testowania
-   - Automatyczne
-   - Manualne
+    - Automatyczne
+    - Manualne
   - Raport z testów
-   - Automatyczne
-   - Manualne
+    - Automatyczne
+    - Manualne
 5. Wkład własny
 6. Bibliografia
 
