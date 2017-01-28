@@ -22,6 +22,40 @@ W pracy opisany jest cały proces powstawania narzędzia. Osobne rozdziały zawi
 
 Android, DSL, Xtext, Location-Based Game, Framework, Engine
 
+### Spis treści
+
+1. Opis problemu
+  - Porównanie dostępnych rozwiązań
+   - Istniejące gry terenowe
+   - Obszary zastosowań DSL
+  - Możliwości zastosowania DSL w grach terenowych
+2. Projekt i analiza 
+  - Wymagania 
+   - Funkcjonalne 
+   - Niefunkcjonalne
+  - Diagram klas
+  - Projekt interfejsu użytkownika
+3. Implementacja
+  - Architektura rozwiązania
+   - Xtext DSL
+   - Aplikacja
+  - Użyte technologie
+   - Java
+   - AndroidSDK
+   - JUnit, Mockito
+   - Xtext
+   - Xtend
+   - Dagger 2
+4. Testy
+  - Scenariusz testowania
+   - Automatyczne
+   - Manualne
+  - Raport z testów
+   - Automatyczne
+   - Manualne
+5. Wkład własny
+6. Bibliografia
+
 ### Bibliografia
 Ian F. Darwin, 2013. Android Receptury. Wydawnictwo: Helion.
 
