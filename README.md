@@ -69,6 +69,7 @@ Android, DSL, Xtext, Location-Based Game, Framework, Engine
 Ian F. Darwin, 2013. Android Receptury. Wydawnictwo: Helion.
 
 [Xtext](https://eclipse.org/Xtext/documentation/index.html)
+[Xtent](http://www.eclipse.org/xtend)
 
 ### Do wykorzystania
 
@@ -77,3 +78,27 @@ W pracy postanowiłem opisać czym właściwie są jezyki domenowe (DSL), poniew
 Niniejsza praca zawiera opis stworzonego języka oraz silnika gry. Osobny rozdział został poświęcony przygotowaniu środowiska pracy dla osoby, która chciałaby wykorzystać mój silnik do napisania własnej gry. Jest też część ilustrująca jak korzystać z narzędzia, w której krok po kroku pokazuje jak stworzyć przykładową grę na postawię przygotowanego scenariusza. 
 
 W pracy opisany jest cały proces powstawania narzędzia. Osobne rozdziały zawierają opis powstawania projektu, jego implementacji oraz testów.
+
+
+### Wymagania
+## Funkcjonalne
+- Język DSL zawieający elemnty takie jak
+  - Klasy Postaci
+  - Przedmioty
+  - Zdarzenia
+  - Przeciwnicy
+- Integracja ze środowiskiem IntelliJ Idea
+- Kompilacja aplikacji na podstawie pliku DSL 
+  
+## Niefunkcjonalne
+- Tworzenie gier RPG bez znajomości języków programowania ogólnego przeznaczenia oraz znajomości technologii
+
+### Technologie
+## Xtext
+
+Xtext to framework służący do implementacji języków DSL. Xtext tworzy infrastrukturę języka zawierającą elementy takie jak: parser,linker, typechecker, compiler na podstawie gramatyki języka. Dodatkowo postwala na integracje zaprojektowane języka z popularnymi IDE, eclipse oraz IntelliJ Idea.
+
+## Xtend
+
+Xtend jest językiem programowania wywodzącym się z JAVY i składniowo zbliżonym do JAVY. Został zaprojektowany, aby wyeliminować kilka wad języka Java. Zawiera elementy niedostępne w Javie oraz upraszcza niektóre strutury pozwalając na pozbycie się niepotrzebnego kody. Kodem wynikowym dla języka Xtext jest Java. Mamy tu więc do czynienia z tranpilacją, czyli przetłumaczeniem jednego kodu źródłowego w inny.
+W moim projekcie Xtend został użyty ze względu na technologie Xtext. Wykorzystanie Xtend jest zalecanym sposobem implementacji generatorów dla języków DSL tworzonych przy użyciu Xtend. Główną zaletą języka Xtext, w kontekście pisania generatorów kodu są szablony, które nie są dostępne w języku JAVA.
