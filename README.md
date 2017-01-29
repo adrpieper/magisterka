@@ -68,6 +68,7 @@ Android, DSL, Xtext, Location-Based Game, Framework, Engine
 ### Bibliografia
 Ian F. Darwin, 2013. Android Receptury. Wydawnictwo: Helion.
 
+
 [Xtext](https://eclipse.org/Xtext/documentation/index.html)
 [Xtent](http://www.eclipse.org/xtend)
 
@@ -80,8 +81,8 @@ Niniejsza praca zawiera opis stworzonego języka oraz silnika gry. Osobny rozdzi
 W pracy opisany jest cały proces powstawania narzędzia. Osobne rozdziały zawierają opis powstawania projektu, jego implementacji oraz testów.
 
 
-### Wymagania
-## Funkcjonalne
+## Wymagania
+### Funkcjonalne
 - Język DSL zawieający elemnty takie jak
   - Klasy Postaci
   - Przedmioty
@@ -90,15 +91,39 @@ W pracy opisany jest cały proces powstawania narzędzia. Osobne rozdziały zawi
 - Integracja ze środowiskiem IntelliJ Idea
 - Kompilacja aplikacji na podstawie pliku DSL 
   
-## Niefunkcjonalne
+### Niefunkcjonalne
 - Tworzenie gier RPG bez znajomości języków programowania ogólnego przeznaczenia oraz znajomości technologii
 
-### Technologie
-## Xtext
+## Technologie
+### Xtext
 
 Xtext to framework służący do implementacji języków DSL. Xtext tworzy infrastrukturę języka zawierającą elementy takie jak: parser,linker, typechecker, compiler na podstawie gramatyki języka. Dodatkowo postwala na integracje zaprojektowane języka z popularnymi IDE, eclipse oraz IntelliJ Idea.
 
-## Xtend
+### Xtend
 
 Xtend jest językiem programowania wywodzącym się z JAVY i składniowo zbliżonym do JAVY. Został zaprojektowany, aby wyeliminować kilka wad języka Java. Zawiera elementy niedostępne w Javie oraz upraszcza niektóre strutury pozwalając na pozbycie się niepotrzebnego kody. Kodem wynikowym dla języka Xtext jest Java. Mamy tu więc do czynienia z tranpilacją, czyli przetłumaczeniem jednego kodu źródłowego w inny.
 W moim projekcie Xtend został użyty ze względu na technologie Xtext. Wykorzystanie Xtend jest zalecanym sposobem implementacji generatorów dla języków DSL tworzonych przy użyciu Xtend. Główną zaletą języka Xtext, w kontekście pisania generatorów kodu są szablony, które nie są dostępne w języku JAVA.
+
+### Android SKD
+
+Android SDK to zestaw standardowych narzędzi programisty umożliwiający tworzenie aplikacji na platformę Android. Zestaw podzielony jest na dwie części, zależną i niezależną od wersji systemu. Całość pakietu SDK podzielona jest na moduły, które można instalować i deinstalować w prosty sposób za pomocą aplikacji SDK manager. Aplikacje napisane w oparciu o Android SDK piszę się w języku JAVA.
+
+### JUnit
+
+JUnit jest to framework służący do testowania programów napisanych w języku Java.
+
+### Mockito
+
+Mockito to biblioteka ściśle związana z frameworkiem JUnit. Umożliwia tzw. mockowanie obiektów na czas testów. Mockowanie polega na przechwyceniu metod klas będących zależnościami testowanej klasy, tak aby można było sprawdzić poprawność działania klasy w oderwaniu od poprawności działania całego systemu.
+
+### Dagger 2
+
+Dagger 2 to biblioteka umożliwiająca wstrzykiwanie zależności w Androdzie. Istnieje wiele bibliotek umożliwiających DI, jednak Dagger 2 jest wśród programistów Androida. Jego główną zaletą jest rozstrzyganie zależności w czasie kompilacji oraz generacja kodu. Dzięki temu możemy wykryć wady projektu, takie jak zależności cykliczne jeszcze przed uruchomieniem aplikacji. Dodatkowo wygenerowany kod jest o wiele szybszy niż typowe rozwiazanie czasu wykonania - czyli refleksja.
+
+## DSL
+
+DSL - czyli języki domenowe, to grupa jezyków programowania zaoprojektowana z myślą o ściśle określonym zastosowaniu. W odróżnieniu od języków programowania ogólnego przeznaczenia, języki domenowe umożliwiają rozwiązanie tylko określonych problemów. Dzięki ograniczeniu się jedynie do wąstkiej grupy zastosowań, możliwe jest tworzenie języków, które są zrozumiałe dla osób będących ekspertami w danej dziedzinie. Języki domenowe należą zazwydzaj do języków deklaratywnych, gdyż skupiąnę są wokół tego co, a nie w jaki sposób chce osiągnąć programista.
+
+Języki domenowe ze względu na sposób ich implementacji można podzielić na dwie grupy:
+  - Języki wewnętrzne (Internal DSL)
+  - Języki zewnętrzne (External DSL)
