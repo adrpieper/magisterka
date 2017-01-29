@@ -61,6 +61,8 @@ Android, DSL, Xtext, Location-Based Game, Framework, Engine
     - Automatyczne
     - Manualne
 5. Korzystanie z frameworka
+  - Konfiguracja środowiska 
+  - Adventure Maker Language
 6. Przykładowa gra
 7. Wkład własny
 8. Bibliografia
@@ -73,8 +75,6 @@ Ian F. Darwin, 2013. Android Receptury. Wydawnictwo: Helion.
 [Xtent](http://www.eclipse.org/xtend)
 
 ### Do wykorzystania
-
-W pracy postanowiłem opisać czym właściwie są jezyki domenowe (DSL), ponieważ stanowią one punkt wyjściowy w realizacji założeń  projektowych. Dzięki wykorzystaniu języka DSL możliwe było stworzenie narzędzia bardzo prostego i przyjaznego w obsłudze w relatywnie krótkim czasie. Umieściłem też rozdziały opisujące wykorzystane przeze mnie narzędzia takie jak: Android SDK, Xtext, Adroid Studio.
 
 Niniejsza praca zawiera opis stworzonego języka oraz silnika gry. Osobny rozdział został poświęcony przygotowaniu środowiska pracy dla osoby, która chciałaby wykorzystać mój silnik do napisania własnej gry. Jest też część ilustrująca jak korzystać z narzędzia, w której krok po kroku pokazuje jak stworzyć przykładową grę na postawię przygotowanego scenariusza. 
 
@@ -122,19 +122,27 @@ Dagger 2 to biblioteka umożliwiająca wstrzykiwanie zależności w Androdzie. I
 
 ## DSL
 
-DSL - czyli języki domenowe, to grupa jezyków programowania zaoprojektowana z myślą o ściśle określonym zastosowaniu. W odróżnieniu od języków programowania ogólnego przeznaczenia, języki domenowe umożliwiają rozwiązanie tylko określonych problemów. Dzięki ograniczeniu się jedynie do wąstkiej grupy zastosowań, możliwe jest tworzenie języków, które są zrozumiałe dla osób będących ekspertami w danej dziedzinie. Języki domenowe należą zazwydzaj do języków deklaratywnych, gdyż skupiąnę są wokół tego co, a nie w jaki sposób chce osiągnąć programista.
+Istnotnym elementem implementacji Andventure Makera są języki domenowe, czyli jezyki programowania zaoprojektowane z myślą o ściśle określonym zastosowaniu. W odróżnieniu od języków programowania ogólnego przeznaczenia, języki domenowe umożliwiają rozwiązanie tylko określonych problemów. Dzięki ograniczeniu się jedynie do wąstkiej grupy zastosowań, możliwe jest tworzenie języków, które są zrozumiałe dla osób będących ekspertami w danej dziedzinie. Języki domenowe należą zazwydzaj do języków deklaratywnych, gdyż skupiąnę są wokół tego co, a nie w jaki sposób chce osiągnąć programista.
 
 Języki domenowe ze względu na sposób ich implementacji można podzielić na dwie grupy:
   - Języki wewnętrzne (Internal DSL)
   - Języki zewnętrzne (External DSL)
  
-W moim projektcie wykorzystałem zaróno wewnętrzne, jak i zerwnętrzne języki domenowe. 
+W moim projektcie wykorzystałem zawróno wewnętrzny, jak i zerwnętrzny język domenowy. Zastosowanie zewnętrznego DSL pozwala twórcy gry na opisanie świata gry w sposób przyjazny dla osoby znającej tematykę gier RPG. Wewnętrzy DSL natomiast, sprawił, że generowany przez przez framework kod jest bardziej czytelny i przyjazny dla programisty, co w dużym stopniu przyczyniło się do skrócenia czasu potrzebnego mi do zaimplementowania generatorów.
   
 # Internal DSL
-Jest to język stworzonych w ramach innego istniejącego już języka ogólnego przeznaczenia. Technicznie rzecz biorą jest to zbiór klas udostępniających interfejs dający wrażenie pisania w innym języku. Klasy te umieszcza się zazwyczaj w bibliotece, którą możemy użyć w do rozwiązania ściśle określonego problemu. Główną cechą takich bibliotek jest wyraźne nastawienie na udostępniany interfejs. O jakości takiego rozwiąznie świadczy nie tyle szynkość jego działania, czy prostota implementacji, lecz łatwość używania, dająca programiście wrażenie pisania w zupełnie nowym, języku wyrażającym w możliwie najlepszy sposób jego intencje.
+Jest to język stworzonych w ramach innego istniejącego już języka ogólnego przeznaczenia. Technicznie rzecz biorą jest to zbiór klas udostępniających wygodny dla programisty, dający wrażenie pisania w innym języku zbiór metod. Klasy te umieszcza się zazwyczaj w bibliotece, którą możemy użyć w do rozwiązania ściśle określonego problemu. Główną cechą takich bibliotek jest wyraźne nastawienie na udostępniany interfejs, a nie samą implementacje. O jakości takiego rozwiąznie świadczy nie tyle wydajność jego działania, lecz łatwość używania. Biblioteki takie dają programiście wrażenie pisania w zupełnie nowym, wyrażającym w możliwie najlepszy sposób jego intencje języku.
+
+W framewodku Adventure Maker również został wykorzystany zewnętrzny język domenowy. W jego skład wchodzą klasy umieszczone w pakiecie "".
+Poniżej znajduje się przykład kodu napisanego z wykorzystaniem tego języka.
+--KOD--
+Przytoczony kod opisuje mogące wystąpić czasie gry zdarzenie. Chodź na to nie wygląda, kod ten został napisany oczywiście w Javie.
 
 # External DSL
-Jest to jezyk z prawdziwego zdarzenia. Język taki posiada ściśle określoną gramatykę i od początku został zaprojektowany w ściśle określonym celu. Przykładami takich języków są:
+Jest to jezyk domenowy z prawdziwego zdarzenia. Język taki posiada ściśle określoną gramatykę i od początku został zaprojektowany w ściśle określonym celu. Przykładami takich języków są:
   - SQL - język służący do obsługi relacyjnych baz danych
   - CSS - język służący do definiowania stylu stron intenetowych 
   - HTML - język służący do definiowania struktury strony internetowej
+
+Na potrzeby frameworka stworzyłem zupełnie nowy zewnętrzy język domenowy o nazwie Adventure Maker Language.
+Opis tego języka znajduje się w rozdziale korzystaniu z frameworka.
