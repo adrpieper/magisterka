@@ -130,7 +130,7 @@ Języki domenowe ze względu na sposób ich implementacji można podzielić na d
  
 W moim projektcie wykorzystałem zawróno wewnętrzny, jak i zerwnętrzny język domenowy. Zastosowanie zewnętrznego DSL pozwala twórcy gry na opisanie świata gry w sposób przyjazny dla osoby znającej tematykę gier RPG. Wewnętrzy DSL natomiast, sprawił, że generowany przez przez framework kod jest bardziej czytelny i przyjazny dla programisty, co w dużym stopniu przyczyniło się do skrócenia czasu potrzebnego mi do zaimplementowania generatorów.
   
-# Internal DSL
+### Internal DSL
 Jest to język stworzonych w ramach innego istniejącego już języka ogólnego przeznaczenia. Technicznie rzecz biorą jest to zbiór klas udostępniających wygodny dla programisty, dający wrażenie pisania w innym języku zbiór metod. Klasy te umieszcza się zazwyczaj w bibliotece, którą możemy użyć w do rozwiązania ściśle określonego problemu. Główną cechą takich bibliotek jest wyraźne nastawienie na udostępniany interfejs, a nie samą implementacje. O jakości takiego rozwiąznie świadczy nie tyle wydajność jego działania, lecz łatwość używania. Biblioteki takie dają programiście wrażenie pisania w zupełnie nowym, wyrażającym w możliwie najlepszy sposób jego intencje języku.
 
 W framewodku Adventure Maker również został wykorzystany zewnętrzny język domenowy. W jego skład wchodzą klasy umieszczone w pakiecie "".
@@ -138,7 +138,7 @@ Poniżej znajduje się przykład kodu napisanego z wykorzystaniem tego języka.
 --KOD--
 Przytoczony kod opisuje mogące wystąpić czasie gry zdarzenie. Chodź na to nie wygląda, kod ten został napisany oczywiście w Javie.
 
-# External DSL
+### External DSL
 Jest to jezyk domenowy z prawdziwego zdarzenia. Język taki posiada ściśle określoną gramatykę i od początku został zaprojektowany w ściśle określonym celu. Przykładami takich języków są:
   - SQL - język służący do obsługi relacyjnych baz danych
   - CSS - język służący do definiowania stylu stron intenetowych 
@@ -146,3 +146,14 @@ Jest to jezyk domenowy z prawdziwego zdarzenia. Język taki posiada ściśle okr
 
 Na potrzeby frameworka stworzyłem zupełnie nowy zewnętrzy język domenowy o nazwie Adventure Maker Language.
 Opis tego języka znajduje się w rozdziale korzystaniu z frameworka.
+
+## Architektura rozwiązania
+W celu stworzenia frameworka Adventure Maker utworzyłem dwa projekty. Pierwszy to projekt odwpowiedzialny za DSL Andventure Maker Language. Projekt bazuje na technologii Xtext, a produktem wyjściowym jest wtyczka do IDE IntelliJ Idea obsługująca zaprojektowany DSL.
+Drugi projekt, to szkielet aplikacji na system Android. Kod aplikacji jest częściowo napisany w AML i do jego kompilacji potrzebne jest obsługa tego AML.
+
+### Xtext DSL
+- Definicja Gramatyki
+- Generatory
+### Aplikacja Android
+- Plik aml
+- Podział na moduły itp...
