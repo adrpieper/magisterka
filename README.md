@@ -154,6 +154,7 @@ Drugi projekt, to szkielet aplikacji na system Android. Kod aplikacji jest czę�
 ### Xtext DSL
 - Definicja Gramatyki
 - Generatory
+
 ### Aplikacja Android
 - Plik aml
 - Podział na moduły itp...
