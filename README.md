@@ -127,3 +127,14 @@ DSL - czyli języki domenowe, to grupa jezyków programowania zaoprojektowana z 
 Języki domenowe ze względu na sposób ich implementacji można podzielić na dwie grupy:
   - Języki wewnętrzne (Internal DSL)
   - Języki zewnętrzne (External DSL)
+ 
+W moim projektcie wykorzystałem zaróno wewnętrzne, jak i zerwnętrzne języki domenowe. 
+  
+# Internal DSL
+Jest to język stworzonych w ramach innego istniejącego już języka ogólnego przeznaczenia. Technicznie rzecz biorą jest to zbiór klas udostępniających interfejs dający wrażenie pisania w innym języku. Klasy te umieszcza się zazwyczaj w bibliotece, którą możemy użyć w do rozwiązania ściśle określonego problemu. Główną cechą takich bibliotek jest wyraźne nastawienie na udostępniany interfejs. O jakości takiego rozwiąznie świadczy nie tyle szynkość jego działania, czy prostota implementacji, lecz łatwość używania, dająca programiście wrażenie pisania w zupełnie nowym, języku wyrażającym w możliwie najlepszy sposób jego intencje.
+
+# External DSL
+Jest to jezyk z prawdziwego zdarzenia. Język taki posiada ściśle określoną gramatykę i od początku został zaprojektowany w ściśle określonym celu. Przykładami takich języków są:
+  - SQL - język służący do obsługi relacyjnych baz danych
+  - CSS - język służący do definiowania stylu stron intenetowych 
+  - HTML - język służący do definiowania struktury strony internetowej
