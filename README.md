@@ -164,10 +164,10 @@ W celu sprawdzenia powprawności dzialania stworzonego oprogramowania postanowi�
 Niestety nie każdy dało się pokryć testemi automatycznymi wszystkich funcjonalności. Z tego powodzu część kodu została przetestowana w sposób manualny. Elementami przetestowanymi w ten sposób są działanie modułu NFC, GPS oraz generacja kodu. Do każdego z tych elemetów przygotowałem scenariusz testowy, który następnie wykonałem. Sposób przeprowadzenia oraz wyniki tych testów zostały przedstawione poniżej.
 ### Scenariusze testowania
 #### Testy automatyczne 
-Podczas testów automatycznych testowałem z osobna działanie poszczególnych funkcji w oderwaniu od reszty systemu, z tego powodu scenariusz każdego testu jest bardzo podobny. Każdy test został podzielone na 3 sekcje:
-- GIVEN
-- WHEN
-- THEN
+Podczas  automatycznych testów jednostkowych testowałem z osobna działanie poszczególnych funkcji w oderwaniu od reszty systemu, z tego powodu scenariusz każdego testu jest bardzo podobny. Każdy test został podzielone na 3 sekcje, w których umieszczony został kod odpowiedniego typu:
+  - GIVEN
+  - WHEN
+  - THEN
 #### NFC
 #### GPS
 #### Generowanie kodu
