@@ -168,6 +168,7 @@ Podczas  automatycznych testów jednostkowych testowałem z osobna działanie po
   - GIVEN
   - WHEN
   - THEN
+  
 #### NFC
 #### GPS
 #### Generowanie kodu
