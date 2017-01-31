@@ -80,6 +80,12 @@ Niniejsza praca zawiera opis stworzonego języka oraz silnika gry. Osobny rozdzi
 
 W pracy opisany jest cały proces powstawania narzędzia. Osobne rozdziały zawierają opis powstawania projektu, jego implementacji oraz testów.
 
+## Opis problemu
+### Porównanie dostępnych rozwiązań
+#### Istniejące gry terenowe
+#### Obszary zastosowań DSL
+## Zastosowania DSL w grach terenowych
+  
 
 ## Wymagania
 ### Funkcjonalne
