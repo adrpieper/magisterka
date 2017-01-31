@@ -63,7 +63,7 @@ Android, DSL, Xtext, Location-Based Game, Framework, Engine
 5. Korzystanie z frameworka
   - Konfiguracja środowiska 
   - Adventure Maker Language
-6. Przykładowa gra
+  - Przykładowa gra
 7. Wkład własny
 8. Bibliografia
 
@@ -174,4 +174,12 @@ Podczas  automatycznych testów jednostkowych testowałem z osobna działanie po
 #### Generowanie kodu
 ### Wyniki
 
+## Korzystanie z frameworka
+### Konfiguracja środowika
+Pierwszym krokiem w celu konfiguracji środowika jest przygotowanie IDE oraz odpowiednich narzędzie. Należy pobrać i zainstalować w standarodowy sposób IntelliJ Idea, JRE, JDK i Android SDK. Drugim krokiem jest przygotowanie wtyczki do IntelliJ Idea. Wtyczka ta odpowiedzialna będzie za obsługę języka AML w tym za generacje kodu Java na podstawie pliku ".aml". Można pominąć ten etap pobierając gotową wtyczkę. Wtyczkę należy zaistalować w środowisku w IDE IntelliJ Idea. Kiedy mamy już potrzebne oprogramowanie należy jeszcze pobrać pusty projekt i można przystąć do stworzenia własnej gry. Napisanie własnej gry sprowadza się do edycji jednego pliku mianowicie "game.aml". Należy w nim umieścić kod w języku AML.
 
+### Adventure Maker Language
+Adventure Maker Language to język domenowy stworzony specjalnie na potrzeby frameworka Adventure Maker. Poniżej znajduje się dokumentacja tego języka.
+
+### Przykładowa gra
+Aby ułatwić korzystanie z frameworka postanowiłem przygotować przykładową grę. Poniżej znajduje się kod AML potrzebny do skompilowania gry oraz opis każdego z jego elementów.
