@@ -149,11 +149,14 @@ Opis tego języka znajduje się w rozdziale korzystaniu z frameworka.
 
 ## Architektura rozwiązania
 W celu stworzenia frameworka Adventure Maker utworzyłem dwa projekty. Pierwszy to projekt odwpowiedzialny za DSL Andventure Maker Language. Projekt bazuje na technologii Xtext, a produktem wyjściowym jest wtyczka do IDE IntelliJ Idea obsługująca zaprojektowany DSL.
-Drugi projekt, to szkielet aplikacji na system Android. Kod aplikacji jest częściowo napisany w AML i do jego kompilacji potrzebne jest obsługa tego AML.
+Drugi projekt, to szkielet aplikacji na system Android. Kod aplikacji jest częściowo napisany w AML i do jego kompilacji potrzebna jest jeog obsługa.
 
 ### Xtext DSL
-- Definicja Gramatyki
-- Generatory
+Projekt powstał w celu implementacji języka Andventure Maker Language. Wykorzystanie technologii Xtext [] wymaga implementacji dwóch elementów gramatyki i generatorów kodu.
+#### Definicja Gramatyki
+Gramatyka języka została umieszczona w pojedyńczym pliku -nazwa pliki-. Głównym celem stworzenia gramatyki jest opis modelu syntaktycznego i semantycznego tworzonego języka. Innymi słowy musimy zdefiniować jaki tekst będzie należał do języka oraz jak zmapować dany tekst na jego reprezentacje w pamięci komputera [dokumentacja]. Xtext na podstawie tego pliku wygeneruje między innymi parser, który sprawdzi, czy dany tekst poprawnym programem oraz zwróci jego reprezentacje w postaci drzewa obiektów.
+#### Generator
+Generator języka odpowiedzialny jest za wygenerowanie kodu (w tym przypadku kodu Java) na podstawie modelu semantycznego zwróconego przez parser w postacie drzewa obiektów. Generator został napisany w języku Xtend i zkłada się z głównej klasy implementującej metodę -nazwa metody- oraz klas pomocniczych utworzonym w celu dekompozycji problemu na mniejsze części zgodnie z zasadą pojedynczej odpowiedzialności [źródło].
 
 ### Aplikacja Android
 - Plik aml
@@ -183,3 +186,6 @@ Adventure Maker Language to język domenowy stworzony specjalnie na potrzeby fra
 
 ### Przykładowa gra
 Aby ułatwić korzystanie z frameworka postanowiłem przygotować przykładową grę. Poniżej znajduje się kod AML potrzebny do skompilowania gry oraz opis każdego z jego elementów.
+
+    KOD AML
+  OPIS
