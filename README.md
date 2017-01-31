@@ -81,9 +81,15 @@ Niniejsza praca zawiera opis stworzonego języka oraz silnika gry. Osobny rozdzi
 W pracy opisany jest cały proces powstawania narzędzia. Osobne rozdziały zawierają opis powstawania projektu, jego implementacji oraz testów.
 
 ## Opis problemu
-### Porównanie dostępnych rozwiązań
-#### Istniejące gry terenowe
-#### Obszary zastosowań DSL
+Celem niniejszej pracy jest implementacja frameworku służącego do szybkiego tworzenia terenowych gier RPG. Najważniejszym moim zdaniem elementem tej implentacji jest stworzony język domenowy. Niniejsza praca zachacza więc o trzy z pozoru niezwiązane ze sobą tematyki jakimi są gry terenowe, gry RPG oraz języki domenowe. Aby wprowadzić czytelnika w tematykę pracy, postanowiłem opisać z osobna, każdy z  tych elementów oraz sposób w jaki postanowiłem je ze sobą połączyć.  
+### Gry terenowe
+Rozwój technologii mobilny sprawił, że od paru lat na rynku rozrywki elektronicznej pojawił się nowy nowy pomysł. Pomysłem tym są gry terenowe, czyli takie, w których istotną częścią rozgrywki jest poruszanie się gracza po świecie rzeczywistym. W grach tych zrezygnowano ze znanego z tradycyjnych gier wirtualnego świata na rzecz tzw. rzeczywistości rozszerzonej [źródło]. W grach terenowych gracz nie steruje już postacią za pomocą myszki, czy klawiatury, lecz jest zmuszony do fizycznego przemieszczania się po rzeczywistym świecie. Lokalizacja gracza zostaje przeniesiona do świata gry za pomocą technologii takiej jak np. GPS. Mapa po której porusza się gracz jest więc mapą znaną z lekcji geografii. Elementami które sprawiają, że świat gry jest rzeczywistością rozszerzoną są pojawiające się w grze, a nie istniejące w rzeczywistości, obiekty lub postaci które wpływają w jakiś sposób na przebieg rozgrywki.
+
+Doskonały przykładem gry terenowej jest Pokemon GO. Gra...
+
+Inny pomysł na wykorzystanie lokalizacji gracza mieli twórcy ...
+### Gry RPG
+### Obszary zastosowań DSL
 ## Zastosowania DSL w grach terenowych
   
 
