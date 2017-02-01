@@ -29,10 +29,11 @@ Android, DSL, Xtext, Location-Based Game, Framework, Engine
 ### Spis treści
 
 1. Opis problemu
-  - Porównanie dostępnych rozwiązań
-    - Istniejące gry terenowe
-    - Obszary zastosowań DSL
-  - Zastosowania DSL w grach terenowych
+  - Gry terenowe
+  - Gry RPG
+  - DSL
+  - Frameworki
+  - Zastosowanie DSL w grach terenowych
 2. Projekt i analiza 
   - Wymagania 
     - Funkcjonalne 
@@ -81,7 +82,7 @@ Niniejsza praca zawiera opis stworzonego języka oraz silnika gry. Osobny rozdzi
 W pracy opisany jest cały proces powstawania narzędzia. Osobne rozdziały zawierają opis powstawania projektu, jego implementacji oraz testów.
 
 ## Opis problemu
-Celem niniejszej pracy jest implementacja frameworku służącego do szybkiego tworzenia terenowych gier RPG. Najważniejszym moim zdaniem elementem tej implentacji jest stworzony język domenowy. Niniejsza praca zachacza więc o trzy z pozoru niezwiązane ze sobą tematyki jakimi są gry terenowe, gry RPG oraz języki domenowe. Aby wprowadzić czytelnika w tematykę pracy, postanowiłem opisać z osobna, każdy z  tych elementów oraz sposób w jaki postanowiłem je ze sobą połączyć.  
+Celem niniejszej pracy jest implementacja frameworku służącego do szybkiego tworzenia terenowych gier RPG. Najważniejszym moim zdaniem elementem tej implentacji jest stworzony język domenowy. Niniejsza praca zachacza więc o cztery z pozoru niezwiązane ze sobą tematyki jakimi są gry terenowe, gry RPG, frameworki oraz języki domenowe. Aby wprowadzić czytelnika w tematykę pracy, postanowiłem opisać z osobna, każdy z  tych elementów oraz sposób w jaki postanowiłem je ze sobą połączyć.  
 ### Gry terenowe
 Rozwój technologii mobilny sprawił, że od paru lat na rynku rozrywki elektronicznej pojawił się nowy nowy pomysł. Pomysłem tym są gry terenowe, czyli takie, w których istotną częścią rozgrywki jest poruszanie się gracza po świecie rzeczywistym. W grach tych zrezygnowano ze znanego z tradycyjnych gier wirtualnego świata na rzecz tzw. rzeczywistości rozszerzonej [źródło]. W grach terenowych gracz nie steruje już postacią za pomocą myszki, czy klawiatury, lecz jest zmuszony do fizycznego przemieszczania się po rzeczywistym świecie. Lokalizacja gracza zostaje przeniesiona do świata gry za pomocą technologii takiej jak np. GPS. Mapa po której porusza się gracz jest więc mapą znaną z lekcji geografii. Elementami które sprawiają, że świat gry jest rzeczywistością rozszerzoną są pojawiające się w grze, a nie istniejące w rzeczywistości, obiekty lub postaci które wpływają w jakiś sposób na przebieg rozgrywki.
 
@@ -114,9 +115,15 @@ Jest to jezyk domenowy z prawdziwego zdarzenia. Język taki posiada ściśle okr
   - SQL - język służący do obsługi relacyjnych baz danych
   - CSS - język służący do definiowania stylu stron intenetowych 
   - HTML - język służący do definiowania struktury strony internetowej
+### Frameworki
+Frameworki są doskonałym przykładem korzyści jakie niesie ze sobą popularna zasada Clean Code - nie powtarzaj się. 
+Twórcy frameworków  wychodzą z założenia, że projekty informatyczne można z powodzeniem podzielić na pewne grupy (np aplikacje webowe). Projekty informatyczne należące do takiej grupy bywają do siebie tak podobne, że zazwyczaj łatwiej jest wkazać cechy wspólne niż różnice. Aplikacje webowe np. udostępniają jakiś interfejs w postaci stron html, przechowują dane w bazach (zazwyczaj relacyjnych) i komunikują się z urzytkownikiem za pomocą protokołu html. Elementem różniącym te aplikacje jest ich wygląd i funkcjonalność. Ideą frameworku jest implementacja tych elementów wspólnych w jednym miejscu i udostępnienie programistom-urzystkownikom frameworku przyjaznego interfejsu do implementacji różnic. Programista pisze jest ograniczony pewnymi ramami, w których musi mieścić się jego aplikacja, stąd nazwa takiego narzędzia - framework.
 
-## Zastosowania DSL w grach terenowych
-  
+Z uwagi na fakt, że gry RPG są bardzo popularne, a jednocześnie do siebie bardzo podobne, naturalnym wydaje się stworzenie oprogramowania pozwalające na łatwe tworzenie takiego typu gier. Narzędzie RPG Maker pozwala...
+
+W tym rozdziale warto też wspomnieć o istnieniu narzędzi pozwalajace na łatwe tworzenie nawet zaawansowanych gier mobilnych... (UNITY). 
+
+### Zastosowania DSL w grach terenowych
 
 ## Wymagania
 ### Funkcjonalne
@@ -200,12 +207,26 @@ Podczas  automatycznych testów jednostkowych testowałem z osobna działanie po
 
 ## Korzystanie z frameworka
 ### Konfiguracja środowika
-Pierwszym krokiem w celu konfiguracji środowika jest przygotowanie IDE oraz odpowiednich narzędzie. Należy pobrać i zainstalować w standarodowy sposób IntelliJ Idea, JRE, JDK i Android SDK. Drugim krokiem jest przygotowanie wtyczki do IntelliJ Idea. Wtyczka ta odpowiedzialna będzie za obsługę języka AML w tym za generacje kodu Java na podstawie pliku ".aml". Można pominąć ten etap pobierając gotową wtyczkę. Wtyczkę należy zaistalować w środowisku w IDE IntelliJ Idea. Kiedy mamy już potrzebne oprogramowanie należy jeszcze pobrać pusty projekt i można przystąć do stworzenia własnej gry. Napisanie własnej gry sprowadza się do edycji jednego pliku mianowicie "game.aml". Należy w nim umieścić kod w języku AML.
+Pierwszym krokiem w celu konfiguracji środowika jest przygotowanie IDE oraz odpowiednich narzędzie. Należy pobrać i zainstalować w standarodowy sposób IntelliJ Idea, JRE, JDK i Android SDK. Drugim krokiem jest przygotowanie wtyczki do IntelliJ Idea. Wtyczka ta odpowiedzialna będzie za obsługę języka AML w tym za generacje kodu Java na podstawie pliku ".aml". Można pominąć ten etap pobierając gotową wtyczkę. Wtyczkę należy zaistalować w środowisku w IDE IntelliJ Idea. Kiedy mamy już potrzebne oprogramowanie należy jeszcze pobrać pusty projekt i można przystąć do implementacji własnej gry. 
 
-### Adventure Maker Language
+#### Instalacja
+  - IntelliJ Idea
+  - JRE
+  - JDK
+  - Android SDK
+#### Kompilacja wtyczki
+Aby skompilować wtyczkę samodzielnie należy pobrać ją z repozytorium [link] i uruchodzić polecenie [grandle ...]. 
+#### Instacja wtyczki
+Wtyczkę obsługującą język AML można pobrać w postaci pliku .zip [skąd?] lub przygotować samodzielnie. Jeżeli mamy już przygotowany plik .zip musimy go zainstalować środowisku IDE IntelliJ Idea. W tym celu należy...
+#### Konfiguracja projektu
+#### Implementacja gry
+Implementacja własnej gry sprowadza się do edycji jednego pliku mianowicie "game.aml". Należy w nim umieścić kod w języku AML. W kodzie tym należy umieścić wszystkie niezbędne elementy gry. Pisząc ten kod można posłużyć się dokumentacją języka AML zamieszczoną w niniejszej pracy. Warto też wzorować się na kodzie przykładowej gry, który równiej wchodzi w skład pracy.
+#### Kompilacja projektu
+Projekt należy skompilować przy pomocy narzędzia grandle []. Projekt jest standartowym projektem Androidowym, tak więc możemy go też uruchomić przyciskiem play dostępnym w IDE IntelliJ Idea. Ważne jest, żeby korzystać z IDE, ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko. Budowanie projektu za pomocą może się więc nie powieść. Osoby zainteresowany głębszym zrozumieniem narzędzia grandle [] , Android SDK [] oraz samego IDE odsyłam do źródeł. 
+## Adventure Maker Language
 Adventure Maker Language to język domenowy stworzony specjalnie na potrzeby frameworka Adventure Maker. Poniżej znajduje się dokumentacja tego języka.
 
-### Przykładowa gra
+## Przykładowa gra
 Aby ułatwić korzystanie z frameworka postanowiłem przygotować przykładową grę. Poniżej znajduje się kod AML potrzebny do skompilowania gry oraz opis każdego z jego elementów.
 
     KOD AML
