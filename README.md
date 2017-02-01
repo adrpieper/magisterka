@@ -115,6 +115,7 @@ Jest to jezyk domenowy z prawdziwego zdarzenia. Język taki posiada ściśle okr
   - SQL - język służący do obsługi relacyjnych baz danych
   - CSS - język służący do definiowania stylu stron intenetowych 
   - HTML - język służący do definiowania struktury strony internetowej
+
 ### Frameworki
 Frameworki są doskonałym przykładem korzyści jakie niesie ze sobą popularna zasada Clean Code - nie powtarzaj się. 
 Twórcy frameworków  wychodzą z założenia, że projekty informatyczne można z powodzeniem podzielić na pewne grupy (np aplikacje webowe). Projekty informatyczne należące do takiej grupy bywają do siebie tak podobne, że zazwyczaj łatwiej jest wkazać cechy wspólne niż różnice. Aplikacje webowe np. udostępniają jakiś interfejs w postaci stron html, przechowują dane w bazach (zazwyczaj relacyjnych) i komunikują się z urzytkownikiem za pomocą protokołu html. Elementem różniącym te aplikacje jest ich wygląd i funkcjonalność. Ideą frameworku jest implementacja tych elementów wspólnych w jednym miejscu i udostępnienie programistom-urzystkownikom frameworku przyjaznego interfejsu do implementacji różnic. Programista pisze jest ograniczony pewnymi ramami, w których musi mieścić się jego aplikacja, stąd nazwa takiego narzędzia - framework.
@@ -124,6 +125,8 @@ Z uwagi na fakt, że gry RPG są bardzo popularne, a jednocześnie do siebie bar
 W tym rozdziale warto też wspomnieć o istnieniu narzędzi pozwalajace na łatwe tworzenie nawet zaawansowanych gier mobilnych... (UNITY). 
 
 ### Zastosowania DSL w grach terenowych
+
+W mojej pracy postawiłem sobie na celu stworzenie frameworku pozwalającego na łatwo tworzenie terenowych gier RPG. Ograniczenie się do tak wąskiej grupy aplikacji pozwoli stworzyć narzędzie...
 
 ## Wymagania
 ### Funkcjonalne
