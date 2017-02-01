@@ -89,6 +89,11 @@ Doskonały przykładem gry terenowej jest Pokemon GO. Gra...
 
 Inny pomysł na wykorzystanie lokalizacji gracza mieli twórcy ...
 ### Gry RPG
+Gry RGP inaczej gry fabularne [źródło wiki], są to gry w których gracze wcielają się w rolę fikcyjnych postaci poruszających się po fikcyjnym świecie.  Celem graczy jest zazwyczaj ukończenie jakiegoś scenariusza, badź też po prostu usiągnięcie określonego celu np. zbobycie jakiegoś przedmiotu, danej ilości złota lub rozwój postaci do konkretnego poziomu. Istnieją też gry otwarte, w których gracz nie ma żadnego narzuconego celu, a jedynie przemierza fikcyjny świat ze znanej tylko sobie motywacji. Tradycyjnie grę tego typu rozgrywa się w wyobraźni graczy. Jeden z graczy wciela się wtedy w tzw. mastera gry. Zadaniem mastera jest o prowadzenia graczy przez świat gry poprzez opowiadanie pewnej historii oraz zadawanie pytań. Master przedstawia graczą jak wygląda sytuacja, w której znajduję się ich postacie oraz karze im podjąć decyzje jak w tej sytuacji ich postacie się zachowają. Gracze podejmują decyzję, po czym master gry określa z jakimi skutkami się ona wiąże i przechodzi do dalszej opowieści. Aby zachować pewną spójność gry, master podejmuje decyzję w oparciu o ustalony zbiór zasad (tzw. mechanikę gry), zazwyczaj efekt podjętej decyzji zależy też od rzutu kością.
+
+Oprócz tradycyjnej odmiany gier fabularnych powstały tej ich planszowe oraz komputerowe odmiany. W grach tych nie już mastera. Gry takie mają z góry narzucony scenariusz oraz zasady. 
+Jednym z najpopularniejszych przykładów planszowych gier RPG jest Magia i Miecza, gracze wybierają jedną z dziesiątek postaci. Świat gry został podzielony na trzy kręgi.... Przykładów komputerowych gier RPG są całe dziesiątki, a elementy tych gier takie jak rozwój i statystyki postaci przedostały się już do prawie każdego typu gier komputerowcych.
+
 ### Obszary zastosowań DSL
 ## Zastosowania DSL w grach terenowych
   
