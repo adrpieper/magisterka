@@ -126,7 +126,12 @@ W tym rozdziale warto też wspomnieć o istnieniu narzędzi pozwalajace na łatw
 
 ### Zastosowania DSL w grach terenowych
 
-W mojej pracy postawiłem sobie na celu stworzenie frameworku pozwalającego na łatwo tworzenie terenowych gier RPG. Ograniczenie się do tak wąskiej grupy aplikacji pozwoli stworzyć narzędzie...
+W mojej pracy postawiłem sobie na celu stworzenie frameworku pozwalającego na łatwe tworzenie terenowych gier RPG. Narzędzie łączy ze sobą cechy isniejących rozwiązań zaprzęgając je jednocześnie do rozwiązania nowych problemów. Cele postawione przed tym frameworkiem są typowe. Udostępnić narzędzie do przyjaznego rozwiązywania problemów określonej klasy. Nowy jest natomiast obszar w jakim działać będzie framework oraz użyte rozwiazania.
+
+Obszar (Dokładny opis jakie gry będę tworzył)
+
+Większość dostępnych frameworków opiera się na dwóch rozwiazaniach. Albo udostępniają użystkowikowi interfesy graficzny, albo pewien popularny język programowania, poszerzony ewentualnie o pewne fukcjonalności. Pierwsze podejście stosowane jest najczęściej w przypadku gier komputerowych lub gry odbiorną jest osoba nie umiąca programować. Jest ono ukierunkowane na prostotę ograniczając przy tym jednak możliwości narzędzia. Drugie podejcie sprawdza się głównie w aplikacja biznesowych. Integracja frameworku z popularnym językiem programowania pozwala pozyskać szerokie rzesze odbiorców. Dodatkowo sprawia, że narzędzie jest zarówno elastyczne, jak uniwersalne, tzn. dające się zastosować wielu przypadkach. Frameworki takie często są pisane   
+W przypadku Adventure Makera pozstanowiem zastosować nieco inne podejście. DSL.. (Jak działa mój framework)
 
 ## Wymagania
 ### Funkcjonalne
