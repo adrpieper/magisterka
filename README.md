@@ -96,7 +96,7 @@ Oprócz tradycyjnej odmiany gier fabularnych powstały tej ich planszowe oraz ko
 
 Jednym z najpopularniejszych przykładów planszowych gier RPG jest Magia i Miecza. Gracze wybierają w niej jedną z kilkudziesieciu postaci. A ich celem jest dostanie się do tzw. Korony Władzy. 
 
-W świcie gier komputerowych, RPG osiągneły niekwestionowany sukces. Wydanych tytułów są całe dziesiątki, a elementy tych gier takie jak rozwój i statystyki postaci przedostały się już do prawie każdego gatunku gier komputerowcych.
+W świecie gier komputerowych, RPG osiągneły niekwestionowany sukces. Wydanych tytułów są całe dziesiątki, a elementy tych gier takie jak rozwój i statystyki postaci przedostały się już do prawie każdego gatunku gier komputerowcych.
 
 ### DSL 
 [źródło]
@@ -117,12 +117,12 @@ Jest to jezyk domenowy z prawdziwego zdarzenia. Język taki posiada ściśle okr
   - HTML - język służący do definiowania struktury strony internetowej
 
 ### Frameworki
-Frameworki są doskonałym przykładem korzyści jakie niesie ze sobą popularna zasada Clean Code - nie powtarzaj się. 
-Twórcy frameworków  wychodzą z założenia, że projekty informatyczne można z powodzeniem podzielić na pewne grupy (np aplikacje webowe). Projekty informatyczne należące do takiej grupy bywają do siebie tak podobne, że zazwyczaj łatwiej jest wkazać cechy wspólne niż różnice. Aplikacje webowe np. udostępniają jakiś interfejs w postaci stron html, przechowują dane w bazach (zazwyczaj relacyjnych) i komunikują się z urzytkownikiem za pomocą protokołu html. Elementem różniącym te aplikacje jest ich wygląd i funkcjonalność. Ideą frameworku jest implementacja tych elementów wspólnych w jednym miejscu i udostępnienie programistom-urzystkownikom frameworku przyjaznego interfejsu do implementacji różnic. Programista pisze jest ograniczony pewnymi ramami, w których musi mieścić się jego aplikacja, stąd nazwa takiego narzędzia - framework.
+Frameworki są doskonałym przykładem korzyści jakie niesie ze sobą popularna zasada Clean Code - DRY (Don't Repeat Yourself) czyli nie powtarzaj się. 
+Twórcy frameworków  wychodzą z założenia, że projekty informatyczne można z powodzeniem podzielić na pewne grupy np aplikacje webowe. Projekty informatyczne należące do takiej grupy bywają do siebie tak podobne, że zazwyczaj łatwiej jest wzkazać cechy wspólne niż różnice. Aplikacje webowe np. udostępniają pewien interfejs w postaci stron html, przechowują dane w bazach (zazwyczaj relacyjnych) i komunikują się z użytkownikiem za pomocą protokołu HTTP. Elementem różniącym te aplikacje jest ich wygląd i funkcjonalność. Ideą frameworku jest implementacja tych elementów wspólnych w jednym miejscu i udostępnienie programistom-użytkownikom frameworku przyjaznego interfejsu do implementacji różnic. Programista pisze jest ograniczony pewnymi ramami, w których musi mieścić się jego aplikacja, stąd nazwa takiego narzędzia - framework.
 
-Z uwagi na fakt, że gry RPG są bardzo popularne, a jednocześnie do siebie bardzo podobne, naturalnym wydaje się stworzenie oprogramowania pozwalające na łatwe tworzenie takiego typu gier. Narzędzie RPG Maker pozwala...
+Z uwagi na fakt, że gry RPG są bardzo popularne, a jednocześnie do siebie bardzo podobne, naturalnym wydaje się stworzenie oprogramowania pozwalające na łatwe tworzenie takiego typu gier. Narzędzie RPG Maker [http://www.rpgmakerweb.com/] pozwala na proste tworzenie dwuwymiarowych gier RPG. Według twórców, tworzenie gier przy pomocy RPG Maker, jest możliwe bez jakiejkolwiek wiedzy na temat programowania, a jednocześnie dając bardzo duże możliwości doświadczonym użytkownikom. Oprogramowanie udostępnia przyjazne GUI, dzięki któremu można tworzyć w pełni funkjonalnego gry i to na wiele różnych platforma. Jedynym, ale bardzo istotnym ograniczeniem jest ściśle narzucony gatunek gier. Jednak to ograniczenie właśnie pozwoliło na stworzenie narzędzia jednocześnie tak prostego i funkjonalnego. 
 
-W tym rozdziale warto też wspomnieć o istnieniu narzędzi pozwalajace na łatwe tworzenie nawet zaawansowanych gier mobilnych... (UNITY). 
+W tym rozdziale warto też wspomnieć o istnieniu narzędzi pozwalajace na łatwe tworzenie nawet zaawansowanych gier mobilnych dowolnego typu. Takim oprogramowanie jest np. Unity [https://unity3d.com/]. Unity udostępnia przyjazne GUI, które pozwala na tworzenie świata gry. Elementy fizyki takie jak grafitacja, są już zaimplementowane w silniku gry. Programista musi natomiast jedynie pamiętać o nadaniu obiektom odpowiednich cech takich jak masa. Logikę gry można zaimplementować w jednym z dwóch języków UnityScript, C#. UnityScript jest językiem o sładni bardzo zbliżonej do JavaScript, a C# jest populanym obiektowym językiem programowania. Użycie powszechnie znanych języków oraz wieleplatformowość z pewnością przyczyniło się do popularności Unity.
 
 ### Zastosowania DSL w grach terenowych
 
