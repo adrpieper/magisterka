@@ -128,10 +128,10 @@ W tym rozdziale warto też wspomnieć o istnieniu narzędzi pozwalajace na łatw
 
 W mojej pracy postawiłem sobie na celu stworzenie frameworku pozwalającego na łatwe tworzenie terenowych gier RPG. Narzędzie łączy ze sobą cechy isniejących rozwiązań zaprzęgając je jednocześnie do rozwiązania nowych problemów. Cele postawione przed tym frameworkiem są typowe. Udostępnić narzędzie do przyjaznego rozwiązywania problemów określonej klasy. Nowy jest natomiast obszar w jakim działać będzie framework oraz użyte rozwiazania.
 
-Obszar (Dokładny opis jakie gry będę tworzył)
+Przy pomocy Andventure Makera możliwe będzie tworzenie terenowych gier o narzuconych z góry, dość wąstkich i specyficznych ramach, typowych dla tradycyjnych gier RPG. Stworzona gra polegać będzie głównie na rozwoju postaci, poprzez odwiedzanie lokacji, podejmowanie decyzji, a przede wszystkim pokonywanie przeciwników. Postać sterowana przez gracza zdobywać będzie punkty doświadczenia, dzięki którym gracz będzie mógł rozwijać postać w wybranym przez siebie kierunku. 
 
 Większość dostępnych frameworków opiera się na dwóch rozwiazaniach. Albo udostępniają użystkowikowi interfesy graficzny, albo pewien popularny język programowania, poszerzony ewentualnie o pewne fukcjonalności. Pierwsze podejście stosowane jest najczęściej w przypadku gier komputerowych lub gry odbiorną jest osoba nie umiąca programować. Jest ono ukierunkowane na prostotę ograniczając przy tym jednak możliwości narzędzia. Drugie podejcie sprawdza się głównie w aplikacja biznesowych. Integracja frameworku z popularnym językiem programowania pozwala pozyskać szerokie rzesze odbiorców. Dodatkowo sprawia, że narzędzie jest zarówno elastyczne, jak uniwersalne, tzn. dające się zastosować wielu przypadkach. Frameworki takie często są pisane   
-W przypadku Adventure Makera pozstanowiem zastosować nieco inne podejście. DSL.. (Jak działa mój framework)
+W przypadku Adventure Makera pozstanowiem zastosować nieco inne podejście. Uznałem, że głównymi elementem gry RPG są świat w którym się rozgrywa, jej zasady oraz scenariusz. Stwiedziłem więc, że naturnym pomysłem na implementacje tych elementów, będzie specjalny język DSL. 
 
 ## Wymagania
 ### Funkcjonalne
