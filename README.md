@@ -232,15 +232,21 @@ Pierwszym krokiem w celu konfiguracji środowika jest przygotowanie IDE oraz odp
   - JRE
   - JDK
   - Android SDK
+  
 #### Kompilacja wtyczki
 Aby skompilować wtyczkę samodzielnie należy pobrać ją z repozytorium [link] i uruchodzić polecenie [grandle ...]. 
+
 #### Instacja wtyczki
 Wtyczkę obsługującą język AML można pobrać w postaci pliku .zip [skąd?] lub przygotować samodzielnie. Jeżeli mamy już przygotowany plik .zip musimy go zainstalować środowisku IDE IntelliJ Idea. W tym celu należy...
+
 #### Konfiguracja projektu
+
 #### Implementacja gry
 Implementacja własnej gry sprowadza się do edycji jednego pliku mianowicie "game.aml". Należy w nim umieścić kod w języku AML. W kodzie tym należy umieścić wszystkie niezbędne elementy gry. Pisząc ten kod można posłużyć się dokumentacją języka AML zamieszczoną w niniejszej pracy. Warto też wzorować się na kodzie przykładowej gry, który równiej wchodzi w skład pracy.
+
 #### Kompilacja projektu
 Projekt należy skompilować przy pomocy narzędzia grandle []. Projekt jest standartowym projektem Androidowym, tak więc możemy go też uruchomić przyciskiem play dostępnym w IDE IntelliJ Idea. Ważne jest, żeby korzystać z IDE, ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko. Budowanie projektu za pomocą może się więc nie powieść. Osoby zainteresowany głębszym zrozumieniem narzędzia grandle [] , Android SDK [] oraz samego IDE odsyłam do źródeł. 
+
 ## Adventure Maker Language
 Adventure Maker Language to język domenowy stworzony specjalnie na potrzeby frameworka Adventure Maker. Poniżej znajduje się dokumentacja tego języka.
 
