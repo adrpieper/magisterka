@@ -134,15 +134,25 @@ Większość dostępnych frameworków opiera się na dwóch rozwiazaniach. Albo 
 W przypadku Adventure Makera pozstanowiem zastosować nieco inne podejście. Uznałem, że głównymi elementem gry RPG są świat w którym się rozgrywa, jej zasady oraz scenariusz. Stwiedziłem więc, że naturnym pomysłem na implementacje tych elementów, będzie specjalny język DSL. 
 
 ## Wymagania
+Jednym z pierwszym kroków jakie należy podjąć przez przystąpieniem do projektowania oprogramowania jest analiza wymagań. Uznałem, że aby, mój framework realizował postawione przed sobą zadania musi spełniać wymienione ponieżej wymagania funkcjonalne i niefunkcjonalne.
 ### Funkcjonalne
 - Język DSL zawieający elemnty takie jak
   - Klasy Postaci
   - Przedmioty
+  - Lokacje
   - Zdarzenia
   - Przeciwnicy
 - Integracja ze środowiskiem IntelliJ Idea
 - Kompilacja aplikacji na podstawie pliku DSL 
   
+Elementy wchodziące w skłąd zaprojektowanego języka DSL zostały przeze mnie wybrane arbitralnie, w taki sposób, żeby zawierał minimum niezbędne do zaprojektowania gry.  Chciałem, aby zaprojektowany język był jednocześnie prosty, ale i pozwalający na implementacje nawet dość zawiłej logiki. Oczywiście RPG z prawdziwego zdarzenia powinien zawierać nieco więcej. Uznałem jednak, że dodanie elementów takich jak np. misje lub NPC zbędnie rozbudowały by język i jego implementacje. Elementy te prawdopodobnie pojawią się, w przypadku wydania kolejenej wersji frameworku. Nie mniej jednak implementacja stworzona w ramach tej pracy obejmować będzie jedynie wyszczególnione punktu.
+
+U celu ułatwienia edycji kodu warto udostępnić użytkownikowi przyjazne IDE. Na szczęście narzędzia takie już isnieją i nie musiałem projektować ich od zera. Popularne narzędzia programistyczne pozwalają na rozszarzanie ich funcjonalności poprzez tzw. wtyczki, czyli oprogramowanie, które doistalowuje się do już istniejącego IDE. Postanowiłem więc, że udostępnie obsługującą język AML wtyczkę do IDE IntelliJ Idea. Postanowiłem wybrać to środowisko z kilku powodów:
+  - jest darmowy w wersji Community
+  - udostępnia integracje z Android SDK
+  - jest wspierany przez Xtext i Xtend
+
+Możliwość łatwej edycji to zamało, aby język był fukcjonalny nie wystarczy udostępnić użytkownikowi. Język należy skompilować. W tym przydku będzie to transkompilacja, ponieważ kodem wyściowym nie będzie kod binarny, a pliki JAVA. Na podstawie wygenerowanego oraz dostarczonego wraz z frameworkiem kody możliwa musi być kompilacja gotowej aplikacji, bez konieczności dopisywania dodatkowego kodu. 
 ### Niefunkcjonalne
 - Tworzenie gier RPG bez znajomości języków programowania ogólnego przeznaczenia oraz znajomości technologii
 
