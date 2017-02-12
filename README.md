@@ -152,18 +152,21 @@ U celu ułatwienia edycji kodu warto udostępnić użytkownikowi przyjazne IDE. 
   - udostępnia integracje z Android SDK
   - jest wspierany przez Xtext i Xtend
 
-Możliwość łatwej edycji to zamało, aby język był fukcjonalny nie wystarczy udostępnić użytkownikowi. Język należy skompilować. W tym przydku będzie to transkompilacja, ponieważ kodem wyściowym nie będzie kod binarny, a pliki JAVA. Na podstawie wygenerowanego oraz dostarczonego wraz z frameworkiem kody możliwa musi być kompilacja gotowej aplikacji, bez konieczności dopisywania dodatkowego kodu. 
+Możliwość łatwej edycji to zamało, aby język był fukcjonalny. Użytkownikowi należy udostępnić możliwość kompilacji kodu. W tym przydku będzie to transkompilacja, ponieważ kodem wyściowym nie będzie kod binarny, a pliki JAVA. Na podstawie wygenerowanego oraz dostarczonego wraz z frameworkiem kody możliwa musi być kompilacja gotowej aplikacji, bez konieczności dopisywania dodatkowego kodu. 
 ### Niefunkcjonalne
 - Tworzenie gier RPG bez znajomości języków programowania ogólnego przeznaczenia oraz znajomości technologii
 
+Podstawowym założeniem Adventure Makera jest udostępnienie możliwości tworzenia gier osobom będącym laikami jeśli chodzi o programowanie i technologie IT. Cen ten został też niejako wyrażony poprzez wymagania funcjonalne w postaci implementacji i integracji z IDE języka AML.
 ## Technologie
+Przed przystąpieniem do projektu informatycznego warto zastanowić się z jakich narzędzi, technologii będziemy korzystać. Napeży wybrać technologie dostosowane do wymagań konkretnego projektu. Jest bardzo ważne, aby nie wymyślać nowo koła. Oznacza to, że należy korzystać z gotowych rozwiązań, jeżeli takie już istnieją. Warto sięgać po sprawdzone rozwiązania, które przeszły już swóch chrzest bojowy. W tym rodziale opisałem najważniejsze z użytych w opisawanym projekcie technologii.
+
 ### Xtext
 
-Xtext to framework służący do implementacji języków DSL. Xtext tworzy infrastrukturę języka zawierającą elementy takie jak: parser,linker, typechecker, compiler na podstawie gramatyki języka. Dodatkowo postwala na integracje zaprojektowane języka z popularnymi IDE, eclipse oraz IntelliJ Idea.
+Xtext [http://www.eclipse.org/Xtext/] to framework służący do implementacji języków DSL. Xtext tworzy infrastrukturę języka zawierającą elementy takie jak: parser,linker, typechecker, compiler na podstawie gramatyki języka. Dodatkowo pozwala na integracje zaprojektowane języka z popularnymi IDE: eclipse oraz IntelliJ Idea. Narzędzie umożliwia też ciągła integracje poprzez wsparcie dla maven i gradle.
 
 ### Xtend
 
-Xtend jest językiem programowania wywodzącym się z JAVY i składniowo zbliżonym do JAVY. Został zaprojektowany, aby wyeliminować kilka wad języka Java. Zawiera elementy niedostępne w Javie oraz upraszcza niektóre strutury pozwalając na pozbycie się niepotrzebnego kody. Kodem wynikowym dla języka Xtext jest Java. Mamy tu więc do czynienia z tranpilacją, czyli przetłumaczeniem jednego kodu źródłowego w inny.
+Xtend [http://www.eclipse.org/xtend/] jest językiem programowania wywodzącym się z JAVY i składniowo zbliżonym do JAVY. Został zaprojektowany, aby wyeliminować kilka wad języka Java. Zawiera elementy niedostępne w Javie oraz upraszcza niektóre strutury pozwalając na pozbycie się niepotrzebnego kody. Kodem wynikowym dla języka Xtext jest Java. Mamy tu więc do czynienia z tranpilacją, czyli przetłumaczeniem jednego kodu źródłowego w inny.
 W moim projekcie Xtend został użyty ze względu na technologie Xtext. Wykorzystanie Xtend jest zalecanym sposobem implementacji generatorów dla języków DSL tworzonych przy użyciu Xtend. Główną zaletą języka Xtext, w kontekście pisania generatorów kodu są szablony, które nie są dostępne w języku JAVA.
 
 ### Android SKD
@@ -172,11 +175,11 @@ Android SDK to zestaw standardowych narzędzi programisty umożliwiający tworze
 
 ### JUnit
 
-JUnit jest to framework służący do testowania programów napisanych w języku Java.
+JUnit [http://junit.org/junit4/] jest to framework służący do testowania programów napisanych w języku Java. Początkowo zaprojektowany przez Erich Gamma i Kent Beck, dziś rozwijany w formie open source.
 
 ### Mockito
 
-Mockito to biblioteka ściśle związana z frameworkiem JUnit. Umożliwia tzw. mockowanie obiektów na czas testów. Mockowanie polega na przechwyceniu metod klas będących zależnościami testowanej klasy, tak aby można było sprawdzić poprawność działania klasy w oderwaniu od poprawności działania całego systemu.
+Mockito [http://site.mockito.org/] to biblioteka ściśle związana z frameworkiem JUnit. Umożliwia tzw. mockowanie obiektów na czas testów jednostkowych. Mockowanie polega na przechwyceniu wywołań metod z klas będących zależnościami testowanej klasy, tak aby można było sprawdzić poprawność działania klasy w oderwaniu od poprawności działania całego systemu. Możliwe jest zarówno zmiana zachowania wywołanej metody, jak i sprawdzenie, czy, ile razy i z jakimi parametrami została wywołana. Główną zaletą mockito jest bardzo wygodne API, tworzące swego rodzaju wewnętrzny DSL.
 
 ### Dagger 2
 
