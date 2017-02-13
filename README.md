@@ -208,19 +208,25 @@ Generator języka odpowiedzialny jest za wygenerowanie kodu (w tym przypadku kod
 W framewodku Adventure Maker również został wykorzystany wewnętrzny język domenowy. W jego skład wchodzą klasy umieszczone w pakiecie "".
 Poniżej znajduje się przykład kodu napisanego z wykorzystaniem tego języka.
 --KOD--
-Przytoczony kod opisuje mogące wystąpić czasie gry zdarzenie. Chodź na to nie wygląda, kod ten został napisany oczywiście w Javie.
+Przytoczony kod opisuje mogące wystąpić w czasie gry zdarzenie. Chodź na to nie wygląda, kod ten został napisany w Javie.
 
 
 ## Testy
-W celu sprawdzenia powprawności dzialania stworzonego oprogramowania postanowiłem je oczywiście przetestować. Na pierwszym miejscu postawiłem testy automatyczne, ponieważ są najbardziej praktyczne i wiarygodne. Testy automatyczne zaimplementowałem w postaci mokowanych testów jednostkowych za pomocą technologii JUnit i Mockito.
-Niestety nie każdy dało się pokryć testemi automatycznymi wszystkich funcjonalności. Z tego powodzu część kodu została przetestowana w sposób manualny. Elementami przetestowanymi w ten sposób są działanie modułu NFC, GPS oraz generacja kodu. Do każdego z tych elemetów przygotowałem scenariusz testowy, który następnie wykonałem. Sposób przeprowadzenia oraz wyniki tych testów zostały przedstawione poniżej.
+W celu sprawdzenia powprawności dzialania stworzonego oprogramowania postanowiłem je przetestować. Na pierwszym miejscu postawiłem testy automatyczne, ponieważ są najbardziej praktyczne i wiarygodne. Testy automatyczne zaimplementowałem w postaci mokowanych testów jednostkowych za pomocą bibliotek JUnit i Mockito.
+Niestety nie dało się pokryć testemi automatycznymi wszystkich funcjonalności. Z tego powodzu część kodu została przetestowana w sposób manualny. Elementami przetestowanymi w ten sposób są działanie modułu NFC, GPS oraz generacja kodu. Do każdego z tych elemetów przygotowałem scenariusz testowy, który następnie wykonałem. Sposób przeprowadzenia oraz wyniki tych testów zostały przedstawione poniżej.
 ### Scenariusze testowania
 #### Testy automatyczne 
-Podczas  automatycznych testów jednostkowych testowałem z osobna działanie poszczególnych funkcji w oderwaniu od reszty systemu, z tego powodu scenariusz każdego testu jest bardzo podobny. Każdy test został podzielone na 3 sekcje, w których umieszczony został kod odpowiedniego typu:
+Podczas  automatycznych testów jednostkowych testowałem z osobna działanie poszczególnych funkcji w oderwaniu od reszty systemu. Każdy test został podzielone na 3 sekcje, w których umieszczony został kod odpowiedniego typu:
   - GIVEN
   - WHEN
   - THEN
-  
+
+W sekcji Given został umieszczony kod implementujący warunki początkowe. Są to przedewszystkim linie kodu mockującego metody klas zależności klasy testowanej. Mogą to być też wywołania metod dostarczających jakieś dane. 
+
+W sekcji When składa się z pojedynczej linii. Jest to wywołanie testowanej metody na instancji testowanej klasy.
+
+Sekcja Then odpowiedzialna jest za sprawdzenie, czy metoda zachowała się w oczekiwany sposób. Zazwyczaj jest to kod skłądający się z kilku linii zawierających asercje. Asercje służą sprawdzeniu czy, ile razy i z jakimi parametrami zostały wywołane metody klas-zależności. Jeżeli funcja zwraca jakiś wynik, za pomocą assercje testują pokrywa się on z oczekiwanym.
+
 #### NFC
 #### GPS
 #### Generowanie kodu
