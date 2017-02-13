@@ -227,10 +227,32 @@ W sekcji When składa się z pojedynczej linii. Jest to wywołanie testowanej me
 
 Sekcja Then odpowiedzialna jest za sprawdzenie, czy metoda zachowała się w oczekiwany sposób. Zazwyczaj jest to kod skłądający się z kilku linii zawierających asercje. Asercje służą sprawdzeniu czy, ile razy i z jakimi parametrami zostały wywołane metody klas-zależności. Jeżeli funcja zwraca jakiś wynik, za pomocą assercje testują pokrywa się on z oczekiwanym.
 
-#### NFC
-#### GPS
 #### Generowanie kodu
+Aby przetestować funcjonalność generacji kodu postanowiłem napisać przykładowy plik AML zawierający wszystkie dostępne w języku elementy. Następnie sprawdziłem, czy wygenerowany kod JAVA nie zawiera błędów oraz czy zawiera wszystkie potrzebne elementy.  
+Poniżej znajduje się kod AML, który testowałem.
+--AML--
+#### NFC i GPS
+Aby przetestować funcjonalność NFC i GPS napisałem plik AML. Następnie skompilowałem i uruchomiłem aplikacje na telefonie. 
+Następnie sprawdziłem ręcznie, czy aplikacja zachowuje się w porządany sposób.
+Szczegóły tych testu zawiera tabela.
+
+       | NFC           | GPS
+------------------ | -------------- | -------------
+Zawartość kodu AML | 2 zdarzenia przypisane do dwóch lokalizacji zdefiniowanych za pomocą tagów "TEST1" i "TEST2". | 2 zdarzenia przypisane do dwóch obszarów definiowanych jako obszary o promieniu 5 m znajdujące się w odległości 20 m od siebie.
+Co sprawdzałem | Czy po przyłożeniu telefonu do opowiedniego tagu aplikacja uruchomi odpowiednie zdarzenie | Czy wejściu w odpowiedni obszar aplikacja uruchomi odpowiednie zdarzenie
+       
+
+zawierający dwa zdarzenia występujące odpowiednio w dwóch lokalizacjach oznaczonych odpowiednio tagami . Sprawdziłem, czy po przełożeniu telefonu do odpowiednich tagów, aplikacja przejdzie do odpowiednich zdarzeń.
 ### Wyniki
+
+#### Testy automatyczne 
+Poniższa tabela zawiera wyniki przeprowadzonych testów jednostkowych.
+
+#### Generowanie kodu
+Kod wygenerowany jest OK.
+
+#### NFC i GPS
+Odpowiednie zdarzenia odpalały się w odpowiednich sytuacjach.
 
 ## Korzystanie z frameworka
 ### Konfiguracja środowika
