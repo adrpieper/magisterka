@@ -185,6 +185,8 @@ Mockito [http://site.mockito.org/] to biblioteka ściśle związana z frameworki
 
 Dagger 2 to biblioteka umożliwiająca wstrzykiwanie zależności w Androdzie. Istnieje wiele bibliotek umożliwiających DI, jednak Dagger 2 jest wśród programistów Androida. Jego główną zaletą jest rozstrzyganie zależności w czasie kompilacji oraz generacja kodu. Dzięki temu możemy wykryć wady projektu, takie jak zależności cykliczne jeszcze przed uruchomieniem aplikacji. Dodatkowo wygenerowany kod jest o wiele szybszy niż typowe rozwiazanie czasu wykonania - czyli refleksja.
 
+### Gradle
+
 ## Architektura rozwiązania
 W celu stworzenia frameworka Adventure Maker utworzyłem dwa projekty. Pierwszy to projekt odwpowiedzialny za DSL Andventure Maker Language. Projekt bazuje na technologii Xtext, a produktem wyjściowym jest wtyczka do IDE IntelliJ Idea obsługująca zaprojektowany DSL.
 Drugi projekt, to szkielet aplikacji na system Android. Kod aplikacji jest częściowo napisany w AML i do jego kompilacji potrzebna jest jego obsługa.
@@ -246,7 +248,7 @@ zawierający dwa zdarzenia występujące odpowiednio w dwóch lokalizacjach ozna
 ### Wyniki
 
 #### Testy automatyczne 
-Poniższa tabela zawiera wyniki przeprowadzonych testów jednostkowych.
+Tabela zawiera wyniki przeprowadzonych testów jednostkowych.
 
 #### Generowanie kodu
 Kod wygenerowany jest OK.
@@ -273,13 +275,40 @@ Wtyczkę obsługującą język AML można pobrać w postaci pliku .zip [skąd?] 
 #### Konfiguracja projektu
 
 #### Implementacja gry
-Implementacja własnej gry sprowadza się do edycji jednego pliku mianowicie "game.aml". Należy w nim umieścić kod w języku AML. W kodzie tym należy umieścić wszystkie niezbędne elementy gry. Pisząc ten kod można posłużyć się dokumentacją języka AML zamieszczoną w niniejszej pracy. Warto też wzorować się na kodzie przykładowej gry, który równiej wchodzi w skład pracy.
+Implementacja własnej gry sprowadza się do edycji jednego pliku, mianowicie "game.aml". Należy w nim umieścić kod w języku AML. Kod musi  zawierać wszystkie niezbędne elementy gry. Pisząc ten kod można posłużyć się dokumentacją języka AML zamieszczoną w niniejszej pracy. Warto też wzorować się na kodzie przykładowej gry, który równiej wchodzi w jej skład.
 
 #### Kompilacja projektu
-Projekt należy skompilować przy pomocy narzędzia grandle []. Projekt jest standartowym projektem Androidowym, tak więc możemy go też uruchomić przyciskiem play dostępnym w IDE IntelliJ Idea. Ważne jest, żeby korzystać z IDE, ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko. Budowanie projektu za pomocą może się więc nie powieść. Osoby zainteresowany głębszym zrozumieniem narzędzia grandle [] , Android SDK [] oraz samego IDE odsyłam do źródeł. 
+Projekt należy skompilować przy pomocy narzędzia grandle []. Projekt jest standartowym projektem Androidowym, tak więc możemy go też uruchomić przyciskiem play dostępnym w IDE IntelliJ Idea. Ważne jest, żeby korzystać z IDE, ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko. Budowanie projektu za pomocą linii komend może się więc nie powieść. Osoby zainteresowany głębszym zrozumieniem narzędzia grandle [] , Android SDK [] oraz samego IDE odsyłam do źródeł. 
 
 ## Adventure Maker Language
 Adventure Maker Language to język domenowy stworzony specjalnie na potrzeby frameworka Adventure Maker. Poniżej znajduje się dokumentacja tego języka.
+
+### Struktura pliku AML
+Plik AML definiuje wszystkie dostępne w grze elementy. Plik może zawierać dowolną ilość postaci, przedmiotów, lokacji oraz zdarzeń. Dodatkowo należy w nim warunki początkowe. 
+
+### Warunki początkowe 
+Warunki początkowe definiują zdarzenia aktywne od początku gry.
+
+### Typy postaci
+Definicja typy, inaczej klasy postacji to informacje na temat statystyk oraz umiejętności dostępnych dla danej klasy postaci. Statystyki dzielą się na statystyki początkowe, które postać odtrzymuje przy starcie gry, oraz statystyki poziomowe, które zwiększają statystyki postaci z każdym zdobytym poziomem. Umiejętności zostały zorganizowane w postaci drzewa. Aby odblokować daną umiejętność, gracz musi najpierw odblokować wszystkie prowadzące do niej umiejętności.
+
+### Definicja przedmioty
+Przedmiot to element, który stanowi nagrodę za pokonanie przeciwnika i może być wykorzystany w celu podniesienia statystyk postaci. Definicja przedmiotu jest bardzo prosta. Wystarczy podać jego nazwę i wartości premii do odpowiednich statystyk.
+
+### Definicja lokacji
+Lokacja miejce do którego można się odwołać definiując zdarzenie. Miejsce takie oznacza pewien obszar w fizycznym świecie np. pokój albo kawałek lasu. Lokacje możemy definiować na dwa sposoby za pomocą technologii GPS lub NFC. 
+W przypadku technologii GPS lokacje opisuje okrąg o środku wyrażonym jako współrzędne geograficzne i promieniu wyrażonym w metrach. Użycie tej technologii zalecane jest do opisu obszarów znajdujących się na otwartej przestrzenii. 
+Opisując lokacje za pomocą technologii NFC wystarczy podać odpowiedni tag. Tą technologię należy wykorzystać do opisu przestrzeni zamniętcy jak np. pokój. Trzeba pamiętać, że odpowiedni znacznik NFC musi znajdować się w tym pomieszczeniu.
+
+### Definicja przygody
+Przygody są najważniejszym i najbardziej rozbudowanym elementem definicji w języku AML. Każda przygoda składa się z nazwy oraz punktu wejściowego będącego tzw. zdarzeń.
+
+Zdarzenie możne zawierać jedną z definicji:
+- Zdarzenie warunkowe
+- Pytanie
+- Walka
+- Edycja zdarzeń
+- Blok zdarzeń
 
 ## Przykładowa gra
 Aby ułatwić korzystanie z frameworka postanowiłem przygotować przykładową grę. Poniżej znajduje się kod AML potrzebny do skompilowania gry oraz opis każdego z jego elementów.
