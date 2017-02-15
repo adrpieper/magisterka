@@ -1,10 +1,10 @@
 package pl.aml.impl.opponent;
 
 
-import pl.aml.impl.item.ItemType;
-import pl.aml.opponent.ItemLoot;
+import pl.aml.opponent.*;
 
 import static pl.aml.impl.item.ItemType.*;
+import static pl.aml.opponent.Opponents.*;
 
 public enum OpponentType {
     TROLL(20,10,100, loot(SWORD,10), loot(IRON_HELMET,50) ),
@@ -35,7 +35,4 @@ public enum OpponentType {
         return loots;
     }
 
-    private static ItemLoot loot(ItemType itemType, int change) {
-        return new ItemLoot(itemType, change);
-    }
 }

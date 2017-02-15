@@ -35,6 +35,11 @@ character type Knight {
     }
 }
 
+item IronHelmet (helmet) {
+    + 3 to str
+    value 120
+}
+
 item Sword (weapon) {
     + 12 to str
     value 100
@@ -44,7 +49,7 @@ monster Troll {
     power : 10
     hp : 20
     exp : 100
-    loot : gold 12 - 13 Sword 12 %
+    loot : gold 12 - 13 Sword 12 %, IronHelmet 30 %
 }
 
 monster Dragon {

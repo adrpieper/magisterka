@@ -10,38 +10,72 @@ import pl.adrian.pieper.generator.builder.ClassBodyBuilder
 import static pl.adrian.pieper.generator.builder.BuilderUtils.*;
 import pl.adrian.pieper.generator.builder.Field
 import pl.adrian.pieper.generator.builder.Accessor
+import pl.adrian.pieper.aML.Stats
+import pl.adrian.pieper.aML.Loot
 
 class OpponentTypeClassGenerator extends SingleClassGenerator{
 
     new(String packageName){
         super("OpponentType", packageName, "public enum")
+
+        addImports (
+                AMLGenerator.MAIN_PACKAGE + ".opponent.*"
+        )
+
+        addStaticImports (
+                AMLGenerator.MAIN_PACKAGE + ".opponent.Opponents.*",
+                AMLGenerator.IMPL_PACKAGE + ".item.ItemType.*"
+        )
     }
+
+    def generate(Stats stats) {
+        return '''«stats.hp»,«stats.power»,«stats.exp»'''
+    }
+
+    def generate(Loot loot) {
+        return '''
+        «FOR item : loot.items», loot(«item.type.name.toUpperCase», «item.chance»)«ENDFOR»
+        '''
+    }
+
 
     override def generateBody(Resource resource){
 
-        var monsters = resource.allContents.filter(typeof(Monster)).toIterable
+        var opponents = resource.allContents.filter(typeof(Monster)).toIterable
 
-        val builder = new ClassBodyBuilder(className);
 
-        monsters.forEach([monster |
-            builder.withEnumInstance(
-                monster.name.toUpperCase,
-                monster.stats.hp.toString,
-                monster.stats.power.toString,
-                monster.stats.exp.toString
-            )
-        ])
+        return '''
+        «FOR opponent : opponents SEPARATOR ','»
+        «opponent.name.toUpperCase» («opponent.stats.generate»«opponent.loot.generate»)
+        «ENDFOR»
 
-        val hpField = new Field("int", "hp", Accessor.GETTER)
-        val powerField = new Field("int", "power", Accessor.GETTER)
-        val expField = new Field("int", "exp", Accessor.GETTER)
+        ;
 
-        builder
-        .withConstructor(hpField, powerField, expField)
-        .withField(hpField)
-        .withField(powerField)
-        .withField(expField)
+        private final int hp;
+        private final int power;
+        private final int exp;
+        private final ItemLoot[] loots;
 
-        return builder.build
+        OpponentType(int hp, int power, int exp, ItemLoot... loots)  {
+            this.hp = hp;
+            this.power = power;
+            this.exp = exp;
+            this.loots = loots;
+        }
+
+        public int getHp() {
+            return hp;
+        }
+        public int getPower() {
+            return power;
+        }
+        public int getExp() {
+            return exp;
+        }
+        public ItemLoot[] getLoots() {
+            return loots;
+        }
+
+        '''
     }
 }
