@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.adventure;
 
-import pl.aml.impl.items.ItemType;
+import pl.aml.impl.item.ItemType;
 import pl.aml.impl.opponent.OpponentType;
 import pl.aml.adventure.*;
 import pl.aml.adventure.AdventureInstance;

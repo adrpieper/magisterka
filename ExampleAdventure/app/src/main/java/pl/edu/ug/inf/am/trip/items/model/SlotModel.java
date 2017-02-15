@@ -2,7 +2,7 @@ package pl.edu.ug.inf.am.trip.items.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import pl.aml.impl.items.ItemType;
+import pl.aml.impl.item.ItemType;
 import pl.aml.items.SlotType;
 import pl.edu.ug.inf.am.BR;
 

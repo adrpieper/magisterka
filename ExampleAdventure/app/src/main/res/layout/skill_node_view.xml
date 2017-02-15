@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <import type="pl.aml.character.SkillType" />
+        <import type="pl.aml.impl.character.SkillType" />
         <variable name="skillNode" type="pl.aml.character.SkillNode"/>
         <variable name="skills" type="pl.edu.ug.inf.am.trip.skills.model.SkillsModel"/>
     </data>

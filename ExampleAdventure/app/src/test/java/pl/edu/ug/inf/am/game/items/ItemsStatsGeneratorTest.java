@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 import pl.aml.character.Stats;
-import pl.aml.impl.items.ItemType;
+import pl.aml.impl.item.ItemType;
 
 import java.util.Arrays;
 

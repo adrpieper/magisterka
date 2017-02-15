@@ -1,4 +1,4 @@
-package pl.aml.impl.items;
+package pl.aml.impl.item;
 
 import pl.aml.character.StatType;
 import pl.aml.items.Bonus;

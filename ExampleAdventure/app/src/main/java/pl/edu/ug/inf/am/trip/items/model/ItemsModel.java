@@ -5,7 +5,7 @@ import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import com.android.databinding.library.baseAdapters.BR;
 import pl.aml.character.Stats;
-import pl.aml.impl.items.ItemType;
+import pl.aml.impl.item.ItemType;
 import pl.aml.items.SlotType;
 import pl.edu.ug.inf.am.game.state.ItemsState;
 

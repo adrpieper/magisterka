@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.game.state;
 
-import pl.aml.impl.items.ItemType;
+import pl.aml.impl.item.ItemType;
 import pl.aml.items.SlotType;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 

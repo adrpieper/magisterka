@@ -1,6 +1,6 @@
 package pl.aml.adventure;
 
-import pl.aml.impl.items.ItemType;
+import pl.aml.impl.item.ItemType;
 
 import java.util.Arrays;
 

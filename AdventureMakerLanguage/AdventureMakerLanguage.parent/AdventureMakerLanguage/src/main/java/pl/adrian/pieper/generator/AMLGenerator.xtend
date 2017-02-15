@@ -24,7 +24,7 @@ import pl.adrian.pieper.generator.start.AdventuresOnStartGenerator
 class AMLGenerator extends AbstractGenerator {
 
     public static final String MAIN_PACKAGE = "pl.aml"
-    public static final String IMPL_PACKAGE = "pl.aml.gen.impl"
+    public static final String IMPL_PACKAGE = "pl.aml.impl"
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 
@@ -39,7 +39,7 @@ class AMLGenerator extends AbstractGenerator {
             new ItemGenerator(IMPL_PACKAGE+".item"),
             new SkillGenerator(IMPL_PACKAGE+".character"),
             new AdventureGenerator(IMPL_PACKAGE+".adventure"),
-            new AdventuresOnStartGenerator(IMPL_PACKAGE+"start")
+            new AdventuresOnStartGenerator(IMPL_PACKAGE+".start")
         ).forEach[ doGenerate("java", resource, fsa, context) ]
     }
 }
