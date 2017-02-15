@@ -9,7 +9,7 @@ import pl.adrian.pieper.aML.NegativePlayerLogicValue
 import pl.adrian.pieper.aML.PlayerLogicBrackets
 import pl.adrian.pieper.aML.PlayerLogicValueExpression
 import pl.adrian.pieper.aML.ComparatorType
-import pl.adrian.pieper.aML.VariableType
+import pl.adrian.pieper.aML.StatsType
 
 class AdventureConditionGenerator {
 
@@ -62,7 +62,7 @@ class AdventureConditionGenerator {
         }
     }
 
-    def String generate(VariableType variable) {
+    def String generate(StatsType variable) {
         return "c.player"+variable.literal.toFirstUpper+"()"
     }
 }

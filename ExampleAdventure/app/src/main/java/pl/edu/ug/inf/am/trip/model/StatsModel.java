@@ -3,7 +3,7 @@ package pl.edu.ug.inf.am.trip.model;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import pl.aml.character.Stats;
-import pl.aml.items.Bonus;
+import pl.aml.item.Bonus;
 import pl.edu.ug.inf.am.BR;
 import pl.edu.ug.inf.am.game.state.PlayerStatsState;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;

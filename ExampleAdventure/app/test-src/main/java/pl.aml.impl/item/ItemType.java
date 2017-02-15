@@ -1,21 +1,21 @@
 package pl.aml.impl.item;
 
-import pl.aml.character.StatType;
-import pl.aml.items.Bonus;
-import pl.aml.items.SlotType;
+import pl.aml.item.*;
 
 import static pl.aml.character.StatType.*;
+import static pl.aml.item.Items.*;
+import static pl.aml.item.SlotType.*;
 
 public enum  ItemType {
-    SWORD(100, SlotType.WEAPON, plus(5, STRENGTH)),
-    HELMET(100, SlotType.HELMET, plus(4, AGILITY)),
-
+    SWORD(100, WEAPON, plus(5, STRENGTH)),
+    IRON_HELMET(100, HELMET, plus(4, AGILITY)),
     ;
+
     private final int cost;
     private final SlotType slotType;
     private final Bonus[] bonuses;
 
-    private ItemType(int cost, SlotType slotType,Bonus... bonuses) {
+    ItemType(int cost, SlotType slotType, Bonus... bonuses) {
         this.cost = cost;
         this.slotType = slotType;
         this.bonuses = bonuses;
@@ -31,10 +31,6 @@ public enum  ItemType {
 
     public SlotType getSlotType() {
         return slotType;
-    }
-
-    private static Bonus plus(int amount, StatType statType) {
-        return new Bonus(statType,amount);
     }
 
 }

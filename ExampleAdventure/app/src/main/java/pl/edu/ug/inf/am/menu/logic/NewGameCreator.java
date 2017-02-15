@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.menu.logic;
 
-import pl.aml.impl.character.CharacterType;
+import pl.aml.character.CharacterType;
 import pl.edu.ug.inf.am.game.state.AvailableAdventures;
 import pl.edu.ug.inf.am.menu.dagger.PerMenu;
 import pl.edu.ug.inf.am.menu.state.GameStateDTO;

@@ -3,7 +3,7 @@ package pl.edu.ug.inf.am.trip.items.model;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import pl.aml.impl.item.ItemType;
-import pl.aml.items.SlotType;
+import pl.aml.item.SlotType;
 import pl.edu.ug.inf.am.BR;
 
 public class SlotModel extends BaseObservable{

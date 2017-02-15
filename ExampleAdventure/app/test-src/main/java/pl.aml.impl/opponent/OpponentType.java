@@ -7,7 +7,7 @@ import pl.aml.opponent.ItemLoot;
 import static pl.aml.impl.item.ItemType.*;
 
 public enum OpponentType {
-    TROLL(20,10,100, loot(SWORD,10), loot(HELMET,50) ),
+    TROLL(20,10,100, loot(SWORD,10), loot(IRON_HELMET,50) ),
     DRAGON(25,10,100, loot(SWORD,100))
     ;
     private final int hp;

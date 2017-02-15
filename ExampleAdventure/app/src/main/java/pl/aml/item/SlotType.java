@@ -1,4 +1,4 @@
-package pl.aml.items;
+package pl.aml.item;
 
 public enum  SlotType {
     HELMET,

@@ -69,14 +69,14 @@ DamageValue:
     DamageVariable | DamageConstant | DamageBrackets
 ;
 
-enum VariableType:
-    INTELIGENCE='int' |
-    STRONG='str' |
+enum StatsType:
+    INTELLIGENCE='int' |
+    STRENGTH='str' |
     AGILITY='agi'
 ;
 
 DamageVariable:
-    value = VariableType
+    value = StatsType
 ;
 
 DamageConstant:
@@ -182,7 +182,7 @@ NegativePlayerLogicValue:
 ;
 
 PlayerLogicValueExpression:
-    comparator=ComparatorType variable=VariableType 'than' value=INT
+    comparator=ComparatorType variable=StatsType 'than' value=INT
 ;
 
 enum ComparatorType:
@@ -222,13 +222,20 @@ FightStage:
     ('If lost' onLost=Stage)?
 ;
 
+enum SlotType:
+    HELMET='helmet' |
+    WEAPON='weapon' |
+    ARMOR='armor' |
+    GLOVES='gloves'
+;
+
 Item:
-    'item' name=ID '{'
+    'item' name=ID '(' slotType=SlotType ')' '{'
     (bonuses+=Bonus)*
     'value' (value=INT)
     '}';
 
 Bonus:
-    '+' value=INT 'to' type=('int' | 'str')
+    '+' value=INT 'to' type=StatsType
 ;
 

@@ -9,11 +9,15 @@ import pl.adrian.pieper.aML.DamageRightSideExpression
 import pl.adrian.pieper.aML.DamageVariable
 import pl.adrian.pieper.aML.DamageConstant
 import pl.adrian.pieper.aML.DamageBrackets
+import pl.adrian.pieper.generator.AMLGenerator
 
 class SkillGenerator extends SingleClassGenerator{
 
     new(String packageName){
-        super("GenSkillType", packageName, "public enum")
+        super("SkillType", packageName, "public enum")
+        addImports (
+                AMLGenerator.MAIN_PACKAGE + ".character.*"
+        )
     }
 
     override def generateBody(Resource resource){
@@ -35,7 +39,7 @@ class SkillGenerator extends SingleClassGenerator{
             private int mpCost;
             private int cooldown;
 
-            GenSkillType(Effect effect, int mpCost, int cooldown) {
+            «className» (Effect effect, int mpCost, int cooldown) {
                 this.effect = effect;
                 this.mpCost = mpCost;
                 this.cooldown = cooldown;

@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.game.state;
 
 import pl.aml.impl.item.ItemType;
-import pl.aml.items.SlotType;
+import pl.aml.item.SlotType;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 
 import javax.inject.Inject;
@@ -13,11 +13,6 @@ public class ItemsState {
 
     private EnumMap<SlotType,ItemType> itemsOnSlot = new EnumMap<>(SlotType.class);
     private List<ItemType> itemsInBag = new ArrayList<>();
-
-    {
-        putItemOnSlot(ItemType.SWORD);
-        addItemToBag(ItemType.HELMET);
-    }
 
     public ItemType getItem(SlotType slotType) {
         return itemsOnSlot.get(slotType);

@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.game.items;
 
 import pl.aml.character.Stats;
-import pl.aml.items.Bonus;
+import pl.aml.item.Bonus;
 import pl.aml.impl.item.ItemType;
 import pl.edu.ug.inf.am.game.dagger.PerGame;
 

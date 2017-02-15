@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.trip.items;
 
 import pl.aml.impl.item.ItemType;
-import pl.aml.items.SlotType;
+import pl.aml.item.SlotType;
 import pl.edu.ug.inf.am.game.player.PlayerStatsUpdater;
 import pl.edu.ug.inf.am.game.state.ItemsState;
 import pl.edu.ug.inf.am.game.state.PlayerStatsState;

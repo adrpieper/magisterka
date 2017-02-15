@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import pl.aml.adventure.AStage;
 import pl.aml.adventure.Adventure;
-import pl.aml.adventure.definition.AdventureDefinition;
+import pl.aml.adventure.AdventureDefinition;
 
 /**
  * Created by Adi on 2016-12-03.

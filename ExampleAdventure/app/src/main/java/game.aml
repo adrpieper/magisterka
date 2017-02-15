@@ -1,18 +1,21 @@
-location Forrest tagged as For100
-location Castle tagged as Castle
 
-active skill BigShot {
+active skill BASIC_HIT {
     effect : take (3 * int) damage
     mp : 12
     cooldown : 1 turns
 }
 
-active skill SmallShot {
+active skill POISON_HIT {
     effect : take (4 * int) damage
-    mp : 12
-    cooldown : 1 turns
+    mp : 20
+    cooldown : 2 turns
 }
 
+active skill SUPER_POISON_HIT {
+    effect : take (12 * int + 13 * agi) damage
+    mp : 60
+    cooldown : 4 turns
+}
 
 character type Knight {
     stats on start:
@@ -26,17 +29,15 @@ character type Knight {
     + 4 str
     + 1 int
     skills tree:
-    BigShot
-    BigShot => {
-        BigShot
-        BigShot
+    BASIC_HIT
+    POISON_HIT => {
+        SUPER_POISON_HIT
     }
 }
 
-item Sword {
+item Sword (weapon) {
     + 12 to str
     value 100
-
 }
 
 monster Troll {
@@ -52,7 +53,6 @@ monster Dragon {
     exp : 100
     loot : gold 12 - 13 Sword 12 %
 }
-
 
 adventure Question starts from {
     If you have more int than 3
@@ -75,7 +75,10 @@ adventure Question starts from {
     }
 }
 
+location Forrest tagged as For100
+location Castle tagged as Castle
+
 adventure on start {
-    Question (2) at Forrest
+    Question (3) at Forrest
     Question (4) at Forrest
 }

@@ -1,4 +1,4 @@
-package pl.aml.adventure.definition;
+package pl.aml.adventure;
 
 import pl.aml.adventure.AStage;
 

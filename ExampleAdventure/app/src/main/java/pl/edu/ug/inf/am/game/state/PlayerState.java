@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.game.state;
 
-import pl.aml.impl.character.CharacterType;
+import pl.aml.character.CharacterType;
 import pl.aml.impl.character.SkillType;
 import pl.edu.ug.inf.am.game.dagger.PerGame;
 

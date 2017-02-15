@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.app.dagger;
 
-import pl.aml.impl.character.CharacterType;
-import pl.aml.character.ExampleCharacterTypeFactory;
+import pl.aml.character.CharacterType;
+import pl.aml.impl.character.ExampleCharacterTypeFactory;
 import pl.edu.ug.inf.am.common.ComponentsManager;
 import pl.edu.ug.inf.am.common.SubComponentManager;
 import pl.edu.ug.inf.am.game.dagger.GameComponent;

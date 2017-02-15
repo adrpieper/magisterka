@@ -1,8 +1,7 @@
 package pl.edu.ug.inf.am.game.logic;
 
-import pl.adrian.util.Reflection;
 import pl.aml.adventure.Adventure;
-import pl.aml.adventure.definition.AdventureDefinition;
+import pl.aml.adventure.AdventureDefinition;
 import pl.edu.ug.inf.am.game.dagger.PerGame;
 
 import javax.inject.Inject;

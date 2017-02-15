@@ -1,7 +1,6 @@
 package pl.aml.adventure;
 
 import pl.aml.impl.location.Place;
-import pl.aml.adventure.definition.AdventureDefinition;
 
 public class AdventureInstance {
     private final Place place;
