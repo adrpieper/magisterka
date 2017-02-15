@@ -1,16 +1,15 @@
 package pl.edu.ug.inf.am.adventure;
 
-import pl.aml.items.ItemType;
+import pl.aml.impl.items.ItemType;
 import pl.aml.opponent.OpponentType;
 import pl.aml.adventure.*;
-import pl.aml.adventure.factory.AdventureInstance;
+import pl.aml.adventure.AdventureInstance;
 import pl.edu.ug.inf.am.adventure.dagger.AdventureSubComponentManager;
 import pl.edu.ug.inf.am.adventure.question.state.QuestionState;
 import pl.edu.ug.inf.am.adventure.state.AdventureResult;
 import pl.edu.ug.inf.am.adventure.state.AdventureState;
 import pl.edu.ug.inf.am.game.state.AvailableAdventures;
 
-import java.util.Collection;
 import java.util.List;
 
 public class AdventureEngineImpl implements AdventureEngine {

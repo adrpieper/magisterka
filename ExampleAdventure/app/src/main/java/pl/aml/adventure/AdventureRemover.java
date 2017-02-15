@@ -1,7 +1,5 @@
 package pl.aml.adventure;
 
-import pl.aml.adventure.factory.AdventureInstance;
-
 public class AdventureRemover implements AStage{
     private final AdventureInstance adventureInstance;
 

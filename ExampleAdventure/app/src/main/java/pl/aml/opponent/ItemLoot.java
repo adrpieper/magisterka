@@ -1,6 +1,6 @@
 package pl.aml.opponent;
 
-import pl.aml.items.ItemType;
+import pl.aml.impl.items.ItemType;
 
 public class ItemLoot {
     private final ItemType itemType;

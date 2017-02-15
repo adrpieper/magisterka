@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.game.state;
 
 import pl.aml.location.Place;
-import pl.aml.adventure.factory.AdventureInstance;
+import pl.aml.adventure.AdventureInstance;
 
 import java.util.ArrayList;
 import java.util.EnumMap;

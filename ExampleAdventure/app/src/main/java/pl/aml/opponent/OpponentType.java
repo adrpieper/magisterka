@@ -1,9 +1,9 @@
 package pl.aml.opponent;
 
 
-import pl.aml.items.ItemType;
+import pl.aml.impl.items.ItemType;
 
-import static pl.aml.items.ItemType.*;
+import static pl.aml.impl.items.ItemType.*;
 
 public enum OpponentType {
     TROLL(20,10,100, loot(SWORD,10), loot(HELMET,50) ),

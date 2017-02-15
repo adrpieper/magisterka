@@ -3,7 +3,7 @@ package pl.edu.ug.inf.am.game.logic;
 import pl.aml.adventure.Adventure;
 import pl.aml.location.Place;
 import pl.aml.adventure.End;
-import pl.aml.adventure.factory.AdventureInstance;
+import pl.aml.adventure.AdventureInstance;
 import pl.edu.ug.inf.am.common.ObjectRandom;
 import pl.edu.ug.inf.am.game.dagger.PerGame;
 import pl.edu.ug.inf.am.game.state.AvailableAdventures;

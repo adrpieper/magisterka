@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.adventure;
 
-import pl.aml.adventure.factory.AdventureInstance;
+import pl.aml.adventure.AdventureInstance;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
 import pl.edu.ug.inf.am.game.state.AvailableAdventures;
 

@@ -14,6 +14,7 @@ import java.util.Arrays
 import java.util.List
 import pl.adrian.pieper.generator.skill.SkillGenerator
 import pl.adrian.pieper.generator.adventure.AdventureGenerator
+import pl.adrian.pieper.generator.start.AdventuresOnStartGenerator
 
 /**
  * Generates code from your model files on save.
@@ -34,7 +35,8 @@ class AMLGenerator extends AbstractGenerator {
             new LocationGenerator("pl.aml"),
             new ItemGenerator("pl.aml"),
             new SkillGenerator("pl.aml.character"),
-            new AdventureGenerator("pl.aml.adventure.definition")
+            new AdventureGenerator("pl.aml.adventure.definition"),
+            new AdventuresOnStartGenerator("pl.aml.start")
         ).forEach[ doGenerate("java", resource, fsa, context) ]
     }
 }

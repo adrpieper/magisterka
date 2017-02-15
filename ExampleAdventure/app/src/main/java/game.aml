@@ -76,6 +76,8 @@ adventure Question starts from {
 }
 
 adventure on start {
-    Question at Forrest
+    Question (2) at Forrest
+    Question (4) at Forrest
+
 
 }

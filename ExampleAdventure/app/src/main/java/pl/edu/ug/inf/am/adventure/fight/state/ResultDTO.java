@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.adventure.fight.state;
 
-import pl.aml.items.ItemType;
+import pl.aml.impl.items.ItemType;
 
 import java.util.List;
 

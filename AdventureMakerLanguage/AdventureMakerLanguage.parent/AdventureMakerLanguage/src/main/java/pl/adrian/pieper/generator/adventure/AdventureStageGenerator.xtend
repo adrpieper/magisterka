@@ -15,6 +15,7 @@ class AdventureStageGenerator {
 
     AdventureConditionGenerator conditionGenerator = new AdventureConditionGenerator
     extension final AdventureClassNameGenerator adventureClassNameGenerator = new AdventureClassNameGenerator
+    extension final AdventureInstanceGenerator adventureInstanceGenerator = new AdventureInstanceGenerator
 
     def String generate(Stage stage) {
         switch (stage) {
@@ -62,16 +63,7 @@ class AdventureStageGenerator {
             .onLost(«generate(fight.onLost)»)«ENDIF»
         '''
     }
-    def String generate(AdventureInstance instance) {
-        return '''«instance.location.name.toUpperCase»,«instance.adventure.generateClassName».class«generateFreqency(instance.freqency)»'''
-    }
 
-    def String generateFreqency(int freq) {
-        if (freq == 0) {
-            return ""
-        }
-        return "," + freq;
-    }
 
     def String generate(AddAdventureInstanceStage stage) {
         return '''add(«generate(stage.instance)»)'''

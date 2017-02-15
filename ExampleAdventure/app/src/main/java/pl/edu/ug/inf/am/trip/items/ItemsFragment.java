@@ -11,7 +11,7 @@ import pl.adrian.bindinge.AdapterBuilder;
 import pl.adrian.bindinge.Adapters;
 import pl.adrian.bindinge.ModelBinder;
 import pl.adrian.bindinge.ViewFactories;
-import pl.aml.items.ItemType;
+import pl.aml.impl.items.ItemType;
 import pl.edu.ug.inf.am.BR;
 import pl.edu.ug.inf.am.R;
 import pl.edu.ug.inf.am.app.App;

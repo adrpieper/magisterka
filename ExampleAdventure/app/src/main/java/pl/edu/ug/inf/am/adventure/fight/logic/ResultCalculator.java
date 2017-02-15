@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.adventure.fight.logic;
 
-import pl.aml.items.ItemType;
+import pl.aml.impl.items.ItemType;
 import pl.aml.opponent.ItemLoot;
 import pl.aml.opponent.OpponentType;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;

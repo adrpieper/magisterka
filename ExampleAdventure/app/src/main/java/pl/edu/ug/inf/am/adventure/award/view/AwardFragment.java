@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import pl.adrian.bindinge.AdapterBuilder;
 import pl.adrian.bindinge.Adapters;
 import pl.aml.adventure.AdventureEngine;
-import pl.aml.items.ItemType;
+import pl.aml.impl.items.ItemType;
 import pl.edu.ug.inf.am.BR;
 import pl.edu.ug.inf.am.R;
 import pl.edu.ug.inf.am.adventure.dagger.AdventureComponent;

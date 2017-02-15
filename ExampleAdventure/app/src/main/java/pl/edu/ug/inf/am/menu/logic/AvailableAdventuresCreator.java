@@ -1,25 +1,32 @@
 package pl.edu.ug.inf.am.menu.logic;
 
-import pl.aml.location.Place;
-import pl.aml.adventure.definition.ExampleDragon;
-import pl.aml.adventure.definition.ExampleTroll;
-import pl.aml.adventure.factory.AdventureInstance;
+import pl.aml.adventure.AdventureInstance;
+import pl.aml.start.AdventuresOnStart;
 import pl.edu.ug.inf.am.game.state.AvailableAdventures;
 import pl.edu.ug.inf.am.menu.dagger.PerMenu;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 @PerMenu
 public class AvailableAdventuresCreator {
 
+    private final AdventuresOnStart adventuresOnStart;
+
     @Inject
-    public AvailableAdventuresCreator() {
+    public AvailableAdventuresCreator(AdventuresOnStart adventuresOnStart) {
+
+        this.adventuresOnStart = adventuresOnStart;
     }
 
     public AvailableAdventures create(){
         AvailableAdventures adventures = new AvailableAdventures();
-        adventures.add(new AdventureInstance(Place.CASTLE, ExampleTroll.class, 1));
-        adventures.add(new AdventureInstance(Place.FORREST, ExampleDragon.class, 1));
+        List<AdventureInstance> instances = new ArrayList<>();
+        adventuresOnStart.load(instances);
+        for (AdventureInstance instance : instances) {
+            adventures.add(instance);
+        }
         return adventures;
     }
 }

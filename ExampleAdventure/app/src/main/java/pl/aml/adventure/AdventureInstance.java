@@ -1,5 +1,6 @@
-package pl.aml.adventure.factory;
+package pl.aml.adventure;
 
+import pl.aml.adventure.definition.ExampleTroll;
 import pl.aml.location.Place;
 import pl.aml.adventure.definition.AdventureDefinition;
 
@@ -12,6 +13,10 @@ public class AdventureInstance {
         this.place = place;
         this.definition = definition;
         this.frequency = frequency;
+    }
+
+    public AdventureInstance(Place place, Class<? extends AdventureDefinition> definition) {
+        this(place,definition,1);
     }
 
     public Place getPlace() {
