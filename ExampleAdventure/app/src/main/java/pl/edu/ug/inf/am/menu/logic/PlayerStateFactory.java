@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.menu.logic;
 
-import pl.aml.character.CharacterType;
-import pl.aml.character.SkillType;
+import pl.aml.impl.character.CharacterType;
+import pl.aml.impl.character.SkillType;
 import pl.edu.ug.inf.am.menu.dagger.PerMenu;
 import pl.edu.ug.inf.am.game.state.PlayerState;
 

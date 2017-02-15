@@ -1,8 +1,5 @@
 package pl.edu.ug.inf.am.adventure.result.controller;
 
-import pl.aml.character.CharacterType;
-import pl.aml.character.StatType;
-import pl.aml.character.Stats;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 import pl.edu.ug.inf.am.adventure.model.AdventurePlayerModel;
 import pl.edu.ug.inf.am.adventure.state.AdventureResult;

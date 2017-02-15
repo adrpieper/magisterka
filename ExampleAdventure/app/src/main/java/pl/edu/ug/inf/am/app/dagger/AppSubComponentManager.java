@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.app.dagger;
 
-import pl.aml.character.CharacterType;
+import pl.aml.impl.character.CharacterType;
 import pl.aml.character.ExampleCharacterTypeFactory;
 import pl.edu.ug.inf.am.common.ComponentsManager;
 import pl.edu.ug.inf.am.common.SubComponentManager;
@@ -8,7 +8,6 @@ import pl.edu.ug.inf.am.game.dagger.GameComponent;
 import pl.edu.ug.inf.am.game.dagger.GameDataModule;
 import pl.edu.ug.inf.am.game.view.GameActivity;
 import pl.edu.ug.inf.am.menu.state.GameStateDTO;
-import pl.edu.ug.inf.am.game.state.PlayerState;
 
 import javax.inject.Inject;
 

@@ -1,6 +1,7 @@
 package pl.aml.character;
 
 import android.databinding.Bindable;
+import pl.aml.impl.character.SkillType;
 
 public class SkillNode {
     private final SkillType skillType;

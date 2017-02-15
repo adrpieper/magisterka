@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.trip.skills;
 
 import pl.aml.character.SkillNode;
-import pl.aml.character.SkillType;
+import pl.aml.impl.character.SkillType;
 import pl.edu.ug.inf.am.trip.controller.TripNavigator;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;
 import pl.edu.ug.inf.am.trip.skills.model.SkillsModel;

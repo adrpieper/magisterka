@@ -1,10 +1,12 @@
-package pl.aml.start;
+package pl.aml.impl.start;
 
 import pl.aml.adventure.AdventureInstance;
 
 import java.util.List;
 
-import pl.aml.adventure.definition.*;
+import pl.aml.impl.adventure.ExampleDragon;
+import pl.aml.impl.adventure.ExampleTroll;
+
 import static pl.aml.location.Place.*;
 
 public class AdventuresOnStart {

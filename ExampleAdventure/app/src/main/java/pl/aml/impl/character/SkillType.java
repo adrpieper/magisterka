@@ -1,4 +1,8 @@
-package pl.aml.character;
+package pl.aml.impl.character;
+
+import pl.aml.character.Damage;
+import pl.aml.character.Effect;
+import pl.aml.character.FightValues;
 
 public enum SkillType {
     BASIC_HIT(new Damage() {

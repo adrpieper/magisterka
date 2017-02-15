@@ -1,4 +1,7 @@
-package pl.aml.character;
+package pl.aml.impl.character;
+
+import pl.aml.character.SkillTree;
+import pl.aml.character.Stats;
 
 public class CharacterType {
     private final Stats statsOnStart;

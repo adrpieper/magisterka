@@ -2,7 +2,7 @@ package pl.edu.ug.inf.am.adventure.dagger;
 
 import pl.aml.adventure.AStage;
 import pl.aml.impl.items.ItemType;
-import pl.aml.opponent.OpponentType;
+import pl.aml.impl.opponent.OpponentType;
 import pl.edu.ug.inf.am.adventure.award.view.AwardFragment;
 import pl.edu.ug.inf.am.adventure.fight.dagger.FightComponent;
 import pl.edu.ug.inf.am.adventure.message.view.ShowMessageFragment;

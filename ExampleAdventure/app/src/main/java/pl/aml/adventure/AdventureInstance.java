@@ -1,6 +1,5 @@
 package pl.aml.adventure;
 
-import pl.aml.adventure.definition.ExampleTroll;
 import pl.aml.location.Place;
 import pl.aml.adventure.definition.AdventureDefinition;
 

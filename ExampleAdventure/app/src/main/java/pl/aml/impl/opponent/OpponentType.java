@@ -1,7 +1,8 @@
-package pl.aml.opponent;
+package pl.aml.impl.opponent;
 
 
 import pl.aml.impl.items.ItemType;
+import pl.aml.opponent.ItemLoot;
 
 import static pl.aml.impl.items.ItemType.*;
 

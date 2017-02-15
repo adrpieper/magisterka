@@ -3,7 +3,7 @@ package pl.edu.ug.inf.am.trip.skills.model;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import pl.aml.character.SkillTree;
-import pl.aml.character.SkillType;
+import pl.aml.impl.character.SkillType;
 import pl.edu.ug.inf.am.BR;
 import pl.edu.ug.inf.am.game.state.PlayerState;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;

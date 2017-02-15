@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.menu.logic;
 
 import pl.aml.adventure.AdventureInstance;
-import pl.aml.start.AdventuresOnStart;
+import pl.aml.impl.start.AdventuresOnStart;
 import pl.edu.ug.inf.am.game.state.AvailableAdventures;
 import pl.edu.ug.inf.am.menu.dagger.PerMenu;
 

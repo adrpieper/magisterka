@@ -1,5 +1,8 @@
 package pl.aml.character;
 
+import pl.aml.impl.character.CharacterType;
+import pl.aml.impl.character.SkillType;
+
 public class ExampleCharacterTypeFactory implements CharacterTypeFactory {
 
     @Override

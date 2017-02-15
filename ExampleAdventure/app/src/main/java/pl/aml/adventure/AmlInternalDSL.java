@@ -2,7 +2,7 @@ package pl.aml.adventure;
 
 import pl.aml.impl.items.ItemType;
 import pl.aml.location.Place;
-import pl.aml.opponent.OpponentType;
+import pl.aml.impl.opponent.OpponentType;
 import pl.aml.adventure.definition.AdventureDefinition;
 
 public class AmlInternalDSL {

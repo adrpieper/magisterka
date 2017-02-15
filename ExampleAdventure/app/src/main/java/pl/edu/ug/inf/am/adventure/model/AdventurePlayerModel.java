@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.adventure.model;
 
 import android.databinding.BaseObservable;
-import pl.aml.character.SkillType;
+import pl.aml.impl.character.SkillType;
 import pl.aml.character.Stats;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventure;
 import pl.edu.ug.inf.am.game.state.PlayerState;

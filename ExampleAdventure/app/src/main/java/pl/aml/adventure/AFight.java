@@ -1,6 +1,6 @@
 package pl.aml.adventure;
 
-import pl.aml.opponent.OpponentType;
+import pl.aml.impl.opponent.OpponentType;
 
 import java.util.Arrays;
 

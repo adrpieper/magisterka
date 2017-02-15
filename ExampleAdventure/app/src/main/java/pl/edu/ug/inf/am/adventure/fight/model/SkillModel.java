@@ -2,7 +2,7 @@ package pl.edu.ug.inf.am.adventure.fight.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import pl.aml.character.SkillType;
+import pl.aml.impl.character.SkillType;
 import pl.edu.ug.inf.am.BR;
 
 public class SkillModel extends BaseObservable {

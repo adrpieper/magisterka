@@ -1,6 +1,6 @@
 package pl.aml.adventure;
 
-import pl.aml.opponent.OpponentType;
+import pl.aml.impl.opponent.OpponentType;
 
 public class AFightBuilder implements AStageBuilder{
     private OpponentType[] opponents;

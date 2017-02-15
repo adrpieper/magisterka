@@ -2,13 +2,10 @@ package pl.edu.ug.inf.am.adventure.fight.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import pl.aml.opponent.OpponentType;
-import pl.aml.character.SkillType;
-import pl.aml.opponent.OpponentType;
+import pl.aml.impl.opponent.OpponentType;
 import pl.edu.ug.inf.am.BR;
 import pl.edu.ug.inf.am.adventure.dagger.PerAdventureStage;
 import pl.edu.ug.inf.am.adventure.model.AdventurePlayerModel;
-import pl.edu.ug.inf.am.trip.skills.model.SkillsModel;
 
 import javax.inject.Inject;
 import java.util.ArrayList;

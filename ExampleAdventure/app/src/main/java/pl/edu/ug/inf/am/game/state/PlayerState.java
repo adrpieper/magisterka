@@ -1,8 +1,7 @@
 package pl.edu.ug.inf.am.game.state;
 
-import pl.aml.character.CharacterType;
-import pl.aml.character.SkillType;
-import pl.aml.character.Stats;
+import pl.aml.impl.character.CharacterType;
+import pl.aml.impl.character.SkillType;
 import pl.edu.ug.inf.am.game.dagger.PerGame;
 
 import java.util.EnumSet;
