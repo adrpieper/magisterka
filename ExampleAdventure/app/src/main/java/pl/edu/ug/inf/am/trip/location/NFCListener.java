@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.trip.location;
 
-import pl.aml.location.Place;
+import pl.aml.impl.location.Place;
 import pl.edu.ug.inf.am.nfc.NFC;
 import pl.edu.ug.inf.am.trip.controller.LocationManager;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;

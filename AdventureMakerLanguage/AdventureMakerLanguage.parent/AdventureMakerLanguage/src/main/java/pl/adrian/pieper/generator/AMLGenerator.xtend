@@ -23,6 +23,9 @@ import pl.adrian.pieper.generator.start.AdventuresOnStartGenerator
  */
 class AMLGenerator extends AbstractGenerator {
 
+    public static final String MAIN_PACKAGE = "pl.aml"
+    public static final String IMPL_PACKAGE = "pl.aml.gen.impl"
+
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 
         resource.allContents
@@ -31,12 +34,12 @@ class AMLGenerator extends AbstractGenerator {
         .forEach[name |  fsa.generateFile(name + '.txt', name)]
 
         Arrays.asList(
-            new MonsterClassGenerator("pl.aml"),
-            new LocationGenerator("pl.aml"),
-            new ItemGenerator("pl.aml"),
-            new SkillGenerator("pl.aml.character"),
-            new AdventureGenerator("pl.aml.adventure.definition"),
-            new AdventuresOnStartGenerator("pl.aml.start")
+            new OpponentTypeClassGenerator(IMPL_PACKAGE+".opponent"),
+            new PlaceGenerator(IMPL_PACKAGE+".location"),
+            new ItemGenerator(IMPL_PACKAGE+".item"),
+            new SkillGenerator(IMPL_PACKAGE+".character"),
+            new AdventureGenerator(IMPL_PACKAGE+".adventure"),
+            new AdventuresOnStartGenerator(IMPL_PACKAGE+"start")
         ).forEach[ doGenerate("java", resource, fsa, context) ]
     }
 }

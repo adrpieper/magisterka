@@ -1,4 +1,6 @@
-package pl.aml.location;
+package pl.aml.impl.location;
+
+import pl.aml.location.Area;
 
 public enum Place {
     FORREST()

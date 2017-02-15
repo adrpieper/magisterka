@@ -3,7 +3,7 @@ package pl.edu.ug.inf.am.trip.dagger;
 import dagger.Module;
 import dagger.Provides;
 import pl.aml.location.Area;
-import pl.aml.location.Place;
+import pl.aml.impl.location.Place;
 
 import java.util.ArrayList;
 import java.util.List;

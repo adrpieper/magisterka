@@ -1,6 +1,6 @@
 package pl.edu.ug.inf.am.game.state;
 
-import pl.aml.location.Place;
+import pl.aml.impl.location.Place;
 import pl.aml.adventure.AdventureInstance;
 
 import java.util.ArrayList;

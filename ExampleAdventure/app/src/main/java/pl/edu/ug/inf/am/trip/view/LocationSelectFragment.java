@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import pl.aml.location.Place;
+import pl.aml.impl.location.Place;
 import pl.edu.ug.inf.am.app.App;
 import pl.edu.ug.inf.am.trip.controller.LocationManager;
 import pl.edu.ug.inf.am.trip.dagger.TripComponent;

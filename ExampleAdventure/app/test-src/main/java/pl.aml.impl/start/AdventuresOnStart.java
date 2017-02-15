@@ -7,7 +7,7 @@ import java.util.List;
 import pl.aml.impl.adventure.ExampleDragon;
 import pl.aml.impl.adventure.ExampleTroll;
 
-import static pl.aml.location.Place.*;
+import static pl.aml.impl.location.Place.*;
 
 public class AdventuresOnStart {
 

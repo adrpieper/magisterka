@@ -1,7 +1,7 @@
 package pl.edu.ug.inf.am.trip.controller;
 
 import pl.aml.adventure.Adventure;
-import pl.aml.location.Place;
+import pl.aml.impl.location.Place;
 import pl.edu.ug.inf.am.game.logic.AdventurePicker;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;
 import pl.edu.ug.inf.am.game.dagger.GameSubComponentManager;

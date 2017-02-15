@@ -1,5 +1,7 @@
 package pl.aml.location;
 
+import pl.aml.impl.location.Place;
+
 public class Area {
     private double longitude;
     private double latitude;

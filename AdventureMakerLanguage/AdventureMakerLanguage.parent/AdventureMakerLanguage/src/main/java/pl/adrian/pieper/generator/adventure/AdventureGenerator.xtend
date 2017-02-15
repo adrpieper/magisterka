@@ -4,6 +4,7 @@ import pl.adrian.pieper.generator.MultiClassGenerator
 import pl.adrian.pieper.aML.Adventure
 import java.util.List
 import org.eclipse.emf.ecore.resource.Resource
+import pl.adrian.pieper.generator.AMLGenerator
 
 class AdventureGenerator extends MultiClassGenerator<Adventure>{
 
@@ -13,12 +14,12 @@ class AdventureGenerator extends MultiClassGenerator<Adventure>{
     new(String packageName){
         super(packageName, "public class")
         common.addInterfaces("AdventureDefinition")
-        common.addImports("pl.aml.adventure.*")
+        common.addImports(AMLGenerator.MAIN_PACKAGE + ".adventure.*")
         common.addStaticImports(
-                "pl.aml.location.Place.*",
-                "pl.aml.items.ItemType.*",
-                "pl.aml.opponent.OpponentType.*",
-                "pl.aml.adventure.AmlInternalDSL.*"
+                AMLGenerator.IMPL_PACKAGE+".location.Place.*",
+                AMLGenerator.IMPL_PACKAGE+".item.ItemType.*",
+                AMLGenerator.IMPL_PACKAGE+".opponent.OpponentType.*",
+                AMLGenerator.MAIN_PACKAGE+".adventure.AmlInternalDSL.*"
         )
 
     }

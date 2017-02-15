@@ -2,7 +2,7 @@ package pl.edu.ug.inf.am.trip.location;
 
 import android.location.Location;
 import pl.aml.location.Area;
-import pl.aml.location.Place;
+import pl.aml.impl.location.Place;
 import pl.edu.ug.inf.am.trip.dagger.PerTrip;
 
 import javax.inject.Inject;

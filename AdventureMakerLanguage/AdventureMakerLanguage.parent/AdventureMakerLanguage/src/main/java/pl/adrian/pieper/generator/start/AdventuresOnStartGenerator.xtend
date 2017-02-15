@@ -4,6 +4,7 @@ import pl.adrian.pieper.generator.SingleClassGenerator
 import org.eclipse.emf.ecore.resource.Resource
 import pl.adrian.pieper.aML.StartData
 import pl.adrian.pieper.generator.adventure.AdventureInstanceGenerator
+import pl.adrian.pieper.generator.AMLGenerator
 
 class AdventuresOnStartGenerator extends SingleClassGenerator{
     extension final AdventureInstanceGenerator adventureInstanceGenerator = new AdventureInstanceGenerator
@@ -11,10 +12,10 @@ class AdventuresOnStartGenerator extends SingleClassGenerator{
     new(String packageName){
         super("AdventuresOnStart", packageName, "public class")
         addImports(
-                "pl.aml.adventure.definition.*",
-                "pl.aml.adventure.AdventureInstance",
+                AMLGenerator.IMPL_PACKAGE + ".adventure.*",
+                AMLGenerator.MAIN_PACKAGE + ".adventure.*",
                 "java.util.List")
-        addStaticImports("pl.aml.location.Place.*")
+        addStaticImports(AMLGenerator.IMPL_PACKAGE+".location.Place.*")
     }
 
     override def generateBody(Resource resource){
