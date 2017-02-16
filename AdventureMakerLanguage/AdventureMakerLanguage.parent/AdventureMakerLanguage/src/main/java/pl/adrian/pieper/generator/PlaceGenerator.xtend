@@ -13,6 +13,7 @@ class PlaceGenerator extends SingleClassGenerator{
 
     new(String packageName){
         super("Place", packageName, "public enum")
+        addImports(AMLGenerator.MAIN_PACKAGE + ".location.*;")
     }
 
     override def generateBody(Resource resource){
@@ -25,22 +26,28 @@ class PlaceGenerator extends SingleClassGenerator{
             «ENDFOR»
             ;
 
-            private Tag tag;
+            private final Object loc;
 
-            private «className»(Tag tag) {
-                this.tag = tag;
+            Place(String tag){
+                this.loc = new Tag(tag);
             }
 
-            private static class Tag {
-                String tagCode;
+            Place(double longitude, double latitude, double distance) {
+                this.loc = new Area(longitude,latitude,distance, this);
+            }
 
-                Tag(String tagCode) {
-                    this.tagCode = tagCode;
+            public Tag getTag() {
+                if (loc instanceof Tag) {
+                    return (Tag) loc;
                 }
+                return null;
             }
 
-            private static Tag tag(String tagCode){
-                return new Tag(tagCode);
+            public Area getArea() {
+                if (loc instanceof Area) {
+                    return (Area) loc;
+                }
+                return null;
             }
         '''
 
@@ -56,11 +63,11 @@ class PlaceGenerator extends SingleClassGenerator{
     }
 
     private def generateTagLoc(TagLoc tagLoc){
-        return '''tag("«tagLoc.getTag()»")'''
+        return '''"«tagLoc.getTag()»"'''
     }
 
     private def generateGSPLoc(GPSLoc gpsLoc){
-        return "TODO"
+        return ''''''
     }
 
 }

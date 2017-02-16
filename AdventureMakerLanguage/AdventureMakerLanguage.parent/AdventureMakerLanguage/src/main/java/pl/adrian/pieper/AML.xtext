@@ -23,7 +23,7 @@ Place:
     GPSLoc | TagLoc;
 
 GPSLoc:
-    'in radius of' radius=INT 'meters from' '?'
+    'in radius of' distance=INT 'meters from' longitude=INT ',' latitude=INT
 ;
 
 TagLoc:
