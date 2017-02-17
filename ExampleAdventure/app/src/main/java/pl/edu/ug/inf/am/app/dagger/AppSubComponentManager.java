@@ -1,12 +1,13 @@
 package pl.edu.ug.inf.am.app.dagger;
 
 import pl.aml.character.CharacterType;
-import pl.aml.impl.character.ExampleCharacterTypeFactory;
+import pl.aml.character.CharacterTypesProvider;
 import pl.edu.ug.inf.am.common.ComponentsManager;
 import pl.edu.ug.inf.am.common.SubComponentManager;
 import pl.edu.ug.inf.am.game.dagger.GameComponent;
 import pl.edu.ug.inf.am.game.dagger.GameDataModule;
 import pl.edu.ug.inf.am.game.view.GameActivity;
+import pl.edu.ug.inf.am.menu.dagger.MenuComponent;
 import pl.edu.ug.inf.am.menu.state.GameStateDTO;
 
 import javax.inject.Inject;
@@ -15,21 +16,23 @@ import javax.inject.Inject;
 public class AppSubComponentManager extends SubComponentManager {
 
     private final AppComponent appComponent;
+    private final CharacterTypesProvider characterTypesProvider;
     private GameComponent gameComponent = null;
 
     @Inject
-    public AppSubComponentManager(ComponentsManager componentsManager, AppComponent appComponent) {
+    public AppSubComponentManager(ComponentsManager componentsManager, AppComponent appComponent, CharacterTypesProvider characterTypesProvider) {
         super(componentsManager);
         this.appComponent = appComponent;
+        this.characterTypesProvider = characterTypesProvider;
     }
 
-    public void prepareNewGame(){
-        CharacterType characterType = new ExampleCharacterTypeFactory().create();
-        GameStateDTO gameStateDTO = appComponent.menuComponent().newGameCreator().createNew(characterType);
-        startGame(gameStateDTO);
+    public void startFastGame(){
+        CharacterType characterType = characterTypesProvider.provideAll().get(0);
+        appComponent.menuComponent().newGameCreator().startNew(characterType);
+
     }
 
-    private void startGame(GameStateDTO gameStateDTO) {
+    public void startGame(GameStateDTO gameStateDTO) {
         GameDataModule gameDataModule = new GameDataModule(gameStateDTO);
         gameComponent = appComponent.gameComponent(gameDataModule);
         setSubcomponent(GameComponent.class, gameComponent);
@@ -38,5 +41,9 @@ public class AppSubComponentManager extends SubComponentManager {
     public void runGame(GameActivity gameActivity) {
         gameComponent.gameViewContainer().bindActivity(gameActivity);
         gameComponent.gameInitializer().init();
+    }
+
+    public void startMenu() {
+        setSubcomponent(MenuComponent.class, appComponent.menuComponent());
     }
 }

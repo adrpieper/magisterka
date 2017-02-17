@@ -35,4 +35,8 @@ public class SkillNode {
     public SkillType getParent() {
         return parent;
     }
+
+    void setParent(SkillType parent) {
+        this.parent = parent;
+    }
 }

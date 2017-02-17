@@ -1,7 +1,7 @@
 package pl.aml.impl.adventure;
 
 import pl.aml.adventure.AStage;
-import pl.aml.adventure.definition.AdventureDefinition;
+import pl.aml.adventure.AdventureDefinition;
 
 import static pl.aml.impl.location.Place.CASTLE;
 import static pl.aml.impl.opponent.OpponentType.TROLL;

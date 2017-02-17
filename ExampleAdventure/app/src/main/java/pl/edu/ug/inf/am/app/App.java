@@ -2,9 +2,7 @@ package pl.edu.ug.inf.am.app;
 
 import android.app.Activity;
 import android.app.Application;
-import android.nfc.NfcAdapter;
 import android.os.Bundle;
-import android.widget.Toast;
 import pl.edu.ug.inf.am.app.dagger.AppComponent;
 import pl.edu.ug.inf.am.app.dagger.AppModule;
 import pl.edu.ug.inf.am.app.dagger.DaggerAppComponent;
@@ -28,7 +26,7 @@ public class App extends Application {
         appComponent = DaggerAppComponent.builder().appModule(new AppModule(getApplicationContext())).build();
         componentsManager = appComponent.componentsManager();
         componentsManager.add(AppComponent.class, appComponent);
-        appComponent.subComponentsManager().prepareNewGame();
+        appComponent.subComponentsManager().startMenu();
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override

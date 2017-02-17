@@ -53,7 +53,7 @@ public class AdapterBuilder<ModelType> {
 
     public class ViewAdapterBuilder<ViewType extends View ,ModelType> {
 
-        private ModelBinder<? extends View, ModelType> binder;
+        private ModelBinder<ViewType, ModelType> binder;
         private ViewFactory<ViewType> viewFactory;
 
         public ViewAdapterBuilder<ViewType, ModelType> withBinder(ModelBinder<ViewType, ModelType> binder) {
