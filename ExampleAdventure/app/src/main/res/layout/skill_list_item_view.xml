@@ -8,7 +8,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background='@{skillModel.canUse ? @drawable/gold_gradient: @drawable/grey_gradient}'>
+            android:background='@{skillModel.canUse ? @drawable/gradient_backgroud_selected: @drawable/gradient_backgroud_default}'>
         <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"

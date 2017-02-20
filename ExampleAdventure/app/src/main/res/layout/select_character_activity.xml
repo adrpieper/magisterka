@@ -2,20 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              style="@style/ActivityLayout">
 
-    <include android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             layout="@layout/character_type_view" android:layout_gravity="center_horizontal"
-             android:id="@+id/selectedCharcterView"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_class"
+            android:id="@+id/textView5" android:layout_gravity="center_horizontal" style="@style/FramedTextView"/>
     <ListView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/selectCharaterListView" android:layout_gravity="center_horizontal" android:layout_weight="1"
             android:choiceMode="singleChoice"/>
+    <include android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             layout="@layout/character_type_view"
+             android:id="@+id/selectedCharcterView"/>
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/start_game"
-            android:id="@+id/startGameButton" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/startGameButton" android:layout_gravity="center_horizontal" style="@style/SpecialButton"/>
 </LinearLayout>

@@ -5,7 +5,7 @@
     </data>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="match_parent" android:padding="@dimen/small_margin"
-                  android:orientation="vertical" android:measureWithLargestChild="false">
+                  android:orientation="vertical" android:measureWithLargestChild="false" style="@style/FragmentLayout">
 
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         <ListView android:layout_width="match_parent"
                   android:layout_height="0dp"
                   android:id="@+id/slots_list_view"
-                  android:background="@drawable/default_frame_gradient"
+                  android:background="@drawable/gradient_backgroud_default"
                   android:layout_weight="1"/>
         <include
                 android:id="@+id/stats_view"
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:id="@+id/bag_items_list_view"
-                android:background="@drawable/default_frame_gradient"
+                android:background="@drawable/gradient_backgroud_default"
                 android:layout_weight="1"/>
     </LinearLayout>
 </layout>

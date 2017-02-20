@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
+        tools:context=".menu.view.SelectCharacterActivity">
     <data>
         <variable name="skills" type="pl.edu.ug.inf.am.trip.skills.model.SkillsModel"/>
     </data>
@@ -7,23 +8,29 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" android:padding="@dimen/small_margin" style="@style/FragmentLayout">
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/your_skills"
+                android:id="@+id/textView4"/>
+        <TextView
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text='@{"skill points : " + skills.skillsPoints}'
                 android:id="@+id/skills_points_text_view"/>
         <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp" android:layout_weight="1" android:id="@+id/tree_frame">
+                android:layout_height="0dp" android:layout_weight="1" android:id="@+id/tree_frame"
+                android:background="@drawable/gradient_backgroud_default">
         </FrameLayout>
         <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Reset"
                 android:id="@+id/reset_button" android:layout_gravity="center_horizontal"/>
         <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Accept"
                 android:id="@+id/accept_button" android:layout_gravity="center_horizontal"/>

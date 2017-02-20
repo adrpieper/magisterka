@@ -1,14 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:bind="http://schemas.android.com/apk/res-auto"
+        >
+    <data android:layout_width="match_parent" android:layout_height="match_parent">
         <variable name="type" type="pl.aml.character.CharacterType"/>
     </data>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/default_frame_gradient">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{type.name}'/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_on_start"/>
+        <include
+                android:id="@+id/stats_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/stats_view"
+                bind:stats='@{type.statsOnStart}'
+                android:layout_marginLeft="32dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stats_per_level"/>
+        <include
+                android:id="@+id/stats_per_level_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/stats_view"
+                bind:stats='@{type.statsPerLevel}'
+                android:layout_marginLeft="32dp"/>
+    </LinearLayout>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text='@{type.name}'
-            android:background="@drawable/default_frame_gradient"/>
 </layout>
 
 

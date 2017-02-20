@@ -5,35 +5,31 @@
         <variable name="player" type="pl.edu.ug.inf.am.game.state.PlayerState"/>
         <variable name="stats" type="pl.edu.ug.inf.am.trip.model.StatsModel"/>
     </data>
-    <RelativeLayout
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:background="@drawable/fbackground">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            style="@style/FragmentLayout">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text='@{"hp"+player.hp.value}'
-            android:id="@+id/hpTextView"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/preview"
+                android:id="@+id/previewTextView"
+                style="@style/FramedTextView"
+        />
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text='@{"level"+player.level}'
-            android:id="@+id/powerTextView"
-            android:layout_below="@+id/hpTextView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{"level : "+player.level+" ("+player.characterType.name+")"+"\nhp : "+player.hp.value+"/"+player.hp.maxValue+"\nmp : "+player.mp.value+"/"+player.mp.maxValue}'
+                android:id="@+id/powerTextView"
+                android:layout_gravity="left" android:gravity="start"/>
         <include
                 android:id="@+id/full_stats_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 layout="@layout/full_stats_view"
                 bind:stats='@{stats}'
-                android:layout_below="@+id/powerTextView"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"/>
-    </RelativeLayout>
+        />
+    </LinearLayout>
 </layout>

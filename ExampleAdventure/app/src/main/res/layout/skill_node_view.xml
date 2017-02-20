@@ -10,8 +10,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text='@{skillNode.skillType.name}'
-            android:background='@{skills.skills.contains(skillNode.skillType) ? @drawable/gold_gradient: @drawable/grey_gradient}'
-            android:padding="4dp" android:id="@+id/skill_name_view"/>
+            android:background='@{skills.skills.contains(skillNode.skillType) ? @drawable/gradient_backgroud_selected: @drawable/gradient_backgroud_disabled}'
+            android:id="@+id/skill_name_view"/>
 
 </layout>
 

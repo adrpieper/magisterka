@@ -5,10 +5,11 @@
     </data>
 
     <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text='@{slot.slotType.name + " : " + slot.itemType.name}'
-            android:id="@+id/skill_name_view" android:background="@drawable/default_frame_gradient"/>
+            android:id="@+id/skill_name_view"
+            style="@style/GradientTextView"/>
 </layout>
 
 

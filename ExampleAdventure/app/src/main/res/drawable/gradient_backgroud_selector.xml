@@ -4,5 +4,5 @@
         android:state_selected="true"/>
     <item android:drawable="@drawable/gradient_backgroud_pressed"
         android:state_pressed="true"/>
-    <item android:drawable="@drawable/gradient_backgroud" />
+    <item android:drawable="@drawable/gradient_backgroud_default" />
 </selector>

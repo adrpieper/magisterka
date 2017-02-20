@@ -4,4 +4,9 @@
     <string name="ok">OK</string>
     <string name="new_game">New Game</string>
     <string name="start_game">Start Game</string>
+    <string name="your_skills">Your Skills</string>
+    <string name="preview">Character Preview</string>
+    <string name="choose_class">Choose Character Class</string>
+    <string name="start_on_start">Stats on start:</string>
+    <string name="stats_per_level">Stats per level:</string>
 </resources>
