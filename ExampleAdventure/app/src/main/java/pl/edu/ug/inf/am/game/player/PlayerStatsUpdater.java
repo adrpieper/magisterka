@@ -30,18 +30,22 @@ public class PlayerStatsUpdater {
     public void updateBasicStats() {
         Stats stats = basicStatsGenerator.generate(playerState.getLevel(), playerState.getCharacterType());
         playerStatsState.setBasic(stats);
-        calculateHpAndMp();
+        updateHpAndMp();
     }
 
     public void updateBonusStats() {
         Stats stats = itemsStatsGenerator.fromItems(itemsState.getItemsOnSlot().values());
         playerStatsState.setBonus(stats);
-        calculateHpAndMp();
+        updateHpAndMp();
     }
 
-    public void calculateHpAndMp(){
+    public void updateHpAndMp(){
         Stats stats = playerStatsState.getFull();
-        playerState.getHp().setMaxValue(stats.getStrength()*100);
-        playerState.getMp().setMaxValue(stats.getIntelligence()*100);
+        final int hp = stats.getStrength() * 10+100;
+        playerState.getHp().setMaxValue(hp);
+        playerState.getHp().setValue(hp);
+        final int mpValue = stats.getIntelligence() * 10+100;
+        playerState.getMp().setMaxValue(mpValue);
+        playerState.getMp().setValue(mpValue);
     }
 }
