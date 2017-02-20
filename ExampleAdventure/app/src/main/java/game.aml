@@ -17,17 +17,30 @@ active skill SUPER_POISON_HIT {
     cooldown : 4 turns
 }
 
+character type Druid {
+    stats on start:
+     10 str
+     15 int
+     10 agi
+    stats per lvl:
+     + 2 str
+     + 3 int
+     + 1 agi
+    skills tree:
+    BASIC_HIT
+    POISON_HIT
+    SUPER_POISON_HIT
+}
+
 character type Knight {
     stats on start:
-     12 hp
-     11 mp
      14 str
      15 int
+     12 agi
     stats per lvl:
-    + 1 hp
-    + 2 mp
     + 4 str
     + 1 int
+    + 2 agi
     skills tree:
     BASIC_HIT
     POISON_HIT => {
@@ -84,6 +97,6 @@ location Forrest tagged as For100
 location Castle tagged as Castle
 
 adventure on start {
-    Question (3) at Forrest
+    Question at Forrest
     Question (4) at Forrest
 }

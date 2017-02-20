@@ -90,15 +90,13 @@ PassiveSkill:
 CharacterType:
     'character' 'type' name=ID '{'
         'stats on start:'
-            hp=INT 'hp'
-            mp=INT 'mp'
             str=INT 'str'
             int=INT 'int'
+            agi=INT 'agi'
         'stats per lvl:'
-            '+' hpPerLevel=INT 'hp'
-            '+' mpPerLevel=INT 'mp'
             '+' strPerLevel=INT 'str'
             '+' intPerLevel=INT 'int'
+            '+' agiPerLevel=INT 'agi'
         'skills tree:'
         (skillsTrees+=SkillsNode)*
     '}';
