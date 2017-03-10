@@ -49,4 +49,13 @@ public class AdventureInstance {
         result = 31 * result + frequency;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "AdventureInstance{" +
+                "place=" + place +
+                ", definition=" + definition +
+                ", frequency=" + frequency +
+                '}';
+    }
 }

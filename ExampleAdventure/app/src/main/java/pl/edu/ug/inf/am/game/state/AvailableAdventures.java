@@ -22,11 +22,45 @@ public class AvailableAdventures {
         return adventures.get(place);
     }
 
-    public void add(AdventureInstance instance) {
-        adventures.get(instance.getPlace()).add(instance);
+    private AdventureInstance findAndRemove(AdventureInstance instance) {
+        for (AdventureInstance existingInstance : getAdventures(instance.getPlace())) {
+            if (existingInstance.getDefinition() == instance.getDefinition()) {
+                getAdventures(instance.getPlace()).remove(existingInstance);
+                return existingInstance;
+            }
+        }
+        return null;
     }
 
-    public void remove(AdventureInstance adventureInstance) {
-        throw new RuntimeException("Not implemented yet");
+    public void add(AdventureInstance instance) {
+        AdventureInstance existingInstance = findAndRemove(instance);
+        if (existingInstance != null) {
+            AdventureInstance newInstance = new AdventureInstance(
+                    instance.getPlace(),
+                    instance.getDefinition(),
+                    instance.getFrequency() + existingInstance.getFrequency()
+            );
+            adventures.get(instance.getPlace()).add(newInstance);
+        }else {
+            adventures.get(instance.getPlace()).add(instance);
+        }
+
     }
+
+    public void remove(AdventureInstance instance) {
+        AdventureInstance existingInstance = findAndRemove(instance);
+        if (existingInstance != null) {
+            int newFrequency = existingInstance.getFrequency() - instance.getFrequency();
+            if (newFrequency > 0) {
+                AdventureInstance newInstance = new AdventureInstance(
+                        instance.getPlace(),
+                        instance.getDefinition(),
+                        newFrequency
+                );
+                adventures.get(instance.getPlace()).add(newInstance);
+            }
+        }
+    }
+
+
 }
