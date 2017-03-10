@@ -9,4 +9,7 @@
     <string name="choose_class">Choose Character Class</string>
     <string name="start_on_start">Stats on start:</string>
     <string name="stats_per_level">Stats per level:</string>
+    <string name="gps">GPS</string>
+    <string name="player_item">Player Item</string>
+    <string name="location">Places</string>
 </resources>

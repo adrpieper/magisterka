@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import pl.adrian.bindinge.AdapterBuilder;
 import pl.adrian.bindinge.Adapters;
 import pl.adrian.bindinge.ModelBinder;
 import pl.adrian.bindinge.ViewFactories;
@@ -59,15 +60,15 @@ public class SelectCharacterActivity extends Activity{
     private void bindListView() {
         final ListView listView = (ListView) findViewById(R.id.selectCharaterListView);
         final List<CharacterType> list = characterTypesProvider.provideAll();
+        select(list.get(0));
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedCharacterType = list.get(position);
-                characterTypeViewBinding.setType(selectedCharacterType);
-            }
-        });
         Adapters.createFor(listView, list)
+                .withListener(new AdapterBuilder.OnDataClickListener<CharacterType>() {
+                    @Override
+                    public void click(CharacterType characterType) {
+                        select(characterType);
+                    }
+                })
                 .withViewFactory(ViewFactories.textViewFactory())
                 .withBinder(new ModelBinder<TextView, CharacterType>() {
                     @Override
@@ -78,13 +79,17 @@ public class SelectCharacterActivity extends Activity{
                 .bind();
     }
 
+    private void select(CharacterType characterType) {
+        selectedCharacterType = characterType;
+        characterTypeViewBinding.setType(selectedCharacterType);
+    }
+
     private void startGame() {
         if (selectedCharacterType != null) {
             newGameCreator.startNew(selectedCharacterType);
             Intent intent = new Intent(this,GameActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
     }
-
-
 }
