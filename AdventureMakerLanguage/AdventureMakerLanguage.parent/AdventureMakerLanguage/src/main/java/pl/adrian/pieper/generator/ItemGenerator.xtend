@@ -25,7 +25,7 @@ class ItemGenerator extends SingleClassGenerator{
     }
 
     def generateBonuses(Item item){
-        return '''«FOR bonus : item.bonuses SEPARATOR ','»plus( «bonus.value», «bonus.type.getName»)«ENDFOR»'''
+        return '''«FOR bonus : item.bonuses », plus( «bonus.value», «bonus.type.getName»)«ENDFOR»'''
     }
 
     override def generateBody(Resource resource){
@@ -34,21 +34,15 @@ class ItemGenerator extends SingleClassGenerator{
 
         return '''
             «FOR item : items SEPARATOR ','»
-                «item.name.toUpperCase»(«item.slotType.getName», «item.generateBonuses»)
+                «item.name.toUpperCase»(«item.slotType.getName»«item.generateBonuses»)
             «ENDFOR»
             ;
-            private final int cost;
             private final SlotType slotType;
             private final Bonus[] bonuses;
 
-            ItemType(int cost, SlotType slotType, Bonus... bonuses) {
-                this.cost = cost;
+            ItemType(SlotType slotType, Bonus... bonuses) {
                 this.slotType = slotType;
                 this.bonuses = bonuses;
-            }
-
-            public int getCost() {
-                return cost;
             }
 
             public Bonus[] getBonuses() {

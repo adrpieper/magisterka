@@ -3,8 +3,8 @@ package pl.aml.impl.location;
 import pl.aml.location.*;
 
 public enum Place {
-    FORREST("Forrest")
-    ,CASTLE(18.269119, 54.600414, 1000)
+    CASTLE("Castle"),
+    FORREST(18.269119, 54.600414, 1000)
     ;
 
     private final Object loc;

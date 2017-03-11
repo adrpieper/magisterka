@@ -1,5 +1,6 @@
 package pl.edu.ug.inf.am.trip.location;
 
+import android.util.Log;
 import pl.aml.impl.location.Place;
 import pl.aml.location.Tag;
 import pl.edu.ug.inf.am.nfc.NFC;
@@ -26,10 +27,10 @@ public class NFCListener implements NFC.TagReaderListener {
         }
     }
 
-    public static Place forTag(String tag){
+    private Place forTag(String tag){
         Tag placeTag = new Tag(tag);
         for (Place place : Place.values()){
-            if (placeTag.equals(place)){
+            if (placeTag.equals(place.getTag())){
                 return place;
             }
         }

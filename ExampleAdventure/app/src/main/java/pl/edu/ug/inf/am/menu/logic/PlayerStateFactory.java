@@ -18,7 +18,6 @@ public class PlayerStateFactory {
     public PlayerState createNew(CharacterType characterType) {
 
         PlayerState playerState = new PlayerState(characterType);
-        playerState.setSkills(EnumSet.of(SkillType.BASIC_HIT));
         playerState.setSkillPoints(1);
         return playerState;
     }

@@ -104,6 +104,7 @@ public class NFC {
         for (NdefRecord ndefRecord : records) {
             if (ndefRecord.getTnf() == NdefRecord.TNF_WELL_KNOWN && Arrays.equals(ndefRecord.getType(), NdefRecord.RTD_TEXT)) {
                 try {
+                    Toast.makeText(context, readText(ndefRecord), Toast.LENGTH_SHORT).show();
                     if (listener != null) {
                         listener.onRead(readText(ndefRecord));
                     }
