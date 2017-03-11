@@ -31,11 +31,7 @@ TagLoc:
 ;
 
 Skill:
-    ActiveSkill | PassiveSkill
-;
-
-ActiveSkill:
-    'active' 'skill' name=ID '{'
+    'skill' name=ID '{'
         'effect' ':' effect=Effect
         'mp' ':' mpCost=INT
         ('cooldown' ':' cooldown=INT 'turns')?
@@ -83,10 +79,6 @@ DamageConstant:
     value = INT
 ;
 
-PassiveSkill:
-    'passive' 'skill' name=ID
-;
-
 CharacterType:
     'character' 'type' name=ID '{'
         'stats on start:'
@@ -114,7 +106,7 @@ Monster:
     '}';
 
 Loot:
-    'loot' ':' ('gold' goldMin=INT '-' goldMax=INT)? (items+=LootItem (',' items+=LootItem)*)
+    'loot' ':' (items+=LootItem (',' items+=LootItem)*)
 ;
 
 LootItem:
@@ -230,10 +222,9 @@ enum SlotType:
 Item:
     'item' name=ID '(' slotType=SlotType ')' '{'
     (bonuses+=Bonus)*
-    'value' (value=INT)
     '}';
 
 Bonus:
-    '+' value=INT 'to' type=StatsType
+    '+' value=INT  type=StatsType
 ;
 

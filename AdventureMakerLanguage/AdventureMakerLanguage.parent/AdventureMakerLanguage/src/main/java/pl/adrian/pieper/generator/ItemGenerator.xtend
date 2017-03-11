@@ -34,7 +34,7 @@ class ItemGenerator extends SingleClassGenerator{
 
         return '''
             «FOR item : items SEPARATOR ','»
-                «item.name.toUpperCase»(«item.value», «item.slotType.getName», «item.generateBonuses»)
+                «item.name.toUpperCase»(«item.slotType.getName», «item.generateBonuses»)
             «ENDFOR»
             ;
             private final int cost;

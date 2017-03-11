@@ -2,7 +2,7 @@ package pl.adrian.pieper.generator.skill
 
 import pl.adrian.pieper.generator.SingleClassGenerator
 import org.eclipse.emf.ecore.resource.Resource
-import pl.adrian.pieper.aML.ActiveSkill
+import pl.adrian.pieper.aML.Skill
 import pl.adrian.pieper.aML.DamageFormula
 import pl.adrian.pieper.aML.DamageValue
 import pl.adrian.pieper.aML.DamageRightSideExpression
@@ -22,7 +22,7 @@ class SkillGenerator extends SingleClassGenerator{
 
     override def generateBody(Resource resource){
 
-        var skills = resource.allContents.filter(typeof(ActiveSkill)).toIterable
+        var skills = resource.allContents.filter(typeof(Skill)).toIterable
 
         '''
             «FOR skill : skills SEPARATOR ','»

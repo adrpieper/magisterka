@@ -1,17 +1,17 @@
 
-active skill BASIC_HIT {
+skill BASIC_HIT {
     effect : take (3 * int) damage
     mp : 12
     cooldown : 1 turns
 }
 
-active skill POISON_HIT {
+skill POISON_HIT {
     effect : take (4 * int) damage
     mp : 20
     cooldown : 2 turns
 }
 
-active skill SUPER_POISON_HIT {
+skill SUPER_POISON_HIT {
     effect : take (12 * int + 13 * agi) damage
     mp : 60
     cooldown : 4 turns
@@ -49,27 +49,28 @@ character type Knight {
 }
 
 item IronHelmet (helmet) {
-    + 3 to str
-    value 120
+    + 3 str
 }
 
 item Sword (weapon) {
-    + 12 to str
-    value 100
+    + 12 str
 }
 
 monster Troll {
     power : 10
     hp : 20
     exp : 100
-    loot : gold 12 - 13 Sword 12 %, IronHelmet 30 %
+    loot : Sword 12%, IronHelmet 30%
 }
 
 monster Dragon {
     power : 10
     hp : 25
     exp : 100
-    loot : gold 12 - 13 Sword 12 %
+    loot : Sword 50%
+}
+adventure OneTroll starts from {
+    Fight with Troll
 }
 
 adventure Question starts from {
@@ -80,6 +81,7 @@ adventure Question starts from {
                 Fight with Troll, Troll
                 If win {
                     {add Question (3) at Forrest}
+                    {remove OneTroll at Forrest}
                     {Get Sword}
                     {Show "Elo"}
                 }
