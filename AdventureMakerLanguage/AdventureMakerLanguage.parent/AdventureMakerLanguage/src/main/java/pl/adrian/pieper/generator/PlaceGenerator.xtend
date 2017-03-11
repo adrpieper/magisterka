@@ -5,6 +5,7 @@ import pl.adrian.pieper.aML.Location
 import pl.adrian.pieper.aML.Place
 import pl.adrian.pieper.aML.TagLoc
 import pl.adrian.pieper.aML.GPSLoc
+import pl.adrian.pieper.aML.Double
 
 /**
  * Created by Adi on 2016-09-18.
@@ -32,8 +33,8 @@ class PlaceGenerator extends SingleClassGenerator{
                 this.loc = new Tag(tag);
             }
 
-            Place(double longitude, double latitude, double distance) {
-                this.loc = new Area(longitude,latitude,distance, this);
+            Place(double latitude, double longitude, double distance) {
+                this.loc = new Area(latitude,longitude,distance, this);
             }
 
             public Tag getTag() {
@@ -67,7 +68,14 @@ class PlaceGenerator extends SingleClassGenerator{
     }
 
     private def generateGSPLoc(GPSLoc gpsLoc){
-        return ''''''
+        return '''«gpsLoc.latitude.generate»,«gpsLoc.longitude.generate»,«gpsLoc.distance.generate»'''
     }
 
+    private def generate(Double d) {
+        var value = Integer.toString(d.value);
+        if (d.hasFraction) {
+            value += "." + d.fraction;
+        }
+        return value;
+    }
 }

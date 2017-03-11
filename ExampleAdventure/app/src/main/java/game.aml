@@ -95,7 +95,7 @@ adventure Question starts from {
     }
 }
 
-location Forrest tagged as For100
+location Forrest in radius of 100 meters from 54.592390 , 18.261659
 location Castle tagged as Castle
 
 adventure on start {

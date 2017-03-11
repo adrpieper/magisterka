@@ -2,6 +2,7 @@ grammar pl.adrian.pieper.AML with org.eclipse.xtext.common.Terminals
 
 generate aML "http://www.adrian.pl/pieper/AML"
 
+
 Model:
     elements+=Element* &
     startData=StartData &
@@ -23,7 +24,10 @@ Place:
     GPSLoc | TagLoc;
 
 GPSLoc:
-    'in radius of' distance=INT 'meters from' longitude=INT ',' latitude=INT
+    'in radius of' distance=Double 'meters from' latitude=Double ',' longitude=Double
+;
+Double:
+    value=INT (hasFraction?=('.') fraction=INT)?
 ;
 
 TagLoc:
