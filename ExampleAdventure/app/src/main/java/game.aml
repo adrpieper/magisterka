@@ -80,15 +80,15 @@ adventure Question starts from {
             Answer "Yes" to {
                 Fight with Troll, Troll
                 If win {
-                    {add Question (3) at Forrest}
-                    {remove OneTroll at Forrest}
+                    {Add Question (3) at Forrest}
+                    {Remove OneTroll at Forrest}
                     {Get Sword}
                     {Show "Elo"}
                 }
                 If lost {Fight with Dragon}
             }
             Answer "Not" to {
-                If you have not (less agi than 2 and more str than 4){
+                If you have no (less agi than 2 and more str than 4){
                     Fight with Dragon
                 }
         }

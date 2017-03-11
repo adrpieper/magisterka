@@ -143,10 +143,10 @@ MultiStage:
     (stages+=Stage)+
 ;
 RemoveAdventureInstanceStage:
-    'remove' instance = AdventureInstance
+    'Remove' instance = AdventureInstance
 ;
 AddAdventureInstanceStage:
-    'add' instance = AdventureInstance
+    'Add' instance = AdventureInstance
 ;
 
 AdventureInstance:
@@ -172,7 +172,7 @@ PlayerLogicBrackets:
 ;
 
 NegativePlayerLogicValue:
-    'not' value=PlayerLogicValue
+    'no' value=PlayerLogicValue
 ;
 
 PlayerLogicValueExpression:
