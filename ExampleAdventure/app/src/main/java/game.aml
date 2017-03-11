@@ -1,104 +1,139 @@
 
-skill BASIC_HIT {
+skill BasicKnowledge {
     effect : take (3 * int) damage
     mp : 12
     cooldown : 1 turns
 }
 
-skill POISON_HIT {
+skill BrilliantIdea {
     effect : take (4 * int) damage
     mp : 20
     cooldown : 2 turns
 }
 
-skill SUPER_POISON_HIT {
+skill Focusing {
     effect : take (12 * int + 13 * agi) damage
     mp : 60
     cooldown : 4 turns
 }
 
-character type Druid {
-    stats on start:
-     10 str
-     15 int
-     10 agi
-    stats per lvl:
-     + 2 str
-     + 3 int
-     + 1 agi
-    skills tree:
-    BASIC_HIT
-    POISON_HIT
-    SUPER_POISON_HIT
+skill AwesomeFocusing {
+    effect : take (12 * int + 13 * agi) damage
+    mp : 60
+    cooldown : 4 turns
 }
 
-character type Knight {
+character type GoodStudent {
     stats on start:
-     14 str
-     15 int
-     12 agi
+     10 str
+     20 int
+     10 agi
     stats per lvl:
-    + 4 str
+     + 1 str
+     + 2 int
+     + 1 agi
+    skills tree:
+    BasicKnowledge => {
+        BrilliantIdea
+        Focusing => {AwesomeFocusing}
+    }
+}
+
+skill PaperCheatsheet {
+    effect : take 2*agi damage
+    mp : 10
+}
+
+skill Smartphone {
+    effect : take 2*agi damage
+    mp : 10
+}
+
+skill FriendHelp {
+    effect : take 2*agi damage
+    mp : 10
+}
+
+skill Luck {
+    effect : take 2*agi damage
+    mp : 10
+}
+
+character type Cheater {
+    stats on start:
+     10 str
+     10 int
+     20 agi
+    stats per lvl:
+    + 1 str
     + 1 int
     + 2 agi
     skills tree:
-    BASIC_HIT
-    POISON_HIT => {
-        SUPER_POISON_HIT
+    Luck => {
+        PaperCheatsheet
+        FriendHelp
+        Smartphone
     }
 }
 
-item IronHelmet (helmet) {
-    + 3 str
+item FunnyHat (helmet) {
 }
 
-item Sword (weapon) {
+item GoodPen (weapon) {
     + 12 str
 }
 
-monster Troll {
+item GoodGrade (armor) {
+    + 12 str
+}
+
+item Diploma (armor) {
+    + 10 agi
+    + 10 str
+    + 10 int
+}
+
+item WarmGloves (gloves) {
+    + 1 str
+}
+
+item BrandNewSmartPhone (weapon) {
+    + 5 int
+}
+
+opponent SimpleExam {
     power : 10
     hp : 20
     exp : 100
-    loot : Sword 12%, IronHelmet 30%
+    loot : GoodGrade 50%, FunnyHat 1 %, BrandNewSmartPhone 10%, GoodPen 20%, WarmGloves 10%
 }
 
-monster Dragon {
-    power : 10
-    hp : 25
-    exp : 100
-    loot : Sword 50%
-}
-adventure OneTroll starts from {
-    Fight with Troll
+opponent MasterDegreeExam{
+    power : 50
+    hp : 100
+    exp : 10000
+    loot : Diploma 100%
 }
 
-adventure Question starts from {
-    If you have more int than 3
-        {
-            Ask "If cos"
-            Answer "Yes" to {
-                Fight with Troll, Troll
-                If win {
-                    {Add Question (3) at Forrest}
-                    {Remove OneTroll at Forrest}
-                    {Get Sword}
-                    {Show "Elo"}
-                }
-                If lost {Fight with Dragon}
+adventure ExamAdventure starts from {
+    Ask "Have you passed all exams?"
+    Answer "Yes" to {
+        If you have more int than 30 or more agi than 30 {
+            Fight with MasterDegreeExam
+            If win {
+                {Show "Great. You just have gradueted your Master Degree"}
+                {Remove ExamAdventure at ClassRoom}
             }
-            Answer "Not" to {
-                If you have no (less agi than 2 and more str than 4){
-                    Fight with Dragon
-                }
+        }
+        else {
+            Show "I don't think so"
         }
     }
+    Answer "No" to { Fight with SimpleExam }
 }
 
-location Forrest in radius of 100 meters from 54.592390 , 18.261659
-location Castle tagged as Castle
+location ClassRoom tagged as ClassRoom
 
 adventure on start {
-    Question at Forrest
-    Question (4) at Forrest
+    ExamAdventure at ClassRoom
 }
