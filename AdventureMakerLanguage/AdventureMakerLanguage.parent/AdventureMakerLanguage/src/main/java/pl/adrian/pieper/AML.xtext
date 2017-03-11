@@ -15,7 +15,7 @@ StartData:
 ;
 
 Element:
-    Location | CharacterType | Monster | Adventure | Item | Skill;
+    Location | CharacterType | Opponent | Adventure | Item | Skill;
 
 Location:
     'location' name = ID place = Place;
@@ -103,8 +103,8 @@ SkillsNode:
 ;
 
 
-Monster:
-    'monster' name=ID '{'
+Opponent:
+    'opponent' name=ID '{'
     stats=Stats
     (loot=Loot)?
     '}';
@@ -211,7 +211,7 @@ GetItemStage:
 ;
 
 FightStage:
-    'Fight with' (oponents+=[Monster] (',' oponents+=[Monster])*)?
+    'Fight with' (oponents+=[Opponent] (',' oponents+=[Opponent])*)?
     ('If win' onWin=Stage)?
     ('If lost' onLost=Stage)?
 ;

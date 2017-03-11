@@ -20,6 +20,13 @@ class SkillGenerator extends SingleClassGenerator{
         )
     }
 
+    private def generateCooldown(int i){
+        if (i<=0){
+            return "1";
+        }
+        return Integer.toString(i);
+    }
+
     override def generateBody(Resource resource){
 
         var skills = resource.allContents.filter(typeof(Skill)).toIterable
@@ -31,7 +38,7 @@ class SkillGenerator extends SingleClassGenerator{
                     protected int calculateDamage(FightValues fightValues) {
                         return «generate(skill.effect.damageFormula)»;
                     }
-                }, 2, 2)
+                }, «skill.mpCost», «skill.cooldown.generateCooldown»)
             «ENDFOR»
             ;
 

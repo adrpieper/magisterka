@@ -5,7 +5,6 @@ import pl.adrian.pieper.aML.Location
 import pl.adrian.pieper.aML.Place
 import pl.adrian.pieper.aML.TagLoc
 import pl.adrian.pieper.aML.GPSLoc
-import pl.adrian.pieper.aML.Monster
 import pl.adrian.pieper.generator.builder.ClassBodyBuilder
 import static pl.adrian.pieper.generator.builder.BuilderUtils.*;
 import pl.adrian.pieper.generator.builder.Field

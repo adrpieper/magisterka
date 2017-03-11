@@ -5,7 +5,7 @@ import pl.adrian.pieper.aML.Location
 import pl.adrian.pieper.aML.Place
 import pl.adrian.pieper.aML.TagLoc
 import pl.adrian.pieper.aML.GPSLoc
-import pl.adrian.pieper.aML.Monster
+import pl.adrian.pieper.aML.Opponent
 import pl.adrian.pieper.generator.builder.ClassBodyBuilder
 import static pl.adrian.pieper.generator.builder.BuilderUtils.*;
 import pl.adrian.pieper.generator.builder.Field
@@ -41,7 +41,7 @@ class OpponentTypeClassGenerator extends SingleClassGenerator{
 
     override def generateBody(Resource resource){
 
-        var opponents = resource.allContents.filter(typeof(Monster)).toIterable
+        var opponents = resource.allContents.filter(typeof(Opponent)).toIterable
 
 
         return '''

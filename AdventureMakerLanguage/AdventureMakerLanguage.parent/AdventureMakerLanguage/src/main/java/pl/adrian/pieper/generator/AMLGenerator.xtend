@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
-import pl.adrian.pieper.aML.Monster
 import pl.adrian.pieper.aML.Item
 import sun.security.x509.KeyIdentifier
 import java.util.Arrays
