@@ -2,20 +2,23 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
     </data>
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/message_text_view" />
+                android:id="@+id/message_text_view" style="@style/MessageTextView" android:layout_weight="1"
+                android:layout_marginLeft="@dimen/small_margin" android:layout_marginRight="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin" android:layout_centerInParent="true"/>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OK"
-            android:id="@+id/ok_button"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ok"
+                android:id="@+id/ok_button" style="@style/SpecialButton" android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 </layout>
 
 

@@ -3,28 +3,24 @@
     <data>
         <variable name="result" type="pl.edu.ug.inf.am.adventure.fight.state.ResultDTO"/>
     </data>
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{"Battle " +result.result.name()}'
-                android:id="@+id/result_text_view" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text='@{"exp: " +result.gainedExp}'
-            android:id="@+id/gained_exp_text_view" />
+                android:text='@{"Battle " +result.result.name() + "\nexp: " +result.gainedExp}'
+                android:id="@+id/result_text_view" style="@style/MessageTextView"
+                android:layout_centerInParent="true"/>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OK"
-            android:id="@+id/ok_button"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ok"
+                android:id="@+id/ok_button" style="@style/SpecialButton" android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true" android:layout_alignParentEnd="true"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 </layout>
 
 

@@ -13,28 +13,32 @@
                 android:text='@{"exp: " + result.gainedExp}'
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/gained_exp_text_view"
-                android:gravity="center" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+                android:gravity="center" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
+                style="@style/MessageTextView"/>
 
         <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/items_list_view" android:background="@drawable/default_frame_gradient"
+                android:id="@+id/items_list_view"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_above="@+id/accept_button" android:layout_below="@+id/collected_items_text_view"/>
+                android:layout_above="@+id/accept_button" android:layout_below="@+id/collected_items_text_view"
+                android:background="@drawable/gradient_backgroud_default"/>
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/collected_items"
+                android:id="@+id/collected_items_text_view"
+                android:layout_below="@+id/gained_exp_text_view" android:layout_alignRight="@+id/accept_button"
+                android:layout_alignEnd="@+id/accept_button" android:layout_alignLeft="@+id/accept_button"
+                android:layout_alignStart="@+id/accept_button" style="@style/FramedTextView"/>
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/accept_button" android:layout_gravity="center_horizontal"
                 android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
-                android:text="@string/ok"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Collected Items"
-                android:id="@+id/collected_items_text_view"
-                android:layout_below="@+id/gained_exp_text_view" android:layout_centerHorizontal="true"/>
+                android:text="@string/ok" style="@style/SpecialButton"/>
 
     </RelativeLayout>
 </layout>

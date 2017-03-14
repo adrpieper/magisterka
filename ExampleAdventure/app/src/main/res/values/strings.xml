@@ -12,4 +12,6 @@
     <string name="gps">GPS</string>
     <string name="player_item">Player Item</string>
     <string name="location">Places</string>
+    <string name="collected_items">Collected Items</string>
+    <string name="samle_text">Example message</string>
 </resources>

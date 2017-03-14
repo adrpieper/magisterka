@@ -12,14 +12,16 @@
                 android:layout_height="wrap_content"
                 android:text='@{"level achieved: " + result.levelAchieved}'
                 android:layout_gravity="center_horizontal"
-                android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
+                android:layout_alignParentTop="false"
+                style="@style/MessageTextView"
+                android:layout_centerInParent="true"/>
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ok"
+                android:text="@string/ok"
                 android:id="@+id/accept_button" android:layout_gravity="center_horizontal"
                 android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/small_margin"/>
+                android:layout_margin="@dimen/small_margin" style="@style/SpecialButton"/>
 
     </RelativeLayout>
 </layout>
