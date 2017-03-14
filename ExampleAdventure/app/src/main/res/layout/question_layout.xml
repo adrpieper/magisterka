@@ -14,8 +14,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/question_text_view" android:layout_gravity="center"
-                    style="@style/MessageFrame"
-                    android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+                    style="@style/MessageFrame"/>
         </FrameLayout>
         <ListView
                 android:layout_width="match_parent"
