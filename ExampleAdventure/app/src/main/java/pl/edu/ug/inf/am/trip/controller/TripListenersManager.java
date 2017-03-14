@@ -9,7 +9,7 @@ import pl.edu.ug.inf.am.trip.location.NFCListener;
 import javax.inject.Inject;
 
 @PerTrip
-public class TripManager {
+public class TripListenersManager {
 
     private final GPS gps;
     private final GPS.GPSListener gpsListener;
@@ -17,19 +17,19 @@ public class TripManager {
     private final NFC.TagReaderListener nfcListener;
 
     @Inject
-    public TripManager(GPS gps, GPSListenerImpl gpsListener, NFC nfc, NFCListener nfcListener) {
+    public TripListenersManager(GPS gps, GPS.GPSListener gpsListener, NFC nfc, NFC.TagReaderListener nfcListener) {
         this.gps = gps;
         this.gpsListener = gpsListener;
         this.nfc = nfc;
         this.nfcListener = nfcListener;
     }
 
-    public void startTrip() {
+    public void register() {
         gps.setListener(gpsListener);
         nfc.setListener(nfcListener);
     }
 
-    public void endTrip() {
+    public void unregister() {
         gps.setListener(null);
         nfc.setListener(null);
     }

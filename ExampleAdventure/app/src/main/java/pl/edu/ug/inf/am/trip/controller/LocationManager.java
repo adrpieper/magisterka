@@ -20,12 +20,8 @@ public class LocationManager {
         this.gameStagesManager = gameStagesManager;
     }
 
-
     public void enterInto(Place place) {
-
         Adventure adventure = adventurePicker.pick(place);
         gameStagesManager.startAdventure(adventure);
-
-
     }
 }

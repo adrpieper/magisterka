@@ -12,12 +12,10 @@ import javax.inject.Inject;
 public class SkillsController {
 
     private final SkillsModel skillsModel;
-    private final TripNavigator tripNavigator;
 
     @Inject
-    public SkillsController(SkillsModel skillsModel, TripNavigator tripNavigator) {
+    public SkillsController(SkillsModel skillsModel) {
         this.skillsModel = skillsModel;
-        this.tripNavigator = tripNavigator;
     }
 
     public boolean canUnlock(SkillNode skillNode) {
@@ -44,6 +42,5 @@ public class SkillsController {
 
     public void accept() {
         skillsModel.accept();
-        tripNavigator.showTrip();
     }
 }

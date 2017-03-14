@@ -19,7 +19,6 @@ public class TripNavigator {
 
     public void showTrip() {
         showSkill();
-        //gameView.showFragment(new TripPagerFragment());
     }
 
     public void showSkill() {

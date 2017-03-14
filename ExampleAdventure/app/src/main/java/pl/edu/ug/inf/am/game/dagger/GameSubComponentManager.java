@@ -23,19 +23,19 @@ public class GameSubComponentManager extends SubComponentManager {
     public void startSkills() {
         TripComponent component = gameComponent.tripComponent();
         setSubcomponent(TripComponent.class, component);
-        component.tripManager().startTrip();
+        component.tripListenersManager().register();
         component.tripNavigator().showSkill();
     }
 
     public void startTrip() {
         TripComponent component = gameComponent.tripComponent();
         setSubcomponent(TripComponent.class, component);
-        component.tripManager().startTrip();
+        component.tripListenersManager().unregister();
         component.tripNavigator().showTrip();
     }
 
     public void startAdventure(Adventure adventure) {
-        App.getComponent(TripComponent.class).tripManager().endTrip();
+        App.getComponent(TripComponent.class).tripListenersManager().unregister();
         AdventureComponent adventureComponent = gameComponent.adventureComponent();
         setSubcomponent(AdventureComponent.class, adventureComponent);
         adventure.getFirstStage().run(adventureComponent.adventureEngine());
