@@ -38,7 +38,6 @@ Android, DSL, Xtext, Location-Based Game, Framework, Engine
   - Wymagania 
     - Funkcjonalne 
     - Niefunkcjonalne
-  - Diagram klas
   - Projekt interfejsu użytkownika
 3. Implementacja
   - DSL
