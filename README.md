@@ -225,6 +225,25 @@ Pierwsze pięć elementów jest typowych dla aplikacji android, natomiasto pozos
 Jest to bardzo rozbudowana, ale i najbardziej tradycyjna i oczywista część aplikacji.
 Ten moduł jest odpowiedzialny za kluczowe elementu aplikacji. To tutaj zdefiniowany jest wygląd oraz zachowanie aplikacji. Moduł korzysta Kodu implementujący zasady gry. W jego kodzie znajduje została umieszczona logika związana z systemem Android taka jak  komunikacja z czujnikami NFC i GSP lub obsługa interfejsu użytkownika. Dodatkowo kod opdowiada za elementy stałe dla każdej gry takie jak mechanizm walki i rozwoju postaci.
  
+Kod został podzielony na warstwy i komponenty, co zostało odwierciedlone w strukturze pakietów. 
+Komponenty to zbiory klas realizujące wspólne zadanie. Ich struktura jest hierarchiczna tzn. w skład konkretnego komponentu wchodzą kolejne odpowiedzialne za zadania bardziej sprecyzowane. Kompletną strukturę komponentów w aplikacji przedstawie poniższy drzewo.
+```
+app
+└───game
+│   │   adventure
+│   │   └───fight
+│   │   └───fight
+│   │   trip
+└───menu
+```
+
+Każdy z taki komponent został zrealizowany w postaci osobnego pakietu o podobnej strukturze. W nich skład wchodzi po kilka pakietów-warstw zawierających bezpośrednio kod realizujacy te warsty. Dodatkowo pakiety, nie będące liśmi w drzewie, zawiera pakiety-komponenty znajdującymi się niżej w hierarchi.
+
+W kodzie wydzieliłem następujące warstwy i odpowiadające im nazwy pakietów:
+- Widok (view)
+- Contoler (controller)
+- Logika (logic)
+- Komponent (dagger)
 
 #### Wewnętrzy język AML
 Moduł ten jest odpowiedzialny za dostarczenie wygodnego API do opisu zasad gry. Zarówno dostarczone API, jak i implementacja modułu została zrealizowana w języku JAVA. Dlatego też nazywam go wewnętrzym językiem domenowym.
