@@ -195,7 +195,7 @@ Istotnym elementem implementacji frameworku są języki domenowe. W moim projekt
   
 ### Xtext DSL
 Projekt powstał w celu implementacji języka Andventure Maker Language. Opis tego języka znajduje się w rozdziale korzystaniu z frameworka.
-Wykorzystanie technologii Xtext [] wymaga implementacji dwóch elementów gramatyki i generatorów kodu. 
+Wykorzystanie technologii Xtext [] wymaga implementacji dwóch elementów: gramatyki i generatorów kodu. 
 
 #### Definicja Gramatyki
 Gramatyka języka została umieszczona w pojedyńczym pliku -nazwa pliki-. Głównym celem stworzenia gramatyki jest opis modelu syntaktycznego i semantycznego tworzonego języka. Innymi słowy musimy zdefiniować jaki tekst będzie należał do języka oraz jak zmapować dany tekst na jego reprezentacje w pamięci komputera [dokumentacja]. Xtext na podstawie tego pliku wygeneruje między innymi parser, który sprawdzi, czy dany tekst poprawnym programem oraz zwróci jego reprezentacje w postaci drzewa obiektów.
@@ -203,6 +203,36 @@ Gramatyka języka została umieszczona w pojedyńczym pliku -nazwa pliki-. Głó
 Generator języka odpowiedzialny jest za wygenerowanie kodu (w tym przypadku kodu Java) na podstawie modelu semantycznego zwróconego przez parser w postacie drzewa obiektów. Generator został napisany w języku Xtend i zkłada się z głównej klasy implementującej metodę -nazwa metody- oraz klas pomocniczych utworzonym w celu dekompozycji problemu na mniejsze części zgodnie z zasadą pojedynczej odpowiedzialności [źródło].
 
 ### Aplikacja Android
+Ten projekt to standardowa aplikacja androidowa wykorzystująca AndroidSDK rozbudowana o język AML i wykorzystująca kilka dodatkowych narzędzi:
+-Dagger 2
+-JUnit
+-Mockito
+
+Architektóra projektu jest dość rozbudowana i zosła podzielona na kilka części:
+- Kod aplikacji
+- Zasoby
+- Plik manifestu
+- Pliki grandle
+- Testy
+- Wewnętrzy język AML
+- Plik game.aml
+- Wygenerowany Kod implementujący zasady gry
+- Przykładowy Kod implementujący zasady gry
+
+Pierwsze pięć elementów jest typowych dla aplikacji android, natomiasto pozostałe wynikają z zastosowania języka AML.
+
+#### Kod aplikacji
+Jest to bardzo rozbudowana, ale i najbardziej tradycyjna i oczywista część aplikacji.
+Ten moduł jest odpowiedzialny za kluczowe elementu aplikacji. To tutaj zdefiniowany jest wygląd oraz zachowanie aplikacji. Moduł korzysta Kodu implementujący zasady gry. W jego kodzie znajduje została umieszczona logika związana z systemem Android taka jak  komunikacja z czujnikami NFC i GSP lub obsługa interfejsu użytkownika. Dodatkowo kod opdowiada za elementy stałe dla każdej gry takie jak mechanizm walki i rozwoju postaci.
+ 
+
+#### Wewnętrzy język AML
+Moduł ten jest odpowiedzialny za dostarczenie wygodnego API do opisu zasad gry. Zarówno dostarczone API, jak i implementacja modułu została zrealizowana w języku JAVA. Dlatego też nazywam go wewnętrzym językiem domenowym.
+W skład modułu wchodzą wszystkie klasy pakietu "".
+Istotną częścią tego modułu są klasy pozwalające na wygodne budowanie obiektów (tzw. Buildery) oraz metody statyczne tworzące instancje tych klas. Dzięki ich zastowowaniu możemy tworzyć kod przyjazny dla programisty. (Może przykład z i bez buiderów).
+Kod znajdujący się w tym module stanowi też interfejs do komunikacji pomiędzy Kodem Aplikacji, a Kodem implementujący zasady gry.
+
+
 - Plik aml
 
 - Podział na moduły itp...
