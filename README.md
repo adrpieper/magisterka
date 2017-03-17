@@ -64,8 +64,7 @@ Android, DSL, Xtext, Location-Based Game, Framework, Engine
   - Konfiguracja środowiska 
   - Adventure Maker Language
   - Przykładowa gra
-7. Wkład własny
-8. Bibliografia
+6. Bibliografia
 
 ### Bibliografia
 Ian F. Darwin, 2013. Android Receptury. Wydawnictwo: Helion.
