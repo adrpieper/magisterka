@@ -235,13 +235,24 @@ app
 └───menu
 ```
 
-Każdy z taki komponent został zrealizowany w postaci osobnego pakietu o podobnej strukturze. W nich skład wchodzi po kilka pakietów-warstw zawierających bezpośrednio kod realizujacy te warsty. Dodatkowo pakiety, nie będące liśmi w drzewie, zawiera pakiety-komponenty znajdującymi się niżej w hierarchi.
+Wszystkie komponenty zostały zrealizowany w postaci osobnych pakietów o podobnej strukturze. W nich skład wchodzi po kilka pakietów-warstw zawierających bezpośrednio kod realizujacy te funkcjonalność tych warst. Dodatkowo pakiety, nie będące liśmi w drzewie, zawiera pakiety-komponenty znajdującymi się niżej w hierarchi.
 
 W kodzie wydzieliłem następujące warstwy i odpowiadające im nazwy pakietów:
 - Widok (view)
 - Contoler (controller)
+- Model (model,state)
 - Logika (logic)
 - Komponent (dagger)
+
+Widok to wastwa odpowiedzialna za interfejs użytkownika. W jej skład wchodzą przede wszystkim klasy dziedziczące po Activity, Fragment oraz View. W większości przypadków zadaniem klasy jest połączenie danych z modelem za pomocą dostępnego od niedawna w Adroidzie mechanizmu Data Bindingu (TODO można wyjaśnić co to). Model danych pobierany jest z warstwy kontrolera.
+
+Warstwa kontrolera odpowiada przede wszystkim za obsługę zdarzeń przychodzących z interfejsu użytkownika, oraz dostarczanie modelu danych dla widoku. Zajmuje się też modyfikacją modelu danych. W prostych przypadkach modyfikuje ją bezpośrednio, a w bardziej zaawansowanych deleguje to zadanie do warstwy logiki. Inną ważną odpowiedzialnością tej wartswy jest przełączanie pomiędzy widokami. 
+
+Model odpowiada za przechowywanie danych w uporządkowany sposób. Hermetyzuje dane udostępniając zestaw metod dostępowych (gettery i settery). Ta warstwa została podzielona na dwie podtypy: model i stan. Modelem nazywam wszystkie klasy, których stan jest obserwowany przez widok (wzorzec obserwator). Stanem (State) nazywam klasy typu POJO, których stan nie może być obserwowany, a ich jedynym zadaniem jest przechowywanie stanu aplikacji. 
+
+Logika to warstwa odpowiadająca za wszelkie operacje wykonywane na danych, które nie powinny znaleść się w warstwie kontrolera ze względu na zbyt duże skomplikowanie, bądź wagę kodu. Wydzielenie tego kodu do osobnych klas w połączeniu z testowaniem jednostkowym pozwala stworzyć kod, co do którego mamy pewność, że jego kluczowe aspekty działają prawidłowo. Usunięcie tego kodu z kontrolera jest zgodne z zasadą pojedynczej odpowiedzialności (TODO jakiś skrót lub odniesienie się) i pozwala na jego reużywalność w kilku miejscach programu. 
+
+Pakiet "dagger" to miejsce w którym integrowane są wszystkie klasy należące do danego komponentu. W projekcie wykorzystano technikę wstrzykiwania zależności (DI), która pozwala na usunięcie zależności pomiędzy klasami, aż do momentu ich integracji. Za wstrzykiwanie zależności w moim projekcie odpowiedzialna jest biblioteka Dagger 2, stąd nazwa pakietu w którym to zadania jest realizowane.
 
 #### Wewnętrzy język AML
 Moduł ten jest odpowiedzialny za dostarczenie wygodnego API do opisu zasad gry. Zarówno dostarczone API, jak i implementacja modułu została zrealizowana w języku JAVA. Dlatego też nazywam go wewnętrzym językiem domenowym.
