@@ -288,6 +288,12 @@ Przytoczony kod opisuje mogące wystąpić w czasie gry zdarzenie. Chodź na to 
 #### Plik game.aml
 Moduł ten składa się z tylko jednego pliku "game.aml" znajdującego się w folderze "app/src/main/java". Plik ten jest kluczowym elementem całego frameworku, bo to własnie w nim definiuje się elementy związane z konkretną grą.
 
+#### Wygenerowany Kod implementujący zasady gry
+Ten moduł znajduje się folderze "app/aml-src" i zawiera kod wygenerowany automatycznie na podstawie pliku "game.aml". Kod ten implementuje szczegóły dotyczące konkretnej gry. Wykorzystuje API dostarczone przez Wewewnętrzny AML. Wygenerowany tu kod użyty jest w module Kod Aplikacji
+
+#### Przykładowy Kod implementujący zasady gry
+Ten moduł zawiera kod analogiczny to automatycznie wygenerowanego w folderze "app/aml-src", jest jednak napisany ręcznie. Kod został umieszczeony w folderze "". Moduł służy przede wszystkim testowaniu i rozwijaniu aplikacji i nie jest wykorzystywany w produkcie finalnym.
+
 ## Testy
 W celu sprawdzenia powprawności dzialania stworzonego oprogramowania postanowiłem je przetestować. Na pierwszym miejscu postawiłem testy automatyczne, ponieważ są najbardziej praktyczne i wiarygodne. Testy automatyczne zaimplementowałem w postaci mokowanych testów jednostkowych za pomocą bibliotek JUnit i Mockito.
 Niestety nie dało się pokryć testemi automatycznymi wszystkich funcjonalności. Z tego powodzu część kodu została przetestowana w sposób manualny. Elementami przetestowanymi w ten sposób są działanie modułu NFC, GPS oraz generacja kodu. Do każdego z tych elemetów przygotowałem scenariusz testowy, który następnie wykonałem. Sposób przeprowadzenia oraz wyniki tych testów zostały przedstawione poniżej.
