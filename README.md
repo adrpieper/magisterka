@@ -206,7 +206,7 @@ Ten projekt to standardowa aplikacja androidowa wykorzystująca AndroidSDK rozbu
 -JUnit
 -Mockito
 
-Architektóra projektu jest dość rozbudowana i zosła podzielona na kilka części:
+Architektóra projektu jest dość rozbudowana i można z niej wydzielić następujące części:
 - Kod aplikacji
 - Zasoby
 - Plik manifestu
@@ -220,11 +220,11 @@ Architektóra projektu jest dość rozbudowana i zosła podzielona na kilka czę
 Pierwsze pięć elementów jest typowych dla aplikacji android, natomiasto pozostałe wynikają z zastosowania języka AML.
 
 #### Kod aplikacji
-Jest to bardzo rozbudowana, ale i najbardziej tradycyjna i oczywista część aplikacji.
-Ten moduł jest odpowiedzialny za kluczowe elementu aplikacji. To tutaj zdefiniowany jest wygląd oraz zachowanie aplikacji. Moduł korzysta Kodu implementujący zasady gry. W jego kodzie znajduje została umieszczona logika związana z systemem Android taka jak  komunikacja z czujnikami NFC i GSP lub obsługa interfejsu użytkownika. Dodatkowo kod opdowiada za elementy stałe dla każdej gry takie jak mechanizm walki i rozwoju postaci.
+Jest to bardzo rozbudowana, ale i najbardziej tradycyjna i oczywista część aplikacji. W jego skład wchodzą pakiety "" umieszczone w folderze "src/main/java"
+Ten moduł jest odpowiedzialny za kluczowe elementu aplikacji. To tutaj zdefiniowany jest zachowanie aplikacji. Moduł korzysta Kodu implementujący zasady gry oraz zasobów. W jego kodzie znajduje została umieszczona logika związana z systemem Android taka jak  komunikacja z czujnikami NFC i GSP lub obsługa interfejsu użytkownika. Dodatkowo kod opdowiada za elementy stałe dla każdej gry takie jak mechanizm walki i rozwoju postaci.
  
 Kod został podzielony na warstwy i komponenty, co zostało odwierciedlone w strukturze pakietów. 
-Komponenty to zbiory klas realizujące wspólne zadanie. Ich struktura jest hierarchiczna tzn. w skład konkretnego komponentu wchodzą kolejne odpowiedzialne za zadania bardziej sprecyzowane. Kompletną strukturę komponentów w aplikacji przedstawie poniższy drzewo.
+Komponenty to zbiory klas realizujące wspólne zadanie. Ich struktura jest hierarchiczna tzn. w skład konkretnego komponentu wchodzą kolejne, odpowiedzialne za zadania bardziej sprecyzowane, komponenty. Kompletną strukturę komponentów aplikacji przedstawie poniższy drzewo.
 ```
 app
 └───game
@@ -254,6 +254,21 @@ Logika to warstwa odpowiadająca za wszelkie operacje wykonywane na danych, któ
 
 Pakiet "dagger" to miejsce w którym integrowane są wszystkie klasy należące do danego komponentu. W projekcie wykorzystano technikę wstrzykiwania zależności (DI), która pozwala na usunięcie zależności pomiędzy klasami, aż do momentu ich integracji. Za wstrzykiwanie zależności w moim projekcie odpowiedzialna jest biblioteka Dagger 2, stąd nazwa pakietu w którym to zadania jest realizowane.
 
+#### Zasoby
+Zasoby są elementem wspólnym dla każdej aplikacji. Tradycyjnie zostały umieszczone w folderze "scr/main/res??". Tutaj definiuje się elementy takie jak layouty, ikonki, animacje itp. Większość zasobów stanowią pliki xml. Dostęp do zasobów możliwy jest z poziomu kodu aplikacji poprzez klasę R. Klasa ta jest generowana automatycznie, a jej skład wchodzi zestaw stały, będących identyfikatorami odpowiednich zasobów. AndroidSDK posiada wbudowany system zarządzania zasobami, który pozwala na przygotowanie kontretnego zasoby w kilku wersjach (np. różny layout dla kilku wielkości ekranów). 
+Tak przygotowany zasób, będzie dostępny pod pojedynczym numerem id, a o wybór odpowiedniej wersji zadba system.
+
+Elementem wartym są layouty, z których znaczna część wykorzystuje tzw. Data Binding. Mechanizm ten pozwala opisać sposób w jaki będą wyświetlane dane w sposób deklaratny, przy pomocy języka xml. AndroidSDK generuje na jego podstawie specjalny kod, który będzie realizował to zadanie. 
+
+#### Plik manifestu
+Plik manifestu jest elementem niezbędnym w każdej aplikacji androidowej. Znajduje się on w "". W nim deklarujemy elementy takie jak identyfikator aplikacji, dostępne aktywności, potrzebne uprawnienia, ikonę startową itp.
+
+#### Gradle
+Gradle jest narzędziem służącym do budowania projektów, który stał się standardem w aplikacjach androidowych. W projekcie znajdują się 2 pliku gradle, jeden dla modułu aplikacji, drugi dla całego projektu. Zostały umieszczone odpowiednio w folderze "/app" i "/". W plikach gradle zdefiniowane jest struktura projektu, zadania związane z jego budowaniem oraz potrzebne zależności.
+
+#### Testy
+Moduł testów odpowiedzialny jest za sprawdzenie, czy kod działa prawidłowo. Ich kod został umieszczony w folderze "app/scr/test/java". W jego skład wchodzą klasy, reprezentujące testy jednostkowe wszystkich ważnych elementów aplikacji. Kod testów wykorzystuje zewnętrzne bilioteki JUnit, Mockito i AssertJ. Testowaniu poświęcony został osobny rozdział.
+
 #### Wewnętrzy język AML
 Moduł ten jest odpowiedzialny za dostarczenie wygodnego API do opisu zasad gry. Zarówno dostarczone API, jak i implementacja modułu została zrealizowana w języku JAVA. Dlatego też nazywam go wewnętrzym językiem domenowym.
 W skład modułu wchodzą wszystkie klasy pakietu "".
@@ -270,6 +285,8 @@ Poniżej znajduje się przykład kodu napisanego z wykorzystaniem tego języka.
 --KOD--
 Przytoczony kod opisuje mogące wystąpić w czasie gry zdarzenie. Chodź na to nie wygląda, kod ten został napisany w Javie.
 
+#### Plik game.aml
+Moduł ten składa się z tylko jednego pliku "game.aml" znajdującego się w folderze "app/src/main/java". Plik ten jest kluczowym elementem całego frameworku, bo to własnie w nim definiuje się elementy związane z konkretną grą.
 
 ## Testy
 W celu sprawdzenia powprawności dzialania stworzonego oprogramowania postanowiłem je przetestować. Na pierwszym miejscu postawiłem testy automatyczne, ponieważ są najbardziej praktyczne i wiarygodne. Testy automatyczne zaimplementowałem w postaci mokowanych testów jednostkowych za pomocą bibliotek JUnit i Mockito.
