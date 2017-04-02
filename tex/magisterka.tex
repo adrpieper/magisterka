@@ -381,59 +381,94 @@ Projekt należy skompilować przy pomocy narzędzia grandle []. Projekt jest sta
 
 
 \chapter{Adventure Maker Language} 
-Adventure Maker Language to język domenowy stworzony specjalnie na potrzeby frameworka Adventure Maker. Poniżej znajduje się dokumentacja tego języka.
+Adventure Maker Language to język domenowy stworzony specjalnie na potrzeby frameworka Adventure Maker. Poniżej znajduje się jego dokumentacja.
 
 \section{Struktura pliku AML} 
-Plik AML definiuje wszystkie dostępne w grze elementy. Plik może zawierać dowolną ilość postaci, przedmiotów, lokacji oraz zdarzeń. Dodatkowo należy w nim warunki początkowe. 
+Plik AML definiuje wszystkie dostępne w grze elementy. Plik może zawierać dowolną ilość postaci, przedmiotów, lokacji oraz zdarzeń. Dodatkowo należy w nim umieścić warunki początkowe. 
 
-\section{Warunki początkowe} 
-Warunki początkowe definiują zdarzenia aktywne od początku gry.
-\begin{lstlisting}[language=Java]
-{
-	<nazwa> ?(częstość) at [lokacja]
-}
-\end{lstlisting}
-Przykład:
-\begin{lstlisting}[language=Java]
-{
-	OldMenMeeting at Forest 
+\section{Przygody początkowe} 
+Warunki początkowe definiują przygody dostępne od początku gry. Definicja bloku przygód początkowych rozpoczyna się od słów kluczowych
+"adventure on start". Następnie w nawiasach klamrowych znajduje się dowolna liczba deklaracji przygód dostępnych na początku gry.
+Każda taka definicja składa się z nazwy przygody słówka kluczowego "at" i nazwy lokacji.
+
+Poniższy przykład zawiera definicje składającą się z dwóch przygód "MysteriusMan" i "Bandits", ulokowanych odpowiednio w "OldHouse" i "Forest".
+\begin{lstlisting}
+adventure on start {
+	MysteriusMan at OldHouse
+	Bandits at Forest
 }
 \end{lstlisting}
 \section{Typy postaci}
-Definicja typy, inaczej klasy postaci to informacje na temat statystyk oraz umiejętności dostępnych dla danej klasy postaci. Statystyki dzielą się na statystyki początkowe, które postać otrzymuje przy starcie gry, oraz statystyki poziomowe, które zwiększają statystyki postaci z każdym zdobytym poziomem. Umiejętności zostały zorganizowane w postaci drzewa. Aby odblokować daną umiejętność, gracz musi najpierw odblokować wszystkie prowadzące do niej umiejętności.
+Definicja typu, inaczej klasy postaci to informacje na temat statystyk oraz umiejętności dostępnych dla danej klasy postaci. Statystyki dzielą się na statystyki początkowe, które postać otrzymuje przy starcie gry, oraz statystyki poziomowe, które zwiększają statystyki postaci z każdym zdobytym poziomem. Umiejętności zostały zorganizowane w postaci drzewa. Aby odblokować daną umiejętność, gracz musi najpierw odblokować wszystkie prowadzące do niej umiejętności.
 
-Przykład:
-\begin{lstlisting}[language=Java]
-{
-character type Cheater {
+Definicja typu postaci rozpoczyna się od słów kluczowych "character type". Następnie należy podać nazwę typu za którą znajdują się nawiasy klamrowe. W nawiasach klamrowych należy umieścić kolejno:
+\begin{itemize}
+	\item statystyki początkowe
+	\item statystyki poziomowe
+	\item drzewo umiejętności
+\end{itemize}
+
+Definicja statystyk początkowych rozpoczyna się od słów kluczowych "stats on start:". Za tymi słowami umieszczone są ilościowe parametry siły, inteligencji i zwinności oznaczone odpowiednio słowami kluczowymi "str", "int", "agi", będącymi skrótami od angielskich tłumaczeń tych parametrów.
+
+Definicja statystyk poziomowych jest bardzo podobna to tych startowych. Występują tu dwie różnice. Po pierwsze, definicja zaczyna się od swój kluczowych "stats per lvl:". Pod drugie przed każdym parametrem występuje znak plusa, który podkreśla fakt, że są to wartości, które zwiększają statystyki postaci. 
+
+Definicja drzewa umiejętności rozpoczyna się od słów kluczowych "skills tree:". Dalej znajduje się dowolna liczba gałęzi drzewa.
+Każdy gałąź składa się z nazwy umiejętności, której dotyczy oraz opcjonalnie zbioru gałęzi potomnych, które definiują umiejętności.
+Zbiór gałęzi potomnych definiuje się w nawiasach klamrowych poprzedzonych symbolem "=>". 
+
+Poniżej znajduje się przykład definicji postaci typu "Wizard":
+\begin{lstlisting}
+character type Wizard {
 	stats on start:
 		10 str
-		10 int
-		20 agi
+		20 int
+		15 agi
 	stats per lvl:
 		+ 1 str
-		+ 1 int
-		+ 2 agi
+		+ 2 int
+		+ 1 agi
 	skills tree:
-		Luck => {
-		PaperCheatsheet
-		FriendHelp
-		Smartphone
+		Fireball => {
+			Wirewall
+			BlackMagic
 		}
+		Poisoning
+}
+\end{lstlisting}
+Z definicji można odczytać, że postać typu "Wizard" otrzymuje 10 punktów siły, 20 inteligencji i 15 zwinności na początku gry.
+Otrzymuje też 1 punkt siły, 2 inteligencji i 1 zwinności z każdym zdobytym poziomem doświadczenia.
+Na początku może odblokować umiejętność "Fireball" lub "Poisoning". Odblokowanie umiejętności "Fireball" pozwala ponadto na odblokowanie dwóch kolejnych: "Wirewall" i "BlackMagic". 
+
+\section{Typy Przedmioty}
+Przedmiot to element, który stanowi nagrodę za pokonanie przeciwnika i może być wykorzystany w celu podniesienia statystyk postaci. 
+Definicja przedmiotu jest bardzo prosta. Wystarczy podać jego nazwę, typ oraz wartości premii do odpowiednich statystyk.
+Wartości premii umieszczone są w nawiasach klamrowych i składają się z wartości liczbowej poprzedzonej znakiem plus oraz słówka kluczowego "agi", "str" lub "int" odnoszącego się do odpowiedniego typu statystyk. Przedmiot nie musi zawierać bonusu do każdego typu statystyk.
+
+Poniżej znajduje się przykład definiujący przedmiot typu "Sword", zwiększający siłę postaci o 4, a zwinność o 3 punkty.
+\begin{lstlisting}
+item Sword (weapon) {
+	+ 4 str
+	+ 3 agi
 }
 \end{lstlisting}
 
-
-\section{Typy Przedmioty}
-Przedmiot to element, który stanowi nagrodę za pokonanie przeciwnika i może być wykorzystany w celu podniesienia statystyk postaci. Definicja przedmiotu jest bardzo prosta. Wystarczy podać jego nazwę i wartości premii do odpowiednich statystyk.
-
 \section{Definicja lokacji}
-Lokacja miejsce do którego można się odwołać definiując zdarzenie. Miejsce takie oznacza pewien obszar w fizycznym świecie np. pokój albo kawałek lasu. Lokacje możemy definiować na dwa sposoby za pomocą technologii GPS lub NFC. 
-W przypadku technologii GPS lokacje opisuje okrąg o środku wyrażonym jako współrzędne geograficzne i promieniu wyrażonym w metrach. Użycie tej technologii zalecane jest do opisu obszarów znajdujących się na otwartej przestrzenii. 
-Opisując lokacje za pomocą technologii NFC wystarczy podać odpowiedni tag. Tą technologię należy wykorzystać do opisu przestrzeni zamniętcy jak np. pokój. Trzeba pamiętać, że odpowiedni znacznik NFC musi znajdować się w tym pomieszczeniu.
+Lokacja to miejsce do którego można się odwołać definiując zdarzenie. Miejsce takie oznacza pewien obszar w fizycznym świecie np. pokój albo kawałek lasu. Lokacje możemy definiować na dwa sposoby za pomocą technologii GPS lub NFC. 
+W przypadku technologii GPS lokacje opisuje okrąg o środku wyrażonym jako współrzędne geograficzne i promieniu wyrażonym w metrach. Użycie tej technologii zalecane jest do opisu obszarów znajdujących się na otwartej przestrzeni 
+Opisując lokacje za pomocą technologii NFC wystarczy podać odpowiedni tag. Tą technologię należy wykorzystać do opisu przestrzeni zamkniętych jak np. pokoje. Trzeba pamiętać, że odpowiedni znacznik NFC musi znajdować się w tym pomieszczeniu.
+
+Definicja lokacji rozpoczyna się od słowa kluczowego "location" i nazwy. Jeżeli lokacja wyrażona ma być przez znacznik NFC należy użyć słów kluczowych "tagged as", a następnie podać tekst, który stanowi zawartość tagu. W przypadku korzystania z technologii GPS używa się słów kluczowych "in radius of" po którym podaje się odległość w metrach. Następnie po słowach "meters from" należy umieścić szerokość i długość geograficzną.
+
+Poniżej znajdują się przykłady definicji lokacji "OldHouse" i "Forest". Lokacja "OldHouse" oznaczona jest tagiem "OldHouseLocation", natomiast 
+"Forest" to obszar o promieniu 100 metrów od punktu o współrzędnych 54°35'45.9"N, 18°14'42.7"E.
+\begin{lstlisting}
+location OldHouse tagged as OldHouseLocation
+location Forest in radius of 100 meters from 54.596077, 18.245200
+\end{lstlisting}
+
 
 \section{Definicja przygody}
-Przygody są najważniejszym i najbardziej rozbudowanym elementem definicji w języku AML. Każda przygoda składa się z nazwy oraz punktu wejściowego będącego tzw. zdarzeń.
+Przygody są najważniejszym i najbardziej rozbudowanym elementem definicji w języku AML. Każda przygoda składa się z nazwy oraz punktu wejściowego będącego tzw. zdarzeniem.
 
 Zdarzenie otoczone jest zawsze nawiasami klamrowymi i może zawierać jedną z definicji:
 \begin{itemize}
@@ -443,6 +478,44 @@ Zdarzenie otoczone jest zawsze nawiasami klamrowymi i może zawierać jedną z d
 	\item Edycja zdarzeń
 	\item Blok zdarzeń
 \end{itemize}
+
+\subsection*{Walka}
+Walka oznacza zdarzenie polegające na pojedynku z pojedynczym przeciwniku lub ich grupą. Zdarzenie tego typu zawiera informacje o ilości i typu przeciwników, oraz zdarzeniach wywołanych w przypadku zwycięstwa jak i porażki.
+
+Definicja walki rozpoczyna się od słów kluczowych "Fight with". Następnie należy wymienić nazwy wszystkich przeciwników oddzielając je przecinkami. Dalej można umieścić opcjonalnie blok zdarzeń wywołanych w przypadku zwycięstwa oraz blok zdarzeń wywołanych w przypadku porażki.
+
+Definicja bloku zdarzeń wywołanych w przypadku zwycięstwa i porażki rozpoczyna się od słów kluczowych odpowiednio "If win" i "If lost". Dalej znajduje się bloku zdarzeń umieszczonych w nawiasach klamrowych.
+
+Poniżej znajduje się przykładowa definicja bloku walki:
+\begin{lstlisting}
+Fight with Troll, Orc
+If win {
+	{Remove VillageInDanger at Forest}
+	{Get MagicSword}
+}
+If lost {
+	{Remove VillageInDanger at Forest}
+	{Show "Niestety nie udało ci się uchronić mieszkańców wioski"}
+}
+\end{lstlisting}
+Z definicji wynika, że gracz będzie musiał się zmierzyć z dwoma przeciwnikami o nazwach "Troll" i "Orc". Jeżeli ich pokona zdobędzie "MagicSword" w przeciwnym wypadku zostanie wyświetlony komunikat "Niestety nie udało ci się uchronić mieszkańców wioski". W obu przypadkach zdarzenie "VillageInDanger" nie będzie już dłużej dostępne w lokacji "Forest".
+
+\begin{lstlisting}
+adventure ExamAdventure starts from {
+	Ask "Have you passed all exams?"
+	Answer "Yes" to {
+		If you have more int than 30 or more agi than 30 {
+		Fight with MasterDegreeExam
+			If win {
+				{Show "Great. You just have gradueted your Master Degree"}
+				{Remove ExamAdventure at ClassRoom}
+			}
+		}
+		else {Show "I don't think so"}
+	}
+	Answer "No" to { Fight with SimpleExam }
+}
+\end{lstlisting}
 
 \chapter{Przykładowa gra}
 Aby ułatwić zrozumienie i korzystanie z frameworka postanowiłem przygotować przykładową grę. Poniżej znajduje się kod AML potrzebny do skompilowania gry oraz opis każdego z jego elementów.
