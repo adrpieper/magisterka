@@ -355,23 +355,24 @@ Odpowiednie zdarzenia odpalały się w odpowiednich sytuacjach.
 
 
 \chapter{Korzystanie z frameworka}
-(Przerobić to zdanie)
-W tym rozdziale zawartem opis konfiguracji stworzonego frameworka oraz instrucje jak napisać włąsną grę. 
+Pisanie własnej gry przy użyciu frameworka Adventure Maker jest bardzo proste. Wymaga ono jednak przygotowania środowiska pracy.
+W tym rozdziale zawarłem instrukcje dotyczące instalacji, konfiguracji i korzystania z potrzebnych narzędzi. 
 \section{Konfiguracja środowika}
-Pierwszym krokiem w celu konfiguracji środowika jest przygotowanie IDE oraz odpowiednich narzędzie. Należy pobrać i zainstalować w standarodowy sposób IntelliJ Idea, JRE, JDK i Android SDK. Drugim krokiem jest przygotowanie wtyczki do IntelliJ Idea. Wtyczka ta odpowiedzialna będzie za obsługę języka AML w tym za generacje kodu Java na podstawie pliku ".aml". Można pominąć ten etap pobierając gotową wtyczkę. Wtyczkę należy zaistalować w środowisku w IDE IntelliJ Idea. Kiedy mamy już potrzebne oprogramowanie należy jeszcze pobrać pusty projekt i można przystąć do implementacji własnej gry. 
+Aby móc korzystać z frameworka należy pobrać i zainstalować IDE IntelliJ Idea, JRE, JDK i Android SDK oraz wtyczkę AML.
+\subsection{JRE}
+JRE, czyli Java Runtime Enviroment, to środowisko uruchomieniowe Javy. Jest ono niezbędne do uruchomienia oprogramowania napisanego napisanego w technologii Java. JRE należy pobrać ze strony producenta [] w wesji 1.8 i zainstalować w standardowy sposób.
+\subsection{JDK}
+JDK, czyli Java Development Kit, standardowy zestaw narzędzi wykorzystywanych do tworzenia aplikacji w technologii Java. JDK należy pobrać ze strony producenta [] w wesji 1.8 i zainstalować w standardowy sposób.
+\subsection{IDE - IntelliJ Idea}
+IDE IntelliJ Idea można pobrać ze strony producenta []. Wersja community jest darmowa i wystarczająca do działania frameworku.
+Podczas instalacji należy pamiętać o włączeniu pluginu obsługującego aplikacje pisane na system Android.
+\subsection{Android SDK}
+Android SDK (Standard Development Kit) to standardowy zestaw narzędzi programisty Android pozwalający na tworzenie aplikacji na ten system w języku JAVA. SDK należy poprać ze strony [] i zainstalować w dowolnej lokalizacji.
+\subsection{Wtyczka AML}
+Wtyczka AML jest odpowiedzialna za obsługę języka AML, w tym generowanie kodu Java na podstawie pliku ".aml". 
 
-\subsection{Instalacja}
-- IntelliJ Idea
-- JRE
-- JDK
-- Android SDK
-
-\subsection{Kompilacja wtyczki}
-Aby skompilować wtyczkę samodzielnie należy pobrać ją z repozytorium [link] i uruchodzić polecenie [grandle ...]. 
-
-
-\subsection{Instacja wtyczki}
-Wtyczkę obsługującą język AML można pobrać w postaci pliku .zip [skąd?] lub przygotować samodzielnie. Jeżeli mamy już przygotowany plik .zip musimy go zainstalować środowisku IDE IntelliJ Idea. W tym celu należy...
+Do prawidłowego działania wtyczki AML potrzebne są wtyczki Xtext i Xtend, które można pobrać ze strony producenta [].
+Wtyczkę AML należy pobrać [] i zainstalować przyciskiem zainstalować ręcznie.
 
 \section{Implementacja gry}
 Implementacja własnej gry sprowadza się do edycji jednego pliku, mianowicie "game.aml". Należy w nim umieścić kod w języku AML. Kod musi  zawierać wszystkie niezbędne elementy gry. Pisząc ten kod można posłużyć się dokumentacją języka AML zamieszczoną w niniejszej pracy. Warto też wzorować się na kodzie przykładowej gry, który równiej wchodzi w jej skład.
