@@ -199,6 +199,35 @@ Dagger 2 \cite{Dagger2:2017:Doc} to biblioteka umożliwiająca wstrzykiwanie zal
 \section{Gradle}
 TODO
 
+\chapter{Projekt GUI}
+Ważnym elementem każdego współczesnego oprogramowania jest jego GUI, czyli interfejs graficzny. W przypadku frameworka do tworzenia gier  możemy o dwóch rodzajach GUI: frameworku i powstałych w nim aplikacji. 
+
+Jako, że framework został zrealizowany w postaci wtyczki do IDE, sprawa jego GUI jest rozwiązana. IDE Idea IntelliJ dostarcza bardzo wygodny i dopracowany interfejs użytkownika, a dostarczona przeze mnie wtyczka wykorzystuje jego możliwości. 
+
+Framework nie pozwala twórcy gry na dostosowanie interfejsu do swoich potrzeb, tak więc, jako projektant frameworka, postanowiłem przygotować interfejs prosty, a zarazem uniwersalny. GUI jest podzielone na trzy części:
+\begin{itemize}
+	\item Menu początkowe
+	\item Tryb zwiedzania
+	\item Tryb przygody
+\end{itemize}
+\section{Menu początkowe}
+Menu początkowe pozwala na wybór typu postaci, jaką dany gracz ma zamiar kontrolować. Ekran został podzielony na dwie części: listy klas postaci oraz szczegółów wybranej klasy. Szczegóły zawierają nazwę klasy oraz informacje jej statystykach.
+\section{Tryb zwiedzania}
+Tryb zwiedzania zawiera dosyć dużo informacji dlatego też został podzielony na następujące części: 
+\begin{itemize}
+	\item Przegląd postaci
+	\item Umiejętności
+	\item Przedmioty
+\end{itemize}
+Pomiędzy widokami można nawigować przeciągając je w lewo lub w prawo.
+\subsection*{Przegląd postaci}
+Przegląd postaci zawiera informacje o ilości i poziomie doświadczenia sterowanej przez gracza postaci. Dodatkowo wyświetla też statystyki uwzględniające bonusy otrzymane z noszonych przedmiotów.
+\subsection*{Umiejętności}
+Ekran umiejętności udostępnia drzewko umiejętności oraz dwa przyciski "Reset" oraz "OK". Drzewko służy zarówno do przeglądania posiadanych, jak i odblokowywania nowych umiejętności. Przycisk reset przywraca graczowi rozdane punkty umiejętności, natomiast przycisk "OK" zatwierdza ich wybór.
+\subsection*{Przedmioty}
+Sekcja przedmiotów, zawiera wszystkiego posiadane przez gracza rzeczy. Przedmioty używane przez gracza znajdują się w górnej części ekranu, natomiast pozostałe w dolnej, zwanej plecakiem. Dodatkowo na środku wyświetlana jest suma bonusów do statystyk uzyskanych z noszonych przedmiotów.
+\section{Tryb przygody}
+Tryb przygody zawiera wiele ekranów, z których każdy odpowiedzialny jest za wyświetlenie konkretnego zdarzenia...
 \chapter{Architektura rozwiązania}
 W celu stworzenia frameworka Adventure Maker utworzyłem dwa projekty. Pierwszy to projekt odwpowiedzialny za DSL Andventure Maker Language. Projekt bazuje na technologii Xtext, a produktem wyjściowym jest wtyczka do IDE IntelliJ Idea obsługująca zaprojektowany DSL.
 Drugi projekt, to szkielet aplikacji na system Android. Kod aplikacji jest częściowo napisany w AML i do jego kompilacji potrzebna jest jego obsługa.
@@ -367,19 +396,21 @@ JDK, czyli Java Development Kit, standardowy zestaw narzędzi wykorzystywanych d
 IDE IntelliJ Idea można pobrać ze strony producenta []. Wersja community jest darmowa i wystarczająca do działania frameworku.
 Podczas instalacji należy pamiętać o włączeniu pluginu obsługującego aplikacje pisane na system Android.
 \subsection{Android SDK}
-Android SDK (Standard Development Kit) to standardowy zestaw narzędzi programisty Android pozwalający na tworzenie aplikacji na ten system w języku JAVA. SDK należy poprać ze strony [] i zainstalować w dowolnej lokalizacji.
+Android SDK (Standard Development Kit) to standardowy zestaw narzędzi programisty Android pozwalający na tworzenie aplikacji na ten system, w języku JAVA. SDK należy poprać ze strony [] i zainstalować w dowolnej lokalizacji.
 \subsection{Wtyczka AML}
 Wtyczka AML jest odpowiedzialna za obsługę języka AML, w tym generowanie kodu Java na podstawie pliku ".aml". 
 
-Do prawidłowego działania wtyczki AML potrzebne są wtyczki Xtext i Xtend, które można pobrać ze strony producenta [].
-Wtyczkę AML należy pobrać [] i zainstalować przyciskiem zainstalować ręcznie.
+Do prawidłowego działania wtyczki AML potrzebne są wtyczki Xtext i Xtend, które można pobrać ze strony producenta [https://eclipse.org/Xtext/download.html].
+Wtyczkę AML należy pobrać [mój link] i zainstalować przyciskiem zainstalować ręcznie.
+
+\section{Przygotowanie projektu}
+Przed rozpoczęciem pracy na własnym projektem należy poprać repozytorium []. Znajdujący się w nim projekt ExampleAdventure, jest projektem przykładowej gry. Najłatwiejszym sposobem nie jego wykorzystanie jest skopiowanie go i posługiwanie się nim jako szablonem. Należy pamiętać, aby zmienić id aplikacji w pliku "
 
 \section{Implementacja gry}
 Implementacja własnej gry sprowadza się do edycji jednego pliku, mianowicie "game.aml". Należy w nim umieścić kod w języku AML. Kod musi  zawierać wszystkie niezbędne elementy gry. Pisząc ten kod można posłużyć się dokumentacją języka AML zamieszczoną w niniejszej pracy. Warto też wzorować się na kodzie przykładowej gry, który równiej wchodzi w jej skład.
 
 \section{Kompilacja projektu}
-Projekt należy skompilować przy pomocy narzędzia grandle []. Projekt jest standartowym projektem Androidowym, tak więc możemy go też uruchomić przyciskiem play dostępnym w IDE IntelliJ Idea. Ważne jest, żeby korzystać z IDE, ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko. Budowanie projektu za pomocą linii komend może się więc nie powieść. Osoby zainteresowany głębszym zrozumieniem narzędzia grandle [] , Android SDK [] oraz samego IDE odsyłam do źródeł. 
-
+Projekt jest standardowym projektem Androidowym, tak więc możemy go też uruchomić przyciskiem play dostępnym w IDE IntelliJ Idea. Ważne jest, żeby korzystać z IDE, nawet w przypadku korzystania z gradle [], ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko.
 
 \chapter{Adventure Maker Language} 
 Adventure Maker Language to język domenowy stworzony specjalnie na potrzeby frameworka Adventure Maker. Poniżej znajduje się jego dokumentacja.
