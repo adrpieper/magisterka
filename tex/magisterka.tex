@@ -468,17 +468,22 @@ location Forest in radius of 100 meters from 54.596077, 18.245200
 
 
 \section{Definicja przygody}
-Przygody są najważniejszym i najbardziej rozbudowanym elementem definicji w języku AML. Każda przygoda składa się z nazwy oraz punktu wejściowego będącego tzw. zdarzeniem.
+Przygody są najważniejszym i najbardziej rozbudowanym elementem definicji w języku AML. 
+Definicja każdej przygody składa się z słowa kluczowego "adventure", nazwy Przygody, słów "starts from" oraz Zdarzenia początkowego.
 
 Zdarzenie otoczone jest zawsze nawiasami klamrowymi i może zawierać jedną z definicji:
 \begin{itemize}
 	\item Zdarzenie warunkowe
 	\item Pytanie
 	\item Walka
-	\item Edycja zdarzeń
+	\item Modyfikacja zdarzeń
 	\item Blok zdarzeń
+	\item Komunikat
 \end{itemize}
 
+Zanim pokażę przykładową definicję, omówić z osoba każdy typ Zdarzeń.
+\subsection*{Komunikat}
+Komunikat to najprostsze ze Zdarzeń. Polega...
 \subsection*{Walka}
 Walka oznacza zdarzenie polegające na pojedynku z pojedynczym przeciwniku lub ich grupą. Zdarzenie tego typu zawiera informacje o ilości i typu przeciwników, oraz zdarzeniach wywołanych w przypadku zwycięstwa jak i porażki.
 
@@ -500,22 +505,90 @@ If lost {
 \end{lstlisting}
 Z definicji wynika, że gracz będzie musiał się zmierzyć z dwoma przeciwnikami o nazwach "Troll" i "Orc". Jeżeli ich pokona zdobędzie "MagicSword" w przeciwnym wypadku zostanie wyświetlony komunikat "Niestety nie udało ci się uchronić mieszkańców wioski". W obu przypadkach zdarzenie "VillageInDanger" nie będzie już dłużej dostępne w lokacji "Forest".
 
+\subsection*{Blok Zdarzeń}
+Blok Zdarzeń to jedno lub więcej zdarzeń umieszczonych w nawiasach klamrowych.
+Poniższy przykład pokazuje blok składający się z 3 zdarzeń.
 \begin{lstlisting}
-adventure ExamAdventure starts from {
-	Ask "Have you passed all exams?"
+{
+	{Remove VillageInDanger at Forest}
+	{Get MagicSword}
+	{Show "Niestety nie udało ci się uchronić mieszkańców wioski"}
+}
+\end{lstlisting}
+
+\subsection*{Zdarzenie warunkowe}
+Zdarzenie warunkowe służy do zadeklarowania zdarzeń, które wywołane zostaną, tylko w przypadku pewnych warunków. Dodatkowo można zdefiniować zdarzenie alternatywne, wywołane w przypadku niespełnienia warunków.
+W aktualnej wersji języka składnia zdarzeń warunkowych jest dość uboga i pozwala jedynie na sprawdzenie, czy postać sterowana przez gracza posiada odpowiednie statystyki.
+
+Definicja zdarzenia warunkowego rozpoczyna się od słów kluczowych "If you have" po których pojawia się wyrażenie warunkowe.
+Następnie należy podać definicję zdarzenia. Opcjonalnie można dodać definicje zdarzenia alternatywnego poprzedzając je słowem "else".
+
+Poniżej znajduje się przykład definicji zdarzenia warunkowego: 
+\begin{lstlisting}
+If you have more str than 30 
+{Fight with Orc}
+else 
+{Show "Walka nie będzie konieczna"}
+\end{lstlisting}
+Z powyższej definicji wynika, że postać o sile większej niż 30 będzie musiała walczyć z "Orc", natomiast gracz kontrolujący postać słabszą zobaczy komunikat "Walka nie będzie konieczna".
+
+Wyrażenia Warunkowe składają się z słówka kluczowego "more" lub "less", skrótowej nazwy parametru ("str, "agi" lub "int"), słowa "than" oraz wartości liczbowej. Dodatkowo wyrażenia warunkowe można łączyć za pomocą słówek "and" lub "or" oraz nawiasów. Wyrażenie warunkowe można też poprzedzić słowem "no", które wprowadza negacje.
+
+Poniżej znajdują się przykłady wyrażeń warunkowych.
+
+\begin{lstlisting}
+If you have no more int than 30
+If you have more agi than 20 or more str than 10
+\end{lstlisting}
+Pierwsze wyrażenie sprawdza, czy postać ma nie więcej niż 30 punktów inteligencji. Drugie sprawdza, czy posiada więcej niż 20 punktów siły lub więcej niż 10 punktów zwinności.
+
+\subsection*{Pytanie}
+Pytanie, jest zdarzeniem nieco podobnym do warunkowego, z tą różnicą, że wybór zdarzenia zależy nie od spełnienia, bądź niespełnienia warunków, a od decyzji podjętej przez gracza.
+
+Definicja Pytania zawsze rozpoczyna się od słowa kluczowego "Ask", po którym znajduje się treść wyświetlonego pytania, którą należy podać w cudzysłowie. Po pytaniu należy umieścić jeden lub więcej Odpowiedzi. Odpowiedź składa się ze słowa kluczowego "Answer" oraz "to", pomiędzy którymi należy umieścić treść odpowiedzi (również w cudzysłowie) oraz zdarzenia, do którego prowadzi dana odpowiedź. 
+
+Poniżej znajduje się przykład definicji Pytania:
+\begin{lstlisting}
+Ask "Chcesz nową zbroję?"
+Answer "Tak" to { Get Armor}
+Answer "Nie" to { Show "Jak uważasz."}
+\end{lstlisting}
+Z powyższej definicji wynika, że graczowi zostanie wyświetlone pytanie "Chcesz nową zbroję?". Gdy odpowie "Tak", otrzyma przedmiot o nazwie "Armor". W przeciwnym wypadku ujrzy komunikat "Jak uważasz.".
+
+
+\subsection*{Modyfikacja Przygód}
+Modyfikacja Przygód służy do dodawania lub usuwania przygód z lokacji. 
+Definicja zdarzenia dodającego nową Przygodę rozpoczyna się od słowa "Add", a usuwającego "Remove". Następnie należy podać nazwę Przygody i opcjonalnie częstość jej występowania w nawiasach (domyślna częstość wynosi 1). Dalej należy podać lokację, której dotyczy edycja poprzedzając ją słowem "at.
+
+Poniżej znajduje się kilka przykładów Modyfikacji Przygód. 
+\begin{lstlisting}
+{Add Bandits (4) at Forest}
+{Add VillageInDanger at Forest}
+{Remove MysteriusMan at OldHouse}
+\end{lstlisting}
+Pierwsze dwie linie dodają odpowiednio Przygody "Bandits" i "VillageInDanger" do Lokacji las. Przygoda "Bandits" będzie występowała czterokrotnie częściej niż "VillageInDanger". Ostania linia usuwa Przygodę "MysteriusMan" z Lokacji "OldHouse".
+
+\subsection*{Przykład}
+Poniżej znajduje się przykład kompletnej definicji przygody.
+\begin{lstlisting}
+adventure MysteriusManAd starts from {
+	Ask "Are you ready to fight?"
+	Answer "No" to { Fight with MysteriusManTraining }
 	Answer "Yes" to {
-		If you have more int than 30 or more agi than 30 {
-		Fight with MasterDegreeExam
+		If you have more str than 30 or more int than 30 or more agi than 30 {
+			Fight with MysteriusMan
 			If win {
-				{Show "Great. You just have gradueted your Master Degree"}
-				{Remove ExamAdventure at ClassRoom}
+				{Show "Great. Now, you are ready for fight with Dragon"}
+				{Add BigDragon at Hills}
+				{Remove MysteriusManAd at OldHause}
 			}
 		}
 		else {Show "I don't think so"}
 	}
-	Answer "No" to { Fight with SimpleExam }
 }
 \end{lstlisting}
+Przygoda "MysteriusManAd" rozpoczyna się od pytania "Are you ready to fight?". Odpowiedź "No" prowadzi do walki z "MysteriusManTraining".
+Odpowiedź "Yes" prowadzie od efektu zależnego od statystyk postaci. Postać posiadająca przynajmniej jedną ze statystyk na poziomie powyżej 30 punktów, będzie musiała stoczyć Walkę z "MysteriusMan". Jeżeli gracz zwycięży w walce otrzyma komunikat "Great. Now, you are ready for fight with Dragon", odblokuje Przygodę "BigDragon" w lokacji "Hills", a przygoda "MysteriusManAd", nie będzie dłużej dostępna w "OldHause". Postać niespełniająca warunków otrzyma po prostu komunikat "I don't think so". 
 
 \chapter{Przykładowa gra}
 Aby ułatwić zrozumienie i korzystanie z frameworka postanowiłem przygotować przykładową grę. Poniżej znajduje się kod AML potrzebny do skompilowania gry oraz opis każdego z jego elementów.
