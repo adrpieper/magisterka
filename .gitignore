@@ -9,3 +9,4 @@ gradle-wrapper.jar
 !AML.xtext
 *generated*
 *gradlew*
+localCopy
