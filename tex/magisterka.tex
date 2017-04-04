@@ -213,13 +213,15 @@ Framework nie pozwala twórcy gry na dostosowanie interfejsu do swoich potrzeb, 
 \section{Menu początkowe}
 Menu początkowe pozwala na wybór typu postaci, jaką dany gracz ma zamiar kontrolować. Ekran został podzielony na dwie części: listy klas postaci oraz szczegółów wybranej klasy. Szczegóły zawierają nazwę klasy oraz informacje jej statystykach.
 \section{Tryb zwiedzania}
+Zwiedzanie stanowi główny ekran gry. Jest wyświetlany przez cały czas, w którym gracz porusza się pomiędzy lokacjami w poszukiwaniu przygód. 
+
 Tryb zwiedzania zawiera dosyć dużo informacji dlatego też został podzielony na następujące części: 
 \begin{itemize}
 	\item Przegląd postaci
 	\item Umiejętności
 	\item Przedmioty
 \end{itemize}
-Pomiędzy widokami można nawigować przeciągając je w lewo lub w prawo.
+Pomiędzy widokami gracz może nawigować swobodnie, przeciągając je w lewo lub w prawo.
 \subsection*{Przegląd postaci}
 Przegląd postaci zawiera informacje o ilości i poziomie doświadczenia sterowanej przez gracza postaci. Dodatkowo wyświetla też statystyki uwzględniające bonusy otrzymane z noszonych przedmiotów.
 \subsection*{Umiejętności}
@@ -227,7 +229,15 @@ Ekran umiejętności udostępnia drzewko umiejętności oraz dwa przyciski "Rese
 \subsection*{Przedmioty}
 Sekcja przedmiotów, zawiera wszystkiego posiadane przez gracza rzeczy. Przedmioty używane przez gracza znajdują się w górnej części ekranu, natomiast pozostałe w dolnej, zwanej plecakiem. Dodatkowo na środku wyświetlana jest suma bonusów do statystyk uzyskanych z noszonych przedmiotów.
 \section{Tryb przygody}
-Tryb przygody zawiera wiele ekranów, z których każdy odpowiedzialny jest za wyświetlenie konkretnego zdarzenia...
+Gracz nie ma swobodnego dostępu do tej części interfejsu. Jest ona wyświetlana dopiero w momencie znalezienia się gracza w lokacji zawierającej jakąś przygodę.
+
+Tryb przygody zawiera kilka ekranów, z których każdy odpowiedzialny jest za wyświetlenie konkretnego zdarzenia. Gracz nie może swobodnie nawigować pomiędzy. Dostępne GUI zależne jest sytuacji, w której znajduje się postać gracza.
+\subsection*{Decyzja}
+Ekran decyzji jest bardzo prosty. Zawiera jedynie pole wyświetlające pytanie skierowane do gracza oraz listę decyzji w postaci przycisków.
+\subsection*{Walka}
+Ekran walki jest zawiera najwięcej elementów ze wszystkich dostępnych w trybie przygody. Odpowiedzialny jest za wyświetlanie oraz sterowanie przebiegiem starcia pomiędzy postacią gracza, a dowolnym przeciwnikiem. Interfejs wyświetla nazwę przeciwnika, kolorowe paski zawierające informacje o punktach życia (tzw. hit points) postaci i przeciwnika oraz o punktów many gracza. W dolnej części znajdują się przyciski akcji pozwalające na użycie standardowego ataku lub dowolnej umiejętności.
+\subsection*{Komunikat}
+Ekran komunikatu składa się z dwóch części. Wiadomości oraz przycisku "OK", którym gracz potwierdza, że zapoznał się z komunikatem. Wiadomość najczęściej wyświetlana jest w prostym oknie tekstowym, jednak w niektórych przypadkach konieczne jest użycie elementów bardziej rozbudowanych. Jest tak na przykład w przypadku okna wyświetlanego pod koniec przygody, zawierającego między innymi wykaz zdobytych przez gracza przedmiotów w postaci listy.
 \chapter{Architektura rozwiązania}
 W celu stworzenia frameworka Adventure Maker utworzyłem dwa projekty. Pierwszy to projekt odwpowiedzialny za DSL Andventure Maker Language. Projekt bazuje na technologii Xtext, a produktem wyjściowym jest wtyczka do IDE IntelliJ Idea obsługująca zaprojektowany DSL.
 Drugi projekt, to szkielet aplikacji na system Android. Kod aplikacji jest częściowo napisany w AML i do jego kompilacji potrzebna jest jego obsługa.
@@ -630,10 +640,26 @@ Przygoda "MysteriusManAd" rozpoczyna się od pytania "Are you ready to fight?". 
 Odpowiedź "Yes" prowadzie od efektu zależnego od statystyk postaci. Postać posiadająca przynajmniej jedną ze statystyk na poziomie powyżej 30 punktów, będzie musiała stoczyć Walkę z "MysteriusMan". Jeżeli gracz zwycięży w walce otrzyma komunikat "Great. Now, you are ready for fight with Dragon", odblokuje Przygodę "BigDragon" w lokacji "Hills", a przygoda "MysteriusManAd", nie będzie dłużej dostępna w "OldHause". Postać niespełniająca warunków otrzyma po prostu komunikat "I don't think so". 
 
 \chapter{Przykładowa gra}
-Aby ułatwić zrozumienie i korzystanie z frameworka postanowiłem przygotować przykładową grę. Poniżej znajduje się kod AML potrzebny do skompilowania gry oraz opis każdego z jego elementów.
+Aby ułatwić zrozumienie i korzystanie z frameworka postanowiłem przygotować przykładową grę. Kod AML potrzebny do skompilowania gry znajduje się w załączniku.
 
-KOD AML
-OPIS
+\section{Opis scenariusza}
+
+Ponieważ Adventure Maker powstał w ramach pracy dyplomowej postanowiłem, że tematem gry nie będzie oklepane ratowanie księżniczek i walka ze smokami w świecie fantasy, a studiowanie. Okazało się, że pomimo, że framework, nie został zaprojektowany z myślą o grach tego typu, bez problemu udało mi się ją napisać w języku AML.
+
+Akcja gry rozgrywa się na uniwersytecie, a celem gracza jest zdanie egzaminu magisterskiego. Aby to osiągnąć, gracz musi rozwijać umiejętności swojej postaci poprzez zdawanie pomniejszych egzaminów. Kiedy, gracz będzie już gotowy do ostatecznej próby, musi udać się do specjalnej sali, w której może podejść do egzaminu i zdobyć uprawniony dyplom.
+
+Gracz może osiągnąć cel obierając jedną z dwóch strategii. Na początku gry musi podjąć decyzję, czy chcę podążać szlachetną ścieżką dobrego studenta, czy też iść na łatwiznę i oszukiwać. Gra zawiera element moralizatorski, ponieważ wybierając ścieżkę oszusta, można co prawda zdać wszystkie pomniejsze egzaminy, ale ostatecznie gracz i tak skazany jest na porażkę. Gra zaimplementowana jest w taki sposób, żeby podczas egzaminu dyplomowego niewiedza nieuczciwego studenta wyżła na jaw, uniemożliwiając mu tym samym zakończenie studiów.
+
+\section{Uruchamianie gry}
+
+Grę można pobrać [] i zainstalować na dowolnym urządzeniu z systemem android w wersji powyżej 4.0, obsługującym komunikację NFC. Przed rozpoczęciem gry należy zaprogramować i umieścić znaczniki NFC zawierające tagi:
+\begin{itemize}
+	\item ExamClassRoom
+	\item PlainClassRoom
+\end{itemize}
+Znaczników "PlainClassRoom" można przygotować dowolną ilość i rozmieścić je w kilku salach uczelni. Znacznik "ExamClassRoom" powinien znajdować się w pojedynczej sali, w której odbywać się będą egzaminy dyplomowe.
+
+Po takim przygotowaniu można już swobodnie rozpocząć rozgrywkę.
 
 % załączniki (opcjonalnie):
 \appendix
