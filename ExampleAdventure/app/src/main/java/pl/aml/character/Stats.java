@@ -1,12 +1,12 @@
 package pl.aml.character;
 
 public class Stats {
-    private static final Stats defaultValue = new Stats(0,0,0);
+    private static final Stats defaultValue = new Stats(0, 0, 0);
     private final int intelligence;
     private final int strength;
     private final int agility;
 
-    public Stats(int intelligence, int strength, int agility) {
+    public Stats(int strength, int intelligence, int agility) {
         this.intelligence = intelligence;
         this.strength = strength;
         this.agility = agility;
@@ -40,8 +40,7 @@ public class Stats {
 
     public Stats plus(Stats stats) {
         return new Stats(
-                intelligence + stats.intelligence,
-                strength + stats.strength,
+                strength + stats.strength, intelligence + stats.intelligence,
                 agility + stats.agility
         );
     }

@@ -37,6 +37,6 @@ public class ItemsStatsGenerator {
         }
 
 
-        return new Stats(intelligence, strength,agility);
+        return new Stats(strength, intelligence, agility);
     }
 }
