@@ -67,30 +67,29 @@ Stworzenie gry z użyciem narzędzia w najprostrzym przykadku sprowadza sie do r
 
 \chapter{Opis problemu}
 
-Celem niniejszej pracy jest implementacja frameworku służącego do szybkiego tworzenia terenowych gier RPG. Najważniejszym moim zdaniem elementem tej implentacji jest stworzony język domenowy. Niniejsza praca zachacza więc o cztery z pozoru niezwiązane ze sobą tematyki jakimi są gry terenowe, gry RPG, frameworki oraz języki domenowe. Aby wprowadzić czytelnika w tematykę pracy, postanowiłem opisać z osobna, każdy z  tych elementów oraz sposób w jaki postanowiłem je ze sobą połączyć.  
+Celem niniejszej pracy jest implementacja frameworku służącego do szybkiego tworzenia terenowych gier RPG. Kluczowym elementem implementacji jest stworzony język domenowy. Niniejsza praca obejmuje więc o cztery z pozoru niezwiązane ze sobą tematyki jakimi są gry terenowe, gry RPG, frameworki oraz języki domenowe. Każdy z tych elementów gości już od dłuższego lub krótszego czasu w świecie informatyki, innowacyjny jest jednak pomysł połączenia ich w jednym narzędziu. Nie sposób jednak pominąć dotychczasowe dorobku innych, zajmujących się nimi, osób. 
 
 \section{Gry terenowe}
 
-Rozwój technologii mobilny sprawił, że od paru lat na rynku rozrywki elektronicznej pojawił się nowy nowy pomysł. Pomysłem tym są gry terenowe, czyli takie, w których istotną częścią rozgrywki jest poruszanie się gracza po świecie rzeczywistym. W grach tych zrezygnowano ze znanego z tradycyjnych gier wirtualnego świata na rzecz tzw. rzeczywistości rozszerzonej [źródło]. W grach terenowych gracz nie steruje już postacią za pomocą myszki, czy klawiatury, lecz jest zmuszony do fizycznego przemieszczania się po rzeczywistym świecie. Lokalizacja gracza zostaje przeniesiona do świata gry za pomocą technologii takiej jak np. GPS. Mapa po której porusza się gracz jest więc mapą znaną z lekcji geografii. Elementami które sprawiają, że świat gry jest rzeczywistością rozszerzoną są pojawiające się w grze, a nie istniejące w rzeczywistości, obiekty lub postaci które wpływają w jakiś sposób na przebieg rozgrywki.
+Rozwój technologii mobilny sprawił, że od paru lat na rynku rozrywki elektronicznej pojawił się całkiem nowy pomysł. Pomysłem tym są gry terenowe, czyli takie, w których istotną częścią rozgrywki jest poruszanie się gracza po świecie rzeczywistym. W grach tych zrezygnowano ze znanego z tradycyjnych gier wirtualnego świata na rzecz tzw. rzeczywistości rozszerzonej. W grach terenowych gracz nie steruje już postacią za pomocą myszki, czy klawiatury, lecz jest zmuszony do fizycznego przemieszczania się po rzeczywistym świecie. Lokalizacja gracza zostaje przeniesiona do świata gry za pomocą technologii takiej jak np. GPS. Mapa po której porusza się gracz jest więc mapą znaną z lekcji geografii. Elementami które sprawiają, że świat gry nazywamy rzeczywistością rozszerzoną, są pojawiające się w grze, a nie istniejące w rzeczywistości, obiekty lub postaci, które wpływają w jakiś sposób na przebieg rozgrywki.
 
-Doskonały przykładem gry terenowej jest Pokemon GO. Gra...
+Doskonały przykładem gry terenowej jest Pokemon GO. Jest to gra, której premierę ciężko było przeoczyć. Gra zyskała olbrzymią popularność w zaledwie kilka dni, czego efektem były tłumy graczy szturmujących parki i place. Tam właśnie ukrywały się tytułowe Pokemony, których szukanie i kolekcjonowanie, są kluczowymi elementami rozgrywki.
 
-Inny pomysł na wykorzystanie lokalizacji gracza mieli twórcy ...
+Inny pomysł na wykorzystanie lokalizacji gracza mieli twórcy Landlord. Gra przenosi koncepcje znale z popularnej gry Monopoly do świata rzeczywistego. Cel gry pozostał niezmieniony, jest nim oczywiście inwestowanie w nieruchomości. Nie znajdziemy tam natomiast, ani planszy, ani pionków, czy kostki. Gracze Landlord, w celu dokonywania wirtualnych zakupów, zmuszeni są do podróżowania po rzeczywistym świecie.
 
 \section{Gry RPG}
 
-Gry RGP inaczej gry fabularne [źródło wiki], są to gry w których gracze wcielają się w rolę fikcyjnych postaci poruszających się po fikcyjnym świecie.  Celem graczy jest zazwyczaj ukończenie jakiegoś scenariusza, badź też po prostu usiągnięcie określonego celu np. zbobycie jakiegoś przedmiotu, danej ilości złota lub rozwój postaci do konkretnego poziomu. Istnieją też gry otwarte, w których gracz nie ma żadnego narzuconego celu, a jedynie przemierza fikcyjny świat ze znanej tylko sobie motywacji. Tradycyjnie grę tego typu rozgrywa się w wyobraźni graczy. Jeden z graczy wciela się wtedy w tzw. mastera gry. Zadaniem mastera jest o prowadzenia graczy przez świat gry poprzez opowiadanie pewnej historii oraz zadawanie pytań. Master przedstawia graczą jak wygląda sytuacja, w której znajduję się ich postacie oraz karze im podjąć decyzje jak w tej sytuacji ich postacie się zachowają. Gracze podejmują decyzję, po czym master gry określa z jakimi skutkami się ona wiąże i przechodzi do dalszej opowieści. Aby zachować pewną spójność gry, master podejmuje decyzję w oparciu o ustalony zbiór zasad (tzw. mechanikę gry), zazwyczaj efekt podjętej decyzji zależy też od rzutu kością.
+Gry RGP, inaczej gry fabularne, są to gry w których gracze wcielają się w rolę fikcyjnych postaci poruszających się po fikcyjnym świecie.  Celem graczy jest zazwyczaj ukończenie jakiegoś scenariusza, bądź też po prostu osiągniecie określonego celu np. zdobycie jakiegoś przedmiotu, danej ilości złota lub rozwój postaci do konkretnego poziomu. Istnieją też gry otwarte, w których gracz nie ma żadnego narzuconego celu, a jedynie przemierza fikcyjny świat ze znanej tylko sobie motywacji. Tradycyjnie grę tego typu rozgrywa się w wyobraźni graczy. Jeden z graczy wciela się wtedy w tzw. mastera gry. Zadaniem mastera jest prowadzenia graczy przez świat gry poprzez opowiadanie pewnej historii oraz zadawanie pytań. Master przedstawia graczom jak wygląda sytuacja, w której znajduję się ich postacie oraz prosi ich o podjęcie decyzji, dotyczącej zachowania się postaci w danej sytuacji. Gracze podejmują decyzję, po czym master gry określa z jakimi skutkami się ona wiąże i przechodzi do dalszej opowieści. Aby zachować pewną spójność gry, master podejmuje decyzję w oparciu o ustalony zbiór zasad (tzw. mechanikę gry), zazwyczaj efekt podjętej decyzji zależy też od rzutu kością.
 
-Oprócz tradycyjnej odmiany gier fabularnych powstały tej ich planszowe oraz komputerowe odmiany. W grach tych nie już mastera. Gry takie mają z góry narzucony scenariusz oraz zasady. 
+Oprócz tradycyjnej odmiany gier fabularnych powstały tej ich planszowe oraz komputerowe odmiany. W grach tych nie już mastera. Gry takie mają z góry narzucony scenariusz oraz ścisłe zasady. 
 
-Jednym z najpopularniejszych przykładów planszowych gier RPG jest Magia i Miecza. Gracze wybierają w niej jedną z kilkudziesieciu postaci. A ich celem jest dostanie się do tzw. Korony Władzy. 
+Jednym z najpopularniejszych przykładów planszowych gier RPG jest Magia i Miecza. Gracze wybierają w niej jedną z kilkudziesięciu postaci. Celem gry jest dostanie się do tzw. Korony Władzy. Aby móc tego dokonać muszę rozwinąć umiejętności swoich postaci. Jest to możliwe poprzez wyciąganie kart przygód, które zawierają opis sytuacji, w której znalazł się gracz. 
 
-W świecie gier komputerowych, RPG osiągneły niekwestionowany sukces. Wydanych tytułów są całe dziesiątki, a elementy tych gier takie jak rozwój i statystyki postaci przedostały się już do prawie każdego gatunku gier komputerowcych.
+W świecie gier komputerowych, RPG osiągnęły niekwestionowany sukces. Wydanych tytułów są całe dziesiątki i nie sposób ich tutaj wymienić. Dodatkowo, warto zwrócić uwagę, że typowe elementy tych gier takie jak rozwój i statystyki postaci przedostały się już do prawie każdego gatunku gier komputerowych.
 
 \section{DSL}
 
-[źródło]
-DSL, czyli języki domenowe, to jezyki programowania zaoprojektowane z myślą o ściśle określonym z reguły bardzo wąskim zastosowaniu. W odróżnieniu od języków programowania ogólnego przeznaczenia, języki domenowe nie nadają się do rozwiązania większości problemów informatycznych. Dzięki ograniczeniu się jedynie do wąstkiej grupy zastosowań, możliwe jest tworzenie języków, które są zrozumiałe dla osób będących ekspertami w danej dziedzinie. Języki domenowe należą zazwyczaj do języków deklaratywnych, gdyż skupiąnę są wokół tego co, a nie w jaki sposób chce osiągnąć programista.
+DSL, czyli języki domenowe, to języki programowania zaprojektowane z myślą o ściśle określonym i z reguły bardzo wąskim zastosowaniu. W odróżnieniu od języków programowania ogólnego przeznaczenia, języki domenowe nie nadają się do rozwiązania większości problemów informatycznych. Sprawdzają się natomiast świetnie w dziedzinie do, której zostały zaprojektowane Dzięki ograniczeniu się jedynie do wąskiej grupy zastosowań, możliwe jest tworzenie języków, które są zrozumiałe dla osób będących ekspertami w danej dziedzinie. Języki domenowe należą zazwyczaj do języków deklaratywnych, gdyż skupiane są wokół tego co, a nie w jaki sposób chce osiągnąć programista.
 
 Języki domenowe ze względu na sposób ich implementacji można podzielić na dwie grupy:
 \begin{itemize}
@@ -100,73 +99,72 @@ Języki domenowe ze względu na sposób ich implementacji można podzielić na d
 
 \subsection{Internal DSL}
 
-Jest to język stworzonych w ramach innego istniejącego już języka ogólnego przeznaczenia. Technicznie rzecz biorą jest to zbiór klas udostępniających wygodny dla programisty, dający wrażenie pisania w innym języku zbiór metod. Klasy te umieszcza się zazwyczaj w bibliotece, którą możemy użyć w do rozwiązania ściśle określonego problemu. Główną cechą takich bibliotek jest wyraźne nastawienie na udostępniany interfejs, a nie samą implementacje. O jakości takiego rozwiąznie świadczy nie tyle wydajność jego działania, lecz łatwość używania. Biblioteki takie dają programiście wrażenie pisania w zupełnie nowym, wyrażającym w możliwie najlepszy sposób jego intencje języku.
-Przykładami taki języków są np. język asercji z bilioteki AsserJ lub język mocków z bilioteki Mockito. 
+Internal DSL to język stworzonych w ramach innego istniejącego już języka ogólnego przeznaczenia. Technicznie rzecz biorą jest to zazwyczaj zbiór klas udostępniających wygodny dla programisty, dający wrażenie pisania w innym języku zbiór metod. Klasy te umieszcza się w bibliotece, którą możemy użyć do rozwiązania ściśle określonego problemu. Główną cechą takich bibliotek jest wyraźne nastawienie na udostępniany interfejs, a nie samą implementacje. O jakości takiego rozwiązania świadczy nie tyle wydajność jego działania, lecz łatwość użycia. Biblioteki takie pozwalają programiście na lepsze, prostsze i bardziej zwięzłe wyrażenie jego intencji. Przykładami taki języków są np. język asercji z biblioteki AssertJ lub  biblioteka Mockito. 
 
 \subsection{External DSL}
 
-Jest to jezyk domenowy z prawdziwego zdarzenia. Język taki posiada ściśle określoną gramatykę i od początku został zaprojektowany w ściśle określonym celu. Nie jest on częścią innego języka, chodź często z nim ściśle współpracuje. Przykładem takiej współpracy może być np komunikacja z bazą danych, gdzie kod programu (napisany np w języku JAVA), wywołuje pewne zapytanie w języku SQL. Przykładami takich języków są:
+External DSL to język domenowy z prawdziwego zdarzenia. Język taki posiada ściśle określoną gramatykę i od początku jest projektowany w określonym celu. Nie stanowi on części innego języka, chodź często z potrafi z nim współpracować. Przykładem takiej współpracy może być np. komunikacja z bazą danych, gdzie kod programu (napisany np w języku JAVA), wywołuje pewne zapytanie w języku SQL. Przykładami takich języków są:
 \begin{itemize}
 	\item SQL - język służący do obsługi relacyjnych baz danych
 	\item CSS - język służący do definiowania stylu stron intenetowych 
 	\item HTML - język służący do definiowania struktury strony internetowej
 \end{itemize}
 
-COKOLWIEK \cite{Eisenberg:2002:SXM,Goldfarb:2002:CFG} \ref{s:dtd}
-
 \section{Frameworki}
 
-Frameworki są doskonałym przykładem korzyści jakie niesie ze sobą popularna zasada Clean Code - DRY (Don't Repeat Yourself) czyli nie powtarzaj się. 
-Twórcy frameworków  wychodzą z założenia, że projekty informatyczne można z powodzeniem podzielić na pewne grupy np aplikacje webowe. Projekty informatyczne należące do takiej grupy bywają do siebie tak podobne, że zazwyczaj łatwiej jest wzkazać cechy wspólne niż różnice. Aplikacje webowe np. udostępniają pewien interfejs w postaci stron html, przechowują dane w bazach (zazwyczaj relacyjnych) i komunikują się z użytkownikiem za pomocą protokołu HTTP. Elementem różniącym te aplikacje jest ich wygląd i funkcjonalność. Ideą frameworku jest implementacja tych elementów wspólnych w jednym miejscu i udostępnienie programistom-użytkownikom frameworku przyjaznego interfejsu do implementacji różnic. Programista pisze jest ograniczony pewnymi ramami, w których musi mieścić się jego aplikacja, stąd nazwa takiego narzędzia - framework.
+Frameworki są doskonałym przykładem korzyści jakie niesie ze sobą popularna zasada Clean Code - DRY (Don't Repeat Yourself), czyli nie powtarzaj się. 
+Twórcy frameworków  wychodzą z założenia, że projekty informatyczne można z powodzeniem podzielić na pewne grupy jak np. aplikacje webowe. Projekty informatyczne należące do takiej grupy bywają do siebie tak podobne, że zazwyczaj łatwiej jest wskazać cechy wspólne niż różnice.
+Wszystkie aplikacje webowe udostępniają pewien interfejs w postaci stron html, przechowują dane w bazach (zazwyczaj relacyjnych) i komunikują się z użytkownikiem za pomocą protokołu HTTP. Elementem różniącym te aplikacje jest ich wygląd i funkcjonalność. Ideą frameworku jest implementacja wszystkich elementów wspólnych w jednym miejscu i udostępnienie programistom-użytkownikom frameworku przyjaznego interfejsu do implementacji różnic. Programista jest więc, ograniczony pewnymi ramami, w których musi mieścić się jego aplikacja, stąd nazwa takiego narzędzia - framework.
 
-Z uwagi na fakt, że gry RPG są bardzo popularne, a jednocześnie do siebie bardzo podobne, naturalnym wydaje się stworzenie oprogramowania pozwalające na łatwe tworzenie takiego typu gier. Narzędzie RPG Maker [http://www.rpgmakerweb.com/] pozwala na proste tworzenie dwuwymiarowych gier RPG. Według twórców, tworzenie gier przy pomocy RPG Maker, jest możliwe bez jakiejkolwiek wiedzy na temat programowania, a jednocześnie dając bardzo duże możliwości doświadczonym użytkownikom. Oprogramowanie udostępnia przyjazne GUI, dzięki któremu można tworzyć w pełni funkjonalnego gry i to na wiele różnych platforma. Jedynym, ale bardzo istotnym ograniczeniem jest ściśle narzucony gatunek gier. Jednak to ograniczenie właśnie pozwoliło na stworzenie narzędzia jednocześnie tak prostego i funkjonalnego. 
+Z uwagi na fakt, że gry RPG są bardzo popularne, a jednocześnie do siebie bardzo podobne, naturalnym wydaje się stworzenie oprogramowania pozwalające na łatwe tworzenie takiego typu gier. Narzędzie RPG Maker \cite{RPGMaker:2017:Doc} pozwala na proste wytwarzanie dwuwymiarowych gier RPG. Według twórców, tworzenie gier przy pomocy RPG Maker, jest możliwe bez jakiejkolwiek wiedzy na temat programowania, a jednocześnie dając bardzo duże możliwości doświadczonym użytkownikom. Oprogramowanie udostępnia przyjazne GUI, dzięki któremu można tworzyć w pełni funkcjonalne gry i to na wiele różnych platform. Jedynym, ale bardzo istotnym ograniczeniem jest ściśle narzucony gatunek gier. Jednak właśnie to ograniczenie pozwoliło na stworzenie narzędzia jednocześnie tak prostego i funkcjonalnego. 
 
-W tym rozdziale warto też wspomnieć o istnieniu narzędzi pozwalajace na łatwe tworzenie nawet zaawansowanych gier mobilnych dowolnego typu. Takim oprogramowanie jest np. Unity [https://unity3d.com/]. Unity udostępnia przyjazne GUI, które pozwala na tworzenie świata gry. Elementy fizyki takie jak grafitacja, są już zaimplementowane w silniku gry. Programista musi natomiast jedynie pamiętać o nadaniu obiektom odpowiednich cech takich jak masa. Logikę gry można zaimplementować w jednym z dwóch języków UnityScript, C\#. UnityScript jest językiem o sładni bardzo zbliżonej do JavaScript, a C\# jest populanym obiektowym językiem programowania. Użycie powszechnie znanych języków oraz wieleplatformowość z pewnością przyczyniło się do popularności Unity.
+W tu wspomnieć o istnieniu narzędzi pozwalających na łatwe tworzenie nawet zaawansowanych gier mobilnych i to dowolnego typu. Takim oprogramowanie jest np. Unity \cite{Unity3D:2017:Doc}. Unity udostępsnia przyjazne GUI, które pozwala na tworzenie świata gry. Elementy fizyki takie jak grawitacja, są już w pełni zaimplementowane w silniku gry. Programista musi natomiast jedynie pamiętać o nadaniu obiektom odpowiednich cech takich jak masa. Logikę gry można zaimplementować w jednym z dwóch języków UnityScript, C\#. UnityScript jest językiem o składni bardzo zbliżonej do JavaScript, a C\# to popularny obiektowy język programowania. Użycie powszechnie znanych języków oraz wieloplatformowość , co z pewnością przyczyniło się do olbrzymiej popularności, którą cieszy się Unity.
 
 \section{Zastosowania DSL w grach terenowych}
 
-W mojej pracy postawiłem sobie na celu stworzenie frameworku pozwalającego na łatwe tworzenie terenowych gier RPG. Narzędzie łączy ze sobą cechy isniejących rozwiązań zaprzęgając je jednocześnie do rozwiązania nowych problemów. Cele postawione przed tym frameworkiem są typowe. Udostępnić narzędzie do przyjaznego rozwiązywania problemów określonej klasy. Nowy jest natomiast obszar w jakim działać będzie framework oraz użyte rozwiazania.
+W mojej pracy postawiłem sobie na celu stworzenie frameworku pozwalającego na łatwe tworzenie terenowych gier RPG. Narzędzie łączy ze sobą cechy istniejących rozwiązań, zaprzęgając je jednocześnie do rozwiązania nowych problemów. Cele postawione przed tym frameworkiem są typowe. Udostępnić narzędzie do przyjaznego rozwiązywania problemów określonej klasy. Nowy jest natomiast obszar w jakim działać będzie framework oraz użyte rozwiązania.
 
-Przy pomocy Andventure Makera możliwe będzie tworzenie terenowych gier o narzuconych z góry, dość wąstkich i specyficznych ramach, typowych dla tradycyjnych gier RPG. Stworzona gra polegać będzie głównie na rozwoju postaci, poprzez odwiedzanie lokacji, podejmowanie decyzji, a przede wszystkim pokonywanie przeciwników. Postać sterowana przez gracza zdobywać będzie punkty doświadczenia, dzięki którym gracz będzie mógł rozwijać postać w wybranym przez siebie kierunku. 
+Przy pomocy Andventure Makera możliwe jest tworzenie gier terenowych o narzuconych z góry, dość wąskich i specyficznych ramach, typowych dla tradycyjnych gier RPG. Stworzona gra polegać będzie głównie na rozwoju postaci, poprzez odwiedzanie lokacji, podejmowanie decyzji, a przede wszystkim pokonywanie przeciwników. Postać sterowana przez gracza zdobywać będzie punkty doświadczenia, dzięki którym gracz będzie mógł rozwijać postać w wybranym przez siebie kierunku. 
 
-Większość dostępnych frameworków opiera się na dwóch rozwiazaniach. Albo udostępniają użystkowikowi interfesy graficzny, albo pewien popularny język programowania, poszerzony ewentualnie o pewne fukcjonalności. Pierwsze podejście stosowane jest najczęściej w przypadku gier komputerowych lub gry odbiorną jest osoba nie umiąca programować. Jest ono ukierunkowane na prostotę ograniczając przy tym jednak możliwości narzędzia. Drugie podejcie sprawdza się głównie w aplikacja biznesowych. Integracja frameworku z popularnym językiem programowania pozwala pozyskać szerokie rzesze odbiorców. Dodatkowo sprawia, że narzędzie jest zarówno elastyczne, jak uniwersalne, tzn. dające się zastosować wielu przypadkach. Frameworki takie często są pisane   
-W przypadku Adventure Makera pozstanowiem zastosować nieco inne podejście. Uznałem, że głównymi elementem gry RPG są świat w którym się rozgrywa, jej zasady oraz scenariusz. Stwiedziłem więc, że naturnym pomysłem na implementacje tych elementów, będzie specjalny język DSL. 
+Większość dostępnych frameworków opiera się na dwóch rozwiązaniach. Albo udostępniają użytkownikowi interfejs graficzny, albo pewien popularny język programowania, poszerzony ewentualnie o nowe funkcjonalności Pierwsze podejście stosowane jest najczęściej w przypadku gier lub gdy odbiorcą jest osoba nie umiejąca programować. Jest ono ukierunkowane na prostotę i wygodę, ograniczając przy tym jednak możliwości narzędzia. Drugie podejście sprawdza się głównie w aplikacja biznesowych. Integracja frameworku z popularnym językiem programowania pozwala pozyskać szerokie rzesze odbiorców. Dodatkowo sprawia, że narzędzie jest zarówno elastyczne, jak uniwersalne, tzn. dające się zastosować wielu przypadkach. Frameworki takie często są pisane w postaci bibliotek.
+W przypadku Adventure Makera postanowieniem zastosować nieco inne, innowacyjne podejście. Uznałem, że głównymi elementem gry RPG są świat w którym się rozgrywa, jej zasady oraz scenariusz. Stwierdziłem więc, że naturalnym pomysłem na implementacje tych elementów, będzie specjalny język DSL, zrozumiały dla fanów tego typu gier.
 
 \chapter{Wymagania}
 
-Jednym z pierwszym kroków jakie należy podjąć przez przystąpieniem do projektowania oprogramowania jest analiza wymagań. Uznałem, że aby, mój framework realizował postawione przed sobą zadania musi spełniać wymienione ponieżej wymagania funkcjonalne i niefunkcjonalne.
+Jednym z pierwszym kroków jakie należy podjąć przez przystąpieniem do projektowania oprogramowania jest analiza wymagań. Uznałem, jakie postawiłem przed Adventure Makerem można podzielić na funkcjonalne i niefunkcjonalne.
 
 \section{Funkcjonalne}
-Do wymagań funcjonalnych należą:
+Do wymagań funkcjonalnych należą:
 \begin{itemize}
-\item Język DSL zawieający elemnty takie jak:
+\item Język DSL zawierający elementy takie jak:
 \subitem Klasy Postaci
 \subitem Przedmioty
 \subitem Lokacje
-\subitem Zdarzenia
+\subitem Przygody
 \subitem Przeciwnicy
 \item Integracja ze środowiskiem IntelliJ Idea
 \item Kompilacja aplikacji na podstawie pliku DSL 
 \end{itemize}
 
-Elementy wchodziące w skłąd zaprojektowanego języka DSL zostały przeze mnie wybrane arbitralnie, w taki sposób, żeby zawierał minimum niezbędne do zaprojektowania gry.  Chciałem, aby zaprojektowany język był jednocześnie prosty, ale i pozwalający na implementacje nawet dość zawiłej logiki. Oczywiście RPG z prawdziwego zdarzenia powinien zawierać nieco więcej. Uznałem jednak, że dodanie elementów takich jak np. misje lub NPC zbędnie rozbudowały by język i jego implementacje. Elementy te prawdopodobnie pojawią się, w przypadku wydania kolejenej wersji frameworku. Nie mniej jednak implementacja stworzona w ramach tej pracy obejmować będzie jedynie wyszczególnione punktu.
+Zbiór elementów wchodzących w skład zaprojektowanego języka DSL został przeze mnie wybrany arbitralnie, w taki sposób, żeby zawierał minimum niezbędne do zaprojektowania gry. Chciałem, aby zaprojektowany język był jednocześnie prosty, ale i pozwalający na implementacje nawet dość zawiłej logiki. Oczywiście RPG z prawdziwego zdarzenia powinien zawierać nieco więcej. Uznałem jednak, że dodanie elementów takich jak np. misje zbędnie rozbudowały by język i jego implementacje. Elementy te prawdopodobnie pojawią się, w przypadku wydania kolejnej wersji frameworku. Nie mniej jednak implementacja stworzona w ramach tej pracy obejmować będzie jedynie wyszczególnione punkty.
 
-U celu ułatwienia edycji kodu warto udostępnić użytkownikowi przyjazne IDE. Na szczęście narzędzia takie już isnieją i nie musiałem projektować ich od zera. Popularne narzędzia programistyczne pozwalają na rozszarzanie ich funcjonalności poprzez tzw. wtyczki, czyli oprogramowanie, które doistalowuje się do już istniejącego IDE. Postanowiłem więc, że udostępnie obsługującą język AML wtyczkę do IDE IntelliJ Idea. Postanowiłem wybrać to środowisko z kilku powodów:
+U celu ułatwienia edycji kodu warto udostępnić użytkownikowi przyjazne IDE. Na szczęście narzędzia takie już istnieją i nie musiałem projektować ich od zera. Popularne narzędzia programistyczne pozwalają na rozszerzanie ich funkcjonalności poprzez tzw. wtyczki, czyli oprogramowanie, które doinstalowuje się do już istniejącego IDE. Postanowiłem więc, że udostępnię obsługującą język AML wtyczkę do IDE IntelliJ Idea. Postanowiłem wybrać to środowisko z kilku powodów:
 \begin{itemize}	
 \item jest darmowy w wersji Community,
 \item udostępnia integracje z Android SDK,
 \item jest wspierany przez Xtext i Xtend.
 \end{itemize}
 
-Możliwość łatwej edycji to zamało, aby język był fukcjonalny. Użytkownikowi należy udostępnić możliwość kompilacji kodu. W tym przydku będzie to transkompilacja, ponieważ kodem wyściowym nie będzie kod binarny, a pliki JAVA. Na podstawie wygenerowanego oraz dostarczonego wraz z frameworkiem kody możliwa musi być kompilacja gotowej aplikacji, bez konieczności dopisywania dodatkowego kodu. 
+Przyjazna edycja kodu to za mało, aby język był funkcjonalny. Użytkownikowi należy udostępnić możliwość kompilacji kodu. W tym przypadku będzie to transkompilacja, ponieważ kodem wyjściowym nie będzie kod binarny, a kod JAVA. Na podstawie wygenerowanego oraz dostarczonego wraz z frameworkiem kodu możliwa jest kompilacja gotowej aplikacji, bez konieczności dopisywania dodatkowego kodu. 
 
 \section{Niefunkcjonalne}
 Do wymagań niefunkcjonalnych nalezą:
 \begin{itemize}
-	\item Tworzenie gier RPG bez znajomości języków programowania ogólnego przeznaczenia oraz znajomości technologii
+	\item Tworzenie gier RPG bez znajomości technologii i języków programowania ogólnego przeznaczenia
+	\item Wykorzystanie darmowych narzędzi
 \end{itemize}
 
-Podstawowym założeniem Adventure Makera jest udostępnienie możliwości tworzenia gier osobom będącym laikami jeśli chodzi o programowanie i technologie IT. Cen ten został też niejako wyrażony poprzez wymagania funcjonalne w postaci implementacji i integracji z IDE języka AML.
+Podstawowym założeniem Adventure Makera jest udostępnienie możliwości tworzenia gier osobom będącym laikami jeśli chodzi o programowanie i technologie IT. Cel ten został też niejako wyrażony poprzez wymagania funkcjonalne w postaci implementacji i integracji z IDE języka AML.
 
 \chapter{Technologie}
 Przed przystąpieniem do projektu informatycznego warto zastanowić się z jakich narzędzi, technologii będziemy korzystać. Napeży wybrać technologie dostosowane do wymagań konkretnego projektu. Jest bardzo ważne, aby nie wymyślać nowo koła. Oznacza to, że należy korzystać z gotowych rozwiązań, jeżeli takie już istnieją. Warto sięgać po sprawdzone rozwiązania, które przeszły już swóch chrzest bojowy. W tym rodziale opisałem najważniejsze z użytych w opisawanym projekcie technologii.
@@ -448,8 +446,8 @@ adventure on start {
 	Bandits at Forest
 }
 \end{lstlisting}
-\section{Typy postaci}
-Definicja typu, inaczej klasy postaci to informacje na temat statystyk oraz umiejętności dostępnych dla danej klasy postaci. Statystyki dzielą się na statystyki początkowe, które postać otrzymuje przy starcie gry, oraz statystyki poziomowe, które zwiększają statystyki postaci z każdym zdobytym poziomem. Umiejętności zostały zorganizowane w postaci drzewa. Aby odblokować daną umiejętność, gracz musi najpierw odblokować wszystkie prowadzące do niej umiejętności.
+\section{Klasy Postaci}
+Definicja Klasy, inaczej typu postaci to informacje na temat statystyk oraz umiejętności dostępnych dla danej Klasy postaci. Statystyki dzielą się na statystyki początkowe, które postać otrzymuje przy starcie gry, oraz statystyki poziomowe, które zwiększają statystyki postaci z każdym zdobytym poziomem. Umiejętności zostały zorganizowane w postaci drzewa. Aby odblokować daną umiejętność, gracz musi najpierw odblokować wszystkie prowadzące do niej umiejętności.
 
 Definicja typu postaci rozpoczyna się od słów kluczowych "character type". Następnie należy podać nazwę typu za którą znajdują się nawiasy klamrowe. W nawiasach klamrowych należy umieścić kolejno:
 \begin{itemize}
@@ -502,7 +500,7 @@ item Sword (weapon) {
 }
 \end{lstlisting}
 
-\section{Definicja lokacji}
+\section{Definicja Lokacji}
 Lokacja to miejsce do którego można się odwołać definiując zdarzenie. Miejsce takie oznacza pewien obszar w fizycznym świecie np. pokój albo kawałek lasu. Lokacje możemy definiować na dwa sposoby za pomocą technologii GPS lub NFC. 
 W przypadku technologii GPS lokacje opisuje okrąg o środku wyrażonym jako współrzędne geograficzne i promieniu wyrażonym w metrach. Użycie tej technologii zalecane jest do opisu obszarów znajdujących się na otwartej przestrzeni 
 Opisując lokacje za pomocą technologii NFC wystarczy podać odpowiedni tag. Tą technologię należy wykorzystać do opisu przestrzeni zamkniętych jak np. pokoje. Trzeba pamiętać, że odpowiedni znacznik NFC musi znajdować się w tym pomieszczeniu.
@@ -516,8 +514,9 @@ location OldHouse tagged as OldHouseLocation
 location Forest in radius of 100 meters from 54.596077, 18.245200
 \end{lstlisting}
 
+\section{Definicja Przeciwnika}
 
-\section{Definicja przygody}
+\section{Definicja Przygody}
 Przygody są najważniejszym i najbardziej rozbudowanym elementem definicji w języku AML. 
 Definicja każdej przygody składa się z słowa kluczowego "adventure", nazwy Przygody, słów "starts from" oraz Zdarzenia początkowego.
 
