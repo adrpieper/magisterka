@@ -197,14 +197,15 @@ Mockito \cite{Mockito:2017:Doc} to biblioteka ściśle związana z frameworkiem 
 Dagger 2 \cite{Dagger2:2017:Doc} to biblioteka umożliwiająca wstrzykiwanie zależności w Androdzie. Istnieje wiele bibliotek umożliwiających DI, jednak Dagger 2 jest wśród programistów Androida. Jego główną zaletą jest rozstrzyganie zależności w czasie kompilacji oraz generacja kodu. Dzięki temu możemy wykryć wady projektu, takie jak zależności cykliczne jeszcze przed uruchomieniem aplikacji. Dodatkowo wygenerowany kod jest o wiele szybszy niż typowe rozwiazanie czasu wykonania - czyli refleksja.
 
 \section{Gradle}
-TODO
+
+Gradle \cite{Gradle:2017:Doc} ...
 
 \chapter{Projekt GUI}
-Ważnym elementem każdego współczesnego oprogramowania jest jego GUI, czyli interfejs graficzny. W przypadku frameworka do tworzenia gier  możemy o dwóch rodzajach GUI: frameworku i powstałych w nim aplikacji. 
+Ważnym elementem każdego współczesnego oprogramowania jest jego GUI, czyli interfejs graficzny. W przypadku frameworku do tworzenia gier  możemy o dwóch rodzajach GUI: frameworku i powstałych w nim aplikacji. 
 
 Jako, że framework został zrealizowany w postaci wtyczki do IDE, sprawa jego GUI jest rozwiązana. IDE Idea IntelliJ dostarcza bardzo wygodny i dopracowany interfejs użytkownika, a dostarczona przeze mnie wtyczka wykorzystuje jego możliwości. 
 
-Framework nie pozwala twórcy gry na dostosowanie interfejsu do swoich potrzeb, tak więc, jako projektant frameworka, postanowiłem przygotować interfejs prosty, a zarazem uniwersalny. GUI jest podzielone na trzy części:
+Framework nie pozwala twórcy gry na dostosowanie interfejsu do swoich potrzeb, tak więc, jako projektant frameworku, postanowiłem przygotować interfejs prosty, a zarazem uniwersalny. GUI jest podzielone na trzy części:
 \begin{itemize}
 	\item Menu początkowe
 	\item Tryb zwiedzania
@@ -239,13 +240,13 @@ Ekran walki jest zawiera najwięcej elementów ze wszystkich dostępnych w trybi
 \subsection*{Komunikat}
 Ekran komunikatu składa się z dwóch części. Wiadomości oraz przycisku "OK", którym gracz potwierdza, że zapoznał się z komunikatem. Wiadomość najczęściej wyświetlana jest w prostym oknie tekstowym, jednak w niektórych przypadkach konieczne jest użycie elementów bardziej rozbudowanych. Jest tak na przykład w przypadku okna wyświetlanego pod koniec przygody, zawierającego między innymi wykaz zdobytych przez gracza przedmiotów w postaci listy.
 \chapter{Architektura rozwiązania}
-W celu stworzenia frameworka Adventure Maker utworzyłem dwa projekty. Pierwszy to projekt odwpowiedzialny za DSL Andventure Maker Language. Projekt bazuje na technologii Xtext, a produktem wyjściowym jest wtyczka do IDE IntelliJ Idea obsługująca zaprojektowany DSL.
+W celu stworzenia frameworku Adventure Maker utworzyłem dwa projekty. Pierwszy to projekt odwpowiedzialny za DSL Andventure Maker Language. Projekt bazuje na technologii Xtext, a produktem wyjściowym jest wtyczka do IDE IntelliJ Idea obsługująca zaprojektowany DSL.
 Drugi projekt, to szkielet aplikacji na system Android. Kod aplikacji jest częściowo napisany w AML i do jego kompilacji potrzebna jest jego obsługa.
 
 Istotnym elementem implementacji frameworku są języki domenowe. W moim projektcie wykorzystałem zawróno wewnętrzny, jak i zerwnętrzny język domenowy. Zastosowanie zewnętrznego DSL pozwala twórcy gry na opisanie świata gry w sposób przyjazny dla osoby znającej tematykę gier RPG. Wewnętrzy DSL natomiast, sprawił, że generowany przez przez framework kod jest bardziej czytelny i przyjazny dla programisty, co w dużym stopniu przyczyniło się do skrócenia czasu potrzebnego mi do zaimplementowania generatorów.
 
 \section{Xtext DSL} 
-Projekt powstał w celu implementacji języka Andventure Maker Language. Opis tego języka znajduje się w rozdziale korzystaniu z frameworka.
+Projekt powstał w celu implementacji języka Andventure Maker Language. Opis tego języka znajduje się w rozdziale korzystaniu z frameworku.
 Wykorzystanie technologii Xtext [] wymaga implementacji dwóch elementów: gramatyki i generatorów kodu. 
 
 \subsection{Definicja Gramatyki} 
@@ -384,7 +385,14 @@ Szczegóły tych testu zawiera tabela.
 Rozdział zawiera zestawienie...
 
 \subsection{Testy automatyczne}
-Tabela zawiera wyniki przeprowadzonych testów jednostkowych.
+Testy jednostkowe zostały uruchomione przy pomocy narzędzia Gradle \cite{Gradle:2017:Doc}. Poniższe zestawienie pokazuje, że wszystkie testy przeszły pomyślnie.
+
+\begin{figure}[!tbh]
+	\centering
+	\includegraphics[width=1.0\hsize]{fig/test_summary}
+	\caption{Podsumowanie testów}
+	\source{Wygenerowane przez Gradle}
+\end{figure}
 
 \subsection{Generowanie kodu}
 Kod wygenerowany jest OK.
@@ -393,11 +401,11 @@ Kod wygenerowany jest OK.
 Odpowiednie zdarzenia odpalały się w odpowiednich sytuacjach.
 
 
-\chapter{Korzystanie z frameworka}
-Pisanie własnej gry przy użyciu frameworka Adventure Maker jest bardzo proste. Wymaga ono jednak przygotowania środowiska pracy.
+\chapter{Korzystanie z frameworku}
+Pisanie własnej gry przy użyciu frameworku Adventure Maker jest bardzo proste. Wymaga ono jednak przygotowania środowiska pracy.
 W tym rozdziale zawarłem instrukcje dotyczące instalacji, konfiguracji i korzystania z potrzebnych narzędzi. 
 \section{Konfiguracja środowika}
-Aby móc korzystać z frameworka należy pobrać i zainstalować IDE IntelliJ Idea, JRE, JDK i Android SDK oraz wtyczkę AML.
+Aby móc korzystać z frameworku należy pobrać i zainstalować IDE IntelliJ Idea, JRE, JDK i Android SDK oraz wtyczkę AML.
 \subsection{JRE}
 JRE, czyli Java Runtime Enviroment, to środowisko uruchomieniowe Javy. Jest ono niezbędne do uruchomienia oprogramowania napisanego napisanego w technologii Java. JRE należy pobrać ze strony producenta [] w wesji 1.8 i zainstalować w standardowy sposób.
 \subsection{JDK}
@@ -423,7 +431,7 @@ Implementacja własnej gry sprowadza się do edycji jednego pliku, mianowicie "g
 Projekt jest standardowym projektem Androidowym, tak więc możemy go też uruchomić przyciskiem play dostępnym w IDE IntelliJ Idea. Ważne jest, żeby korzystać z IDE, nawet w przypadku korzystania z gradle [], ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko.
 
 \chapter{Adventure Maker Language} 
-Adventure Maker Language to język domenowy stworzony specjalnie na potrzeby frameworka Adventure Maker. Poniżej znajduje się jego dokumentacja.
+Adventure Maker Language to język domenowy stworzony specjalnie na potrzeby frameworku Adventure Maker. Poniżej znajduje się jego dokumentacja.
 
 \section{Struktura pliku AML} 
 Plik AML definiuje wszystkie dostępne w grze elementy. Plik może zawierać dowolną ilość postaci, przedmiotów, lokacji oraz zdarzeń. Dodatkowo należy w nim umieścić warunki początkowe. 
@@ -640,7 +648,7 @@ Przygoda "MysteriusManAd" rozpoczyna się od pytania "Are you ready to fight?". 
 Odpowiedź "Yes" prowadzie od efektu zależnego od statystyk postaci. Postać posiadająca przynajmniej jedną ze statystyk na poziomie powyżej 30 punktów, będzie musiała stoczyć Walkę z "MysteriusMan". Jeżeli gracz zwycięży w walce otrzyma komunikat "Great. Now, you are ready for fight with Dragon", odblokuje Przygodę "BigDragon" w lokacji "Hills", a przygoda "MysteriusManAd", nie będzie dłużej dostępna w "OldHause". Postać niespełniająca warunków otrzyma po prostu komunikat "I don't think so". 
 
 \chapter{Przykładowa gra}
-Aby ułatwić zrozumienie i korzystanie z frameworka postanowiłem przygotować przykładową grę. Kod AML potrzebny do skompilowania gry znajduje się w załączniku.
+Aby ułatwić zrozumienie i korzystanie z frameworku postanowiłem przygotować przykładową grę. Kod AML potrzebny do skompilowania gry znajduje się w załączniku.
 
 \section{Opis scenariusza}
 
