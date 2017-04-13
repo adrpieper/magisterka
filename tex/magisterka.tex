@@ -167,15 +167,15 @@ Do wymagań niefunkcjonalnych nalezą:
 Podstawowym założeniem Adventure Makera jest udostępnienie możliwości tworzenia gier osobom będącym laikami jeśli chodzi o programowanie i technologie IT. Cel ten został też niejako wyrażony poprzez wymagania funkcjonalne w postaci implementacji i integracji z IDE języka AML.
 
 \chapter{Technologie}
-Przed przystąpieniem do projektu informatycznego warto zastanowić się z jakich narzędzi, technologii będziemy korzystać. Napeży wybrać technologie dostosowane do wymagań konkretnego projektu. Jest bardzo ważne, aby nie wymyślać nowo koła. Oznacza to, że należy korzystać z gotowych rozwiązań, jeżeli takie już istnieją. Warto sięgać po sprawdzone rozwiązania, które przeszły już swóch chrzest bojowy. W tym rodziale opisałem najważniejsze z użytych w opisawanym projekcie technologii.
+Przed przystąpieniem do projektu informatycznego warto zastanowić się jakie narzędzia i technologie wykorzystać. Należy wybrać technologie dostosowane do wymagań konkretnego projektu. Jest bardzo ważne, aby nie wymyślać koła na nowo. Oznacza to, że powinno się korzystać z gotowych rozwiązań, o ile tylko takie istnieją. Warto sięgać po sprawdzone rozwiązania, które przeszły już dowiodły swojej skuteczności. W tym rozdziale opisałem najważniejsze, z wykorzystanych przed Adventure Maker , technologii.
 
 \section{Xtext}
 
-Xtext \cite{Xtext:2017:Doc} to framework służący do implementacji języków DSL. Xtext tworzy infrastrukturę języka zawierającą elementy takie jak: parser,linker, typechecker, compiler na podstawie gramatyki języka. Dodatkowo pozwala na integracje zaprojektowane języka z popularnymi IDE: eclipse oraz IntelliJ Idea. Narzędzie umożliwia też ciągła integracje poprzez wsparcie dla maven i gradle.
+Xtext \cite{Xtext:2017:Doc} to narzędzie służącą do implementacji języków domenowych. Framework dostarcza, na podstawie gramatyki języka, całą jego infrastrukturę, zawierającą elementy takie jak: parser, linker, typechecker, compiler. Dodatkowo pozwala na integracje zaprojektowane języka z popularnymi IDE: eclipse oraz IntelliJ Idea. Narzędzie umożliwia też ciągła integracje poprzez wsparcie dla narzędzi Maven i Gradle.
 
 \section{Xtend}
 
-Xtend \cite{Xtend:2017:Doc} jest językiem programowania wywodzącym się z JAVY i składniowo zbliżonym do JAVY. Został zaprojektowany, aby wyeliminować kilka wad języka Java. Zawiera elementy niedostępne w Javie oraz upraszcza niektóre strutury pozwalając na pozbycie się niepotrzebnego kody. Kodem wynikowym dla języka Xtext jest Java. Mamy tu więc do czynienia z tranpilacją, czyli przetłumaczeniem jednego kodu źródłowego w inny.
+Xtend \cite{Xtend:2017:Doc} jest językiem programowania wywodzącym się i składniowo zbliżonym do JAVY. Został zaprojektowany, aby wyeliminować kilka wad tego języka. Zawiera elementy niedostępne w Jawie oraz upraszcza niektóre struktury pozwalając na pozbycie się niepotrzebnego kody. Kodem wynikowym dla języka Xtext jest Java. Mamy tu więc do czynienia z transpilacją, czyli przetłumaczeniem jednego kodu źródłowego w inny.
 W moim projekcie Xtend został użyty ze względu na technologie Xtext. Wykorzystanie Xtend jest zalecanym sposobem implementacji generatorów dla języków DSL tworzonych przy użyciu Xtend. Główną zaletą języka Xtext, w kontekście pisania generatorów kodu są szablony, które nie są dostępne w języku JAVA.
 
 \section{Android SKD}
@@ -188,15 +188,21 @@ JUnit \cite{JUnit:2017:Doc} jest to framework służący do testowania programó
 
 \section{Mockito}
 
-Mockito \cite{Mockito:2017:Doc} to biblioteka ściśle związana z frameworkiem JUnit. Umożliwia tzw. mockowanie obiektów na czas testów jednostkowych. Mockowanie polega na przechwyceniu wywołań metod z klas będących zależnościami testowanej klasy, tak aby można było sprawdzić poprawność działania klasy w oderwaniu od poprawności działania całego systemu. Możliwe jest zarówno zmiana zachowania wywołanej metody, jak i sprawdzenie, czy, ile razy i z jakimi parametrami została wywołana. Główną zaletą mockito jest bardzo wygodne API, tworzące swego rodzaju wewnętrzny DSL.
+Mockito \cite{Mockito:2017:Doc} to biblioteka ściśle związana z frameworkiem JUnit. Umożliwia tzw. mockowanie obiektów na czas testów jednostkowych. Mockowanie polega na przechwyceniu wywołań metod z klas będących zależnościami testowanej klasy, tak aby można było sprawdzić poprawność działania klasy w oderwaniu od reszty systemu. Możliwe jest zarówno zmiana zachowania wywołanej metody, jak i sprawdzenie, czy, ile razy i z jakimi parametrami została wywołana. Główną zaletą Mockito jest bardzo wygodne API, tworzące swego rodzaju wewnętrzny DSL.
  
 \section{Dagger 2}
 
-Dagger 2 \cite{Dagger2:2017:Doc} to biblioteka umożliwiająca wstrzykiwanie zależności w Androdzie. Istnieje wiele bibliotek umożliwiających DI, jednak Dagger 2 jest wśród programistów Androida. Jego główną zaletą jest rozstrzyganie zależności w czasie kompilacji oraz generacja kodu. Dzięki temu możemy wykryć wady projektu, takie jak zależności cykliczne jeszcze przed uruchomieniem aplikacji. Dodatkowo wygenerowany kod jest o wiele szybszy niż typowe rozwiazanie czasu wykonania - czyli refleksja.
+Dagger 2 \cite{Dagger2:2017:Doc} to biblioteka umożliwiająca DI, czyli wstrzykiwanie zależności. Istnieje wiele bibliotek umożliwiających DI, jednak Dagger 2 cieszy się największą popularnością programistów Androida. Jego główną zaletą jest rozstrzyganie zależności w czasie kompilacji oraz generacja kodu. Dzięki temu możemy wykryć wady projektu, takie jak zależności cykliczne jeszcze przed uruchomieniem aplikacji. Dodatkowo wygenerowany kod jest o wiele szybszy niż typowe rozwiązanie czasu wykonania - czyli refleksja. Jest to bardzo ważna cecha w przypadku aplikacji Androidowych, gdyż urządzenia mobilne mają stosunkowo ograniczone zasoby. 
 
 \section{Gradle}
 
-Gradle \cite{Gradle:2017:Doc} ...
+Gradle \cite{Gradle:2017:Doc} jest narzędziem służącym do automatyzacji budowania projektów informatycznych. Do jego zadań należą między innymi:
+\begin{itemize}
+	\item Zarządzanie zależnościami
+	\item Automatyzacja testów
+	\item Budowanie i instalacja aplikacji
+\end{itemize}
+Wraz ze specjalnie zaprojektowanym pluginem, stanowi obowiązkowy element każdego projektu związanego z systemem Android.
 
 \chapter{Projekt GUI}
 Ważnym elementem każdego współczesnego oprogramowania jest jego GUI, czyli interfejs graficzny. W przypadku frameworku do tworzenia gier  możemy o dwóch rodzajach GUI: frameworku i powstałych w nim aplikacji. 
