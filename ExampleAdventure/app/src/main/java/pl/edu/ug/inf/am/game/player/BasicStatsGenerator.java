@@ -20,7 +20,7 @@ public class BasicStatsGenerator {
         int newIntelligence = count(StatType.INTELLIGENCE, statsOnStart, statsPerLevel, level);
         int newStrength = count(StatType.STRENGTH, statsOnStart, statsPerLevel, level);
         int newAgility = count(StatType.AGILITY, statsOnStart, statsPerLevel, level);
-        return new Stats(newIntelligence, newStrength, newAgility);
+        return new Stats(newStrength, newIntelligence, newAgility);
     }
 
     private int count (StatType statType, Stats statsOnStart, Stats statsPerLevel,int level) {

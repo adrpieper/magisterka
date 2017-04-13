@@ -12,6 +12,10 @@ import javax.inject.Inject;
 @PerGame
 public class PlayerStatsUpdater {
 
+    public static final int HP_PER_LEVEL = 10;
+    public static final int BASE_HP = 100;
+    public static final int MP_PER_LEVEL = 10;
+    public static final int BASE_MP = 100;
     private final PlayerStatsState playerStatsState;
     private final ItemsState itemsState;
     private final ItemsStatsGenerator itemsStatsGenerator;
@@ -41,10 +45,10 @@ public class PlayerStatsUpdater {
 
     public void updateHpAndMp(){
         Stats stats = playerStatsState.getFull();
-        final int hp = stats.getStrength() * 10+100;
+        final int hp = stats.getStrength() * HP_PER_LEVEL + BASE_HP;
         playerState.getHp().setMaxValue(hp);
         playerState.getHp().setValue(hp);
-        final int mpValue = stats.getIntelligence() * 10+100;
+        final int mpValue = stats.getIntelligence() * MP_PER_LEVEL + BASE_MP;
         playerState.getMp().setMaxValue(mpValue);
         playerState.getMp().setValue(mpValue);
     }

@@ -7,12 +7,12 @@ public class CharacterTypeBuilder {
     private String name;
 
     public CharacterTypeBuilder statsOnStart(int strength, int intelligence, int agility) {
-        this.statsOnStart = new Stats(intelligence,strength,agility);
+        this.statsOnStart = new Stats(strength, intelligence, agility);
         return this;
     }
 
     public CharacterTypeBuilder statsPerLevel(int strength, int intelligence, int agility) {
-        this.statsPerLevel = new Stats(intelligence,strength,agility);;
+        this.statsPerLevel = new Stats(strength, intelligence, agility);;
         return this;
     }
 

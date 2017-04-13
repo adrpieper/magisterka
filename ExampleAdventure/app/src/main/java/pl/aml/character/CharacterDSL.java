@@ -11,7 +11,7 @@ public class CharacterDSL {
 
     @NonNull
     public static Stats stats(int intelligence, int strength, int agility) {
-        return new Stats(intelligence, strength, agility);
+        return new Stats(strength, intelligence, agility);
     }
 
     public static SkillNode node(SkillType skill, SkillNode... nodes) {
