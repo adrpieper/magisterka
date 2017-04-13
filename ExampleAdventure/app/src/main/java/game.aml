@@ -1,4 +1,3 @@
-
 skill BasicKnowledge {
     effect : take (3 * int) damage
     mp : 12
@@ -111,29 +110,54 @@ opponent SimpleExam {
 opponent MasterDegreeExam{
     power : 50
     hp : 100
-    exp : 10000
+    exp : 1000
     loot : Diploma 100%
 }
 
-adventure ExamAdventure starts from {
-    Ask "Have you passed all exams?"
-    Answer "Yes" to {
-        If you have more int than 30 or more agi than 30 {
-            Fight with MasterDegreeExam
-            If win {
-                {Show "Great. You just have gradueted your Master Degree"}
-                {Remove ExamAdventure at ClassRoom}
+adventure NotAStudent starts from {
+    Show "You are not a Student"
+}
+
+adventure SimpleExamAdventure starts from {
+    Fight with SimpleExam
+    If win {
+        {
+            If you have more int than 30 {
+                {Show "You are ready for MasterDegreeExam" }
+                {Remove SimpleExamAdventure at ClassRoom}
+                {Add MasterExamAdventure at ClassRoom}
+            }
+            else {
+                Show "You have to pass few more exams."
             }
         }
-        else {
-            Show "I don't think so"
+        {
+            If you have more agi than 30 {
+                {Show "You was catched on cheating." }
+                {Add NotAStudent at ClassRoom}
+                {Remove SimpleExamAdventure at ClassRoom}
+            }
         }
     }
-    Answer "No" to { Fight with SimpleExam }
+}
+
+adventure MasterExamAdventure starts from {
+    {Show "Have you passed all exams?"}
+    {
+        Fight with MasterDegreeExam
+        If win {
+            {Show "Great. You just have gradueted your Master Degree"}
+            {Remove MasterExamAdventure at MasterExamRoom}
+        }
+        If lost {
+            Show "You can try another one"
+        }
+    }
 }
 
 location ClassRoom tagged as ClassRoom
+location MasterExamRoom tagged as MasterExamRoom
 
 adventure on start {
-    ExamAdventure at ClassRoom
+    SimpleExamAdventure at ClassRoom
 }
