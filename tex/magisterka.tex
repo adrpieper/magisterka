@@ -427,93 +427,99 @@ Implementacja własnej gry sprowadza się do edycji jednego pliku, mianowicie "g
 Projekt jest standardowym projektem Androidowym, tak więc możemy go też uruchomić przyciskiem play dostępnym w IDE IntelliJ Idea. Ważne jest, żeby korzystać z IDE, nawet w przypadku korzystania z gradle [], ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko.
 
 \chapter{Adventure Maker Language} 
-Adventure Maker Language to język domenowy stworzony specjalnie na potrzeby frameworku Adventure Maker. Poniżej znajduje się jego dokumentacja.
+Adventure Maker Language (AML) to język domenowy stworzony specjalnie na potrzeby frameworku Adventure Maker. Poniżej znajduje się jego dokumentacja.
 
 \section{Struktura pliku AML} 
-Plik AML definiuje wszystkie dostępne w grze elementy. Plik może zawierać dowolną ilość postaci, przedmiotów, lokacji oraz zdarzeń. Dodatkowo należy w nim umieścić warunki początkowe. 
+Plik AML definiuje wszystkie dostępne w grze elementy. Plik może zawierać dowolną ilość Klas Postaci, Typów Przedmiotów, Przeciwników, Lokacji oraz Przygód. Dodatkowo należy w nim umieścić Przygody Początkowe. 
 
-\section{Przygody początkowe} 
-Warunki początkowe definiują przygody dostępne od początku gry. Definicja bloku przygód początkowych rozpoczyna się od słów kluczowych
-"adventure on start". Następnie w nawiasach klamrowych znajduje się dowolna liczba deklaracji przygód dostępnych na początku gry.
-Każda taka definicja składa się z nazwy przygody słówka kluczowego "at" i nazwy lokacji.
+\section{Przygody Początkowe} 
+Przygody Początkowe definiują Przygody udostępnione graczowi od początku gry. Definicja bloku Przygody Początkowe rozpoczyna się od słów kluczowych "adventure on start". Następnie w nawiasach klamrowych znajduje się dowolna liczba deklaracji przygód dostępnych na początku gry.
+Każda taka definicja składa się z nazwy Przygody, słówka kluczowego "at" i nazwy Lokacji.
 
-Poniższy przykład zawiera definicje składającą się z dwóch przygód "MysteriusMan" i "Bandits", ulokowanych odpowiednio w "OldHouse" i "Forest".
+Poniższy przykład zawiera definicje składającą się z dwóch Przygód "MysteriusMan" i "Bandits", ulokowanych odpowiednio w "OldHouse" i "Forest".
+
 \begin{lstlisting}
 adventure on start {
 	MysteriusMan at OldHouse
 	Bandits at Forest
 }
 \end{lstlisting}
+
 \section{Klasy Postaci}
-Definicja Klasy, inaczej typu postaci to informacje na temat statystyk oraz umiejętności dostępnych dla danej Klasy postaci. Statystyki dzielą się na statystyki początkowe, które postać otrzymuje przy starcie gry, oraz statystyki poziomowe, które zwiększają statystyki postaci z każdym zdobytym poziomem. Umiejętności zostały zorganizowane w postaci drzewa. Aby odblokować daną umiejętność, gracz musi najpierw odblokować wszystkie prowadzące do niej umiejętności.
+Definicja Klasy, inaczej typu postaci to informacje na temat statystyk oraz umiejętności dostępnych dla danej Klasy Postaci. Statystyki dzielą się na Początkowe, które postać otrzymuje przy starcie gry, oraz Poziomowe, które zwiększają całkowite statystyki postaci z każdym zdobytym poziomem. Umiejętności zostały zorganizowane w postaci drzewa. Aby odblokować daną umiejętność, gracz musi najpierw odblokować wszystkie prowadzące do niej umiejętności.
 
 Definicja typu postaci rozpoczyna się od słów kluczowych "character type". Następnie należy podać nazwę typu za którą znajdują się nawiasy klamrowe. W nawiasach klamrowych należy umieścić kolejno:
 \begin{itemize}
-	\item statystyki początkowe
-	\item statystyki poziomowe
-	\item drzewo umiejętności
+	\item Statystyki Początkowe
+	\item Statystyki Poziomowe
+	\item Drzewo Umiejętności
 \end{itemize}
 
-Definicja statystyk początkowych rozpoczyna się od słów kluczowych "stats on start:". Za tymi słowami umieszczone są ilościowe parametry siły, inteligencji i zwinności oznaczone odpowiednio słowami kluczowymi "str", "int", "agi", będącymi skrótami od angielskich tłumaczeń tych parametrów.
+Definicja Statystyk Początkowych rozpoczyna się od słów kluczowych "stats on start:". Za tymi słowami umieszczone są ilościowe parametry siły, inteligencji i zwinności oznaczone odpowiednio słowami kluczowymi "str", "int", "agi", będącymi skrótami od angielskich tłumaczeń nazw tych parametrów.
 
-Definicja statystyk poziomowych jest bardzo podobna to tych startowych. Występują tu dwie różnice. Po pierwsze, definicja zaczyna się od swój kluczowych "stats per lvl:". Pod drugie przed każdym parametrem występuje znak plusa, który podkreśla fakt, że są to wartości, które zwiększają statystyki postaci. 
+Definicja Statystyk Poziomowych jest bardzo podobna to tych Początkowych. Występują tu tylko dwie niewielkie różnice. Po pierwsze, definicja zaczyna się od swój kluczowych "stats per lvl:". Pod drugie przed każdym parametrem występuje znak plusa, który podkreśla fakt, że są to wartości, które zwiększają statystyki postaci. 
 
-Definicja drzewa umiejętności rozpoczyna się od słów kluczowych "skills tree:". Dalej znajduje się dowolna liczba gałęzi drzewa.
-Każdy gałąź składa się z nazwy umiejętności, której dotyczy oraz opcjonalnie zbioru gałęzi potomnych, które definiują umiejętności.
+Definicja Drzewa Umiejętności rozpoczyna się od słów kluczowych "skills tree:". Dalej znajduje się dowolna liczba gałęzi drzewa.
+Każdy gałąź składa się z nazwy umiejętności, której dotyczy oraz opcjonalnie zbioru gałęzi potomnych, które definiują umiejętności, dostępne po odblokowaniu umiejętności-rodzica.
 Zbiór gałęzi potomnych definiuje się w nawiasach klamrowych poprzedzonych symbolem "=>". 
 
-Poniżej znajduje się przykład definicji postaci typu "Wizard":
+Poniżej znajduje się pełny przykład definicji postaci typu "Wizard":
 \begin{lstlisting}
 character type Wizard {
-	stats on start:
-		10 str
-		20 int
-		15 agi
-	stats per lvl:
-		+ 1 str
-		+ 2 int
-		+ 1 agi
-	skills tree:
-		Fireball => {
-			Wirewall
-			BlackMagic
-		}
-		Poisoning
+   stats on start:
+      10 str
+      20 int
+      15 agi
+   stats per lvl:
+      + 1 str
+      + 2 int
+      + 1 agi
+   skills tree:
+      Fireball => {
+         Wirewall
+         BlackMagic
+      }
+      Poisoning
 }
 \end{lstlisting}
 Z definicji można odczytać, że postać typu "Wizard" otrzymuje 10 punktów siły, 20 inteligencji i 15 zwinności na początku gry.
-Otrzymuje też 1 punkt siły, 2 inteligencji i 1 zwinności z każdym zdobytym poziomem doświadczenia.
-Na początku może odblokować umiejętność "Fireball" lub "Poisoning". Odblokowanie umiejętności "Fireball" pozwala ponadto na odblokowanie dwóch kolejnych: "Wirewall" i "BlackMagic". 
+Jego statystyki zwiększają się o 1 punkt siły, 2 inteligencji i 1 zwinności z każdym zdobytym poziomem doświadczenia.
+Na początku może odblokować umiejętność "Fireball" lub "Poisoning". Zdobycie umiejętności "Fireball" udostępnia ponadto dwie kolejnych: "Wirewall" i "BlackMagic". 
 
-\section{Typy Przedmioty}
-Przedmiot to element, który stanowi nagrodę za pokonanie przeciwnika i może być wykorzystany w celu podniesienia statystyk postaci. 
-Definicja przedmiotu jest bardzo prosta. Wystarczy podać jego nazwę, typ oraz wartości premii do odpowiednich statystyk.
+\section{Typy Przedmiotów}
+Przedmiot to element, który stanowi nagrodę dla gracza i może być wykorzystany w celu podniesienia statystyk jego postaci. Definicja Typu Przedmiotu jest bardzo prosta. Wystarczy podać jego nazwę, kategorię oraz wartości premii do odpowiednich statystyk.
+Do wyboru mamy następujące kategorie (w nawiasie podano odpowiadające kategorii słówko kluczowe):
+\begin{itemize}
+	\item Broń (weapon)
+	\item Hełm (helmet)
+	\item Zbroja (armor)
+	\item Rękawice (gloves)
+\end{itemize}
 Wartości premii umieszczone są w nawiasach klamrowych i składają się z wartości liczbowej poprzedzonej znakiem plus oraz słówka kluczowego "agi", "str" lub "int" odnoszącego się do odpowiedniego typu statystyk. Przedmiot nie musi zawierać bonusu do każdego typu statystyk.
 
-Poniżej znajduje się przykład definiujący przedmiot typu "Sword", zwiększający siłę postaci o 4, a zwinność o 3 punkty.
+Poniżej znajduje się przykład definiujący przedmiot typu "Sword", należący do kategorii Broń, zwiększający siłę postaci o 4, a zwinność o 3 punkty.
 \begin{lstlisting}
 item Sword (weapon) {
-	+ 4 str
-	+ 3 agi
+   + 4 str
+   + 3 agi
 }
 \end{lstlisting}
 
-\section{Definicja Lokacji}
-Lokacja to miejsce do którego można się odwołać definiując zdarzenie. Miejsce takie oznacza pewien obszar w fizycznym świecie np. pokój albo kawałek lasu. Lokacje możemy definiować na dwa sposoby za pomocą technologii GPS lub NFC. 
-W przypadku technologii GPS lokacje opisuje okrąg o środku wyrażonym jako współrzędne geograficzne i promieniu wyrażonym w metrach. Użycie tej technologii zalecane jest do opisu obszarów znajdujących się na otwartej przestrzeni 
+\section{Lokacje}
+Lokacja to miejsce do którego można się odwołać definiując Przygodę. Miejsce takie oznacza pewien obszar w fizycznym świecie np. pokój albo kawałek lasu. Lokacje można definiować na dwa sposoby: za pomocą technologii GPS lub NFC. 
+W przypadku technologii GPS lokacje opisuje okrąg o środku składającym się z współrzędnych geograficznych i promieniu wyrażonym w metrach. Użycie tej technologii zalecane jest do opisu obszarów znajdujących się na otwartej przestrzeni.
 Opisując lokacje za pomocą technologii NFC wystarczy podać odpowiedni tag. Tą technologię należy wykorzystać do opisu przestrzeni zamkniętych jak np. pokoje. Trzeba pamiętać, że odpowiedni znacznik NFC musi znajdować się w tym pomieszczeniu.
 
-Definicja lokacji rozpoczyna się od słowa kluczowego "location" i nazwy. Jeżeli lokacja wyrażona ma być przez znacznik NFC należy użyć słów kluczowych "tagged as", a następnie podać tekst, który stanowi zawartość tagu. W przypadku korzystania z technologii GPS używa się słów kluczowych "in radius of" po którym podaje się odległość w metrach. Następnie po słowach "meters from" należy umieścić szerokość i długość geograficzną.
+Definicja Lokacji rozpoczyna się od słowa kluczowego "location" i jej nazwy. Jeżeli lokacja ma być opisana przez znacznik NFC należy użyć słów kluczowych "tagged as", a następnie podać tekst, który stanowi zawartość tagu. W przypadku korzystania z technologii GPS używa się słów kluczowych "in radius of" po którym podaje się odległość w metrach. Następnie po słowach "meters from" należy umieścić szerokość i długość geograficzną.
 
-Poniżej znajdują się przykłady definicji lokacji "OldHouse" i "Forest". Lokacja "OldHouse" oznaczona jest tagiem "OldHouseLocation", natomiast 
-"Forest" to obszar o promieniu 100 metrów od punktu o współrzędnych 54°35'45.9"N, 18°14'42.7"E.
+Poniżej znajdują się przykłady definicji lokacji "OldHouse" i "Forest". Lokacja "OldHouse" oznaczona jest tagiem "OldHouseLocation", natomiast "Forest" to obszar o promieniu 100 metrów od punktu o współrzędnych 54°35'45.9"N, 18°14'42.7"E.
 \begin{lstlisting}
 location OldHouse tagged as OldHouseLocation
 location Forest in radius of 100 meters from 54.596077, 18.245200
 \end{lstlisting}
 
 \section{Definicja Przeciwnika}
-
+// TODO
 \section{Definicja Przygody}
 Przygody są najważniejszym i najbardziej rozbudowanym elementem definicji w języku AML. 
 Definicja każdej przygody składa się z słowa kluczowego "adventure", nazwy Przygody, słów "starts from" oraz Zdarzenia początkowego.
