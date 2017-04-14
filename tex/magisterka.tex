@@ -112,7 +112,7 @@ External DSL to język domenowy z prawdziwego zdarzenia. Język taki posiada śc
 
 \section{Frameworki}
 
-Frameworki są doskonałym przykładem korzyści jakie niesie ze sobą popularna zasada Clean Code - DRY (Don't Repeat Yourself), czyli nie powtarzaj się. 
+Frameworki są doskonałym przykładem korzyści jakie niesie ze sobą popularna zasada Clean Code \cite{CleanCode:1000} - DRY (Don't Repeat Yourself), czyli nie powtarzaj się. 
 Twórcy frameworków  wychodzą z założenia, że projekty informatyczne można z powodzeniem podzielić na pewne grupy jak np. aplikacje webowe. Projekty informatyczne należące do takiej grupy bywają do siebie tak podobne, że zazwyczaj łatwiej jest wskazać cechy wspólne niż różnice.
 Wszystkie aplikacje webowe udostępniają pewien interfejs w postaci stron html, przechowują dane w bazach (zazwyczaj relacyjnych) i komunikują się z użytkownikiem za pomocą protokołu HTTP. Elementem różniącym te aplikacje jest ich wygląd i funkcjonalność. Ideą frameworku jest implementacja wszystkich elementów wspólnych w jednym miejscu i udostępnienie programistom-użytkownikom frameworku przyjaznego interfejsu do implementacji różnic. Programista jest więc, ograniczony pewnymi ramami, w których musi mieścić się jego aplikacja, stąd nazwa takiego narzędzia - framework.
 
@@ -243,56 +243,52 @@ Ekran decyzji jest bardzo prosty. Zawiera jedynie pole wyświetlające pytanie s
 Ekran walki jest zawiera najwięcej elementów ze wszystkich dostępnych w trybie przygody. Odpowiedzialny jest za wyświetlanie oraz sterowanie przebiegiem starcia pomiędzy postacią gracza, a dowolnym przeciwnikiem. Interfejs wyświetla nazwę przeciwnika, kolorowe paski zawierające informacje o punktach życia (tzw. hit points) postaci i przeciwnika oraz o punktów many gracza. W dolnej części znajdują się przyciski akcji pozwalające na użycie standardowego ataku lub dowolnej umiejętności.
 \subsection*{Komunikat}
 Ekran komunikatu składa się z dwóch części. Wiadomości oraz przycisku "OK", którym gracz potwierdza, że zapoznał się z komunikatem. Wiadomość najczęściej wyświetlana jest w prostym oknie tekstowym, jednak w niektórych przypadkach konieczne jest użycie elementów bardziej rozbudowanych. Jest tak na przykład w przypadku okna wyświetlanego pod koniec przygody, zawierającego między innymi wykaz zdobytych przez gracza przedmiotów w postaci listy.
+
 \chapter{Architektura rozwiązania}
-W celu stworzenia frameworku Adventure Maker utworzyłem dwa projekty. Pierwszy to projekt odwpowiedzialny za DSL Andventure Maker Language. Projekt bazuje na technologii Xtext, a produktem wyjściowym jest wtyczka do IDE IntelliJ Idea obsługująca zaprojektowany DSL.
-Drugi projekt, to szkielet aplikacji na system Android. Kod aplikacji jest częściowo napisany w AML i do jego kompilacji potrzebna jest jego obsługa.
 
-Istotnym elementem implementacji frameworku są języki domenowe. W moim projektcie wykorzystałem zawróno wewnętrzny, jak i zerwnętrzny język domenowy. Zastosowanie zewnętrznego DSL pozwala twórcy gry na opisanie świata gry w sposób przyjazny dla osoby znającej tematykę gier RPG. Wewnętrzy DSL natomiast, sprawił, że generowany przez przez framework kod jest bardziej czytelny i przyjazny dla programisty, co w dużym stopniu przyczyniło się do skrócenia czasu potrzebnego mi do zaimplementowania generatorów.
+Framework Adventure Maker składa się z dwóch projektów. Pierwszy odpowiedzialny jest za DSL (Andventure Maker Language). Projekt bazuje na narzędziu Xtext, a produktem wyjściowym jest wtyczka do IDE IntelliJ Idea obsługująca zaprojektowany DSL. Drugi projekt, to szkielet aplikacji na system Android. Kod aplikacji jest częściowo napisany w AML i do jego kompilacji potrzebna jest jego obsługa.
 
-\section{Xtext DSL} 
-Projekt powstał w celu implementacji języka Andventure Maker Language. Opis tego języka znajduje się w rozdziale korzystaniu z frameworku.
-Wykorzystanie technologii Xtext [] wymaga implementacji dwóch elementów: gramatyki i generatorów kodu. 
+Istotnym elementem implementacji frameworku są języki domenowe. W moim projektcie wykorzystałem zarówno wewnętrzny, jak i zewnętrzny język domenowy. Zastosowanie zewnętrznego DSL pozwala twórcy gry na opisanie świata gry w sposób przyjazny dla osoby znającej tematykę gier RPG. Wewnętrzny DSL natomiast, sprawił, że generowany przez wtyczkę kod jest bardziej czytelny i przyjazny dla programisty, co w dużym stopniu przyczyniło się do skrócenia czasu potrzebnego mi do zaimplementowania generatorów.
+
+\section{AML} 
+Projekt powstał w celu implementacji języka Andventure Maker Language. Dokumentacja języka znajduje się w osobnym rozdziale. Wykorzystanie technologii Xtext \cite{Xtext:2017:Doc} wymaga od projektanta języka implementacji dwóch elementów: gramatyki i generatorów kodu. 
 
 \subsection{Definicja Gramatyki} 
-Gramatyka języka została umieszczona w pojedyńczym pliku -nazwa pliki-. Głównym celem stworzenia gramatyki jest opis modelu syntaktycznego i semantycznego tworzonego języka. Innymi słowy musimy zdefiniować jaki tekst będzie należał do języka oraz jak zmapować dany tekst na jego reprezentacje w pamięci komputera [dokumentacja]. Xtext na podstawie tego pliku wygeneruje między innymi parser, który sprawdzi, czy dany tekst poprawnym programem oraz zwróci jego reprezentacje w postaci drzewa obiektów.
+
+Gramatyka języka AML znajduje w pojedynczym pliku o nazwie "AML.xtext". Gramatyka zawiera zarówno opis modelu syntaktycznego i semantycznego tworzonego języka. Innymi słowy zdefiniuje jaki tekst należy do języka oraz jak będzie on reprezentowany w pamięci komputera. Xtext na podstawie tego pliku generuje między innymi parser, który sprawdzi, czy dany tekst poprawnym programem oraz zwróci jego reprezentacje w postaci drzewa obiektów.
 
 \subsection{Generator}
-Generator języka odpowiedzialny jest za wygenerowanie kodu (w tym przypadku kodu Java) na podstawie modelu semantycznego zwróconego przez parser w postacie drzewa obiektów. Generator został napisany w języku Xtend i zkłada się z głównej klasy implementującej metodę -nazwa metody- oraz klas pomocniczych utworzonym w celu dekompozycji problemu na mniejsze części zgodnie z zasadą pojedynczej odpowiedzialności [źródło].
+Generator języka odpowiedzialny jest za wygenerowanie kodu (w tym przypadku kodu Java) na podstawie modelu semantycznego zwróconego przez parser w postacie drzewa obiektów. Generator został napisany w języku Xtend i składa się z głównej klasy implementującej metodę "doGenerate" oraz klas pomocniczych utworzonym w celu dekompozycji problemu na mniejsze części zgodnie z zasadą pojedynczej odpowiedzialności \cite{CleanCode:1000}.
 
 \section{Aplikacja Android}
-Ten projekt to standardowa aplikacja androidowa wykorzystująca AndroidSDK rozbudowana o język AML i wykorzystująca kilka dodatkowych narzędzi:
-\begin{itemize}
-	\item Dagger 2
-	\item JUnit
-	\item Mockito
-\end{itemize}
+Ten projekt to standardowa aplikacja Androidowa wykorzystująca AndroidSDK rozbudowana o język AML, na podstawie, którego generowana jest cześć kodu aplikacji.
 
-Architektóra projektu jest dość rozbudowana i można z niej wydzielić następujące części:
+Architektura projektu jest dość rozbudowana i można z niej wydzielić następujące części:
 
 \begin{itemize}
-	\item Kod aplikacji
+	\item Standardowy kod aplikacji
 	\item Zasoby
 	\item Plik manifestu
-	\item Pliki grandle
+	\item Pliki Grandle
 	\item Testy
 	\item Wewnętrzy język AML
 	\item Plik game.aml
+	\item Testowy Kod implementujący zasady gry
 	\item Wygenerowany Kod implementujący zasady gry
-	\item Przykładowy Kod implementujący zasady gry
 \end{itemize}
 
-Pierwsze pięć elementów jest typowych dla aplikacji android, natomiasto pozostałe wynikają z zastosowania języka AML.
+Pierwsze pięć elementów jest typowych dla aplikacji android, natomiast pozostałe są specyficzne i wynikają z zastosowania języka AML.
 
-\subsection{Kod aplikacji} 
-Jest to bardzo rozbudowana, ale i najbardziej tradycyjna i oczywista część aplikacji. W jego skład wchodzą pakiety "" umieszczone w folderze "src/main/java"
-Ten moduł jest odpowiedzialny za kluczowe elementu aplikacji. To tutaj zdefiniowany jest zachowanie aplikacji. Moduł korzysta Kodu implementujący zasady gry oraz zasobów. W jego kodzie znajduje została umieszczona logika związana z systemem Android taka jak  komunikacja z czujnikami NFC i GSP lub obsługa interfejsu użytkownika. Dodatkowo kod opdowiada za elementy stałe dla każdej gry takie jak mechanizm walki i rozwoju postaci.
+\subsection{Standardowy kod aplikacji} 
 
-Kod został podzielony na warstwy i komponenty, co zostało odwierciedlone w strukturze pakietów. 
-Komponenty to zbiory klas realizujące wspólne zadanie. Ich struktura jest hierarchiczna tzn. w skład konkretnego komponentu wchodzą kolejne, odpowiedzialne za zadania bardziej sprecyzowane, komponenty. Kompletną strukturę komponentów aplikacji przedstawie poniższy drzewo.
+Jest to bardzo rozbudowana, ale i najbardziej tradycyjna i oczywista część aplikacji. W jego skład wchodzą pakiety "edu.ug.inf.am.*" umieszczone w folderze "app/src/main/java". Ten moduł jest odpowiedzialny za kluczowe działania i wyglądu aplikacji. Moduł korzysta z kodu implementujący zasady gry oraz zasobów. Została w nim umieszczona logika związana z systemem Android taka jak komunikacja z czujnikami NFC i GSP lub obsługa interfejsu użytkownika. Dodatkowo kod odpowiada za elementy stałe dla każdej gry takie jak mechanizm walki i rozwoju postaci.
 
-DRZEWO
+Kod został podzielony na warstwy i komponenty, co zostało odzwierciedlone w strukturze pakietów. 
+Komponenty to zbiory klas realizujące wspólne zadanie. Ich struktura jest hierarchiczna tzn. w skład konkretnego komponentu wchodzą kolejne, odpowiedzialne za zadania bardziej sprecyzowane. Kompletną strukturę komponentów aplikacji przedstawie poniższy drzewo.
 
-Wszystkie komponenty zostały zrealizowany w postaci osobnych pakietów o podobnej strukturze. W nich skład wchodzi po kilka pakietów-warstw zawierających bezpośrednio kod realizujacy te funkcjonalność tych warst. Dodatkowo pakiety, nie będące liśmi w drzewie, zawiera pakiety-komponenty znajdującymi się niżej w hierarchi.
+DRZEWO // TODO
+
+Wszystkie komponenty zostały zrealizowane w postaci pakietów o podobnej strukturze. W nich skład wchodzi po kilka pakietów-warstw zawierających bezpośrednio klasy realizujące funkcjonalność tych warstw Dodatkowo pakiety, nie będące liśćmi w drzewie, zawiera pakiety-komponenty znajdującymi się niżej w hierarchii.
 
 W kodzie wydzieliłem następujące warstwy i odpowiadające im nazwy pakietów:
 \begin{itemize}
@@ -303,7 +299,7 @@ W kodzie wydzieliłem następujące warstwy i odpowiadające im nazwy pakietów:
 	\item Komponent (dagger)
 \end{itemize}
 
-Widok to wastwa odpowiedzialna za interfejs użytkownika. W jej skład wchodzą przede wszystkim klasy dziedziczące po Activity, Fragment oraz View. W większości przypadków zadaniem klasy jest połączenie danych z modelem za pomocą dostępnego od niedawna w Adroidzie mechanizmu Data Bindingu (TODO można wyjaśnić co to). Model danych pobierany jest z warstwy kontrolera.
+Widok to warstwa odpowiedzialna za interfejs użytkownika. W jej skład wchodzą przede wszystkim klasy dziedziczące po Activity, Fragment oraz View. W większości przypadków zadaniem klasy jest połączenie danych z widokiem za pomocą dostępnego od niedawna w Adroidzie mechanizmu Data Bindingu. Danych pobierany jest z warstwy kontrolera.
 
 Warstwa kontrolera odpowiada przede wszystkim za obsługę zdarzeń przychodzących z interfejsu użytkownika, oraz dostarczanie modelu danych dla widoku. Zajmuje się też modyfikacją modelu danych. W prostych przypadkach modyfikuje ją bezpośrednio, a w bardziej zaawansowanych deleguje to zadanie do warstwy logiki. Inną ważną odpowiedzialnością tej wartswy jest przełączanie pomiędzy widokami. 
 
