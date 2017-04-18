@@ -30,7 +30,7 @@ public class GameSubComponentManager extends SubComponentManager {
     public void startTrip() {
         TripComponent component = gameComponent.tripComponent();
         setSubcomponent(TripComponent.class, component);
-        component.tripListenersManager().unregister();
+        component.tripListenersManager().register();
         component.tripNavigator().showTrip();
     }
 

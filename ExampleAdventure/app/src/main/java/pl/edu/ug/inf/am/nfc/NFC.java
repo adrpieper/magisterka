@@ -105,7 +105,12 @@ public class NFC {
             if (ndefRecord.getTnf() == NdefRecord.TNF_WELL_KNOWN && Arrays.equals(ndefRecord.getType(), NdefRecord.RTD_TEXT)) {
                 try {
                     Toast.makeText(context, readText(ndefRecord), Toast.LENGTH_SHORT).show();
+
+                    Log.d("LOCATION", "listener test");
+
                     if (listener != null) {
+
+                        Log.d("LOCATION", "listener ok");
                         listener.onRead(readText(ndefRecord));
                     }
                 } catch (UnsupportedEncodingException e) {}
