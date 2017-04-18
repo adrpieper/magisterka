@@ -22,9 +22,7 @@ public class NFCListener implements NFC.TagReaderListener {
     @Override
     public void onRead(String tagMessage) {
         Place place = forTag(tagMessage);
-        Log.d("LOCATION", place.name());
         if (place != null) {
-            Log.d("LOCATION","enter into : "+place.name());
             locationManager.enterInto(place);
         }
     }

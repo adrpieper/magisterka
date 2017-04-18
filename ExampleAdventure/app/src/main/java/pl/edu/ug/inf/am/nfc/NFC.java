@@ -75,16 +75,15 @@ public class NFC {
     }
 
     public void handleIntent(Intent intent) {
-        Toast.makeText(context, "handleIntent", Toast.LENGTH_SHORT).show();
 
         String action = intent.getAction();
+
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
 
             String type = intent.getType();
             if ("text/plain".equals(type)) {
 
                 Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-                Toast.makeText(context, "ACTION_NDEF_DISCOVERED", Toast.LENGTH_SHORT).show();
                 read(tag);
             } else {
                 Log.d(TAG, "Wrong mime type: " + type);
@@ -104,13 +103,9 @@ public class NFC {
         for (NdefRecord ndefRecord : records) {
             if (ndefRecord.getTnf() == NdefRecord.TNF_WELL_KNOWN && Arrays.equals(ndefRecord.getType(), NdefRecord.RTD_TEXT)) {
                 try {
-                    Toast.makeText(context, readText(ndefRecord), Toast.LENGTH_SHORT).show();
-
-                    Log.d("LOCATION", "listener test");
 
                     if (listener != null) {
 
-                        Log.d("LOCATION", "listener ok");
                         listener.onRead(readText(ndefRecord));
                     }
                 } catch (UnsupportedEncodingException e) {}
