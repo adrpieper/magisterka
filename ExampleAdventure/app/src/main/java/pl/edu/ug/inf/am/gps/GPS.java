@@ -5,6 +5,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 import pl.edu.ug.inf.am.game.dagger.PerGame;
 
@@ -28,7 +29,10 @@ public class GPS {
 
             @Override
             public void onLocationChanged(Location location) {
+                Log.d("LOCATION", "GPS loc changed");
                 if (listener != null) {
+                    Log.d("LOCATION", "listener ok");
+                    Log.d("LOCATION", location.toString());
                     listener.onLocationChanged(location);
                 }
             }

@@ -8,9 +8,9 @@ public class Area {
     private double radius;
     private Place place;
 
-    public Area(double longitude, double latitude, double radius, Place place) {
-        this.longitude = longitude;
+    public Area(double latitude, double longitude, double radius, Place place) {
         this.latitude = latitude;
+        this.longitude = longitude;
         this.radius = radius;
         this.place = place;
     }
