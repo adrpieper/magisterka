@@ -1,163 +1,27 @@
-skill BasicKnowledge {
-    effect : take (3 * int) damage
-    mp : 12
-    cooldown : 1 turns
-}
-
-skill BrilliantIdea {
-    effect : take (4 * int) damage
-    mp : 20
-    cooldown : 2 turns
-}
-
-skill Focusing {
-    effect : take (12 * int + 13 * agi) damage
-    mp : 60
-    cooldown : 4 turns
-}
-
-skill AwesomeFocusing {
-    effect : take (12 * int + 13 * agi) damage
-    mp : 60
-    cooldown : 4 turns
-}
-
-character type GoodStudent {
+character type NFCTestCharacter {
     stats on start:
-     10 str
-     20 int
-     10 agi
+        10 str
+        10 int
+        10 agi
     stats per lvl:
-     + 1 str
-     + 2 int
-     + 1 agi
+        + 1 str
+        + 1 int
+        + 1 agi
     skills tree:
-    BasicKnowledge => {
-        BrilliantIdea
-        Focusing => {AwesomeFocusing}
-    }
 }
 
-skill PaperCheatsheet {
-    effect : take 2*agi damage
-    mp : 10
+location TestLocation1 in radius of 10 meters from 54.601292, 18.269273
+location TestLocation2 in radius of 1 0 meters from 54.600007, 18.269222
+
+adventure TestAdventure1 starts from {
+    Show "Test adventure 1"
 }
 
-skill Smartphone {
-    effect : take 2*agi damage
-    mp : 10
+adventure TestAdventure2 starts from {
+    Show "Test adventure 2"
 }
-
-skill FriendHelp {
-    effect : take 2*agi damage
-    mp : 10
-}
-
-skill Luck {
-    effect : take 2*agi damage
-    mp : 10
-}
-
-character type Cheater {
-    stats on start:
-     10 str
-     10 int
-     20 agi
-    stats per lvl:
-    + 1 str
-    + 1 int
-    + 2 agi
-    skills tree:
-    Luck => {
-        PaperCheatsheet
-        FriendHelp
-        Smartphone
-    }
-}
-
-item FunnyHat (helmet) {
-}
-
-item GoodPen (weapon) {
-    + 12 str
-}
-
-item GoodGrade (armor) {
-    + 12 str
-}
-
-item Diploma (armor) {
-    + 10 agi
-    + 10 str
-    + 10 int
-}
-
-item WarmGloves (gloves) {
-    + 1 str
-}
-
-item BrandNewSmartPhone (weapon) {
-    + 5 int
-}
-
-opponent SimpleExam {
-    power : 10
-    hp : 20
-    exp : 100
-    loot : GoodGrade 50%, FunnyHat 1 %, BrandNewSmartPhone 10%, GoodPen 20%, WarmGloves 10%
-}
-
-opponent MasterDegreeExam{
-    power : 50
-    hp : 100
-    exp : 1000
-    loot : Diploma 100%
-}
-
-adventure NotAStudent starts from {
-    Show "You are not a Student"
-}
-
-adventure SimpleExamAdventure starts from {
-    Fight with SimpleExam
-    If win {
-        {
-            If you have more int than 30 {
-                {Show "You are ready for MasterDegreeExam" }
-                {Remove SimpleExamAdventure at ClassRoom}
-                {Add MasterExamAdventure at ClassRoom}
-            }
-            else {
-                Show "You have to pass few more exams."
-            }
-        }
-        {
-            If you have more agi than 30 {
-                {Show "You was catched on cheating." }
-                {Add NotAStudent at ClassRoom}
-                {Remove SimpleExamAdventure at ClassRoom}
-            }
-        }
-    }
-}
-
-adventure MasterExamAdventure starts from {
-    {Show "Have you passed all exams?"}
-    {
-        Fight with MasterDegreeExam
-        If win {
-            {Show "Great. You just have gradueted your Master Degree"}
-            {Remove MasterExamAdventure at MasterExamRoom}
-        }
-        If lost {
-            Show "You can try another one"
-        }
-    }
-}
-
-location ClassRoom tagged as ClassRoom
-location MasterExamRoom tagged as MasterExamRoom
 
 adventure on start {
-    SimpleExamAdventure at ClassRoom
+    TestAdventure1 at TestLocation1
+    TestAdventure2 at TestLocation2
 }
