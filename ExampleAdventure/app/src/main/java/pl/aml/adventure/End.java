@@ -1,6 +1,6 @@
 package pl.aml.adventure;
 
-public enum  End implements AStage {
+public enum End implements AStage, AStageBuilder {
     INSTANCE;
 
     public static End instance() {
@@ -12,4 +12,8 @@ public enum  End implements AStage {
         initializer.end();
     }
 
+    @Override
+    public AStage build() {
+        return this;
+    }
 }

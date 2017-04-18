@@ -1,6 +1,6 @@
 package pl.aml.adventure;
 
-public class ConditionStage implements AStage {
+public class ConditionStage extends AbsAState {
     private final APredicate predicate;
     private final AStage doOnTrue;
     private final AStage doOnFalse;

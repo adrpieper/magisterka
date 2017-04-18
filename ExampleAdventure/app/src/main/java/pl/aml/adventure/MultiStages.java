@@ -2,7 +2,7 @@ package pl.aml.adventure;
 
 import java.util.Arrays;
 
-public class MultiStages implements AStage{
+public class MultiStages extends AbsAState{
 
     private AStage[] stages;
 

@@ -4,7 +4,7 @@ import pl.aml.impl.item.ItemType;
 
 import java.util.Arrays;
 
-public class GetItem implements AStage {
+public class GetItem extends AbsAState {
 
     private final ItemType[] items;
 

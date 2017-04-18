@@ -22,43 +22,39 @@ public class AmlInternalDSL {
         return new ConditionBuilder().withPredicate(predicate);
     }
 
-    public static AStage multi(AStageBuilder... aStageBuilders){
+    public static AStageBuilder multi(AStageBuilder... aStageBuilders){
         AStage[] stages = new AStage[aStageBuilders.length];
         for (int i = 0; i < aStageBuilders.length; i++) {
             stages[i] = aStageBuilders[i].build();
         }
 
-        return multi(stages);
+        return new MultiStages(stages);
     }
-    public static AStage add(Place place, Class<? extends AdventureDefinition> definition,int frequency) {
+    public static AStageBuilder add(Place place, Class<? extends AdventureDefinition> definition,int frequency) {
         return new AdventureAdder(new AdventureInstance(place, definition, frequency));
     }
 
-    public static AStage add(Place place, Class<? extends AdventureDefinition> definition) {
+    public static AStageBuilder add(Place place, Class<? extends AdventureDefinition> definition) {
         return add(place, definition, 1);
     }
 
-    public static AStage remove(Place place, Class<? extends AdventureDefinition> definition,int frequency) {
+    public static AStageBuilder remove(Place place, Class<? extends AdventureDefinition> definition,int frequency) {
         return new AdventureRemover(new AdventureInstance(place, definition, frequency));
     }
 
-    public static AStage remove(Place place, Class<? extends AdventureDefinition> definition) {
+    public static AStageBuilder remove(Place place, Class<? extends AdventureDefinition> definition) {
         return remove(place, definition, 1);
     }
 
-    public static AStage multi(AStage... stages) {
-        return new MultiStages(stages);
-    }
-
-    public static AStage get(ItemType... items) {
+    public static AStageBuilder get(ItemType... items) {
         return new GetItem(items);
     }
 
-    public static AStage show(String message) {
+    public static AStageBuilder show(String message) {
         return new ShowMessage(message);
     }
 
-    public static End end(){
+    public static AStageBuilder end(){
         return End.instance();
     }
 }

@@ -1,6 +1,6 @@
 package pl.aml.adventure;
 
-public class AdventureAdder implements AStage{
+public class AdventureAdder extends AbsAState{
     private final AdventureInstance adventureInstance;
 
     public AdventureAdder(AdventureInstance adventureInstance) {

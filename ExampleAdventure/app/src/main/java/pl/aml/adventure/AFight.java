@@ -4,7 +4,7 @@ import pl.aml.impl.opponent.OpponentType;
 
 import java.util.Arrays;
 
-public class AFight implements AStage {
+public class AFight extends AbsAState {
     private final OpponentType[] opponents;
     private final AStage doOnWin;
     private final AStage doOnLost;

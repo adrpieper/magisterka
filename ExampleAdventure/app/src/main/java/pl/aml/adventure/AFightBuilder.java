@@ -21,13 +21,9 @@ public class AFightBuilder implements AStageBuilder{
         return onWin(doOnWin.build());
     }
 
-    public AFightBuilder onLost(AStage doOnLost) {
-        this.doOnLost = doOnLost;
-        return this;
-    }
-
     public AFightBuilder onLost(AStageBuilder doOnLost) {
-        return onLost(doOnLost.build());
+        this.doOnLost = doOnLost.build();
+        return this;
     }
 
     @Override

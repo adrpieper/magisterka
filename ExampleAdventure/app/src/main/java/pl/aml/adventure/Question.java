@@ -2,7 +2,7 @@ package pl.aml.adventure;
 
 import java.util.Arrays;
 
-public class Question implements AStage {
+public class Question extends AbsAState{
 
     private final String question;
     private final QuestionAnswer[] answers;

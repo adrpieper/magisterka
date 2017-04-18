@@ -1,6 +1,6 @@
 package pl.aml.adventure;
 
-public class ShowMessage implements AStage {
+public class ShowMessage extends AbsAState{
 
     private final String message;
 

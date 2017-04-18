@@ -1,6 +1,6 @@
 package pl.aml.adventure;
 
-public class AdventureRemover implements AStage{
+public class AdventureRemover extends AbsAState {
     private final AdventureInstance adventureInstance;
 
     public AdventureRemover(AdventureInstance adventureInstance) {
