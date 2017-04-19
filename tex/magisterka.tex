@@ -337,50 +337,26 @@ Ten moduł znajduje się folderze "app/aml-src" i zawiera kod wygenerowany autom
 Ten moduł zawiera kod analogiczny to automatycznie wygenerowanego w folderze "app/aml-src", jest jednak napisany ręcznie. Kod został umieszczony w folderze "app/test-src". Moduł ten zastępuje kod generowany przez framework podczas testowania i rozwijania aplikacji i nie jest wykorzystywany w produkcie finalnym.
 
 \chapter{Testy} 
-W celu sprawdzenia powprawności dzialania stworzonego oprogramowania postanowiłem je przetestować. Na pierwszym miejscu postawiłem testy automatyczne, ponieważ są najbardziej praktyczne i wiarygodne. Testy automatyczne zaimplementowałem w postaci mokowanych testów jednostkowych za pomocą bibliotek JUnit i Mockito.
-Niestety nie dało się pokryć testemi automatycznymi wszystkich funcjonalności. Z tego powodzu część kodu została przetestowana w sposób manualny. Elementami przetestowanymi w ten sposób są działanie modułu NFC, GPS oraz generacja kodu. Do każdego z tych elemetów przygotowałem scenariusz testowy, który następnie wykonałem. Sposób przeprowadzenia oraz wyniki tych testów zostały przedstawione poniżej.
+W celu sprawdzenia poprawności działania stworzonego oprogramowania musiałem je przetestować. Na pierwszym miejscu postawiłem testy automatyczne, ponieważ są najbardziej praktyczne i wiarygodne. Testy automatyczne zaimplementowałem w postaci mockowanych testów jednostkowych za pomocą bibliotek JUnit i Mockito.
 
-\section{Scenariusze testowania}
-Przygotowanie scenariuszy testów jest jezbędnym elementem...
-\subsection{Testy automatyczne }
-Podczas  automatycznych testów jednostkowych testowałem z osobna działanie poszczególnych funkcji w oderwaniu od reszty systemu. Każdy test został podzielone na 3 sekcje, w których umieszczony został kod odpowiedniego typu:
+Niestety z przyczyn technicznych nie dało się pokryć testami automatycznymi wszystkich funkcjonalności. Z tego powodu część kodu została przetestowana w sposób manualny. Elementami przetestowanymi ręcznie są działanie modułu NFC, GPS oraz generacja kodu. Do każdego z tych elementów przygotowałem scenariusz testowy, który następnie wykonałem. Sposób przeprowadzenia oraz wyniki tych testów zostały przedstawione poniżej.
+
+\section{Testy automatyczne}
+\subsection{Struktura testów}
+Podczas  automatycznych testów jednostkowych testowałem z osobna działanie poszczególnych funkcji w oderwaniu od reszty systemu. Każdy test został podzielone na 3 sekcje, zawierające kod odpowiedniego typu:
 \begin{itemize}
-\item GIVEN
-\item WHEN
-\item THEN
+\item Given
+\item When
+\item Then
 \end{itemize}
 
-W sekcji Given został umieszczony kod implementujący warunki początkowe. Są to przedewszystkim linie kodu mockującego metody klas zależności klasy testowanej. Mogą to być też wywołania metod dostarczających jakieś dane. 
+W sekcji \textit{Given} został umieszczony kod implementujący warunki początkowe. Są to przede wszystkim linie kodu mockującego metody klas zależności klasy testowanej. Mogą to być też wywołania metod dostarczających jakieś dane. 
 
-W sekcji When składa się z pojedynczej linii. Jest to wywołanie testowanej metody na instancji testowanej klasy.
+W sekcji \textit{When} składa się z pojedynczej linii. Jest to wywołanie testowanej metody na instancji testowanej klasy.
 
-Sekcja Then odpowiedzialna jest za sprawdzenie, czy metoda zachowała się w oczekiwany sposób. Zazwyczaj jest to kod skłądający się z kilku linii zawierających asercje. Asercje służą sprawdzeniu czy, ile razy i z jakimi parametrami zostały wywołane metody klas-zależności. Jeżeli funcja zwraca jakiś wynik, za pomocą assercje testują pokrywa się on z oczekiwanym.
+Sekcja \textit{Then} odpowiedzialna jest za sprawdzenie, czy metoda zachowała się w oczekiwany sposób. Zazwyczaj jest to kod składający się z kilku linii zawierających asercje. Asercje służą sprawdzeniu czy, ile razy i z jakimi parametrami zostały wywołane metody klas-zależności. Jeżeli funkcja zwraca jakiś wynik, za pomocą asercji testuje się, czy pokrywa się on z oczekiwanym.
 
-\subsection{Generowanie kodu}
-Aby przetestować funcjonalność generacji kodu postanowiłem napisać przykładowy plik AML zawierający wszystkie dostępne w języku elementy. Następnie napisałem odpowiedający mu kod java i sprawdziłem, czy wygenerowany kod jest identyczny (podobny).  
-Poniżej znajduje się kod AML, który testowałem. (w załączniku można dać kod JAVA)
---AML--
-
-\subsection{NFC i GPS}
-Aby przetestować funcjonalność NFC i GPS napisałem plik AML. Następnie skompilowałem i uruchomiłem aplikacje na telefonie. 
-Następnie sprawdziłem ręcznie, czy aplikacja zachowuje się w porządany sposób.
-Szczegóły tych testu zawiera tabela.
-
-
-\begin{table}[!tbh]
-	\begin{tabular}{|l|l|l|} \hline
-		0 & NFC & GPS \\ \hline
-		Zawartość kodu AML & 2 zdarzenia przypisane do dwóch lokalizacji zdefiniowanych za pomocą tagów "TEST1" i "TEST2". & 2 zdarzenia przypisane do dwóch obszarów definiowanych jako obszary o promieniu 5 m znajdujące się w odległości 20 m od siebie. \\ \hline
-		Co sprawdzałem  & Czy po przyłożeniu telefonu do opowiedniego tagu aplikacja uruchomi odpowiednie zdarzenie & Czy po wejściu w odpowiedni obszar aplikacja uruchomi odpowiednie zdarzenie \\ \hline
-	\end{tabular}
-	\caption{Porównanie szczegółów testowania modułu NFC i GPS
-		typu dokumentu}
-\end{table}
-
-\section{Wyniki}
-Rozdział zawiera zestawienie...
-
-\subsection{Testy automatyczne}
+\subsection{Wyniki}
 Testy jednostkowe zostały uruchomione przy pomocy narzędzia Gradle \cite{Gradle:2017:Doc}. Poniższe zestawienie pokazuje, że wszystkie testy przeszły pomyślnie.
 
 \begin{figure}[!tbh]
@@ -390,41 +366,75 @@ Testy jednostkowe zostały uruchomione przy pomocy narzędzia Gradle \cite{Gradl
 	\source{Wygenerowane przez Gradle}
 \end{figure}
 
-\subsection{Generowanie kodu}
-Kod wygenerowany jest OK.
+\section{Generowanie kodu}
+Aby przetestować funcjonalność generacji kodu postanowiłem napisać przykładowy plik AML zawierający wszystkie dostępne w języku elementy. Następnie napisałem odpowiedający mu kod java i sprawdziłem, czy wygenerowany kod jest identyczny (podobny).  
+Poniżej znajduje się kod AML, który testowałem. (w załączniku można dać kod JAVA)
+--AML--
 
-\subsection{NFC i GPS}
-Odpowiednie zdarzenia odpalały się w odpowiednich sytuacjach.
+\section{NFC i GPS}
 
+Testy funkcjonalność NFC i GPS zostały przeprowadzone ręcznie według poniższego scenariusza:
+
+\begin{itemize}
+  \item Przygotowanie pliku AML
+  \item Kompilacja
+  \item Sprawdzenie poprawności zachowania
+\end{itemize}
+
+\section{Pliku AML}
+
+Przygotowane pliki AML dla testu NFC i GPS są bardzo podobne. W obu składają się z przykładowej Klasy Postaci oraz dwóch Przygód i Lokacji. W obu przypadkach przygody polegają jedynie na wyświetleniu komunikatu. 
+
+Różnica pojawia się w przypadku definicji Lokacji. W pliku przygotowanym dla GPS, są to dwa znajdujące się niedaleko od siebie obszary o promieniu 10 metrów. W przypadku NFC Lokacje zdefiniowane są przez odpowiednie znaczniki "Test1" i "Test2".
+
+Kod AML przygotowany do przeprowadzenia obydwu testów znajduje się w załączniku.
+
+\subsection{Sprawdzenie poprawności zachowania}
+
+Poprawność działania modułów GPS i NFC została sprawdzona manualnie. W obu przypadkach sprawdziłem, czy wejście do odpowiedniej Lokacji uruchomi odpowiednie zdarzenie.
+
+W przypadku testu GPS przeszedłem się z urządzenie wyposażonym w moduł GPS w odpowiednie miejsca. W przypadku NFC po prostu przyłożyłem telefon do odpowiednich znaczników. 
+
+Oba testy zakończyły się sukcesem.  
 
 \chapter{Korzystanie z frameworku}
-Pisanie własnej gry przy użyciu frameworku Adventure Maker jest bardzo proste. Wymaga ono jednak przygotowania środowiska pracy.
-W tym rozdziale zawarłem instrukcje dotyczące instalacji, konfiguracji i korzystania z potrzebnych narzędzi. 
+Pisanie własnej gry przy użyciu frameworku Adventure Maker jest bardzo proste. Wymaga ono jednak przygotowania środowiska pracy. W tym rozdziale zawarłem instrukcje dotyczące instalacji, konfiguracji i korzystania z potrzebnych narzędzi. 
+
 \section{Konfiguracja środowika}
+
 Aby móc korzystać z frameworku należy pobrać i zainstalować IDE IntelliJ Idea, JRE, JDK i Android SDK oraz wtyczkę AML.
+
 \subsection{JRE}
-JRE, czyli Java Runtime Enviroment, to środowisko uruchomieniowe Javy. Jest ono niezbędne do uruchomienia oprogramowania napisanego napisanego w technologii Java. JRE należy pobrać ze strony producenta [] w wesji 1.8 i zainstalować w standardowy sposób.
+
+JRE, czyli Java Runtime Enviroment, to środowisko uruchomieniowe Javy. Jest ono 
+niezbędne do uruchomienia oprogramowania wykorzystującego technologię Java. JRE należy pobrać ze strony Oracje (https://www.java.com) w wesji 1.8 i zainstalować w standardowy sposób.
+
 \subsection{JDK}
-JDK, czyli Java Development Kit, standardowy zestaw narzędzi wykorzystywanych do tworzenia aplikacji w technologii Java. JDK należy pobrać ze strony producenta [] w wesji 1.8 i zainstalować w standardowy sposób.
+
+JDK, czyli Java Development Kit, standardowy zestaw narzędzi wykorzystywanych do tworzenia aplikacji w technologii Java. JDK podobnie, jak JRE należy pobrać ze strony Oracle (https://www.java.com) i zainstalować w wersji 1.8.
+
 \subsection{IDE - IntelliJ Idea}
-IDE IntelliJ Idea można pobrać ze strony producenta []. Wersja community jest darmowa i wystarczająca do działania frameworku.
-Podczas instalacji należy pamiętać o włączeniu pluginu obsługującego aplikacje pisane na system Android.
+
+IDE IntelliJ Idea można pobrać ze strony producenta - JetBrains (https://www.jetbrains.com/idea). Wersja community jest darmowa i wystarczająca do działania frameworku. Podczas instalacji należy pamiętać o włączeniu pluginu obsługującego aplikacje pisane na system Android.
+
 \subsection{Android SDK}
-Android SDK (Standard Development Kit) to standardowy zestaw narzędzi programisty Android pozwalający na tworzenie aplikacji na ten system, w języku JAVA. SDK należy poprać ze strony [] i zainstalować w dowolnej lokalizacji.
+
+Android SDK (Standard Development Kit) to standardowy zestaw narzędzi programisty Android pozwalający na tworzenie aplikacji na ten system, w języku JAVA. SDK należy poprać ze strony (https://developer.android.com) i zainstalować w dowolnej lokalizacji.
+
 \subsection{Wtyczka AML}
 Wtyczka AML jest odpowiedzialna za obsługę języka AML, w tym generowanie kodu Java na podstawie pliku ".aml". 
 
-Do prawidłowego działania wtyczki AML potrzebne są wtyczki Xtext i Xtend, które można pobrać ze strony producenta [https://eclipse.org/Xtext/download.html].
-Wtyczkę AML należy pobrać [mój link] i zainstalować przyciskiem zainstalować ręcznie.
+Do prawidłowego działania wtyczki AML potrzebne są wtyczki Xtext i Xtend, które można pobrać ze strony producenta (https://eclipse.org/Xtext/download.html).
+Wtyczkę AML należy pobrać (https://adrpieper.github.io/magisterka) i zainstalować ręcznie.
 
 \section{Przygotowanie projektu}
-Przed rozpoczęciem pracy na własnym projektem należy poprać repozytorium []. Znajdujący się w nim projekt ExampleAdventure, jest projektem przykładowej gry. Najłatwiejszym sposobem nie jego wykorzystanie jest skopiowanie go i posługiwanie się nim jako szablonem. Należy pamiętać, aby zmienić id aplikacji w pliku "
+Przed rozpoczęciem pracy na własnym projektem należy poprać repozytorium (https://github.com/adrpieper/magisterka). Znajdujący się w nim projekt ExampleAdventure, jest projektem przykładowej gry. Najłatwiejszym sposobem na jego wykorzystanie jest skopiowanie go i posługiwanie się nim jako szablonem. Należy pamiętać, aby zmienić id aplikacji w pliku Manifestu.
 
 \section{Implementacja gry}
 Implementacja własnej gry sprowadza się do edycji jednego pliku, mianowicie "game.aml". Należy w nim umieścić kod w języku AML. Kod musi  zawierać wszystkie niezbędne elementy gry. Pisząc ten kod można posłużyć się dokumentacją języka AML zamieszczoną w niniejszej pracy. Warto też wzorować się na kodzie przykładowej gry, który równiej wchodzi w jej skład.
 
 \section{Kompilacja projektu}
-Projekt jest standardowym projektem Androidowym, tak więc możemy go też uruchomić przyciskiem play dostępnym w IDE IntelliJ Idea. Ważne jest, żeby korzystać z IDE, nawet w przypadku korzystania z gradle [], ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko.
+Projekt jest standardowym projektem Androidowym, tak więc możemy go też uruchomić przyciskiem play dostępnym w IDE IntelliJ Idea. Ważne jest, żeby korzystać z IDE, nawet w przypadku budowania narzędziem gradle, ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko.
 
 \chapter{Adventure Maker Language} 
 Adventure Maker Language (AML) to język domenowy stworzony specjalnie na potrzeby frameworku Adventure Maker. Poniżej znajduje się jego dokumentacja.
@@ -670,19 +680,19 @@ Przygoda "MysteriusManAd" rozpoczyna się od Pytania - "Are you ready to fight?"
 Odpowiedź "Yes" prowadzi do efektu zależnego od statystyk postaci. Postać posiadająca przynajmniej jedną ze statystyk na poziomie powyżej 30 punktów, będzie musiała stoczyć Walkę z "MysteriusMan". Jeżeli gracz zwycięży w walce otrzyma komunikat - "Great. Now, you are ready for fight with Dragon", odblokuje Przygodę "BigDragon" w Lokacji "Hills", a przygoda "MysteriusManAd", nie będzie dłużej dostępna w "OldHause". Postać niespełniająca tych warunków otrzyma po prostu komunikat - "I don't think so". 
 
 \chapter{Przykładowa gra}
-Aby ułatwić zrozumienie i korzystanie z frameworku postanowiłem przygotować przykładową grę. Kod AML potrzebny do skompilowania gry znajduje się w załączniku.
+Aby ułatwić zrozumienie i korzystanie z frameworku postanowiłem przygotować przykładową grę. Kod AML, potrzebny do skompilowania gry znajduje się w załączniku.
 
 \section{Opis scenariusza}
 
-Ponieważ Adventure Maker powstał w ramach pracy dyplomowej postanowiłem, że tematem gry nie będzie oklepane ratowanie księżniczek i walka ze smokami w świecie fantasy, a studiowanie. Okazało się, że pomimo, że framework, nie został zaprojektowany z myślą o grach tego typu, bez problemu udało mi się ją napisać w języku AML.
+Ponieważ Adventure Maker powstał w ramach pracy dyplomowej postanowiłem, że tematem gry nie będzie oklepane ratowanie księżniczek i walka ze smokami w świecie fantasy, a studiowanie. Okazało się, że pomimo, iż framework, nie został zaprojektowany z myślą o grach tego typu, bez problemu udało mi się ją napisać w języku AML.
 
-Akcja gry rozgrywa się na uniwersytecie, a celem gracza jest zdanie egzaminu magisterskiego. Aby to osiągnąć, gracz musi rozwijać umiejętności swojej postaci poprzez zdawanie pomniejszych egzaminów. Kiedy, gracz będzie już gotowy do ostatecznej próby, musi udać się do specjalnej sali, w której może podejść do egzaminu i zdobyć uprawniony dyplom.
+Akcja gry rozgrywa się na uniwersytecie, a celem gracza jest zdanie egzaminu magisterskiego. Aby to osiągnąć, gracz musi rozwijać umiejętności swojej postaci poprzez zdawanie pomniejszych egzaminów. Kiedy gracz będzie już gotowy do ostatecznej próby, musi udać się do specjalnej sali, w której może podejść do egzaminu i zdobyć uprawniony dyplom.
 
-Gracz może osiągnąć cel obierając jedną z dwóch strategii. Na początku gry musi podjąć decyzję, czy chcę podążać szlachetną ścieżką dobrego studenta, czy też iść na łatwiznę i oszukiwać. Gra zawiera element moralizatorski, ponieważ wybierając ścieżkę oszusta, można co prawda zdać wszystkie pomniejsze egzaminy, ale ostatecznie gracz i tak skazany jest na porażkę. Gra zaimplementowana jest w taki sposób, żeby podczas egzaminu dyplomowego niewiedza nieuczciwego studenta wyżła na jaw, uniemożliwiając mu tym samym zakończenie studiów.
+Gracz może osiągnąć cel obierając jedną z dwóch strategii. Na początku gry musi podjąć decyzję, czy chcę podążać szlachetną ścieżką dobrego studenta, czy też iść na łatwiznę i oszukiwać. Gra zawiera element moralizatorski, ponieważ wybierając ścieżkę oszusta, można co prawda zdać kilka pomniejszych egzaminów, ale ostatecznie gracz i tak skazany jest na porażkę. Gra zaimplementowana jest w taki sposób, żeby niewiedza nieuczciwego studenta w pewnym momencie wyżła na jaw, uniemożliwiając mu tym samym zakończenie studiów.
 
 \section{Uruchamianie gry}
 
-Grę można pobrać [] i zainstalować na dowolnym urządzeniu z systemem android w wersji powyżej 4.0, obsługującym komunikację NFC. Przed rozpoczęciem gry należy zaprogramować i umieścić znaczniki NFC zawierające tagi:
+Grę można pobrać (https://adrpieper.github.io/magisterka) i zainstalować na dowolnym urządzeniu z systemem android w wersji powyżej 4.0, obsługującym komunikację NFC. Przed rozpoczęciem gry należy zaprogramować i umieścić znaczniki NFC zawierające tagi:
 \begin{itemize}
 	\item ExamClassRoom
 	\item PlainClassRoom
@@ -693,172 +703,171 @@ Po takim przygotowaniu można już swobodnie rozpocząć rozgrywkę.
 
 % załączniki (opcjonalnie):
 \appendix
-\chapter{Tytuł załącznika jeden}
+\chapter{Kod przykładowej gry}
 
 \begin{lstlisting}
 
 skill BasicKnowledge {
-	effect : take (3 * int) damage
-	mp : 12
-	cooldown : 1 turns
+  effect : take (3 * int) damage
+  mp : 12
+  cooldown : 1 turns
 }
 
 skill BrilliantIdea {
-	effect : take (4 * int) damage
-	mp : 20
-	cooldown : 2 turns
+  effect : take (4 * int) damage
+  mp : 20
+  cooldown : 2 turns
 }
 
 skill Focusing {
-	effect : take (12 * int + 13 * agi) damage
-	mp : 60
-	cooldown : 4 turns
+  effect : take (12 * int + 13 * agi) damage
+  mp : 60
+  cooldown : 4 turns
 }
 
 skill AwesomeFocusing {
-	effect : take (12 * int + 13 * agi) damage
-	mp : 60
-	cooldown : 4 turns
+  effect : take (12 * int + 13 * agi) damage
+  mp : 60
+  cooldown : 4 turns
 }
 
 character type GoodStudent {
-	stats on start:
-	10 str
-	20 int
-	10 agi
-	stats per lvl:
-	+ 1 str
-	+ 2 int
-	+ 1 agi
-	skills tree:
-	BasicKnowledge => {
-		BrilliantIdea
-		Focusing => {AwesomeFocusing}
-	}
+  stats on start:
+    10 str
+    20 int
+    10 agi
+  stats per lvl:
+    + 1 str
+    + 2 int
+    + 1 agi
+  skills tree:
+    BasicKnowledge => {
+      BrilliantIdea
+      Focusing => {AwesomeFocusing}
+    }
 }
 
-skill PaperCheatsheet {
-	effect : take 2*agi damage
-	mp : 10
+skill PaperCheatsheet {  
+  effect : take 2*agi damage
+  mp : 10
 }
 
 skill Smartphone {
-	effect : take 2*agi damage
-	mp : 10
+  effect : take 2*agi damage
+  mp : 10
 }
 
 skill FriendHelp {
-	effect : take 2*agi damage
-	mp : 10
+  effect : take 2*agi damage
+  mp : 10
 }
 
 skill Luck {
-	effect : take 2*agi damage
-	mp : 10
+  effect : take 2*agi damage
+  mp : 10
 }
 
 character type Cheater {
-	stats on start:
-	10 str
-	10 int
-	20 agi
-	stats per lvl:
-	+ 1 str
-	+ 1 int
-	+ 2 agi
-	skills tree:
-	Luck => {
-		PaperCheatsheet
-		FriendHelp
-		Smartphone
-	}
+  stats on start:
+    10 str
+    10 int
+    20 agi
+  stats per lvl:
+    + 1 str
+    + 1 int
+    + 2 agi
+  skills tree:
+    Luck => {
+      PaperCheatsheet
+      FriendHelp
+      Smartphone
+    }
 }
 
 item FunnyHat (helmet) {
 }
 
 item GoodPen (weapon) {
-	+ 12 str
+  + 12 str
 }
 
 item GoodGrade (armor) {
-	+ 12 str
+  + 12 str
 }
 
 item Diploma (armor) {
-	+ 10 agi
-	+ 10 str
-	+ 10 int
+  + 10 agi
+  + 10 str
+  + 10 int
 }
 
 item WarmGloves (gloves) {
-	+ 1 str
+  + 1 str
 }
 
 item BrandNewSmartPhone (weapon) {
-	+ 5 int
+  + 5 int
 }
 
 opponent SimpleExam {
-	power : 10
-	hp : 20
-	exp : 100
-	loot : GoodGrade 50%, FunnyHat 1 %, BrandNewSmartPhone 10%, GoodPen 20%, WarmGloves 10%
+  power : 10
+  hp : 20
+  exp : 100
+  loot : GoodGrade 50%, FunnyHat 1 %, BrandNewSmartPhone 10%, 
+         GoodPen 20%,  WarmGloves 10%
 }
 
 opponent MasterDegreeExam{
-	power : 50
-	hp : 100
-	exp : 1000
-	loot : Diploma 100%
+  power : 50
+  hp : 100
+  exp : 1000
+  loot : Diploma 100%
 }
 
 adventure NotAStudent starts from {
-	Show "You are not a Student"
+  Show "You are not a Student"
 }
 
 adventure SimpleExamAdventure starts from {
-	Fight with SimpleExam
-	If win {
-		{
-			If you have more int than 30 {
-				{Show "You are ready for MasterDegreeExam" }
-				{Remove SimpleExamAdventure at ClassRoom}
-				{Add MasterExamAdventure at ClassRoom}
-			}
-			else {
-				Show "You have to pass few more exams."
-			}
-		}
-		{
-			If you have more agi than 30 {
-				{Show "You was catched on cheating." }
-				{Add NotAStudent at ClassRoom}
-				{Remove SimpleExamAdventure at ClassRoom}
-			}
-		}
-	}
+  Fight with SimpleExam
+  If win {
+    {
+      If you have more int than 30 {
+        {Show "You are ready for MasterDegreeExam" }
+        {Remove SimpleExamAdventure at ClassRoom}
+        {Add MasterExamAdventure at ClassRoom}
+      }
+      else 
+        { Show "You have to pass few more exams." }
+    }
+    {
+      If you have more agi than 30 {
+        {Show "You was catched on cheating." }
+        {Add NotAStudent at ClassRoom}
+        {Remove SimpleExamAdventure at ClassRoom}
+      }
+    }
+  }
 }
 
 adventure MasterExamAdventure starts from {
-	{Show "Have you passed all exams?"}
-	{
-		Fight with MasterDegreeExam
-		If win {
-			{Show "Great. You just have gradueted your Master Degree"}
-			{Remove MasterExamAdventure at MasterExamRoom}
-		}
-		If lost {
-			Show "You can try another one"
-		}
-	}
+  {Show "Have you passed all exams?"}
+  {
+    Fight with MasterDegreeExam
+    If win {
+      {Show "Great. You just have gradueted your Master Degree"}
+      {Remove MasterExamAdventure at MasterExamRoom}
+    }
+    If lost 
+      { Show "You can try another one" }
+    }
 }
 
 location ClassRoom tagged as ClassRoom
 location MasterExamRoom tagged as MasterExamRoom
 
 adventure on start {
-	SimpleExamAdventure at ClassRoom
+  SimpleExamAdventure at ClassRoom
 }
 
 \end{lstlisting}
