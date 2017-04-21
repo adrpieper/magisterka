@@ -37,9 +37,11 @@
 
 % streszczenie
 \begin{abstract}
-  Celem niniejszej pracy jest projekt i implementacja narzędzia pozwalającego w prosty sposób tworzyć terenowe gry RPG. Aby osiągnąć ten cel zaprojektowany został specjalny język opisu sceneriuszy oraz zadad panujących w grze. Język ten został stworzony z użyciem technologii Xtext [2]. Dzięki wykorzystaniu tego narzędzia możliwa jest względnie szybka implementacja nowego języka, zawięrającego takie elementy jak linker, czy kompiler. Dodatkowo powstały język zintegrowany jest z IDE Idea InteliJ co pozwala na podświetlanie, autouzupełnianie oraz automatyczne sprawdzanie składni.
+  W ramach niniejszej pracy zostało zaprojektowane i zaimplementowane frameworka pozwalającego w prosty sposób tworzyć terenowe gry RPG. Kluczowym elementem frameworku jest specjalny język opisu scenariuszy oraz zasad panujących w grze - Adventure Maker Language. Język ten został stworzony z użyciem technologii Xtext \cite{Xtext:2017:Doc}. Dzięki wykorzystaniu tego narzędzia możliwa była względnie szybka implementacja nowego języka, zawierającego takie elementy jak linker, czy kompiler. Dodatkowo powstały język zintegrowany jest z IDE Idea InteliJ co pozwala na podświetlanie, autouzupełnianie oraz automatyczne sprawdzanie składni.
   
-  Stworzony silnik gier wykorzystuje technologię NFC oraz GPS w celu lokalizacji graczy w pomieszczeniach, jak i na otwartym terenie. Silnik został zaprojektowany tak, aby twórca gry mógł traktować te dwie technologie w sposób bardzo zbliżony, nie zważając na ich  całkowicie odmienną techniczną implementację. Z jego punktu widzenia zarówno pomiesznienie oznaczone tagiem NFC, jak i współrzędne geograficzne, stanowią po prostu lokację w której gracza mogą spotkać dowolnego typu przygody. 
+  Stworzone gry wykorzystują technologię NFC oraz GPS w celu lokalizacji graczy w pomieszczeniach, jak i na otwartym terenie. Framework został zaprojektowany tak, aby twórca gry mógł traktować te dwie technologie w sposób bardzo zbliżony, nie zważając na ich  całkowicie odmienną techniczną implementację. Z jego punktu widzenia zarówno pomieszczenie oznaczone tagiem NFC, jak i współrzędne geograficzne, stanowią po prostu lokację, w której gracza mogą spotkać dowolnego typu przygody. 
+  
+  Przy implementacji frameworka wykorzystane zostały popularne narzędzia i biblioteki. Dodatkowo kod był pisany zgodnie z zasadami czystego kodu \cite{CleanCode:2005}. Uprościło to znacznie i przyśpieszyło proces implementacji, testowania i budowania stworzonego frameworka.
 \end{abstract}
 
 % słowa kluczowe
@@ -51,23 +53,19 @@
 % wstęp
 \introduction
 
-Gry terenowe, czyli aplikacje rozrywkowe basujące głównie na fizycznej pozycji gracza, są nowym trendem w dziedzinie rozrywki elektronicznej. Do tej pory ukazało się niewiele tytułów tego typu, co mogłoby sugerować, że pomysł by gracz musiał poruszać się po fizycznym świecie jest nietrafiony. Sukces niedawno wydanej gry "Pocemon GO" pokazał jednak, że na gry tego typu znajduje się całkiem spora rzesza odbiorców, czego nie dało się nie zauważyć, gdyż grupy poszukiwaczy pokemonów, spotkać można było niemal na każdym kroku.
+Gry terenowe, czyli aplikacje rozrywkowe basujące głównie na fizycznej pozycji gracza, są nowym trendem w dziedzinie rozrywki elektronicznej. Sukces niedawno wydanej gry "Pocemon GO" pokazał, że pomysł by gracz musiał poruszać się po fizycznym świecie jest strzałem w dziesiątkę. Okazuje się, że na gry tego typu znajduje się całkiem spora rzesza odbiorców, czego nie dało się nie zauważyć, gdyż grupy poszukiwaczy pokemonów, spotkać można było niemal na każdym kroku.
 
-Moim zdaniem niewielka ilość aplikacji tego typu, wynika z braku odpowiednich narządzi do ich tworzenia. Napisanie tego typu gier z wykorzystaniem standardowego SDK systemów mobilnych jest dość skomplikowane, a przez to kosztowne. Wykorzystanie technologii typu GPS, czy NFC wymaga od programisty wykorzystnia specjalistycznego API oraz sprawia, że testowanie aplikacji jest utrudnione.
+Pomimo sukcesu "Pocemon GO", gry terenowe nadal stanowią marginalną część rynku rozrywki elektronicznej. Moim zdaniem niewielka ilość aplikacji tego typu, wynika z braku odpowiednich narządzi do ich tworzenia. Napisanie tego typu gier z wykorzystaniem standardowych narzędzi developerskich jest dość skomplikowane, a przez to kosztowne. Wykorzystanie technologii typu GPS, czy NFC wymaga od programisty wiedzy, wykorzystania specjalistycznego API oraz sprawia, że testowanie aplikacji jest utrudnione.
 
-W idealnym świecie napisanie tego typu gry powinno sprowadzać się jedynie do zdefiniowania miejsc, postaci oraz zasad obowiązujących w wirtualnym świecie.
-Skoro gry tego typu opierają się na podobnych zasadach, powinny one zostać zdefiniowane raz i reużywane, odciążając tym samym projektanta gry od szczegółów implementacyjnych. 
+Spora część elementów gier terenowych jest wspólna, szczególnie jeśli ograniczymy się do gier RPG. Skoro gry tego typu opierają się na podobnych zasadach, powinny one zostać zdefiniowane tylko raz, w myśl zasady - "nie powtarzaj się". W ten sposób można odciążyć projektanta gry od szczegółów implementacyjnych, pozwalając mu skupić się w całości na tym co ważne. W idealnym świecie napisanie tego typu gry powinno sprowadzać się jedynie do zdefiniowania miejsc, postaci oraz zasad obowiązujących w wirtualnym świecie. Postanowiłem więc sprawdzić, czy osiągnięcie takiego ideału jest możliwe. Okazuje się, że tak, o ile tylko zastosuje się do tego odpowiednie podejście i narzędzia.
 
-Sam pomysł umieszczenia warstwy wspólnej dla wielu aplikacji nie jest nowy. Isnieje wiele rozwiązanie, które już to robią. Warstwę tą nazywa się frameworkiem lub silnikiem. Większość powstających obecnie gier osadzonych jest właśnie na tego typu rdzeniu. 
-Nie istnieje natomiast jeszcze framework, wyspecjalizowany do tworzenia konkretnego typu gier, jakimi są terenowe gry RPG i zmniejszający wysiłem związany z tworzeniem takiej gry do obsolutnego minimum. Dlatego właśnie postanowiłem storzyć Adventure Maker - framework umożliwiający szybkie tworzenie terenowych gier RPG. 
+Sam pomysł umieszczenia warstwy wspólnej dla wielu aplikacji nie jest nowy. Istnieje wiele rozwiązanie, które już to robią. Warstwę tą nazywa się frameworkiem lub silnikiem. Większość powstających obecnie gier osadzonych jest właśnie na tego typu rdzeniu. Nie istnieje natomiast jeszcze framework, wyspecjalizowany do tworzenia konkretnego typu gier, jakimi są terenowe gry RPG. Dlatego właśnie uznałem, że terenowe gry RPG. 
 
-Framework pozwala na implementacje prostej gry nawet przez mało doświadczonego programistę nieznającego Javy ani AndroidSDK. Jest to możliwe dzieki specjalnemu językowi DSL zaprojektowanego właśnie w tym celu. Składnia języka jest przyjazna dla programisty-projektanta gry i nie wymaga znajomości, ani żadnego języka programowania ogólnego przeznaczenia, ani żadnych dodatkowych technologii.
-
-Stworzenie gry z użyciem narzędzia w najprostrzym przykadku sprowadza sie do rozmieszczenie przeciwników na terenie danego obiektu (znacznik NFC) lub danej lokalizacji (Wspólrzedne geograficzne) oraz ustalenia klas postaci dostepnych w danej rozgrywce.
+Moim celem nie było stworzenie niesamowicie grywalnej, ani popularnej gry. Chciałem pokazać, na modnym przykładzie gier terenowych, jak można rozwiązać problem "wynajdywania koła na nowo" wykorzystując własny język domenowy. Powstały język pozwala na implementacje prostej gry przez osobę niebędącą programistą. Składnia języka jest przyjazna dla projektanta gry i nie wymaga znajomości, ani żadnego języka programowania ogólnego przeznaczenia, ani żadnych dodatkowych technologii.
 
 \chapter{Opis problemu}
 
-Celem niniejszej pracy jest implementacja frameworku służącego do szybkiego tworzenia terenowych gier RPG. Kluczowym elementem implementacji jest stworzony język domenowy. Niniejsza praca obejmuje więc o cztery z pozoru niezwiązane ze sobą tematyki jakimi są gry terenowe, gry RPG, frameworki oraz języki domenowe. Każdy z tych elementów gości już od dłuższego lub krótszego czasu w świecie informatyki, innowacyjny jest jednak pomysł połączenia ich w jednym narzędziu. Nie sposób jednak pominąć dotychczasowe dorobku innych, zajmujących się nimi, osób. 
+Celem niniejszej pracy jest implementacja frameworka służącego do szybkiego tworzenia terenowych gier RPG. Kluczowym elementem implementacji jest stworzony język domenowy. Niniejsza praca obejmuje więc o cztery z pozoru niezwiązane ze sobą tematyki jakimi są gry terenowe, gry RPG, frameworki oraz języki domenowe. Każdy z tych elementów gości już od dłuższego lub krótszego czasu w świecie informatyki, innowacyjny jest jednak pomysł połączenia ich w jednym narzędziu. Nie sposób jednak pominąć dotychczasowe dorobku innych, zajmujących się nimi, osób. 
 
 \section{Gry terenowe}
 
@@ -112,9 +110,9 @@ External DSL to język domenowy z prawdziwego zdarzenia. Język taki posiada śc
 
 \section{Frameworki}
 
-Frameworki są doskonałym przykładem korzyści jakie niesie ze sobą popularna zasada Clean Code \cite{CleanCode:1000} - DRY (Don't Repeat Yourself), czyli nie powtarzaj się. 
+Frameworki są doskonałym przykładem korzyści jakie niesie ze sobą popularna zasada Clean Code \cite{CleanCode:2005} - DRY (Don't Repeat Yourself), czyli nie powtarzaj się. 
 Twórcy frameworków  wychodzą z założenia, że projekty informatyczne można z powodzeniem podzielić na pewne grupy jak np. aplikacje webowe. Projekty informatyczne należące do takiej grupy bywają do siebie tak podobne, że zazwyczaj łatwiej jest wskazać cechy wspólne niż różnice.
-Wszystkie aplikacje webowe udostępniają pewien interfejs w postaci stron html, przechowują dane w bazach (zazwyczaj relacyjnych) i komunikują się z użytkownikiem za pomocą protokołu HTTP. Elementem różniącym te aplikacje jest ich wygląd i funkcjonalność. Ideą frameworku jest implementacja wszystkich elementów wspólnych w jednym miejscu i udostępnienie programistom-użytkownikom frameworku przyjaznego interfejsu do implementacji różnic. Programista jest więc, ograniczony pewnymi ramami, w których musi mieścić się jego aplikacja, stąd nazwa takiego narzędzia - framework.
+Wszystkie aplikacje webowe udostępniają pewien interfejs w postaci stron html, przechowują dane w bazach (zazwyczaj relacyjnych) i komunikują się z użytkownikiem za pomocą protokołu HTTP. Elementem różniącym te aplikacje jest ich wygląd i funkcjonalność. Ideą frameworka jest implementacja wszystkich elementów wspólnych w jednym miejscu i udostępnienie programistom-użytkownikom frameworka przyjaznego interfejsu do implementacji różnic. Programista jest więc, ograniczony pewnymi ramami, w których musi mieścić się jego aplikacja, stąd nazwa takiego narzędzia - framework.
 
 Z uwagi na fakt, że gry RPG są bardzo popularne, a jednocześnie do siebie bardzo podobne, naturalnym wydaje się stworzenie oprogramowania pozwalające na łatwe tworzenie takiego typu gier. Narzędzie RPG Maker \cite{RPGMaker:2017:Doc} pozwala na proste wytwarzanie dwuwymiarowych gier RPG. Według twórców, tworzenie gier przy pomocy RPG Maker, jest możliwe bez jakiejkolwiek wiedzy na temat programowania, a jednocześnie dając bardzo duże możliwości doświadczonym użytkownikom. Oprogramowanie udostępnia przyjazne GUI, dzięki któremu można tworzyć w pełni funkcjonalne gry i to na wiele różnych platform. Jedynym, ale bardzo istotnym ograniczeniem jest ściśle narzucony gatunek gier. Jednak właśnie to ograniczenie pozwoliło na stworzenie narzędzia jednocześnie tak prostego i funkcjonalnego. 
 
@@ -122,11 +120,11 @@ W tu wspomnieć o istnieniu narzędzi pozwalających na łatwe tworzenie nawet z
 
 \section{Zastosowania DSL w grach terenowych}
 
-W mojej pracy postawiłem sobie na celu stworzenie frameworku pozwalającego na łatwe tworzenie terenowych gier RPG. Narzędzie łączy ze sobą cechy istniejących rozwiązań, zaprzęgając je jednocześnie do rozwiązania nowych problemów. Cele postawione przed tym frameworkiem są typowe. Udostępnić narzędzie do przyjaznego rozwiązywania problemów określonej klasy. Nowy jest natomiast obszar w jakim działać będzie framework oraz użyte rozwiązania.
+W mojej pracy postawiłem sobie na celu stworzenie frameworka pozwalającego na łatwe tworzenie terenowych gier RPG. Narzędzie łączy ze sobą cechy istniejących rozwiązań, zaprzęgając je jednocześnie do rozwiązania nowych problemów. Cele postawione przed tym frameworkiem są typowe. Udostępnić narzędzie do przyjaznego rozwiązywania problemów określonej klasy. Nowy jest natomiast obszar w jakim działać będzie framework oraz użyte rozwiązania.
 
 Przy pomocy Andventure Makera możliwe jest tworzenie gier terenowych o narzuconych z góry, dość wąskich i specyficznych ramach, typowych dla tradycyjnych gier RPG. Stworzona gra polegać będzie głównie na rozwoju postaci, poprzez odwiedzanie lokacji, podejmowanie decyzji, a przede wszystkim pokonywanie przeciwników. Postać sterowana przez gracza zdobywać będzie punkty doświadczenia, dzięki którym gracz będzie mógł rozwijać postać w wybranym przez siebie kierunku. 
 
-Większość dostępnych frameworków opiera się na dwóch rozwiązaniach. Albo udostępniają użytkownikowi interfejs graficzny, albo pewien popularny język programowania, poszerzony ewentualnie o nowe funkcjonalności Pierwsze podejście stosowane jest najczęściej w przypadku gier lub gdy odbiorcą jest osoba nie umiejąca programować. Jest ono ukierunkowane na prostotę i wygodę, ograniczając przy tym jednak możliwości narzędzia. Drugie podejście sprawdza się głównie w aplikacja biznesowych. Integracja frameworku z popularnym językiem programowania pozwala pozyskać szerokie rzesze odbiorców. Dodatkowo sprawia, że narzędzie jest zarówno elastyczne, jak uniwersalne, tzn. dające się zastosować wielu przypadkach. Frameworki takie często są pisane w postaci bibliotek.
+Większość dostępnych frameworków opiera się na dwóch rozwiązaniach. Albo udostępniają użytkownikowi interfejs graficzny, albo pewien popularny język programowania, poszerzony ewentualnie o nowe funkcjonalności Pierwsze podejście stosowane jest najczęściej w przypadku gier lub gdy odbiorcą jest osoba nie umiejąca programować. Jest ono ukierunkowane na prostotę i wygodę, ograniczając przy tym jednak możliwości narzędzia. Drugie podejście sprawdza się głównie w aplikacja biznesowych. Integracja frameworka z popularnym językiem programowania pozwala pozyskać szerokie rzesze odbiorców. Dodatkowo sprawia, że narzędzie jest zarówno elastyczne, jak uniwersalne, tzn. dające się zastosować wielu przypadkach. Frameworki takie często są pisane w postaci bibliotek.
 W przypadku Adventure Makera postanowieniem zastosować nieco inne, innowacyjne podejście. Uznałem, że głównymi elementem gry RPG są świat w którym się rozgrywa, jej zasady oraz scenariusz. Stwierdziłem więc, że naturalnym pomysłem na implementacje tych elementów, będzie specjalny język DSL, zrozumiały dla fanów tego typu gier.
 
 \chapter{Wymagania}
@@ -146,7 +144,7 @@ Do wymagań funkcjonalnych należą:
 \item Kompilacja aplikacji na podstawie pliku DSL 
 \end{itemize}
 
-Zbiór elementów wchodzących w skład zaprojektowanego języka DSL został przeze mnie wybrany arbitralnie, w taki sposób, żeby zawierał minimum niezbędne do zaprojektowania gry. Chciałem, aby zaprojektowany język był jednocześnie prosty, ale i pozwalający na implementacje nawet dość zawiłej logiki. Oczywiście RPG z prawdziwego zdarzenia powinien zawierać nieco więcej. Uznałem jednak, że dodanie elementów takich jak np. misje zbędnie rozbudowały by język i jego implementacje. Elementy te prawdopodobnie pojawią się, w przypadku wydania kolejnej wersji frameworku. Nie mniej jednak implementacja stworzona w ramach tej pracy obejmować będzie jedynie wyszczególnione punkty.
+Zbiór elementów wchodzących w skład zaprojektowanego języka DSL został przeze mnie wybrany arbitralnie, w taki sposób, żeby zawierał minimum niezbędne do zaprojektowania gry. Chciałem, aby zaprojektowany język był jednocześnie prosty, ale i pozwalający na implementacje nawet dość zawiłej logiki. Oczywiście RPG z prawdziwego zdarzenia powinien zawierać nieco więcej. Uznałem jednak, że dodanie elementów takich jak np. misje zbędnie rozbudowały by język i jego implementacje. Elementy te prawdopodobnie pojawią się, w przypadku wydania kolejnej wersji frameworka. Nie mniej jednak implementacja stworzona w ramach tej pracy obejmować będzie jedynie wyszczególnione punkty.
 
 U celu ułatwienia edycji kodu warto udostępnić użytkownikowi przyjazne IDE. Na szczęście narzędzia takie już istnieją i nie musiałem projektować ich od zera. Popularne narzędzia programistyczne pozwalają na rozszerzanie ich funkcjonalności poprzez tzw. wtyczki, czyli oprogramowanie, które doinstalowuje się do już istniejącego IDE. Postanowiłem więc, że udostępnię obsługującą język AML wtyczkę do IDE IntelliJ Idea. Postanowiłem wybrać to środowisko z kilku powodów:
 \begin{itemize}	
@@ -205,11 +203,11 @@ Gradle \cite{Gradle:2017:Doc} jest narzędziem służącym do automatyzacji budo
 Wraz ze specjalnie zaprojektowanym pluginem, stanowi obowiązkowy element każdego projektu związanego z systemem Android.
 
 \chapter{Projekt GUI}
-Ważnym elementem każdego współczesnego oprogramowania jest jego GUI, czyli interfejs graficzny. W przypadku frameworku do tworzenia gier  możemy o dwóch rodzajach GUI: frameworku i powstałych w nim aplikacji. 
+Ważnym elementem każdego współczesnego oprogramowania jest jego GUI, czyli graficzny interfejs użytkownika. W przypadku frameworka do tworzenia gier można mówić o dwóch rodzajach GUI: interfejs narzędzia i powstałych w nim gier. 
 
-Jako, że framework został zrealizowany w postaci wtyczki do IDE, sprawa jego GUI jest rozwiązana. IDE Idea IntelliJ dostarcza bardzo wygodny i dopracowany interfejs użytkownika, a dostarczona przeze mnie wtyczka wykorzystuje jego możliwości. 
+Jako, że framework został zrealizowany jako wtyczka do istniejącego IDE, sprawa jego GUI jest rozwiązana. IDE Idea IntelliJ dostarcza bardzo wygodny i dopracowany interfejs użytkownika, a dostarczona przeze mnie wtyczka wykorzystuje jego możliwości. 
 
-Framework nie pozwala twórcy gry na dostosowanie interfejsu do swoich potrzeb, tak więc, jako projektant frameworku, postanowiłem przygotować interfejs prosty, a zarazem uniwersalny. GUI jest podzielone na trzy części:
+Framework nie pozwala twórcy gry na dostosowanie interfejsu do swoich potrzeb. Tak więc, jako projektant frameworka, postanowiłem przygotować interfejs prosty, a zarazem uniwersalny i neutralny względem klimatu gry. GUI jest podzielone na trzy części:
 \begin{itemize}
 	\item Menu początkowe
 	\item Tryb zwiedzania
@@ -217,6 +215,7 @@ Framework nie pozwala twórcy gry na dostosowanie interfejsu do swoich potrzeb, 
 \end{itemize}
 \section{Menu początkowe}
 Menu początkowe pozwala na wybór typu postaci, jaką dany gracz ma zamiar kontrolować. Ekran został podzielony na dwie części: listy klas postaci oraz szczegółów wybranej klasy. Szczegóły zawierają nazwę klasy oraz informacje jej statystykach.
+
 \section{Tryb zwiedzania}
 Zwiedzanie stanowi główny ekran gry. Jest wyświetlany przez cały czas, w którym gracz porusza się pomiędzy lokacjami w poszukiwaniu przygód. 
 
@@ -248,7 +247,7 @@ Ekran komunikatu składa się z dwóch części. Wiadomości oraz przycisku "OK"
 
 Framework Adventure Maker składa się z dwóch projektów. Pierwszy odpowiedzialny jest za DSL (Andventure Maker Language). Projekt bazuje na narzędziu Xtext, a produktem wyjściowym jest wtyczka do IDE IntelliJ Idea obsługująca zaprojektowany DSL. Drugi projekt, to szkielet aplikacji na system Android. Kod aplikacji jest częściowo napisany w AML i do jego kompilacji potrzebna jest jego obsługa.
 
-Istotnym elementem implementacji frameworku są języki domenowe. W moim projektcie wykorzystałem zarówno wewnętrzny, jak i zewnętrzny język domenowy. Zastosowanie zewnętrznego DSL pozwala twórcy gry na opisanie świata gry w sposób przyjazny dla osoby znającej tematykę gier RPG. Wewnętrzny DSL natomiast, sprawił, że generowany przez wtyczkę kod jest bardziej czytelny i przyjazny dla programisty, co w dużym stopniu przyczyniło się do skrócenia czasu potrzebnego mi do zaimplementowania generatorów.
+Istotnym elementem implementacji frameworka są języki domenowe. W moim projektcie wykorzystałem zarówno wewnętrzny, jak i zewnętrzny język domenowy. Zastosowanie zewnętrznego DSL pozwala twórcy gry na opisanie świata gry w sposób przyjazny dla osoby znającej tematykę gier RPG. Wewnętrzny DSL natomiast, sprawił, że generowany przez wtyczkę kod jest bardziej czytelny i przyjazny dla programisty, co w dużym stopniu przyczyniło się do skrócenia czasu potrzebnego mi do zaimplementowania generatorów.
 
 \section{AML} 
 Projekt powstał w celu implementacji języka Andventure Maker Language. Dokumentacja języka znajduje się w osobnym rozdziale. Wykorzystanie technologii Xtext \cite{Xtext:2017:Doc} wymaga od projektanta języka implementacji dwóch elementów: gramatyki i generatorów kodu. 
@@ -258,7 +257,7 @@ Projekt powstał w celu implementacji języka Andventure Maker Language. Dokumen
 Gramatyka języka AML znajduje w pojedynczym pliku o nazwie "AML.xtext". Gramatyka zawiera zarówno opis modelu syntaktycznego i semantycznego tworzonego języka. Innymi słowy zdefiniuje jaki tekst należy do języka oraz jak będzie on reprezentowany w pamięci komputera. Xtext na podstawie tego pliku generuje między innymi parser, który sprawdzi, czy dany tekst poprawnym programem oraz zwróci jego reprezentacje w postaci drzewa obiektów.
 
 \subsection{Generator}
-Generator języka odpowiedzialny jest za wygenerowanie kodu (w tym przypadku kodu Java) na podstawie modelu semantycznego zwróconego przez parser w postacie drzewa obiektów. Generator został napisany w języku Xtend i składa się z głównej klasy implementującej metodę "doGenerate" oraz klas pomocniczych utworzonym w celu dekompozycji problemu na mniejsze części zgodnie z zasadą pojedynczej odpowiedzialności \cite{CleanCode:1000}.
+Generator języka odpowiedzialny jest za wygenerowanie kodu (w tym przypadku kodu Java) na podstawie modelu semantycznego zwróconego przez parser w postacie drzewa obiektów. Generator został napisany w języku Xtend i składa się z głównej klasy implementującej metodę "doGenerate" oraz klas pomocniczych utworzonym w celu dekompozycji problemu na mniejsze części zgodnie z zasadą pojedynczej odpowiedzialności \cite{CleanCode:2005}.
 
 \section{Aplikacja Android}
 Ten projekt to standardowa aplikacja Androidowa wykorzystująca AndroidSDK rozbudowana o język AML, na podstawie, którego generowana jest cześć kodu aplikacji.
@@ -305,7 +304,7 @@ Warstwa kontrolera odpowiada przede wszystkim za obsługę zdarzeń przychodząc
 
 Model odpowiada za przechowywanie danych w uporządkowany sposób. Hermetyzuje dane udostępniając zestaw metod dostępowych (gettery i settery). Ta warstwa została podzielona na dwie podtypy: model i stan. Modelem nazywam wszystkie klasy, których stan jest obserwowany przez widok (wzorzec obserwator). Stanem (State) nazywam klasy typu POJO, których stan nie może być obserwowany, a ich jedynym zadaniem jest przechowywanie stanu aplikacji. 
 
-Logika to warstwa odpowiadająca za wszelkie operacje wykonywane na danych, które nie powinny znaleźć się w warstwie kontrolera ze względu na zbyt duże skomplikowanie, bądź wagę kodu. Wydzielenie tego kodu do osobnych klas w połączeniu z testowaniem jednostkowym pozwala stworzyć kod, co do którego mamy pewność, że jego kluczowe aspekty działają prawidłowo. Usunięcie tego kodu z kontrolera jest zgodne z zasadą pojedynczej odpowiedzialności \cite{CleanCode:1000} i pozwala na jego użycie w wielu miejscach programu. 
+Logika to warstwa odpowiadająca za wszelkie operacje wykonywane na danych, które nie powinny znaleźć się w warstwie kontrolera ze względu na zbyt duże skomplikowanie, bądź wagę kodu. Wydzielenie tego kodu do osobnych klas w połączeniu z testowaniem jednostkowym pozwala stworzyć kod, co do którego mamy pewność, że jego kluczowe aspekty działają prawidłowo. Usunięcie tego kodu z kontrolera jest zgodne z zasadą pojedynczej odpowiedzialności \cite{CleanCode:2005} i pozwala na jego użycie w wielu miejscach programu. 
 
 Pakiet "dagger" to miejsce w którym integrowane są wszystkie klasy należące do danego komponentu. W projekcie wykorzystano technikę wstrzykiwania zależności (DI), która pozwala na usunięcie bezpośrednich zależności pomiędzy klasami, aż do momentu ich integracji. Za wstrzykiwanie zależności w moim projekcie odpowiedzialna jest biblioteka Dagger 2, stąd nazwa pakietu w którym to zadanie jest realizowane.
 
@@ -328,7 +327,7 @@ Moduł ten jest odpowiedzialny za dostarczenie wygodnego API do opisu zasad gry.
 Istotną częścią tego modułu są klasy pozwalające na wygodne budowanie obiektów (tzw. Buildery) oraz metody statyczne tworzące instancje tych klas. Dzięki ich zastosowaniu możemy tworzyć kod przyjazny dla programisty. Kod znajdujący się w tym module stanowi też interfejs do komunikacji pomiędzy modułami Standardowy Kod Aplikacji, a Kodem Implementujący Zasady Gry.
 
 \subsection{Plik game.aml}
-Moduł ten składa się z tylko jednego pliku "game.aml" znajdującego się w folderze "app/src/main/java". Plik ten jest kluczowym elementem całego frameworku, bo to właśnie w nim definiuje się elementy związane z konkretną grą.
+Moduł ten składa się z tylko jednego pliku "game.aml" znajdującego się w folderze "app/src/main/java". Plik ten jest kluczowym elementem całego frameworka, bo to właśnie w nim definiuje się elementy związane z konkretną grą.
 
 \subsection{Wygenerowany Kod implementujący zasady gry}
 Ten moduł znajduje się folderze "app/aml-src" i zawiera kod wygenerowany automatycznie na podstawie pliku "game.aml". Kod ten implementuje szczegóły dotyczące konkretnej gry. Wykorzystuje API dostarczone przez Wewnętrzny Język AML. Wygenerowany tu kod użyty jest w module Kod Aplikacji.
@@ -339,7 +338,7 @@ Ten moduł zawiera kod analogiczny to automatycznie wygenerowanego w folderze "a
 \chapter{Testy} 
 W celu sprawdzenia poprawności działania stworzonego oprogramowania musiałem je przetestować. Na pierwszym miejscu postawiłem testy automatyczne, ponieważ są najbardziej praktyczne i wiarygodne. Testy automatyczne zaimplementowałem w postaci mockowanych testów jednostkowych za pomocą bibliotek JUnit i Mockito.
 
-Niestety z przyczyn technicznych nie dało się pokryć testami automatycznymi wszystkich funkcjonalności. Z tego powodu część kodu została przetestowana w sposób manualny. Elementami przetestowanymi ręcznie są działanie modułu NFC, GPS oraz generacja kodu. Do każdego z tych elementów przygotowałem scenariusz testowy, który następnie wykonałem. Sposób przeprowadzenia oraz wyniki tych testów zostały przedstawione poniżej.
+Niestety z przyczyn technicznych nie dało się pokryć testami automatycznymi wszystkich funkcjonalności. Z tego powodu część kodu została przetestowana w sposób manualny. Elementami przetestowanymi ręcznie są działanie modułu NFC oraz GPS. Do każdego z tych elementów przygotowałem scenariusz testowy, który następnie wykonałem. Sposób przeprowadzenia oraz wyniki tych testów zostały przedstawione poniżej.
 
 \section{Testy automatyczne}
 \subsection{Struktura testów}
@@ -365,11 +364,6 @@ Testy jednostkowe zostały uruchomione przy pomocy narzędzia Gradle \cite{Gradl
 	\caption{Podsumowanie testów}
 	\source{Wygenerowane przez Gradle}
 \end{figure}
-
-\section{Generowanie kodu}
-Aby przetestować funcjonalność generacji kodu postanowiłem napisać przykładowy plik AML zawierający wszystkie dostępne w języku elementy. Następnie napisałem odpowiedający mu kod java i sprawdziłem, czy wygenerowany kod jest identyczny (podobny).  
-Poniżej znajduje się kod AML, który testowałem. (w załączniku można dać kod JAVA)
---AML--
 
 \section{NFC i GPS}
 
@@ -397,16 +391,16 @@ W przypadku testu GPS przeszedłem się z urządzenie wyposażonym w moduł GPS 
 
 Oba testy zakończyły się sukcesem.  
 
-\chapter{Korzystanie z frameworku}
-Pisanie własnej gry przy użyciu frameworku Adventure Maker jest bardzo proste. Wymaga ono jednak przygotowania środowiska pracy. W tym rozdziale zawarłem instrukcje dotyczące instalacji, konfiguracji i korzystania z potrzebnych narzędzi. 
+\chapter{Korzystanie z frameworka}
+Pisanie własnej gry przy użyciu frameworka Adventure Maker jest bardzo proste. Wymaga ono jednak przygotowania środowiska pracy. W tym rozdziale zawarłem instrukcje dotyczące instalacji, konfiguracji i korzystania z potrzebnych narzędzi. 
 
 \section{Konfiguracja środowika}
 
-Aby móc korzystać z frameworku należy pobrać i zainstalować IDE IntelliJ Idea, JRE, JDK i Android SDK oraz wtyczkę AML.
+Aby móc korzystać z frameworka należy pobrać i zainstalować IDE IntelliJ Idea, JRE, JDK i Android SDK oraz wtyczkę AML.
 
 \subsection{JRE}
 
-JRE, czyli Java Runtime Enviroment, to środowisko uruchomieniowe Javy. Jest ono 
+JRE, czyli Java Runtime Enviroment, to środowisko uruchomieniowe Java. Jest ono 
 niezbędne do uruchomienia oprogramowania wykorzystującego technologię Java. JRE należy pobrać ze strony Oracje (https://www.java.com) w wesji 1.8 i zainstalować w standardowy sposób.
 
 \subsection{JDK}
@@ -415,7 +409,7 @@ JDK, czyli Java Development Kit, standardowy zestaw narzędzi wykorzystywanych d
 
 \subsection{IDE - IntelliJ Idea}
 
-IDE IntelliJ Idea można pobrać ze strony producenta - JetBrains (https://www.jetbrains.com/idea). Wersja community jest darmowa i wystarczająca do działania frameworku. Podczas instalacji należy pamiętać o włączeniu pluginu obsługującego aplikacje pisane na system Android.
+IDE IntelliJ Idea można pobrać ze strony producenta - JetBrains (https://www.jetbrains.com/idea). Wersja community jest darmowa i wystarczająca do działania frameworka. Podczas instalacji należy pamiętać o włączeniu pluginu obsługującego aplikacje pisane na system Android.
 
 \subsection{Android SDK}
 
@@ -437,7 +431,7 @@ Implementacja własnej gry sprowadza się do edycji jednego pliku, mianowicie "g
 Projekt jest standardowym projektem Androidowym, tak więc możemy go też uruchomić przyciskiem play dostępnym w IDE IntelliJ Idea. Ważne jest, żeby korzystać z IDE, nawet w przypadku budowania narzędziem gradle, ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko.
 
 \chapter{Adventure Maker Language} 
-Adventure Maker Language (AML) to język domenowy stworzony specjalnie na potrzeby frameworku Adventure Maker. Poniżej znajduje się jego dokumentacja.
+Adventure Maker Language (AML) to język domenowy stworzony specjalnie na potrzeby frameworka Adventure Maker. Poniżej znajduje się jego dokumentacja.
 
 \section{Struktura pliku AML} 
 Plik AML definiuje wszystkie dostępne w grze elementy. Plik może zawierać dowolną ilość Klas Postaci, Typów Przedmiotów, Przeciwników, Lokacji oraz Przygód. Dodatkowo należy w nim umieścić Przygody Początkowe. 
@@ -680,7 +674,7 @@ Przygoda "MysteriusManAd" rozpoczyna się od Pytania - "Are you ready to fight?"
 Odpowiedź "Yes" prowadzi do efektu zależnego od statystyk postaci. Postać posiadająca przynajmniej jedną ze statystyk na poziomie powyżej 30 punktów, będzie musiała stoczyć Walkę z "MysteriusMan". Jeżeli gracz zwycięży w walce otrzyma komunikat - "Great. Now, you are ready for fight with Dragon", odblokuje Przygodę "BigDragon" w Lokacji "Hills", a przygoda "MysteriusManAd", nie będzie dłużej dostępna w "OldHause". Postać niespełniająca tych warunków otrzyma po prostu komunikat - "I don't think so". 
 
 \chapter{Przykładowa gra}
-Aby ułatwić zrozumienie i korzystanie z frameworku postanowiłem przygotować przykładową grę. Kod AML, potrzebny do skompilowania gry znajduje się w załączniku.
+Aby ułatwić zrozumienie i korzystanie z frameworka postanowiłem przygotować przykładową grę. Kod AML, potrzebny do skompilowania gry znajduje się w załączniku.
 
 \section{Opis scenariusza}
 
