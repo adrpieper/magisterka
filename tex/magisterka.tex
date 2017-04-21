@@ -1,6 +1,6 @@
 
 
-\documentclass	{xmgr}
+\documentclass{xmgr}
 \usepackage{listings}
 % Jeśli nowe rozdziały mają się zaczynać na stronach
 % nieparzystych:
@@ -22,7 +22,7 @@
 \nralbumu {243\,677}
 \email    {adrpieper@gmail.com.pl}
 
-\title    {Adventure Maker...}
+\title    {Adventure Maker - Framework dla terenowych gier RGP}
 \date     {2017}
 \miejsce  {Gdańsk}
 
@@ -283,11 +283,16 @@ Pierwsze pięć elementów jest typowych dla aplikacji android, natomiast pozost
 Jest to bardzo rozbudowana, ale i najbardziej tradycyjna i oczywista część aplikacji. W jego skład wchodzą pakiety "edu.ug.inf.am.*" umieszczone w folderze "app/src/main/java". Ten moduł jest odpowiedzialny za kluczowe działania i wyglądu aplikacji. Moduł korzysta z kodu implementujący zasady gry oraz zasobów. Została w nim umieszczona logika związana z systemem Android taka jak komunikacja z czujnikami NFC i GSP lub obsługa interfejsu użytkownika. Dodatkowo kod odpowiada za elementy stałe dla każdej gry takie jak mechanizm walki i rozwoju postaci.
 
 Kod został podzielony na warstwy i komponenty, co zostało odzwierciedlone w strukturze pakietów. 
-Komponenty to zbiory klas realizujące wspólne zadanie. Ich struktura jest hierarchiczna tzn. w skład konkretnego komponentu wchodzą kolejne, odpowiedzialne za zadania bardziej sprecyzowane. Kompletną strukturę komponentów aplikacji przedstawie poniższy drzewo.
+Komponenty to zbiory klas realizujące wspólne zadanie. Ich struktura jest hierarchiczna tzn. w skład konkretnego komponentu wchodzą kolejne, odpowiedzialne za zadania bardziej sprecyzowane. Kompletną strukturę komponentów aplikacji przedstawie drzewo \ref{modules:tree}.
 
-DRZEWO // TODO
+\begin{figure}[!tbh]
+	\centering
+	\includegraphics[width=1.0\hsize]{fig/modules_tree}
+	\caption{Struktura komponentów aplikacji}
+	\label{modules:tree}
+\end{figure}
 
-Wszystkie komponenty zostały zrealizowane w postaci pakietów o podobnej strukturze. W nich skład wchodzi po kilka pakietów-warstw zawierających bezpośrednio klasy realizujące funkcjonalność tych warstw Dodatkowo pakiety, nie będące liśćmi w drzewie, zawiera pakiety-komponenty znajdującymi się niżej w hierarchii.
+Wszystkie komponenty zostały zrealizowane w postaci pakietów o podobnej strukturze. W nich skład wchodzi po kilka pakietów-warstw zawierających bezpośrednio klasy realizujące funkcjonalność tych warstw. Dodatkowo pakiety, nie będące liśćmi w drzewie, zawiera pakiety-komponenty znajdującymi się niżej w hierarchii.
 
 W kodzie wydzieliłem następujące warstwy i odpowiadające im nazwy pakietów:
 \begin{itemize}
