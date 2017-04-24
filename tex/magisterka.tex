@@ -37,7 +37,7 @@
 
 % streszczenie
 \begin{abstract}
-  W ramach niniejszej pracy zostało zaprojektowane i zaimplementowane frameworka pozwalającego w prosty sposób tworzyć terenowe gry RPG. Kluczowym elementem frameworku jest specjalny język opisu scenariuszy oraz zasad panujących w grze - Adventure Maker Language. Język ten został stworzony z użyciem technologii Xtext \cite{Xtext:2017:Doc}. Dzięki wykorzystaniu tego narzędzia możliwa była względnie szybka implementacja nowego języka, zawierającego takie elementy jak linker, czy kompiler. Dodatkowo powstały język zintegrowany jest z IDE Idea InteliJ co pozwala na podświetlanie, autouzupełnianie oraz automatyczne sprawdzanie składni.
+  W ramach niniejszej pracy zostało zaprojektowane i zaimplementowane narzędzie pozwalającego w prosty sposób tworzyć terenowe gry RPG. Kluczowym elementem frameworku Adventure Maker jest specjalny język opisu scenariuszy oraz zasad panujących w grze - Adventure Maker Language. Język ten został stworzony z użyciem technologii Xtext \cite{Xtext:2017:Doc}. Dzięki wykorzystaniu tego narzędzia możliwa była względnie szybka implementacja nowego języka, obejmująca takie elementy jak linker, czy kompiler. Dodatkowo powstały język zintegrowany jest z IDE Idea InteliJ co pozwala na podświetlanie, autouzupełnianie oraz automatyczne sprawdzanie składni.
   
   Stworzone gry wykorzystują technologię NFC oraz GPS w celu lokalizacji graczy w pomieszczeniach, jak i na otwartym terenie. Framework został zaprojektowany tak, aby twórca gry mógł traktować te dwie technologie w sposób bardzo zbliżony, nie zważając na ich  całkowicie odmienną techniczną implementację. Z jego punktu widzenia zarówno pomieszczenie oznaczone tagiem NFC, jak i współrzędne geograficzne, stanowią po prostu lokację, w której gracza mogą spotkać dowolnego typu przygody. 
   
@@ -53,19 +53,19 @@
 % wstęp
 \introduction
 
-Gry terenowe, czyli aplikacje rozrywkowe basujące głównie na fizycznej pozycji gracza, są nowym trendem w dziedzinie rozrywki elektronicznej. Sukces niedawno wydanej gry "Pocemon GO" pokazał, że pomysł by gracz musiał poruszać się po fizycznym świecie jest strzałem w dziesiątkę. Okazuje się, że na gry tego typu znajduje się całkiem spora rzesza odbiorców, czego nie dało się nie zauważyć, gdyż grupy poszukiwaczy pokemonów, spotkać można było niemal na każdym kroku.
+Gry terenowe, czyli aplikacje rozrywkowe, basujące głównie na fizycznej pozycji gracza, są nowym trendem w dziedzinie rozrywki elektronicznej. Sukces niedawno wydanej gry "Pocemon GO" pokazał, że pomysł by gracz musiał poruszać się po fizycznym świecie jest strzałem w dziesiątkę. Okazuje się, że na gry tego typu znajduje się całkiem spora rzesza odbiorców, czego nie dało się nie zauważyć, gdyż grupy poszukiwaczy tytułowych pokemonów, spotkać można było niemal na każdym kroku.
 
-Pomimo sukcesu "Pocemon GO", gry terenowe nadal stanowią marginalną część rynku rozrywki elektronicznej. Moim zdaniem niewielka ilość aplikacji tego typu, wynika z braku odpowiednich narządzi do ich tworzenia. Napisanie tego typu gier z wykorzystaniem standardowych narzędzi developerskich jest dość skomplikowane, a przez to kosztowne. Wykorzystanie technologii typu GPS, czy NFC wymaga od programisty wiedzy, wykorzystania specjalistycznego API oraz sprawia, że testowanie aplikacji jest utrudnione.
+Pomimo sukcesu "Pocemon GO", gry terenowe nadal stanowią marginalną część rynku rozrywki elektronicznej. Moim zdaniem niewielka ilość aplikacji tego typu, wynika z braku odpowiednich narządzi do ich tworzenia. Napisanie tego typu gier z wykorzystaniem standardowych narzędzi developerskich jest dość skomplikowane, a przez to kosztowne. Wykorzystanie technologii typu GPS, czy NFC wymaga od programisty wiedzy i znajomości specjalistycznego API oraz sprawia, że testowanie aplikacji jest utrudnione.
 
-Spora część elementów gier terenowych jest wspólna, szczególnie jeśli ograniczymy się do gier RPG. Skoro gry tego typu opierają się na podobnych zasadach, powinny one zostać zdefiniowane tylko raz, w myśl zasady - "nie powtarzaj się". W ten sposób można odciążyć projektanta gry od szczegółów implementacyjnych, pozwalając mu skupić się w całości na tym co ważne. W idealnym świecie napisanie tego typu gry powinno sprowadzać się jedynie do zdefiniowania miejsc, postaci oraz zasad obowiązujących w wirtualnym świecie. Postanowiłem więc sprawdzić, czy osiągnięcie takiego ideału jest możliwe. Okazuje się, że tak, o ile tylko zastosuje się do tego odpowiednie podejście i narzędzia.
+Spora część elementów gier terenowych jest wspólna, szczególnie jeśli ograniczymy się jedynie do gier RPG. Skoro gry tego typu opierają się na podobnych zasadach, powinny one zostać zdefiniowane tylko raz, w myśl zasady - "nie powtarzaj się". W ten sposób można odciążyć projektanta gry od szczegółów implementacyjnych, pozwalając mu skupić się w całości na tym co ważne. W idealnym świecie napisanie tego typu gry powinno sprowadzać się jedynie do zdefiniowania miejsc, postaci oraz zasad obowiązujących w wirtualnym świecie. Postanowiłem więc sprawdzić, czy osiągnięcie takiego ideału jest możliwe. Okazuje się, że tak, o ile tylko zastosuje się do tego odpowiednie podejście i narzędzia.
 
-Sam pomysł umieszczenia warstwy wspólnej dla wielu aplikacji nie jest nowy. Istnieje wiele rozwiązanie, które już to robią. Warstwę tą nazywa się frameworkiem lub silnikiem. Większość powstających obecnie gier osadzonych jest właśnie na tego typu rdzeniu. Nie istnieje natomiast jeszcze framework, wyspecjalizowany do tworzenia konkretnego typu gier, jakimi są terenowe gry RPG. Dlatego właśnie uznałem, że terenowe gry RPG. 
+Sam pomysł umieszczenia warstwy wspólnej dla wielu aplikacji nie jest nowy. Istnieje wiele rozwiązanie, które już to robią. Warstwę tą nazywa się frameworkiem lub silnikiem. Większość powstających obecnie gier osadzonych jest właśnie na tego typu rdzeniu. Nie istnieje natomiast jeszcze framework, wyspecjalizowany do tworzenia konkretnego typu gier, jakimi są terenowe gry RPG.
 
-Moim celem nie było stworzenie niesamowicie grywalnej, ani popularnej gry. Chciałem pokazać, na modnym przykładzie gier terenowych, jak można rozwiązać problem "wynajdywania koła na nowo" wykorzystując własny język domenowy. Powstały język pozwala na implementacje prostej gry przez osobę niebędącą programistą. Składnia języka jest przyjazna dla projektanta gry i nie wymaga znajomości, ani żadnego języka programowania ogólnego przeznaczenia, ani żadnych dodatkowych technologii.
+Moim celem nie było stworzenie niesamowicie grywalnej, ani popularnej gry. Chciałem pokazać, na modnym przykładzie gier terenowych, jak można rozwiązać problem "wynajdywania koła na nowo" wykorzystując własny język domenowy. Język AML pozwala na implementacje prostej gry przez osobę niebędącą programistą, ponieważ wszystkie niezbędne w grze elementy zaimplementowane są w już w samych frameworku. Składnia języka jest przyjazna dla projektanta gry i nie wymaga znajomości, ani żadnego języka programowania ogólnego przeznaczenia, ani żadnych dodatkowych technologii.
 
 \chapter{Opis problemu}
 
-Celem niniejszej pracy jest implementacja frameworka służącego do szybkiego tworzenia terenowych gier RPG. Kluczowym elementem implementacji jest stworzony język domenowy. Niniejsza praca obejmuje więc o cztery z pozoru niezwiązane ze sobą tematyki jakimi są gry terenowe, gry RPG, frameworki oraz języki domenowe. Każdy z tych elementów gości już od dłuższego lub krótszego czasu w świecie informatyki, innowacyjny jest jednak pomysł połączenia ich w jednym narzędziu. Nie sposób jednak pominąć dotychczasowe dorobku innych, zajmujących się nimi, osób. 
+Celem niniejszej pracy jest implementacja frameworka służącego do szybkiego tworzenia terenowych gier RPG. Kluczowym elementem implementacji jest stworzony język domenowy. Niniejsza praca obejmuje więc cztery z pozoru niezwiązane ze sobą tematyki jakimi są gry terenowe, gry RPG, frameworki oraz języki domenowe. Każdy z tych elementów gości już od dłuższego lub krótszego czasu w świecie informatyki, innowacyjny jest jednak pomysł połączenia ich w jednym narzędziu. Nie sposób jednak pominąć dotychczasowe dorobku innych, zajmujących się nimi, osób. 
 
 \section{Gry terenowe}
 
@@ -73,21 +73,21 @@ Rozwój technologii mobilny sprawił, że od paru lat na rynku rozrywki elektron
 
 Doskonały przykładem gry terenowej jest Pokemon GO. Jest to gra, której premierę ciężko było przeoczyć. Gra zyskała olbrzymią popularność w zaledwie kilka dni, czego efektem były tłumy graczy szturmujących parki i place. Tam właśnie ukrywały się tytułowe Pokemony, których szukanie i kolekcjonowanie, są kluczowymi elementami rozgrywki.
 
-Inny pomysł na wykorzystanie lokalizacji gracza mieli twórcy Landlord. Gra przenosi koncepcje znale z popularnej gry Monopoly do świata rzeczywistego. Cel gry pozostał niezmieniony, jest nim oczywiście inwestowanie w nieruchomości. Nie znajdziemy tam natomiast, ani planszy, ani pionków, czy kostki. Gracze Landlord, w celu dokonywania wirtualnych zakupów, zmuszeni są do podróżowania po rzeczywistym świecie.
+Inny pomysł na wykorzystanie lokalizacji gracza mieli twórcy gry Landlord. Gra przenosi koncepcje znale z popularnej gry Monopoly do świata rzeczywistego. Cel gry pozostał niezmieniony, jest nim oczywiście inwestowanie w nieruchomości. Nie znajdziemy tam natomiast planszy, pionków, ani kostki. Gracze Landlord, w celu dokonywania wirtualnych zakupów, zmuszeni są do podróżowania po rzeczywistym świecie.
 
 \section{Gry RPG}
 
-Gry RGP, inaczej gry fabularne, są to gry w których gracze wcielają się w rolę fikcyjnych postaci poruszających się po fikcyjnym świecie.  Celem graczy jest zazwyczaj ukończenie jakiegoś scenariusza, bądź też po prostu osiągniecie określonego celu np. zdobycie jakiegoś przedmiotu, danej ilości złota lub rozwój postaci do konkretnego poziomu. Istnieją też gry otwarte, w których gracz nie ma żadnego narzuconego celu, a jedynie przemierza fikcyjny świat ze znanej tylko sobie motywacji. Tradycyjnie grę tego typu rozgrywa się w wyobraźni graczy. Jeden z graczy wciela się wtedy w tzw. mastera gry. Zadaniem mastera jest prowadzenia graczy przez świat gry poprzez opowiadanie pewnej historii oraz zadawanie pytań. Master przedstawia graczom jak wygląda sytuacja, w której znajduję się ich postacie oraz prosi ich o podjęcie decyzji, dotyczącej zachowania się postaci w danej sytuacji. Gracze podejmują decyzję, po czym master gry określa z jakimi skutkami się ona wiąże i przechodzi do dalszej opowieści. Aby zachować pewną spójność gry, master podejmuje decyzję w oparciu o ustalony zbiór zasad (tzw. mechanikę gry), zazwyczaj efekt podjętej decyzji zależy też od rzutu kością.
+Gry RPG, inaczej gry fabularne, są to gry w których gracze wcielają się w rolę fikcyjnych postaci poruszających się po fikcyjnym świecie.  Celem graczy jest zazwyczaj ukończenie jakiegoś scenariusza, bądź też po prostu osiągniecie określonego celu np. zdobycie jakiegoś przedmiotu, danej ilości złota lub rozwój postaci do konkretnego poziomu. Istnieją też gry otwarte, w których gracz nie ma żadnego narzuconego celu, a jedynie przemierza fikcyjny świat ze znanej tylko sobie motywacji. Tradycyjnie grę tego typu rozgrywa się w wyobraźni graczy. Jeden z graczy wciela się wtedy w tzw. mastera gry. Zadaniem mastera jest prowadzenia graczy przez świat gry poprzez opowiadanie pewnej historii oraz zadawanie pytań. Master przedstawia graczom jak wygląda sytuacja, w której znajdują się ich postacie oraz prosi ich o podjęcie decyzji, dotyczącej zachowania się postaci w danej sytuacji. Gracze podejmują decyzję, po czym master gry określa z jakimi skutkami się ona wiąże i przechodzi do dalszej opowieści. Aby zachować pewną spójność gry, master podejmuje decyzję w oparciu o ustalony zbiór zasad (tzw. mechanikę gry), zazwyczaj efekt podjętej decyzji zależy też od rzutu kością.
 
-Oprócz tradycyjnej odmiany gier fabularnych powstały tej ich planszowe oraz komputerowe odmiany. W grach tych nie już mastera. Gry takie mają z góry narzucony scenariusz oraz ścisłe zasady. 
+Oprócz tradycyjnej odmiany gier fabularnych powstały tej ich planszowe oraz komputerowe odmiany. W grach tych nie już mastera, a jego rolę przejmuje z góry narzucony scenariusz oraz ścisłe zasady. 
 
-Jednym z najpopularniejszych przykładów planszowych gier RPG jest Magia i Miecza. Gracze wybierają w niej jedną z kilkudziesięciu postaci. Celem gry jest dostanie się do tzw. Korony Władzy. Aby móc tego dokonać muszę rozwinąć umiejętności swoich postaci. Jest to możliwe poprzez wyciąganie kart przygód, które zawierają opis sytuacji, w której znalazł się gracz. 
+Jednym z najpopularniejszych przykładów planszowych gier RPG jest Magia i Miecz. Gracze wybierają w niej jedną z kilkudziesięciu postaci. Celem gry jest dostanie się do tzw. Korony Władzy. Aby móc tego dokonać muszę rozwinąć umiejętności swoich postaci. Jest to możliwe poprzez wyciąganie kart przygód, które zawierają opis sytuacji, w której znalazł się gracz. 
 
 W świecie gier komputerowych, RPG osiągnęły niekwestionowany sukces. Wydanych tytułów są całe dziesiątki i nie sposób ich tutaj wymienić. Dodatkowo, warto zwrócić uwagę, że typowe elementy tych gier takie jak rozwój i statystyki postaci przedostały się już do prawie każdego gatunku gier komputerowych.
 
 \section{DSL}
 
-DSL, czyli języki domenowe, to języki programowania zaprojektowane z myślą o ściśle określonym i z reguły bardzo wąskim zastosowaniu. W odróżnieniu od języków programowania ogólnego przeznaczenia, języki domenowe nie nadają się do rozwiązania większości problemów informatycznych. Sprawdzają się natomiast świetnie w dziedzinie do, której zostały zaprojektowane Dzięki ograniczeniu się jedynie do wąskiej grupy zastosowań, możliwe jest tworzenie języków, które są zrozumiałe dla osób będących ekspertami w danej dziedzinie. Języki domenowe należą zazwyczaj do języków deklaratywnych, gdyż skupiane są wokół tego co, a nie w jaki sposób chce osiągnąć programista.
+DSL, czyli języki domenowe, to języki programowania zaprojektowane z myślą o ściśle określonym i z reguły bardzo wąskim zastosowaniu. W odróżnieniu od języków programowania ogólnego przeznaczenia, języki domenowe nie nadają się do rozwiązania większości problemów informatycznych. Sprawdzają się natomiast świetnie w dziedzinie, do której zostały zaprojektowane Dzięki ograniczeniu się jedynie do wąskiej grupy zastosowań, możliwe jest tworzenie języków, które są zrozumiałe dla osób będących ekspertami w danej dziedzinie. Języki domenowe należą zazwyczaj do języków deklaratywnych, gdyż skupiają są wokół tego co, a nie w jaki sposób, chce osiągnąć programista.
 
 Języki domenowe ze względu na sposób ich implementacji można podzielić na dwie grupy:
 \begin{itemize}
@@ -97,54 +97,60 @@ Języki domenowe ze względu na sposób ich implementacji można podzielić na d
 
 \subsection{Internal DSL}
 
-Internal DSL to język stworzonych w ramach innego istniejącego już języka ogólnego przeznaczenia. Technicznie rzecz biorą jest to zazwyczaj zbiór klas udostępniających wygodny dla programisty, dający wrażenie pisania w innym języku zbiór metod. Klasy te umieszcza się w bibliotece, którą możemy użyć do rozwiązania ściśle określonego problemu. Główną cechą takich bibliotek jest wyraźne nastawienie na udostępniany interfejs, a nie samą implementacje. O jakości takiego rozwiązania świadczy nie tyle wydajność jego działania, lecz łatwość użycia. Biblioteki takie pozwalają programiście na lepsze, prostsze i bardziej zwięzłe wyrażenie jego intencji. Przykładami taki języków są np. język asercji z biblioteki AssertJ lub  biblioteka Mockito. 
+Internal DSL to język stworzonych w ramach innego istniejącego już języka ogólnego przeznaczenia. Technicznie rzecz biorąc jest to zazwyczaj zbiór klas udostępniających wygodny dla programisty, dający wrażenie pisania w innym języku zbiór metod. Klasy te umieszcza się w bibliotece, którą możemy użyć do rozwiązania ściśle określonego problemu. Główną cechą takich bibliotek jest wyraźne nastawienie na udostępniany interfejs, a nie samą implementacje. O jakości takiego rozwiązania świadczy nie tyle wydajność jego działania, lecz łatwość użycia. Biblioteki takie pozwalają programiście na bardziej czytelne, prostsze i zwięzłe wyrażenie jego intencji. Przykładami taki języków są np. język asercji z biblioteki AssertJ lub  biblioteka Mockito. 
 
 \subsection{External DSL}
 
-External DSL to język domenowy z prawdziwego zdarzenia. Język taki posiada ściśle określoną gramatykę i od początku jest projektowany w określonym celu. Nie stanowi on części innego języka, chodź często z potrafi z nim współpracować. Przykładem takiej współpracy może być np. komunikacja z bazą danych, gdzie kod programu (napisany np w języku JAVA), wywołuje pewne zapytanie w języku SQL. Przykładami takich języków są:
+External DSL to język domenowy z prawdziwego zdarzenia. Język taki posiada ściśle określoną gramatykę i od początku jest projektowany w określonym celu. Nie stanowi on części innego języka, chodź często z potrafi z nim współpracować. Przykładem takiej współpracy może być np. komunikacja z bazą danych, gdzie kod programu (napisany np w języku JAVA), wywołuje pewne zapytanie w języku SQL. Przykładami zewnętrznych języków domenowych są:
 \begin{itemize}
 	\item SQL - język służący do obsługi relacyjnych baz danych
-	\item CSS - język służący do definiowania stylu stron intenetowych 
+	\item CSS - język służący do definiowania stylu stron internetowych 
 	\item HTML - język służący do definiowania struktury strony internetowej
 \end{itemize}
 
 \section{Frameworki}
 
 Frameworki są doskonałym przykładem korzyści jakie niesie ze sobą popularna zasada Clean Code \cite{CleanCode:2005} - DRY (Don't Repeat Yourself), czyli nie powtarzaj się. 
-Twórcy frameworków  wychodzą z założenia, że projekty informatyczne można z powodzeniem podzielić na pewne grupy jak np. aplikacje webowe. Projekty informatyczne należące do takiej grupy bywają do siebie tak podobne, że zazwyczaj łatwiej jest wskazać cechy wspólne niż różnice.
-Wszystkie aplikacje webowe udostępniają pewien interfejs w postaci stron html, przechowują dane w bazach (zazwyczaj relacyjnych) i komunikują się z użytkownikiem za pomocą protokołu HTTP. Elementem różniącym te aplikacje jest ich wygląd i funkcjonalność. Ideą frameworka jest implementacja wszystkich elementów wspólnych w jednym miejscu i udostępnienie programistom-użytkownikom frameworka przyjaznego interfejsu do implementacji różnic. Programista jest więc, ograniczony pewnymi ramami, w których musi mieścić się jego aplikacja, stąd nazwa takiego narzędzia - framework.
+Twórcy frameworków  wychodzą z założenia, że projekty informatyczne można z powodzeniem podzielić na pewne grupy. Projekty informatyczne należące do takiej grupy bywają do siebie tak podobne, że zazwyczaj łatwiej jest wskazać cechy wspólne niż różnice. Ideą frameworka jest implementacja wszystkich elementów wspólnych w jednym miejscu i udostępnienie programistom-użytkownikom frameworka przyjaznego interfejsu do implementacji tych różnic. Programista jest więc, ograniczony pewnymi ramami, w których musi mieścić się jego aplikacja, stąd nazwa takiego narzędzia - framework.
 
-Z uwagi na fakt, że gry RPG są bardzo popularne, a jednocześnie do siebie bardzo podobne, naturalnym wydaje się stworzenie oprogramowania pozwalające na łatwe tworzenie takiego typu gier. Narzędzie RPG Maker \cite{RPGMaker:2017:Doc} pozwala na proste wytwarzanie dwuwymiarowych gier RPG. Według twórców, tworzenie gier przy pomocy RPG Maker, jest możliwe bez jakiejkolwiek wiedzy na temat programowania, a jednocześnie dając bardzo duże możliwości doświadczonym użytkownikom. Oprogramowanie udostępnia przyjazne GUI, dzięki któremu można tworzyć w pełni funkcjonalne gry i to na wiele różnych platform. Jedynym, ale bardzo istotnym ograniczeniem jest ściśle narzucony gatunek gier. Jednak właśnie to ograniczenie pozwoliło na stworzenie narzędzia jednocześnie tak prostego i funkcjonalnego. 
+Dobrym przykładem takiej grupy są aplikacje webowe.Wszystkie udostępniają pewien interfejs w postaci stron html, przechowują dane w bazach (zazwyczaj relacyjnych) i komunikują się z użytkownikiem za pomocą protokołu HTTP. Elementem różniącym te aplikacje jest ich wygląd i funkcjonalność. 
 
-W tu wspomnieć o istnieniu narzędzi pozwalających na łatwe tworzenie nawet zaawansowanych gier mobilnych i to dowolnego typu. Takim oprogramowanie jest np. Unity \cite{Unity3D:2017:Doc}. Unity udostępsnia przyjazne GUI, które pozwala na tworzenie świata gry. Elementy fizyki takie jak grawitacja, są już w pełni zaimplementowane w silniku gry. Programista musi natomiast jedynie pamiętać o nadaniu obiektom odpowiednich cech takich jak masa. Logikę gry można zaimplementować w jednym z dwóch języków UnityScript, C\#. UnityScript jest językiem o składni bardzo zbliżonej do JavaScript, a C\# to popularny obiektowy język programowania. Użycie powszechnie znanych języków oraz wieloplatformowość , co z pewnością przyczyniło się do olbrzymiej popularności, którą cieszy się Unity.
+Z uwagi na fakt, że gry RPG są bardzo popularne, a jednocześnie do siebie bardzo podobne, naturalnym wydaje się stworzenie oprogramowania pozwalające na łatwe tworzenie takiego typu gier. Narzędzie RPG Maker \cite{RPGMaker:2017:Doc} pozwala na proste wytwarzanie dwuwymiarowych gier RPG. Według twórców, tworzenie gier przy pomocy RPG Maker, jest możliwe bez jakiejkolwiek wiedzy na temat programowania, jednocześnie dając bardzo duże możliwości doświadczonym użytkownikom. Oprogramowanie udostępnia przyjazne GUI, dzięki któremu można tworzyć w pełni funkcjonalne gry i to na wiele różnych platform. Jedynym, ale bardzo istotnym ograniczeniem jest ściśle narzucony gatunek gier. Jednak właśnie to ograniczenie pozwoliło na stworzenie narzędzia jednocześnie tak prostego i funkcjonalnego. 
+
+Warto wspomnieć tu również o istnieniu narzędzi pozwalających na łatwe tworzenie nawet zaawansowanych gier mobilnych i to dowolnego typu. Takim oprogramowanie jest np. Unity \cite{Unity3D:2017:Doc}. Unity udostępsnia przyjazne GUI, które pozwala na tworzenie świata gry. Elementy fizyki takie jak grawitacja, są już w pełni zaimplementowane w silniku gry. Programista musi natomiast jedynie pamiętać o nadaniu obiektom odpowiednich cech takich jak np. masa. Logikę gry można zaimplementować w jednym z dwóch języków UnityScript oraz C\#. UnityScript jest językiem o składni bardzo zbliżonej do JavaScript, natomiast C\# to popularny obiektowy język programowania czerpiący wszystko co dobre z JAVA i C++. Użycie powszechnie znanych języków oraz wieloplatformowość z pewnością przyczyniły się do olbrzymiej popularności, którą cieszy się Unity.
 
 \section{Zastosowania DSL w grach terenowych}
 
 W mojej pracy postawiłem sobie na celu stworzenie frameworka pozwalającego na łatwe tworzenie terenowych gier RPG. Narzędzie łączy ze sobą cechy istniejących rozwiązań, zaprzęgając je jednocześnie do rozwiązania nowych problemów. Cele postawione przed tym frameworkiem są typowe. Udostępnić narzędzie do przyjaznego rozwiązywania problemów określonej klasy. Nowy jest natomiast obszar w jakim działać będzie framework oraz użyte rozwiązania.
 
-Przy pomocy Andventure Makera możliwe jest tworzenie gier terenowych o narzuconych z góry, dość wąskich i specyficznych ramach, typowych dla tradycyjnych gier RPG. Stworzona gra polegać będzie głównie na rozwoju postaci, poprzez odwiedzanie lokacji, podejmowanie decyzji, a przede wszystkim pokonywanie przeciwników. Postać sterowana przez gracza zdobywać będzie punkty doświadczenia, dzięki którym gracz będzie mógł rozwijać postać w wybranym przez siebie kierunku. 
+Przy pomocy Andventure Makera możliwe jest tworzenie gier terenowych o narzuconych z góry, dość wąskich i specyficznych ramach, typowych dla tradycyjnych gier RPG. Stworzona gra polega głównie na rozwoju postaci, poprzez odwiedzanie lokacji, podejmowanie decyzji, a przede wszystkim pokonywanie przeciwników. Postać sterowana przez gracza zdobywa punkty doświadczenia, dzięki którym gracz może rozwijać postać w wybranym przez siebie kierunku. 
 
-Większość dostępnych frameworków opiera się na dwóch rozwiązaniach. Albo udostępniają użytkownikowi interfejs graficzny, albo pewien popularny język programowania, poszerzony ewentualnie o nowe funkcjonalności Pierwsze podejście stosowane jest najczęściej w przypadku gier lub gdy odbiorcą jest osoba nie umiejąca programować. Jest ono ukierunkowane na prostotę i wygodę, ograniczając przy tym jednak możliwości narzędzia. Drugie podejście sprawdza się głównie w aplikacja biznesowych. Integracja frameworka z popularnym językiem programowania pozwala pozyskać szerokie rzesze odbiorców. Dodatkowo sprawia, że narzędzie jest zarówno elastyczne, jak uniwersalne, tzn. dające się zastosować wielu przypadkach. Frameworki takie często są pisane w postaci bibliotek.
-W przypadku Adventure Makera postanowieniem zastosować nieco inne, innowacyjne podejście. Uznałem, że głównymi elementem gry RPG są świat w którym się rozgrywa, jej zasady oraz scenariusz. Stwierdziłem więc, że naturalnym pomysłem na implementacje tych elementów, będzie specjalny język DSL, zrozumiały dla fanów tego typu gier.
+Większość dostępnych frameworków opiera się jednym z dwóch sprawdzonych rozwiązań. Albo udostępniają użytkownikowi interfejs graficzny, albo pewien popularny język programowania, poszerzony ewentualnie o nowe funkcjonalności. 
+
+Pierwsze podejście stosowane jest najczęściej w przypadku gier lub gdy odbiorcą jest osoba nie umiejąca programować. Jest ono ukierunkowane na prostotę i wygodę, ograniczając przy tym jednak możliwości narzędzia. 
+
+Drugie podejście sprawdza się głównie w aplikacja biznesowych. Integracja frameworka z popularnym językiem programowania pozwala pozyskać szerokie rzesze odbiorców. Dodatkowo sprawia, że narzędzie jest zarówno elastyczne, jak uniwersalne, tzn. dające się zastosować wielu przypadkach. Frameworki takie często są pisane w postaci bibliotek.
+
+W przypadku Adventure Maker postanowieniem zastosować nieco inne, innowacyjne podejście. Uznałem, że głównymi elementem gry RPG są świat w którym się rozgrywa, jej zasady oraz scenariusz. Stwierdziłem więc, że naturalnym pomysłem na implementacje tych elementów, będzie specjalny język DSL, zrozumiały dla fanów tego typu gier.
 
 \chapter{Wymagania}
 
-Jednym z pierwszym kroków jakie należy podjąć przez przystąpieniem do projektowania oprogramowania jest analiza wymagań. Uznałem, jakie postawiłem przed Adventure Makerem można podzielić na funkcjonalne i niefunkcjonalne.
+Jednym z pierwszym kroków jakie należy podjąć przez przystąpieniem do projektowania oprogramowania jest analiza wymagań. Wymagania, jakie postawiłem przed Adventure Makerem można podzielić na funkcjonalne i niefunkcjonalne.
 
 \section{Funkcjonalne}
 Do wymagań funkcjonalnych należą:
 \begin{itemize}
 \item Język DSL zawierający elementy takie jak:
-\subitem Klasy Postaci
-\subitem Przedmioty
-\subitem Lokacje
-\subitem Przygody
-\subitem Przeciwnicy
+\subitem - Klasy Postaci
+\subitem - Przedmioty
+\subitem - Lokacje
+\subitem - Przygody
+\subitem - Przeciwnicy
 \item Integracja ze środowiskiem IntelliJ Idea
 \item Kompilacja aplikacji na podstawie pliku DSL 
 \end{itemize}
 
-Zbiór elementów wchodzących w skład zaprojektowanego języka DSL został przeze mnie wybrany arbitralnie, w taki sposób, żeby zawierał minimum niezbędne do zaprojektowania gry. Chciałem, aby zaprojektowany język był jednocześnie prosty, ale i pozwalający na implementacje nawet dość zawiłej logiki. Oczywiście RPG z prawdziwego zdarzenia powinien zawierać nieco więcej. Uznałem jednak, że dodanie elementów takich jak np. misje zbędnie rozbudowały by język i jego implementacje. Elementy te prawdopodobnie pojawią się, w przypadku wydania kolejnej wersji frameworka. Nie mniej jednak implementacja stworzona w ramach tej pracy obejmować będzie jedynie wyszczególnione punkty.
+Zbiór elementów wchodzących w skład zaprojektowanego języka DSL został przeze mnie wybrany arbitralnie, w taki sposób, żeby zawierał minimum niezbędne do zaprojektowania gry. Chciałem, aby zaprojektowany język był jednocześnie prosty, ale i pozwalający na implementacje nawet dość zawiłej logiki. Oczywiście RPG z prawdziwego zdarzenia powinien zawierać nieco bardziej rozbudowany. Uznałem jednak, że dodanie elementów takich jak np. misje zbędnie skomplikowały by język i jego implementacje. Elementy te prawdopodobnie pojawią się, w przypadku wydania kolejnej wersji frameworka. Nie mniej jednak implementacja stworzona w ramach tej pracy obejmować będzie jedynie wyszczególnione punkty.
 
 U celu ułatwienia edycji kodu warto udostępnić użytkownikowi przyjazne IDE. Na szczęście narzędzia takie już istnieją i nie musiałem projektować ich od zera. Popularne narzędzia programistyczne pozwalają na rozszerzanie ich funkcjonalności poprzez tzw. wtyczki, czyli oprogramowanie, które doinstalowuje się do już istniejącego IDE. Postanowiłem więc, że udostępnię obsługującą język AML wtyczkę do IDE IntelliJ Idea. Postanowiłem wybrać to środowisko z kilku powodów:
 \begin{itemize}	
@@ -153,7 +159,7 @@ U celu ułatwienia edycji kodu warto udostępnić użytkownikowi przyjazne IDE. 
 \item jest wspierany przez Xtext i Xtend.
 \end{itemize}
 
-Przyjazna edycja kodu to za mało, aby język był funkcjonalny. Użytkownikowi należy udostępnić możliwość kompilacji kodu. W tym przypadku będzie to transkompilacja, ponieważ kodem wyjściowym nie będzie kod binarny, a kod JAVA. Na podstawie wygenerowanego oraz dostarczonego wraz z frameworkiem kodu możliwa jest kompilacja gotowej aplikacji, bez konieczności dopisywania dodatkowego kodu. 
+Przyjazna edycja kodu to za mało, aby język był funkcjonalny. Użytkownikowi należy udostępnić możliwość kompilacji kodu. W tym przypadku będzie to transkompilacja, ponieważ kodem wyjściowym nie będzie kod binarny, a kod JAVA. Na podstawie wygenerowanego oraz dostarczonego wraz z frameworkiem kodu możliwa jest kompilacja gotowej aplikacji, bez konieczności dopisywania ani jednej linii dodatkowego kodu. 
 
 \section{Niefunkcjonalne}
 Do wymagań niefunkcjonalnych nalezą:
@@ -165,15 +171,16 @@ Do wymagań niefunkcjonalnych nalezą:
 Podstawowym założeniem Adventure Makera jest udostępnienie możliwości tworzenia gier osobom będącym laikami jeśli chodzi o programowanie i technologie IT. Cel ten został też niejako wyrażony poprzez wymagania funkcjonalne w postaci implementacji i integracji z IDE języka AML.
 
 \chapter{Technologie}
-Przed przystąpieniem do projektu informatycznego warto zastanowić się jakie narzędzia i technologie wykorzystać. Należy wybrać technologie dostosowane do wymagań konkretnego projektu. Jest bardzo ważne, aby nie wymyślać koła na nowo. Oznacza to, że powinno się korzystać z gotowych rozwiązań, o ile tylko takie istnieją. Warto sięgać po sprawdzone rozwiązania, które przeszły już dowiodły swojej skuteczności. W tym rozdziale opisałem najważniejsze, z wykorzystanych przed Adventure Maker , technologii.
+Przed przystąpieniem do projektu informatycznego warto zastanowić się jakie narzędzia i technologie wykorzystać. Należy wybrać technologie dostosowane do wymagań konkretnego projektu. Jest bardzo ważne, aby nie wymyślać koła na nowo. Oznacza to, że powinno się korzystać z gotowych rozwiązań, o ile tylko takie istnieją. Warto sięgać po sprawdzone rozwiązania, które już dowiodły swojej skuteczności. W tym rozdziale opisałem najważniejsze z wykorzystanych przed Adventure Maker technologii.
 
 \section{Xtext}
 
-Xtext \cite{Xtext:2017:Doc} to narzędzie służącą do implementacji języków domenowych. Framework dostarcza, na podstawie gramatyki języka, całą jego infrastrukturę, zawierającą elementy takie jak: parser, linker, typechecker, compiler. Dodatkowo pozwala na integracje zaprojektowane języka z popularnymi IDE: eclipse oraz IntelliJ Idea. Narzędzie umożliwia też ciągła integracje poprzez wsparcie dla narzędzi Maven i Gradle.
+Xtext \cite{Xtext:2017:Doc} to narzędzie służącą do implementacji języków domenowych. Framework dostarcza, na podstawie gramatyki języka, całą infrastrukturę języka, zawierającą elementy takie jak: parser, linker, typechecker, compiler. Dodatkowo pozwala na integracje zaprojektowane języka z popularnymi IDE: eclipse oraz IntelliJ Idea. Narzędzie umożliwia też ciągła integracje poprzez wsparcie dla narzędzi Maven i Gradle.
 
 \section{Xtend}
 
-Xtend \cite{Xtend:2017:Doc} jest językiem programowania wywodzącym się i składniowo zbliżonym do JAVY. Został zaprojektowany, aby wyeliminować kilka wad tego języka. Zawiera elementy niedostępne w Jawie oraz upraszcza niektóre struktury pozwalając na pozbycie się niepotrzebnego kody. Kodem wynikowym dla języka Xtext jest Java. Mamy tu więc do czynienia z transpilacją, czyli przetłumaczeniem jednego kodu źródłowego w inny.
+Xtend \cite{Xtend:2017:Doc} jest językiem programowania wywodzącym się i składniowo zbliżonym do JAVA. Został zaprojektowany, aby wyeliminować kilka wad tego języka. Zawiera elementy niedostępne w JAVA oraz upraszcza niektóre struktury pozwalając na pozbycie się niepotrzebnego kody. Kodem wynikowym dla języka Xtext jest JAVA, a nie kod binarny. Mamy tu więc do czynienia z transpilacją, czyli przetłumaczeniem jednego kodu źródłowego w inny.
+
 W moim projekcie Xtend został użyty ze względu na technologie Xtext. Wykorzystanie Xtend jest zalecanym sposobem implementacji generatorów dla języków DSL tworzonych przy użyciu Xtend. Główną zaletą języka Xtext, w kontekście pisania generatorów kodu są szablony, które nie są dostępne w języku JAVA.
 
 \section{Android SKD}
@@ -190,7 +197,7 @@ Mockito \cite{Mockito:2017:Doc} to biblioteka ściśle związana z frameworkiem 
  
 \section{Dagger 2}
 
-Dagger 2 \cite{Dagger2:2017:Doc} to biblioteka umożliwiająca DI, czyli wstrzykiwanie zależności. Istnieje wiele bibliotek umożliwiających DI, jednak Dagger 2 cieszy się największą popularnością programistów Androida. Jego główną zaletą jest rozstrzyganie zależności w czasie kompilacji oraz generacja kodu. Dzięki temu możemy wykryć wady projektu, takie jak zależności cykliczne jeszcze przed uruchomieniem aplikacji. Dodatkowo wygenerowany kod jest o wiele szybszy niż typowe rozwiązanie czasu wykonania - czyli refleksja. Jest to bardzo ważna cecha w przypadku aplikacji Androidowych, gdyż urządzenia mobilne mają stosunkowo ograniczone zasoby. 
+Dagger 2 \cite{Dagger2:2017:Doc} to biblioteka umożliwiająca DI, czyli wstrzykiwanie zależności. Istnieje wiele bibliotek umożliwiających DI, jednak Dagger 2 cieszy się największą popularnością wśród programistów Androida. Jego główną zaletą jest rozstrzyganie zależności w czasie kompilacji oraz generacja kodu. Dzięki temu możemy wykryć wady projektu, takie jak zależności cykliczne jeszcze przed uruchomieniem aplikacji. Dodatkowo wygenerowany kod jest o wiele szybszy niż typowe rozwiązanie czasu wykonania - czyli refleksja. Jest to bardzo ważna cecha w przypadku aplikacji Androidowych, gdyż urządzenia mobilne mają stosunkowo ograniczone zasoby. 
 
 \section{Gradle}
 
@@ -203,7 +210,7 @@ Gradle \cite{Gradle:2017:Doc} jest narzędziem służącym do automatyzacji budo
 Wraz ze specjalnie zaprojektowanym pluginem, stanowi obowiązkowy element każdego projektu związanego z systemem Android.
 
 \chapter{Projekt GUI}
-Ważnym elementem każdego współczesnego oprogramowania jest jego GUI, czyli graficzny interfejs użytkownika. W przypadku frameworka do tworzenia gier można mówić o dwóch rodzajach GUI: interfejs narzędzia i powstałych w nim gier. 
+Ważnym elementem każdego współczesnego oprogramowania jest jego GUI, czyli graficzny interfejs użytkownika. W przypadku frameworka do tworzenia gier można mówić o dwóch rodzajach GUI: interfejsie narzędzia i powstałych w nim gier. 
 
 Jako, że framework został zrealizowany jako wtyczka do istniejącego IDE, sprawa jego GUI jest rozwiązana. IDE Idea IntelliJ dostarcza bardzo wygodny i dopracowany interfejs użytkownika, a dostarczona przeze mnie wtyczka wykorzystuje jego możliwości. 
 
@@ -214,7 +221,7 @@ Framework nie pozwala twórcy gry na dostosowanie interfejsu do swoich potrzeb. 
 	\item Tryb przygody
 \end{itemize}
 \section{Menu początkowe}
-Menu początkowe pozwala na wybór typu postaci, jaką dany gracz ma zamiar kontrolować. Ekran został podzielony na dwie części: listy klas postaci oraz szczegółów wybranej klasy. Szczegóły zawierają nazwę klasy oraz informacje jej statystykach.
+Menu początkowe pozwala na wybór typu postaci, jaką dany gracz ma zamiar kontrolować. Ekran został podzielony na dwie części: listy klas postaci oraz szczegółów wybranej klasy. Szczegóły zawierają nazwę klasy oraz informacje o jej statystykach.
 
 \section{Tryb zwiedzania}
 Zwiedzanie stanowi główny ekran gry. Jest wyświetlany przez cały czas, w którym gracz porusza się pomiędzy lokacjami w poszukiwaniu przygód. 
@@ -235,11 +242,11 @@ Sekcja przedmiotów, zawiera wszystkiego posiadane przez gracza rzeczy. Przedmio
 \section{Tryb przygody}
 Gracz nie ma swobodnego dostępu do tej części interfejsu. Jest ona wyświetlana dopiero w momencie znalezienia się gracza w lokacji zawierającej jakąś przygodę.
 
-Tryb przygody zawiera kilka ekranów, z których każdy odpowiedzialny jest za wyświetlenie konkretnego zdarzenia. Gracz nie może swobodnie nawigować pomiędzy. Dostępne GUI zależne jest sytuacji, w której znajduje się postać gracza.
+Tryb przygody zawiera kilka ekranów, z których każdy odpowiedzialny jest za wyświetlenie konkretnego zdarzenia. Gracz nie może swobodnie nawigować pomiędzy nimi. Dostępne GUI zależne jest sytuacji, w której znajduje się postać gracza.
 \subsection*{Decyzja}
 Ekran decyzji jest bardzo prosty. Zawiera jedynie pole wyświetlające pytanie skierowane do gracza oraz listę decyzji w postaci przycisków.
 \subsection*{Walka}
-Ekran walki jest zawiera najwięcej elementów ze wszystkich dostępnych w trybie przygody. Odpowiedzialny jest za wyświetlanie oraz sterowanie przebiegiem starcia pomiędzy postacią gracza, a dowolnym przeciwnikiem. Interfejs wyświetla nazwę przeciwnika, kolorowe paski zawierające informacje o punktach życia (tzw. hit points) postaci i przeciwnika oraz o punktów many gracza. W dolnej części znajdują się przyciski akcji pozwalające na użycie standardowego ataku lub dowolnej umiejętności.
+Ekran walki zawiera najwięcej elementów ze wszystkich dostępnych w trybie przygody. Odpowiedzialny jest za wyświetlanie oraz sterowanie przebiegiem starcia pomiędzy postacią gracza, a dowolnym przeciwnikiem. Interfejs wyświetla nazwę przeciwnika, kolorowe paski zawierające informacje o punktach życia (tzw. hit points) postaci i przeciwnika oraz o punktów many gracza. W dolnej części znajdują się przyciski akcji pozwalające na użycie standardowego ataku lub dowolnej umiejętności.
 \subsection*{Komunikat}
 Ekran komunikatu składa się z dwóch części. Wiadomości oraz przycisku "OK", którym gracz potwierdza, że zapoznał się z komunikatem. Wiadomość najczęściej wyświetlana jest w prostym oknie tekstowym, jednak w niektórych przypadkach konieczne jest użycie elementów bardziej rozbudowanych. Jest tak na przykład w przypadku okna wyświetlanego pod koniec przygody, zawierającego między innymi wykaz zdobytych przez gracza przedmiotów w postaci listy.
 
@@ -254,13 +261,13 @@ Projekt powstał w celu implementacji języka Andventure Maker Language. Dokumen
 
 \subsection{Definicja Gramatyki} 
 
-Gramatyka języka AML znajduje w pojedynczym pliku o nazwie "AML.xtext". Gramatyka zawiera zarówno opis modelu syntaktycznego i semantycznego tworzonego języka. Innymi słowy zdefiniuje jaki tekst należy do języka oraz jak będzie on reprezentowany w pamięci komputera. Xtext na podstawie tego pliku generuje między innymi parser, który sprawdzi, czy dany tekst poprawnym programem oraz zwróci jego reprezentacje w postaci drzewa obiektów.
+Gramatyka języka AML znajduje w pojedynczym pliku o nazwie "AML.xtext". Definicja w nim zawarta zawiera zarówno opis modelu syntaktycznego i semantycznego tworzonego języka. Innymi słowy zdefiniuje jaki tekst należy do języka oraz jak będzie on reprezentowany w pamięci komputera. Xtext na podstawie tego pliku generuje między innymi parser, który sprawdzi, czy dany tekst poprawnym programem oraz zwróci jego reprezentacje w postaci drzewa obiektów.
 
 \subsection{Generator}
 Generator języka odpowiedzialny jest za wygenerowanie kodu (w tym przypadku kodu Java) na podstawie modelu semantycznego zwróconego przez parser w postacie drzewa obiektów. Generator został napisany w języku Xtend i składa się z głównej klasy implementującej metodę "doGenerate" oraz klas pomocniczych utworzonym w celu dekompozycji problemu na mniejsze części zgodnie z zasadą pojedynczej odpowiedzialności \cite{CleanCode:2005}.
 
 \section{Aplikacja Android}
-Ten projekt to standardowa aplikacja Androidowa wykorzystująca AndroidSDK rozbudowana o język AML, na podstawie, którego generowana jest cześć kodu aplikacji.
+Ten projekt to standardowa aplikacja Androidowa wykorzystująca AndroidSDK rozbudowana o język AML, na podstawie którego generowana jest cześć kodu aplikacji.
 
 Architektura projektu jest dość rozbudowana i można z niej wydzielić następujące moduły:
 
@@ -272,15 +279,15 @@ Architektura projektu jest dość rozbudowana i można z niej wydzielić następ
 	\item Testy
 	\item Wewnętrzy język AML
 	\item Plik game.aml
-	\item Testowy Kod Implementujący Zasady Gry
 	\item Wygenerowany Kod Implementujący Zasady Gry
+	\item Testowy Kod Implementujący Zasady Gry
 \end{itemize}
 
 Pierwsze pięć elementów jest typowych dla aplikacji android, natomiast pozostałe są specyficzne i wynikają z zastosowania języka AML.
 
 \subsection{Standardowy kod aplikacji} 
 
-Jest to bardzo rozbudowana, ale i najbardziej tradycyjna i oczywista część aplikacji. W jego skład wchodzą pakiety "edu.ug.inf.am.*" umieszczone w folderze "app/src/main/java". Ten moduł jest odpowiedzialny za kluczowe działania i wyglądu aplikacji. Moduł korzysta z kodu implementujący zasady gry oraz zasobów. Została w nim umieszczona logika związana z systemem Android taka jak komunikacja z czujnikami NFC i GSP lub obsługa interfejsu użytkownika. Dodatkowo kod odpowiada za elementy stałe dla każdej gry takie jak mechanizm walki i rozwoju postaci.
+Jest to bardzo rozbudowana, ale i najbardziej tradycyjna i oczywista część aplikacji. W jego skład wchodzą pakiety "edu.ug.inf.am.*" umieszczone w folderze "app/src/main/java". Ten moduł jest odpowiedzialny za sposób działania i wygląd aplikacji. Moduł korzysta z kodu Implementujący Zasady Gry oraz Zasobów. Została w nim umieszczona logika związana z systemem Android taka jak komunikacja z czujnikami NFC i GPS, czy obsługa interfejsu użytkownika. Dodatkowo kod odpowiada za elementy stałe dla każdej gry takie jak mechanizm walki i rozwoju postaci.
 
 Kod został podzielony na warstwy i komponenty, co zostało odzwierciedlone w strukturze pakietów. 
 Komponenty to zbiory klas realizujące wspólne zadanie. Ich struktura jest hierarchiczna tzn. w skład konkretnego komponentu wchodzą kolejne, odpowiedzialne za zadania bardziej sprecyzowane. Kompletną strukturę komponentów aplikacji przedstawie drzewo \ref{modules:tree}.
@@ -303,11 +310,11 @@ W kodzie wydzieliłem następujące warstwy i odpowiadające im nazwy pakietów:
 	\item Komponent (dagger)
 \end{itemize}
 
-Widok to warstwa odpowiedzialna za interfejs użytkownika. W jej skład wchodzą przede wszystkim klasy dziedziczące po Activity, Fragment oraz View. W większości przypadków zadaniem klasy jest połączenie danych z widokiem za pomocą dostępnego od niedawna w Adroidzie mechanizmu Data Bindingu. Danych pobierany jest z warstwy kontrolera.
+Widok to warstwa odpowiedzialna za interfejs użytkownika. W jej skład wchodzą przede wszystkim klasy dziedziczące po Activity, Fragment oraz View. W większości przypadków zadaniem klasy jest połączenie danych z widokiem za pomocą dostępnego od niedawna w Adroidzie mechanizmu Data Bindingu. Dana pobierane  są z warstwy kontrolera.
 
 Warstwa kontrolera odpowiada przede wszystkim za obsługę zdarzeń przychodzących z interfejsu użytkownika, oraz dostarczanie modelu danych dla widoku. Zajmuje się też modyfikacją danych. W prostych przypadkach modyfikuje je bezpośrednio, a w bardziej zaawansowanych deleguje to zadanie do warstwy logiki. Inną ważną odpowiedzialnością tej warstwy jest przełączanie pomiędzy widokami. 
 
-Model odpowiada za przechowywanie danych w uporządkowany sposób. Hermetyzuje dane udostępniając zestaw metod dostępowych (gettery i settery). Ta warstwa została podzielona na dwie podtypy: model i stan. Modelem nazywam wszystkie klasy, których stan jest obserwowany przez widok (wzorzec obserwator). Stanem (State) nazywam klasy typu POJO, których stan nie może być obserwowany, a ich jedynym zadaniem jest przechowywanie stanu aplikacji. 
+Model odpowiada za przechowywanie danych w uporządkowany sposób. Hermetyzuje dane udostępniając zestaw metod dostępowych (gettery i settery). Ta warstwa została podzielona na dwa podtypy: model i stan. Modelem nazywam wszystkie klasy, których stan jest obserwowany przez widok (wzorzec obserwator). Stanem (State) nazywam klasy typu POJO, których stan nie może być obserwowany, a ich jedynym zadaniem jest przechowywanie stanu aplikacji. 
 
 Logika to warstwa odpowiadająca za wszelkie operacje wykonywane na danych, które nie powinny znaleźć się w warstwie kontrolera ze względu na zbyt duże skomplikowanie, bądź wagę kodu. Wydzielenie tego kodu do osobnych klas w połączeniu z testowaniem jednostkowym pozwala stworzyć kod, co do którego mamy pewność, że jego kluczowe aspekty działają prawidłowo. Usunięcie tego kodu z kontrolera jest zgodne z zasadą pojedynczej odpowiedzialności \cite{CleanCode:2005} i pozwala na jego użycie w wielu miejscach programu. 
 
@@ -316,20 +323,20 @@ Pakiet "dagger" to miejsce w którym integrowane są wszystkie klasy należące 
 \subsection{Zasoby}
 Zasoby są elementem wspólnym dla każdej aplikacji. Tradycyjnie zostały umieszczone w folderze "app/scr/main/res". Tutaj definiuje się elementy takie jak layouty, ikonki, animacje itp. Większość zasobów stanowią pliki xml. Dostęp do zasobów możliwy jest z poziomu kodu aplikacji poprzez klasę R. Klasa ta jest generowana automatycznie, a jej skład wchodzi zestaw stałych, będących identyfikatorami odpowiednich zasobów. Android SDK posiada wbudowany system zarządzania zasobami, który pozwala na przygotowanie konkretnego zasobu w kilku wersjach (np. różny layout dla kilku wielkości ekranów). Tak przygotowany zasób, jest dostępny pod pojedynczym numerem id, a o wybór odpowiedniej wersji dba system.
 
-Elementem wartym opisania są layouty, z których znaczna część wykorzystuje tzw. Data Binding. Mechanizm ten pozwala opisać logikę odpowiedzialną za wyświetlanie danych w sposób deklaratywny, przy pomocy języka xml. AndroidSDK generuje na jego podstawie specjalny kod, który będzie realizował to zadanie. 
+WiększođC zasobów stanowią layouty, z których znaczna część wykorzystuje tzw. Data Binding. Mechanizm ten pozwala opisać logikę odpowiedzialną za wyświetlanie danych w sposób deklaratywny, przy pomocy języka xml. AndroidSDK generuje na jego podstawie specjalny kod, który będzie realizował to zadanie. 
 
 \subsection{Plik manifestu}
 Plik manifestu jest elementem niezbędnym w każdej aplikacji androidowej. Znajduje się on w folderze "app/scr/main". W nim zadeklarowane są elementy takie jak identyfikator aplikacji, zbiór dostępnych aktywności, potrzebne uprawnienia, ikonę startową itp.
 
 \subsection{Gradle}
-Gradle jest narzędziem służącym do budowania projektów, który stał się standardem w aplikacjach androidowych. W projekcie znajdują się 2 pliku Gradle, jeden dla modułu aplikacji, drugi dla całego projektu. Zostały umieszczone odpowiednio w folderze "/app" i "/". W plikach Gradle zdefiniowane jest struktura projektu, zadania związane z jego budowaniem oraz potrzebne zależności.
+Gradle jest narzędziem służącym do budowania projektów, który stał się standardem w aplikacjach androidowych. W projekcie znajdują się 2 pliki Gradle, jeden dla modułu aplikacji, drugi dla całego projektu. Zostały umieszczone odpowiednio w folderze "/app" i "/". W plikach Gradle zdefiniowane jest struktura projektu, zadania związane z jego budowaniem oraz potrzebne zależności.
 
 \subsection{Testy}
-Moduł testów odpowiedzialny jest za sprawdzenie, czy kod działa prawidłowo. Ich kod został umieszczony w folderze "app/scr/test/java". W jego skład wchodzą klasy, implementujące testy jednostkowe wszystkich ważnych elementów aplikacji. Kod testów wykorzystuje zewnętrzne biblioteki JUnit, Mockito i AssertJ. Testowaniu poświęcony został osobny rozdział.
+Moduł testów odpowiedzialny jest za sprawdzenie, czy kod aplikacji działa prawidłowo. Ich  kod został umieszczony w folderze "app/scr/test/java". W jego skład wchodzą klasy, implementujące testy jednostkowe wszystkich ważnych elementów aplikacji. Kod testów wykorzystuje zewnętrzne biblioteki JUnit, Mockito i AssertJ.
 
 \subsection{Wewnętrzy język AML}
-Moduł ten jest odpowiedzialny za dostarczenie wygodnego API do opisu zasad gry. Zarówno dostarczone API, jak i implementacja modułu została zrealizowana w języku JAVA. Dlatego też nazywam go wewnętrznym językiem domenowym. W skład modułu wchodzą wszystkie klasy pakietów "pl.aml.*".
-Istotną częścią tego modułu są klasy pozwalające na wygodne budowanie obiektów (tzw. Buildery) oraz metody statyczne tworzące instancje tych klas. Dzięki ich zastosowaniu możemy tworzyć kod przyjazny dla programisty. Kod znajdujący się w tym module stanowi też interfejs do komunikacji pomiędzy modułami Standardowy Kod Aplikacji, a Kodem Implementujący Zasady Gry.
+Moduł ten jest odpowiedzialny za dostarczenie wygodnego API do opisu zasad gry. Technicznie rzecz biorąc stanowi on interfejs do komunikacji pomiędzy modułami Standardowy Kod Aplikacji, a Kodem Implementujący Zasady Gry. Zarówno dostarczone API, jak i implementacja modułu zostały zrealizowana w języku JAVA. Dlatego też nazywam go wewnętrznym językiem domenowym. W skład modułu wchodzą wszystkie klasy pakietów "pl.aml.*".
+Istotną częścią tego modułu są klasy pozwalające na wygodne budowanie obiektów (tzw. Buildery) oraz metody statyczne tworzące instancje tych klas. Dzięki ich zastosowaniu możemy tworzyć kod przyjazny dla programisty. 
 
 \subsection{Plik game.aml}
 Moduł ten składa się z tylko jednego pliku "game.aml" znajdującego się w folderze "app/src/main/java". Plik ten jest kluczowym elementem całego frameworka, bo to właśnie w nim definiuje się elementy związane z konkretną grą.
@@ -337,17 +344,18 @@ Moduł ten składa się z tylko jednego pliku "game.aml" znajdującego się w fo
 \subsection{Wygenerowany Kod implementujący zasady gry}
 Ten moduł znajduje się folderze "app/aml-src" i zawiera kod wygenerowany automatycznie na podstawie pliku "game.aml". Kod ten implementuje szczegóły dotyczące konkretnej gry. Wykorzystuje API dostarczone przez Wewnętrzny Język AML. Wygenerowany tu kod użyty jest w module Kod Aplikacji.
 
-\subsection{Przykładowy Kod implementujący zasady gry}
-Ten moduł zawiera kod analogiczny to automatycznie wygenerowanego w folderze "app/aml-src", jest jednak napisany ręcznie. Kod został umieszczony w folderze "app/test-src". Moduł ten zastępuje kod generowany przez framework podczas testowania i rozwijania aplikacji i nie jest wykorzystywany w produkcie finalnym.
+\subsection{Testowy Kod implementujący zasady gry}
+Ten moduł zawiera kod analogiczny do Wygenerowanego Kodu implementujący zasady gry, jest jednak napisany ręcznie. Kod został umieszczony w folderze "app/test-src". Moduł ten zastępuje kod generowany przez framework podczas testowania i rozwijania aplikacji i nie jest wykorzystywany w produkcie finalnym.
 
 \chapter{Testy} 
+
 W celu sprawdzenia poprawności działania stworzonego oprogramowania musiałem je przetestować. Na pierwszym miejscu postawiłem testy automatyczne, ponieważ są najbardziej praktyczne i wiarygodne. Testy automatyczne zaimplementowałem w postaci mockowanych testów jednostkowych za pomocą bibliotek JUnit i Mockito.
 
 Niestety z przyczyn technicznych nie dało się pokryć testami automatycznymi wszystkich funkcjonalności. Z tego powodu część kodu została przetestowana w sposób manualny. Elementami przetestowanymi ręcznie są działanie modułu NFC oraz GPS. Do każdego z tych elementów przygotowałem scenariusz testowy, który następnie wykonałem. Sposób przeprowadzenia oraz wyniki tych testów zostały przedstawione poniżej.
 
 \section{Testy automatyczne}
 \subsection{Struktura testów}
-Podczas  automatycznych testów jednostkowych testowałem z osobna działanie poszczególnych funkcji w oderwaniu od reszty systemu. Każdy test został podzielone na 3 sekcje, zawierające kod odpowiedniego typu:
+Podczas  automatycznych testów jednostkowych testowałem z osobna działanie poszczególnych funkcji w oderwaniu od reszty systemu. Każdy test został podzielony na 3 sekcje, zawierające kod odpowiedniego typu:
 \begin{itemize}
 \item Given
 \item When
@@ -356,7 +364,7 @@ Podczas  automatycznych testów jednostkowych testowałem z osobna działanie po
 
 W sekcji \textit{Given} został umieszczony kod implementujący warunki początkowe. Są to przede wszystkim linie kodu mockującego metody klas zależności klasy testowanej. Mogą to być też wywołania metod dostarczających jakieś dane. 
 
-W sekcji \textit{When} składa się z pojedynczej linii. Jest to wywołanie testowanej metody na instancji testowanej klasy.
+Sekcja \textit{When} składa się z pojedynczej linii. Jest to wywołanie testowanej metody na instancji testowanej klasy.
 
 Sekcja \textit{Then} odpowiedzialna jest za sprawdzenie, czy metoda zachowała się w oczekiwany sposób. Zazwyczaj jest to kod składający się z kilku linii zawierających asercje. Asercje służą sprawdzeniu czy, ile razy i z jakimi parametrami zostały wywołane metody klas-zależności. Jeżeli funkcja zwraca jakiś wynik, za pomocą asercji testuje się, czy pokrywa się on z oczekiwanym.
 
@@ -382,7 +390,7 @@ Testy funkcjonalność NFC i GPS zostały przeprowadzone ręcznie według poniż
 
 \section{Pliku AML}
 
-Przygotowane pliki AML dla testu NFC i GPS są bardzo podobne. W obu składają się z przykładowej Klasy Postaci oraz dwóch Przygód i Lokacji. W obu przypadkach przygody polegają jedynie na wyświetleniu komunikatu. 
+Przygotowane pliki AML dla testu NFC i GPS są bardzo podobne. Oba składają się z przykładowej Klasy Postaci oraz dwóch Przygód i Lokacji. W obu przypadkach przygody polegają jedynie na wyświetleniu komunikatu. 
 
 Różnica pojawia się w przypadku definicji Lokacji. W pliku przygotowanym dla GPS, są to dwa znajdujące się niedaleko od siebie obszary o promieniu 10 metrów. W przypadku NFC Lokacje zdefiniowane są przez odpowiednie znaczniki "Test1" i "Test2".
 
@@ -405,12 +413,12 @@ Aby móc korzystać z frameworka należy pobrać i zainstalować IDE IntelliJ Id
 
 \subsection{JRE}
 
-JRE, czyli Java Runtime Enviroment, to środowisko uruchomieniowe Java. Jest ono 
-niezbędne do uruchomienia oprogramowania wykorzystującego technologię Java. JRE należy pobrać ze strony Oracje (https://www.java.com) w wesji 1.8 i zainstalować w standardowy sposób.
+JRE, czyli Java Runtime Enviroment, to środowisko uruchomieniowe JAVA. Jest ono 
+niezbędne do uruchomienia oprogramowania wykorzystującego technologię JAVA. JRE należy pobrać ze strony Oracje (https://www.java.com) w wesji 1.8 i zainstalować w standardowy sposób.
 
 \subsection{JDK}
 
-JDK, czyli Java Development Kit, standardowy zestaw narzędzi wykorzystywanych do tworzenia aplikacji w technologii Java. JDK podobnie, jak JRE należy pobrać ze strony Oracle (https://www.java.com) i zainstalować w wersji 1.8.
+JDK, czyli Java Development Kit, standardowy zestaw narzędzi wykorzystywanych do tworzenia aplikacji w technologii JAVA. JDK podobnie, jak JRE należy pobrać ze strony Oracle (https://www.java.com) i zainstalować w wersji 1.8.
 
 \subsection{IDE - IntelliJ Idea}
 
@@ -418,10 +426,10 @@ IDE IntelliJ Idea można pobrać ze strony producenta - JetBrains (https://www.j
 
 \subsection{Android SDK}
 
-Android SDK (Standard Development Kit) to standardowy zestaw narzędzi programisty Android pozwalający na tworzenie aplikacji na ten system, w języku JAVA. SDK należy poprać ze strony (https://developer.android.com) i zainstalować w dowolnej lokalizacji.
+Android SDK (Standard Development Kit) to standardowy zestaw narzędzi programisty Android pozwalający na tworzenie aplikacji na ten system w języku JAVA. SDK należy poprać ze strony (https://developer.android.com) i zainstalować w dowolnej lokalizacji.
 
 \subsection{Wtyczka AML}
-Wtyczka AML jest odpowiedzialna za obsługę języka AML, w tym generowanie kodu Java na podstawie pliku ".aml". 
+Wtyczka AML jest odpowiedzialna za obsługę języka AML, w tym generowanie kodu JAVA na podstawie pliku ".aml". 
 
 Do prawidłowego działania wtyczki AML potrzebne są wtyczki Xtext i Xtend, które można pobrać ze strony producenta (https://eclipse.org/Xtext/download.html).
 Wtyczkę AML należy pobrać (https://adrpieper.github.io/magisterka) i zainstalować ręcznie.
@@ -660,19 +668,21 @@ Poniższy przykład pokazuje blok składający się z 3 zdarzeń.
 Poniżej znajduje się przykład kompletnej definicji przygody.
 \begin{lstlisting}
 adventure MysteriusManAd starts from {
-	Ask "Are you ready to fight?"
-	Answer "No" to { Fight with MysteriusManTraining }
-	Answer "Yes" to {
-		If you have more str than 30 or more int than 30 or more agi than 30 {
-			Fight with MysteriusMan
-			If win {
-				{Show "Great. Now, you are ready for fight with Dragon"}
-				{Add BigDragon at Hills}
-				{Remove MysteriusManAd at OldHause}
-			}
-		}
-		else {Show "I don't think so"}
-	}
+  Ask "Are you ready to fight?"
+  Answer "No" to { Fight with MysteriusManTraining }
+  Answer "Yes" to {
+    If you have more str than 30 
+      or more int than 30 
+      or more agi than 30 {
+        Fight with MysteriusMan
+        If win {
+          {Show "Great. Now, you are ready for fight with Dragon"}
+          {Add BigDragon at Hills}
+          {Remove MysteriusManAd at OldHause}
+        }
+      }
+      else {Show "I don't think so"}
+    }
 }
 \end{lstlisting}
 Przygoda "MysteriusManAd" rozpoczyna się od Pytania - "Are you ready to fight?". Odpowiedź "No" prowadzi do Walki z "MysteriusManTraining".
@@ -869,6 +879,69 @@ adventure on start {
   SimpleExamAdventure at ClassRoom
 }
 
+\end{lstlisting}
+
+
+\chapter{Kod testu NFC}
+
+\begin{lstlisting}
+character type NFCTestCharacter {
+  stats on start:
+    10 str
+    10 int
+    10 agi
+  stats per lvl:
+    + 1 str
+    + 1 int
+    + 1 agi
+  skills tree:
+}
+location TestLocation1 in radius of 10 meters 
+  from 54.601292, 18.269273
+location TestLocation2 in radius of 1 0 meters
+  from 54.600007, 18.269222
+
+adventure TestAdventure1 starts from {
+  Show "Test adventure 1"
+}
+adventure TestAdventure2 starts from {
+  Show "Test adventure 2"
+}
+adventure on start {
+  TestAdventure1 at TestLocation1
+  TestAdventure2 at TestLocation2
+}
+\end{lstlisting}
+
+\chapter{Kod testu GPS}
+
+\begin{lstlisting}
+character type NFCTestCharacter {
+  stats on start:
+    10 str
+    10 int
+    10 agi
+  stats per lvl:
+    + 1 str
+    + 1 int
+    + 1 agi
+  skills tree:
+}
+location TestLocation1 tagged as Test1
+location TestLocation2 tagged as Test2
+
+adventure TestAdventure1 starts from {
+  Show "Test adventure 1"
+}
+
+adventure TestAdventure2 starts from {
+  Show "Test adventure 2"
+}
+
+adventure on start {
+  TestAdventure1 at TestLocation1
+  TestAdventure2 at TestLocation2
+}
 \end{lstlisting}
 
 % literatura (obowiązkowo):
