@@ -1,7 +1,7 @@
 
 
-\documentclass{xmgr}
-\usepackage{listings}
+\documentclass[openright]{xmgr}
+\usepackage{minted}
 % Jeśli nowe rozdziały mają się zaczynać na stronach
 % nieparzystych:
 %\documentclass[openright]{xmgr}
@@ -62,6 +62,7 @@ Spora część elementów gier terenowych jest wspólna, szczególnie jeśli ogr
 Sam pomysł umieszczenia warstwy wspólnej dla wielu aplikacji nie jest nowy. Istnieje wiele rozwiązanie, które już to robią. Warstwę tą nazywa się frameworkiem lub silnikiem. Większość powstających obecnie gier osadzonych jest właśnie na tego typu rdzeniu. Nie istnieje natomiast jeszcze framework, wyspecjalizowany do tworzenia konkretnego typu gier, jakimi są terenowe gry RPG.
 
 Moim celem nie było stworzenie niesamowicie grywalnej, ani popularnej gry. Chciałem pokazać, na modnym przykładzie gier terenowych, jak można rozwiązać problem "wynajdywania koła na nowo" wykorzystując własny język domenowy. Język AML pozwala na implementacje prostej gry przez osobę niebędącą programistą, ponieważ wszystkie niezbędne w grze elementy zaimplementowane są w już w samych frameworku. Składnia języka jest przyjazna dla projektanta gry i nie wymaga znajomości, ani żadnego języka programowania ogólnego przeznaczenia, ani żadnych dodatkowych technologii.
+
 
 \chapter{Opis problemu}
 
@@ -296,6 +297,7 @@ Komponenty to zbiory klas realizujące wspólne zadanie. Ich struktura jest hier
 	\centering
 	\includegraphics[width=1.0\hsize]{fig/modules_tree}
 	\caption{Struktura komponentów aplikacji}
+	\source{Własne opracowanie}
 	\label{modules:tree}
 \end{figure}
 
@@ -450,17 +452,17 @@ Adventure Maker Language (AML) to język domenowy stworzony specjalnie na potrze
 Plik AML definiuje wszystkie dostępne w grze elementy. Plik może zawierać dowolną ilość Klas Postaci, Typów Przedmiotów, Przeciwników, Lokacji oraz Przygód. Dodatkowo należy w nim umieścić Przygody Początkowe. 
 
 \section{Przygody Początkowe} 
-Przygody Początkowe definiują Przygody udostępnione graczowi od początku gry. Definicja bloku Przygody Początkowe rozpoczyna się od słów kluczowych "adventure on start". Następnie w nawiasach klamrowych znajduje się dowolna liczba deklaracji przygód dostępnych na początku gry.
+Przygody Początkowe definiują Przygody udostępnione graczowi na starcie gry. Definicja bloku Przygody Początkowe rozpoczyna się od słów kluczowych "adventure on start". Następnie w nawiasach klamrowych znajduje się dowolna liczba deklaracji przygód dostępnych na początku gry.
 Każda taka definicja składa się z nazwy Przygody, słówka kluczowego "at" i nazwy Lokacji.
 
 Poniższy przykład zawiera definicje składającą się z dwóch Przygód "MysteriusMan" i "Bandits", ulokowanych odpowiednio w "OldHouse" i "Forest".
 
-\begin{lstlisting}
+\begin{minted}{text}
 adventure on start {
-	MysteriusMan at OldHouse
-	Bandits at Forest
+    MysteriusMan at OldHouse
+    Bandits at Forest
 }
-\end{lstlisting}
+\end{minted}
 
 \section{Klasy Postaci}
 Definicja Klasy, inaczej typu postaci to informacje na temat statystyk oraz umiejętności dostępnych dla danej Klasy Postaci. Statystyki dzielą się na Początkowe, które postać otrzymuje przy starcie gry, oraz Poziomowe, które zwiększają całkowite statystyki postaci z każdym zdobytym poziomem. Umiejętności zostały zorganizowane w postaci drzewa. Aby odblokować daną umiejętność, gracz musi najpierw odblokować wszystkie prowadzące do niej umiejętności.
@@ -481,7 +483,7 @@ Każdy gałąź składa się z nazwy umiejętności, której dotyczy oraz opcjon
 Zbiór gałęzi potomnych definiuje się w nawiasach klamrowych poprzedzonych symbolem "=>". 
 
 Poniżej znajduje się pełny przykład definicji postaci typu "Wizard":
-\begin{lstlisting}
+\begin{minted}{text}
 character type Wizard {
    stats on start:
       10 str
@@ -498,7 +500,7 @@ character type Wizard {
       }
       Poisoning
 }
-\end{lstlisting}
+\end{minted}
 Z definicji można odczytać, że postać typu "Wizard" otrzymuje 10 punktów siły, 20 inteligencji i 15 zwinności na początku gry.
 Jego statystyki zwiększają się o 1 punkt siły, 2 inteligencji i 1 zwinności z każdym zdobytym poziomem doświadczenia.
 Na początku może odblokować umiejętność "Fireball" lub "Poisoning". Zdobycie umiejętności "Fireball" udostępnia ponadto dwie kolejnych: "Wirewall" i "BlackMagic". 
@@ -515,12 +517,12 @@ Do wyboru mamy następujące kategorie (w nawiasie podano odpowiadające kategor
 Wartości premii umieszczone są w nawiasach klamrowych i składają się z wartości liczbowej poprzedzonej znakiem plus oraz słówka kluczowego "agi", "str" lub "int" odnoszącego się do odpowiedniego typu statystyk. Przedmiot nie musi zawierać bonusu do każdego typu statystyk.
 
 Poniżej znajduje się przykład definiujący przedmiot typu "Sword", należący do kategorii Broń, zwiększający siłę postaci o 4, a zwinność o 3 punkty.
-\begin{lstlisting}
+\begin{minted}{text}
 item Sword (weapon) {
    + 4 str
    + 3 agi
 }
-\end{lstlisting}
+\end{minted}
 
 \section{Lokacje}
 Lokacja to miejsce do którego można się odwołać definiując Przygodę. Miejsce takie oznacza pewien obszar w fizycznym świecie np. pokój albo kawałek lasu. Lokacje można definiować na dwa sposoby: za pomocą technologii GPS lub NFC. 
@@ -530,11 +532,11 @@ Opisując lokacje za pomocą technologii NFC wystarczy podać odpowiedni tag. T�
 Definicja Lokacji rozpoczyna się od słowa kluczowego "location" i jej nazwy. Jeżeli lokacja ma być opisana przez znacznik NFC należy użyć słów kluczowych "tagged as", a następnie podać tekst, który stanowi zawartość tagu. W przypadku korzystania z technologii GPS używa się słów kluczowych "in radius of" po którym podaje się odległość w metrach. Następnie po słowach "meters from" należy umieścić szerokość i długość geograficzną.
 
 Poniżej znajdują się przykłady definicji lokacji "OldHouse" i "Forest". Lokacja "OldHouse" oznaczona jest tagiem "OldHouseLocation", natomiast "Forest" to obszar o promieniu 100 metrów od punktu o współrzędnych 54°35'45.9"N, 18°14'42.7"E.
-\begin{lstlisting}
+\begin{minted}{text}
 location OldHouse tagged as OldHouseLocation
 location Forest in radius of 100 meters 
 	from 54.596077, 18.245200
-\end{lstlisting}
+\end{minted}
 
 \section{Przeciwnicy}
 
@@ -546,14 +548,14 @@ Czwarty parametr - "loot", to lista przedmiotów, który może otrzymać gracz p
 
 Poniższy przykład definiuje przeciwnika o nazwie "Dragon":
 
-\begin{lstlisting}
+\begin{minted}{text}
 opponent Dragon {
    power : 100
    hp : 200
    exp : 100
    loot : MagicSword 50%, SteelArmor 10 %
 }
-\end{lstlisting}
+\end{minted}
 
 Z definicji wynika, że "Dragon" posiada moc o wartości 100, 200 punktów życia. Za pokonanie tego Przeciwnika gracz otrzyma 100 punktów doświadczenia, oraz odpowiednio 50\% i 10\% szansy na zdobycie przedmiotów "MagicSword" oraz "SteelArmor".
 
@@ -577,9 +579,9 @@ Komunikat to najprostsze ze Zdarzeń. Polega na zwykłym wyświetleniu komunikat
 Definicja Komunikatu składa się ze słowa kluczowego "Show" oraz treści komunikatu.
 
 Poniżej znajduje się przykład kodu wyświetlającego komunikat "Hello World!".
-\begin{lstlisting}
+\begin{minted}{text}
 Show "Hello World!"
-\end{lstlisting}
+\end{minted}
 
 \subsection{Walka}
 Walka oznacza Zdarzenie polegające na pojedynku z pojedynczym przeciwnikiem lub ich grupą. Zdarzenie tego typu zawiera informacje o ilości i typie przeciwników oraz Zdarzeniach wywoływanych w przypadku zwycięstwa jak i porażki.
@@ -589,7 +591,7 @@ Definicja walki rozpoczyna się od słów kluczowych "Fight with". Następnie na
 Definicja Zdarzeń wywołanych w przypadku zwycięstwa i porażki składa się ze słów kluczowych odpowiednio "If win" i "If lost" oraz samego zdarzenia.
 
 Poniżej znajduje się przykładowa definicja Walki:
-\begin{lstlisting}
+\begin{minted}{text}
 Fight with Troll, Orc
 If win {
    {Remove VillageInDanger at Forest}
@@ -599,7 +601,7 @@ If lost {
    {Remove VillageInDanger at Forest}
    {Show "Unfortunately, you have not saved the villagers"}
 }
-\end{lstlisting}
+\end{minted}
 
 Z definicji wynika, że gracz będzie musiał się zmierzyć z dwoma przeciwnikami o nazwach "Troll" i "Orc". Jeżeli ich pokona zdobędzie przedmiot - "MagicSword", w przeciwnym wypadku zostanie wyświetlony komunikat - "Unfortunately, you have not saved the villagers". W obu przypadkach Zdarzenie "VillageInDanger" nie będzie już dłużej dostępne w Lokacji "Forest".
 
@@ -611,20 +613,20 @@ Definicja zdarzenia warunkowego rozpoczyna się od słów kluczowych "If you hav
 Wyrażenia Warunkowe składają się z słówka kluczowego "more" lub "less", skrótowej nazwy parametru ("str, "agi" lub "int"), słowa "than" oraz wartości liczbowej. Dodatkowo wyrażenia warunkowe można łączyć za pomocą słówek "and" lub "or" oraz nawiasów. Wyrażenie warunkowe można też poprzedzić słowem "no", które wprowadza negacje.
 
 Poniżej znajdują się dwa przykłady wyrażeń warunkowych.
-\begin{lstlisting}
+\begin{minted}{text}
 If you have no more int than 30
 If you have more agi than 20 or more str than 10
-\end{lstlisting}
+\end{minted}
 
 Pierwsze wyrażenie sprawdza, czy postać ma nie więcej niż 30 punktów inteligencji. Drugie sprawdza, czy posiada więcej niż 20 punktów siły lub więcej niż 10 punktów zwinności.
 
 Poniżej znajduje się pełny przykład definicji Zdarzenia Warunkowego: 
-\begin{lstlisting}
+\begin{minted}{text}
 If you have more str than 30 
    {Fight with Orc}
 else 
    {Show "The fight will not be necessary"}
-\end{lstlisting}
+\end{minted}
 
 Z powyższej definicji wynika, że postać o sile większej niż 30 będzie musiała walczyć z przeciwnikiem - "Orc", natomiast gracz kontrolujący postać słabszą zobaczy komunikat - "The fight will not be necessary".
 
@@ -634,11 +636,11 @@ Pytanie, jest Zdarzeniem nieco podobnym do Zdarzenia Warunkowego, z tą różnic
 Definicja Pytania zawsze rozpoczyna się słowem kluczowym "Ask", po którym znajduje się treść wyświetlonego pytania, którą należy podać w cudzysłowie. Po pytaniu należy umieścić jeden lub więcej Odpowiedzi. Odpowiedź składa się ze słów kluczowych "Answer" oraz "to", pomiędzy którymi należy umieścić treść odpowiedzi (również w cudzysłowie) oraz zdarzenia, do którego prowadzi dana odpowiedź. 
 
 Poniżej znajduje się przykład definicji Pytania:
-\begin{lstlisting}
+\begin{minted}{text}
 Ask "Do you want a new armor?"
 Answer "Yes" to { Get Armor }
 Answer "No" to { Show "Your choise." }
-\end{lstlisting}
+\end{minted}
 
 Z powyższej definicji wynika, że graczowi zostanie wyświetlone pytanie - "Do you want a new armor?". Gdy odpowie "Yes", otrzyma przedmiot o nazwie "Armor". W przeciwnym wypadku ujrzy komunikat - "Your choise.".
 
@@ -646,27 +648,27 @@ Z powyższej definicji wynika, że graczowi zostanie wyświetlone pytanie - "Do 
 Modyfikacja Przygód służy do dodawania lub usuwania Przygód do lub z Lokacji. Definicja Zdarzenia dodającego nową Przygodę rozpoczyna się od słowa "Add", a usuwającego "Remove". Następnie należy podać nazwę Przygody i opcjonalnie częstość jej występowania w nawiasach (domyślna częstość wynosi 1). Dalej należy podać lokację, której dotyczy edycja poprzedzając ją słowem kluczowym "at".
 
 Poniżej znajduje się kilka przykładów Modyfikacji Przygód. 
-\begin{lstlisting}
+\begin{minted}{text}
 { Add Bandits (4) at Forest }
 { Add VillageInDanger at Forest }
 { Remove MysteriusMan at OldHouse }
-\end{lstlisting}
+\end{minted}
 Pierwsze dwie linie dodają odpowiednio Przygody "Bandits" i "VillageInDanger" do Lokacji Forest. Przygoda "Bandits" będzie występowała czterokrotnie częściej niż "VillageInDanger". Ostania linia usuwa Przygodę "MysteriusMan" z Lokacji "OldHouse".
 
 \subsection*{Blok Zdarzeń}
 Blok Zdarzeń to jedno lub więcej Zdarzeń umieszczonych w nawiasach klamrowych. Takie zdarzenia wywołują się sekwencyjnie.
 Poniższy przykład pokazuje blok składający się z 3 zdarzeń.
-\begin{lstlisting}
+\begin{minted}{text}
 {
    {Remove VillageInDanger at Forest}
    {Get MagicSword}
    {Show "Unfortunately, you have not saved the villagers"}
 }
-\end{lstlisting}
+\end{minted}
 
 \subsection{Przykład}
 Poniżej znajduje się przykład kompletnej definicji przygody.
-\begin{lstlisting}
+\begin{minted}{text}
 adventure MysteriusManAd starts from {
   Ask "Are you ready to fight?"
   Answer "No" to { Fight with MysteriusManTraining }
@@ -684,7 +686,7 @@ adventure MysteriusManAd starts from {
       else {Show "I don't think so"}
     }
 }
-\end{lstlisting}
+\end{minted}
 Przygoda "MysteriusManAd" rozpoczyna się od Pytania - "Are you ready to fight?". Odpowiedź "No" prowadzi do Walki z "MysteriusManTraining".
 Odpowiedź "Yes" prowadzi do efektu zależnego od statystyk postaci. Postać posiadająca przynajmniej jedną ze statystyk na poziomie powyżej 30 punktów, będzie musiała stoczyć Walkę z "MysteriusMan". Jeżeli gracz zwycięży w walce otrzyma komunikat - "Great. Now, you are ready for fight with Dragon", odblokuje Przygodę "BigDragon" w Lokacji "Hills", a przygoda "MysteriusManAd", nie będzie dłużej dostępna w "OldHause". Postać niespełniająca tych warunków otrzyma po prostu komunikat - "I don't think so". 
 
@@ -714,7 +716,7 @@ Po takim przygotowaniu można już swobodnie rozpocząć rozgrywkę.
 \appendix
 \chapter{Kod przykładowej gry}
 
-\begin{lstlisting}
+\begin{minted}{text}
 
 skill BasicKnowledge {
   effect : take (3 * int) damage
@@ -879,12 +881,12 @@ adventure on start {
   SimpleExamAdventure at ClassRoom
 }
 
-\end{lstlisting}
+\end{minted}
 
 
 \chapter{Kod testu NFC}
 
-\begin{lstlisting}
+\begin{minted}{text}
 character type NFCTestCharacter {
   stats on start:
     10 str
@@ -898,7 +900,7 @@ character type NFCTestCharacter {
 }
 location TestLocation1 in radius of 10 meters 
   from 54.601292, 18.269273
-location TestLocation2 in radius of 1 0 meters
+location TestLocation2 in radius of 10 meters
   from 54.600007, 18.269222
 
 adventure TestAdventure1 starts from {
@@ -911,11 +913,11 @@ adventure on start {
   TestAdventure1 at TestLocation1
   TestAdventure2 at TestLocation2
 }
-\end{lstlisting}
+\end{minted}
 
 \chapter{Kod testu GPS}
 
-\begin{lstlisting}
+\begin{minted}{text}
 character type NFCTestCharacter {
   stats on start:
     10 str
@@ -942,7 +944,7 @@ adventure on start {
   TestAdventure1 at TestLocation1
   TestAdventure2 at TestLocation2
 }
-\end{lstlisting}
+\end{minted}
 
 % literatura (obowiązkowo):
 \bibliographystyle{unsrt}
