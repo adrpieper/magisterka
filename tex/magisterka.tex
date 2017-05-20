@@ -22,7 +22,7 @@
 \nralbumu {243\,677}
 \email    {adrpieper@gmail.com.pl}
 
-\title    {Adventure Maker - Framework dla terenowych gier RGP}
+\title    {Adventure Maker - język dla terenowych gier RGP}
 \date     {2017}
 \miejsce  {Gdańsk}
 
@@ -30,8 +30,8 @@
 
 % dodatkowe polecenia
 %\renewcommand{\filename}[1]{\texttt{#1}}
-%\definecolor{stress}{cmyk}{0,1,0.13,0} % RubineRed
-%\definecolor{topic}{cmyk}{0.98,0.13,0,0.43} % MidnightBlue
+\definecolor{stress}{cmyk}{0,1,0.13,0} % RubineRed
+\definecolor{topic}{cmyk}{0.98,0.13,0,0.43} % MidnightBlue
 
 \begin{document}
 
@@ -61,7 +61,7 @@ Pomimo sukcesu "Pocemon GO", gry terenowe nadal stanowią niewielką część ry
 
 Zauważyłem, że spora część elementów gier terenowych jest wspólna, szczególnie jeśli ograniczyć się jedynie do gier RPG. Pomyślałem, że skoro gry tego typu opierają się na podobnych zasadach, powinny one zostać zdefiniowane tylko raz, w myśl zasady - "nie powtarzaj się". W ten sposób można by odciążyć projektanta gry od szczegółów implementacyjnych, pozwalając mu skupić się w całości na tym co ważne, czyli zasadach i scenariuszu rozgrywki. Stwierdziłem, że napisanie tego typu gry powinno sprowadzać się jedynie do zdefiniowania miejsc, postaci oraz zasad obowiązujących w wirtualnym świecie. Postanowiłem więc sprawdzić, czy osiągnięcie takiego ideału jest w ogóle możliwe. Okazuje się, że tak, o ile tylko zastosuje się do tego odpowiednie podejście i narzędzia.
 
-Sam pomysł umieszczenia warstwy wspólnej dla wielu aplikacji nie jest nowy. Istnieje wiele rozwiązanie, które już to robią. Warstwę tą nazywa się frameworkiem lub silnikiem gry. Większość powstających obecnie gier osadzonych jest właśnie na tego typu rdzeniu. Brak jest natomiast narzędzia, wyspecjalizowany do tworzenia konkretnego typu gier, jakimi są terenowe gry RPG.
+Sam pomysł umieszczenia warstwy wspólnej dla wielu aplikacji nie jest nowy. Istnieje wiele takich rozwiązań. Warstwę tą nazywa się frameworkiem lub silnikiem gry. Większość powstających obecnie gier osadzonych jest właśnie na tego typu rdzeniu. Brak jest natomiast narzędzia, wyspecjalizowany do tworzenia konkretnego typu gier, jakimi są terenowe gry RPG.
 
 Moim celem nie było stworzenie niesamowicie grywalnej, ani popularnej gry. Chciałem pokazać, na ciekawym moim zdaniem przykładzie gier terenowych, jak można rozwiązać problem "wynajdywania koła na nowo" wykorzystując własny język domenowy. Adventure Maker pozwala na implementacje gry przez osobę niebędącą programistą, ponieważ wszystkie niezbędne w grze elementy są już zaimplementowane. Składnia języka jest przyjazna dla osoby zaznajomionej z tematyką gier RPG i nie wymaga znajomości, ani żadnego języka programowania ogólnego przeznaczenia, ani żadnych dodatkowych technologii.
 
@@ -84,7 +84,7 @@ Istnieje wiele bibliotek umożliwiających DI\footnote{Dependency Injection - ws
 
 \chapter{Przegląd istniejących rozwiązań}
 
-W pracy postawiłem sobie na celu stworzenie języka domenowego pozwalającego na łatwe tworzenie terenowych gier RPG. Cele postawione przed tym językiem są typowe dla frameworku - udostępnić narzędzie do przyjaznego rozwiązywania problemów określonej klasy. Nowy jest natomiast obszar w jakim działać będzie język, czyli terenowe gry RPG.
+W pracy postawiłem sobie na celu stworzenie języka domenowego pozwalającego na pisanie terenowych gier RPG. Cele postawione przed tym językiem są typowe dla frameworku - udostępnić narzędzie do przyjaznego rozwiązywania problemów określonej klasy. Nowy jest natomiast obszar w jakim działać będzie język, czyli terenowe gry RPG.
 
 Tematyka pracy obejmuje więc, cztery pozornie niezwiązane ze sobą tematyki jakimi są gry terenowe, gry RPG, frameworki oraz języki domenowe. Ten rozdział ma na celu zaprezentowanie istniejących rozwiązań w każdej z tych dziedzin.
 
@@ -132,7 +132,7 @@ External DSL to język domenowy z prawdziwego zdarzenia. Język taki posiada śc
 \section{Frameworki}
 
 Frameworki są doskonałym przykładem korzyści jakie niesie ze sobą popularna zasada Clean Code \cite{CleanCode:2005} - DRY (Don't Repeat Yourself), czyli nie powtarzaj się. 
-Twórcy frameworków  wychodzą z założenia, że projekty informatyczne można z powodzeniem podzielić na pewne grupy. Projekty informatyczne należące do takiej grupy bywają do siebie tak podobne, że zazwyczaj łatwiej jest wskazać cechy wspólne niż różnice. Ideą frameworka jest implementacja wszystkich elementów wspólnych w jednym miejscu i udostępnienie programistom-użytkownikom frameworka przyjaznego interfejsu do implementacji tych różnic. Programista jest więc, ograniczony pewnymi ramami, w których musi mieścić się jego aplikacja, stąd nazwa takiego narzędzia - framework.
+Twórcy frameworków  wychodzą z założenia, że projekty informatyczne można z powodzeniem podzielić na pewne grupy. Projekty informatyczne należące do takiej grupy bywają do siebie tak podobne, że zazwyczaj łatwiej jest wskazać cechy wspólne niż różnice. Ideą frameworka jest implementacja wszystkich elementów wspólnych w jednym miejscu i udostępnienie programistom-użytkownikom frameworka przyjaznego interfejsu do implementacji tych różnic. Programista jest więc, ograniczony pewnymi ramami, w których musi mieścić się jego aplikacja, stąd nazwa takiego narzędzia.
 
 Dobrym przykładem takiej grupy są aplikacje webowe.Wszystkie udostępniają pewien interfejs w postaci stron html, przechowują dane w bazach (zazwyczaj relacyjnych) i komunikują się z użytkownikiem za pomocą protokołu HTTP. Elementem różniącym te aplikacje jest ich wygląd i funkcjonalność. 
 
@@ -143,7 +143,7 @@ Warto wspomnieć tu również o istnieniu narzędzi pozwalających na łatwe two
 
 \chapter{Wymagania}
 
-Jednym z pierwszym kroków jakie należy podjąć przez przystąpieniem do projektowania oprogramowania jest analiza wymagań. Andventure Maker musi umożliwiać tworzenie gier terenowych o narzuconych z góry, dość wąskich i specyficznych ramach, typowych dla tradycyjnych gier RPG. Stworzona gra polega głównie na rozwoju postaci, poprzez odwiedzanie lokacji, podejmowanie decyzji, a przede wszystkim pokonywanie przeciwników. Postać sterowana przez gracza zdobywa punkty doświadczenia, dzięki którym gracz może rozwijać postać w wybranym przez siebie kierunku. 
+Jednym z pierwszym kroków jakie należy podjąć przez przystąpieniem do projektowania oprogramowania jest analiza wymagań. Andventure Maker umożliwia tworzenie gier terenowych o narzuconych z góry, dość wąskich i specyficznych ramach, typowych dla tradycyjnych gier RPG. Napisana w nim gra polega głównie na rozwoju postaci, poprzez odwiedzanie lokacji, podejmowanie decyzji, a przede wszystkim pokonywanie przeciwników. Postać sterowana przez gracza zdobywa punkty doświadczenia, dzięki którym gracz może rozwijać postać w wybranym przez siebie kierunku. 
 
 Wymagania, jakie postawiłem przed Adventure Makerem można podzielić na funkcjonalne i niefunkcjonalne.
 
@@ -162,14 +162,14 @@ Do wymagań funkcjonalnych należą:
 
 Zbiór elementów wchodzących w skład zaprojektowanego języka DSL został przeze mnie wybrany arbitralnie, w taki sposób, żeby zawierał minimum niezbędne do zaprojektowania gry. Chciałem, aby zaprojektowany język był jednocześnie prosty, ale i pozwalający na implementacje nawet dość zawiłej logiki. Oczywiście RPG z prawdziwego zdarzenia powinien zawierać nieco bardziej rozbudowany. Uznałem jednak, że dodanie elementów takich jak np. misje zbędnie skomplikowały by język. Elementy te prawdopodobnie pojawią się, w przypadku wydania kolejnej wersji Adventure Maker. Nie mniej jednak implementacja stworzona w ramach tej pracy obejmować będzie jedynie wyszczególnione punkty.
 
-U celu ułatwienia edycji kodu warto udostępnić użytkownikowi przyjazne IDE. Na szczęście narzędzia takie już istnieją i nie musiałem projektować ich od zera. Popularne narzędzia programistyczne pozwalają na rozszerzanie ich funkcjonalności poprzez tzw. wtyczki, czyli oprogramowanie, które doinstalowuje się do już istniejącego IDE. Postanowiłem więc, że udostępnię obsługującą język AML wtyczkę do IDE IntelliJ Idea. Postanowiłem wybrać to środowisko z kilku powodów:
+U celu ułatwienia edycji kodu warto udostępnić użytkownikowi przyjazne IDE. Na szczęście narzędzia takie już istnieją i nie musiałem projektować ich od zera. Popularne narzędzia programistyczne pozwalają na rozszerzanie ich funkcjonalności poprzez tzw. wtyczki, czyli oprogramowanie, które doinstalowuje się do już istniejącego IDE. Postanowiłem więc, że udostępnię obsługującą język Adventure Maker wtyczkę do IDE IntelliJ Idea. Postanowiłem wybrać to środowisko z kilku powodów:
 \begin{itemize}	
 \item jest darmowy w wersji Community,
 \item udostępnia integracje z Android SDK,
 \item jest wspierany przez Xtext i Xtend.
 \end{itemize}
 
-Przyjazna edycja kodu to za mało, aby język był funkcjonalny. Użytkownikowi należy udostępnić możliwość kompilacji kodu. W tym przypadku będzie to transkompilacja, ponieważ kodem wyjściowym nie będzie kod binarny, a kod JAVA. Na podstawie wygenerowanego oraz dostarczonego wraz z frameworkiem kodu możliwa jest kompilacja gotowej aplikacji, bez konieczności dopisywania ani jednej linii dodatkowego kodu. 
+Przyjazna edycja kodu to za mało, aby język był funkcjonalny. Użytkownikowi należy udostępnić możliwość kompilacji kodu. W tym przypadku będzie to transkompilacja, ponieważ kodem wyjściowym nie będzie kod binarny, a kod JAVA. Na podstawie wygenerowanego oraz dostarczonego kodu możliwa musi być kompilacja gotowej aplikacji, bez konieczności dopisywania ani jednej linii dodatkowego kodu. 
 
 \section{Niefunkcjonalne}
 Do wymagań niefunkcjonalnych nalezą:
@@ -179,7 +179,7 @@ Do wymagań niefunkcjonalnych nalezą:
 	\item Ukrycie szczegółów implantacyjny GPS i NFC przed użytkownikiem języka
 \end{itemize}
 
-Podstawowym założeniem Adventure Makera jest udostępnienie możliwości tworzenia gier osobom będącym laikami jeśli chodzi o programowanie i technologie IT. Abym mógł im udostępnić język ważne jest wykorzystanie darmowych narzędzi.
+Podstawowym założeniem Adventure Maker jest udostępnienie możliwości tworzenia gier osobom będącym laikami jeśli chodzi o programowanie i technologie IT. Abym mógł w ogóle udostępnić im ten język ważne jest wykorzystanie darmowych narzędzi.
 
 Język został zaprojektowany tak, aby twórca gry mógł traktować technologie NFC i GPS w sposób bardzo zbliżony, nie zważając na ich  całkowicie odmienną techniczną implementację. Z jego punktu widzenia zarówno pomieszczenie oznaczone tagiem NFC, jak i współrzędne geograficzne, stanowią po prostu lokację, w której gracza mogą spotkać dowolnego typu przygody. 
 
@@ -224,24 +224,22 @@ Widok walki odpowiedzialny jest za wyświetlanie oraz sterowanie przebiegiem sta
 \subsection*{Komunikat}
 Ekran komunikatu składa się z dwóch części. Wiadomości oraz przycisku "OK", którym gracz potwierdza, że zapoznał się z komunikatem. Wiadomość najczęściej wyświetlana jest w prostym oknie tekstowym, jednak w niektórych przypadkach konieczne jest użycie elementów bardziej rozbudowanych. Jest tak na przykład w przypadku okna wyświetlanego pod koniec przygody, zawierającego między innymi wykaz zdobytych przez gracza przedmiotów w postaci listy.
 
-\chapter{Architektura (czego?)}
+\chapter{Architektura Języka i Aplikacji}
 
-Adventure Maker składa się z dwóch projektów. Pierwszy odpowiedzialny jest za DSL Andventure Maker. Drugi projekt, to szkielet aplikacji na system Android. 
+Adventure Maker składa się z dwóch projektów. Pierwszy odpowiedzialny jest za implementacje języka. Drugi projekt, to szkielet aplikacji na system Android, będący bazą pod wszystkie gry pisane w Adventure Maker. 
 
-W projekcie wykorzystałem zarówno wewnętrzny, jak i zewnętrzny język domenowy. Zastosowanie zewnętrznego DSL pozwala twórcy gry na opisanie świata gry w sposób przyjazny dla osoby znającej tematykę gier RPG. Wewnętrzny DSL natomiast, sprawił, że generowany przez wtyczkę kod jest bardziej czytelny i przyjazny dla programisty, co w dużym stopniu przyczyniło się do skrócenia czasu potrzebnego mi do zaimplementowania generatorów.
-
-\section{AML} 
+\section{Adventure Maker DSL} 
 Projekt powstał w celu implementacji gramatyki i generatora dla języka Andventure Maker. Projekt bazuje na narzędziu Xtext\cite{Xtext:2017:Doc}, a produktem wyjściowym jest wtyczka do IDE IntelliJ Idea obsługująca zaprojektowany DSL. 
 
 \subsection{Definicja Gramatyki} 
 
-Gramatyka języka AML znajduje w pojedynczym pliku o nazwie "AML.xtext". Definicja w nim zawarta zawiera zarówno opis modelu syntaktycznego i semantycznego tworzonego języka. Innymi słowy zdefiniuje jaki tekst należy do języka oraz jak będzie on reprezentowany w pamięci komputera. Xtext na podstawie tego pliku generuje między innymi parser, który sprawdzi, czy dany tekst poprawnym programem oraz zwróci jego reprezentacje w postaci drzewa obiektów.
+Gramatyka języka Adventure Maker znajduje w pojedynczym pliku o nazwie "AML.xtext". Definicja w nim zawarta zawiera zarówno opis modelu syntaktycznego i semantycznego tworzonego języka. Innymi słowy zdefiniuje jaki tekst należy do języka oraz jak będzie on reprezentowany w pamięci komputera. Xtext na podstawie tego pliku generuje między innymi parser, który sprawdzi, czy dany tekst poprawnym programem oraz zwróci jego reprezentacje w postaci drzewa obiektów.
 
-\subsection{Generator}
-Generator języka odpowiedzialny jest za wygenerowanie kodu (w tym przypadku kodu Java) na podstawie modelu semantycznego zwróconego przez parser w postacie drzewa obiektów. Generator został napisany w języku Xtend i składa się z głównej klasy implementującej metodę "doGenerate" oraz klas pomocniczych utworzonym w celu dekompozycji problemu na mniejsze części zgodnie z zasadą pojedynczej odpowiedzialności \cite{CleanCode:2005}.
+\subsection{Generator Kodu}
+Generator odpowiedzialny jest za wygenerowanie kodu (w tym przypadku kodu Java) na podstawie modelu semantycznego zwróconego przez parser w postacie drzewa obiektów. Generator został napisany w języku Xtend i składa się z głównej klasy implementującej metodę "doGenerate" oraz klas pomocniczych utworzonym w celu dekompozycji problemu na mniejsze części zgodnie z zasadą pojedynczej odpowiedzialności \cite{CleanCode:2005}.
 
 \section{Aplikacja Android}
-Ten projekt to standardowa aplikacja Androidowa wykorzystująca AndroidSDK rozbudowana o język AML, na podstawie którego generowana jest cześć kodu aplikacji.
+Ten projekt to standardowa aplikacja Androidowa wykorzystująca AndroidSDK rozbudowana o język Adventure Maker, na podstawie którego generowana jest cześć kodu aplikacji.
 
 Architektura projektu jest dość rozbudowana i można z niej wydzielić następujące moduły:
 
@@ -251,13 +249,13 @@ Architektura projektu jest dość rozbudowana i można z niej wydzielić następ
 	\item Plik manifestu
 	\item Pliki Grandle
 	\item Testy
-	\item Wewnętrzy język AML
+	\item Wewnętrzy DSL
 	\item Plik game.aml
 	\item Wygenerowany Kod Implementujący Zasady Gry
 	\item Testowy Kod Implementujący Zasady Gry
 \end{itemize}
 
-Pierwsze pięć elementów jest typowych dla aplikacji android, natomiast pozostałe są specyficzne i wynikają z zastosowania języka AML.
+Pierwsze pięć elementów jest typowych dla aplikacji android, natomiast pozostałe są specyficzne i wynikają z zastosowania języka Adventure Maker.
 
 \subsection*{Standardowy kod aplikacji} 
 
@@ -309,15 +307,21 @@ Gradle jest narzędziem służącym do budowania projektów, który stał się s
 \subsection*{Testy}
 Moduł testów odpowiedzialny jest za sprawdzenie, czy kod aplikacji działa prawidłowo. Ich  kod został umieszczony w folderze "app/scr/test/java". W jego skład wchodzą klasy, implementujące testy jednostkowe wszystkich ważnych elementów aplikacji. Kod testów wykorzystuje zewnętrzne biblioteki JUnit, Mockito i AssertJ.
 
-\subsection*{Wewnętrzy język AML}
-Moduł ten jest odpowiedzialny za dostarczenie wygodnego API do opisu zasad gry. Technicznie rzecz biorąc stanowi on interfejs do komunikacji pomiędzy modułami Standardowy Kod Aplikacji, a Kodem Implementujący Zasady Gry. Zarówno dostarczone API, jak i implementacja modułu zostały zrealizowana w języku JAVA. Dlatego też nazywam go wewnętrznym językiem domenowym. W skład modułu wchodzą wszystkie klasy pakietów "pl.aml.*".
+\subsection*{Wewnętrzy DSL}
+
+W projekcie wykorzystałem zarówno wewnętrzny, jak i zewnętrzny język domenowy. Zastosowanie zewnętrznego DSL pozwala twórcy gry na opisanie świata gry w sposób przyjazny dla osoby znającej tematykę gier RPG.  Wewnętrzny DSL jest odpowiedzialny za dostarczenie wygodnego API do opisu zasad gry w języku Java, co znacznie uprościło zaimplementowania generatorów kodu.
+
+Technicznie rzecz biorąc moduł stanowi on interfejs do komunikacji pomiędzy modułami Standardowy Kod Aplikacji, a Kodem Implementujący Zasady Gry. Zarówno dostarczone API, jak i implementacja modułu zostały zrealizowana w języku JAVA. Dlatego też nazywam go wewnętrznym językiem domenowym. W skład modułu wchodzą wszystkie klasy pakietów "pl.aml.*".
+
 Istotną częścią tego modułu są klasy pozwalające na wygodne budowanie obiektów (tzw. Buildery) oraz metody statyczne tworzące instancje tych klas. Dzięki ich zastosowaniu możemy tworzyć kod przyjazny dla programisty. 
+
+Różnicę pomiędzy kodem pisany z i bez wykorzystania wewnętrznego DSL zaprezentowałem w dodatku A.
 
 \subsection*{Plik game.aml}
 Plik znajduje się w folderze "app/src/main/java". Jest kluczowym elementem całego projektu, bo to właśnie w nim definiuje się w języku Adventure Maker elementy związane z konkretną grą.
 
 \subsection*{Wygenerowany Kod implementujący zasady gry}
-Ten moduł znajduje się folderze "app/aml-src" i zawiera kod wygenerowany automatycznie na podstawie pliku "game.aml". Kod ten implementuje szczegóły dotyczące konkretnej gry. Wykorzystuje API dostarczone przez Wewnętrzny Język AML. Wygenerowany tu kod użyty jest w module Kod Aplikacji.
+Ten moduł znajduje się folderze "app/aml-src" i zawiera kod wygenerowany automatycznie na podstawie pliku "game.aml". Kod ten implementuje szczegóły dotyczące konkretnej gry. Wykorzystuje API dostarczone przez Wewnętrzny Język DSL. Wygenerowany tu kod użyty jest w module Kod Aplikacji.
 
 \subsection*{Testowy Kod implementujący zasady gry}
 Ten moduł zawiera kod analogiczny do Wygenerowanego Kodu implementujący zasady gry, jest jednak napisany ręcznie. Kod został umieszczony w folderze "app/test-src". Moduł ten zastępuje kod generowany podczas testowania i rozwijania aplikacji i nie jest wykorzystywany w produkcie finalnym.
@@ -358,18 +362,18 @@ Testy jednostkowe zostały uruchomione przy pomocy narzędzia Gradle \cite{Gradl
 Testy funkcjonalność NFC i GPS zostały przeprowadzone ręcznie według poniższego scenariusza:
 
 \begin{itemize}
-  \item Przygotowanie pliku AML
+  \item Przygotowanie pliku AML\footnote{Adventure Maker Language - rozszerzenie plików obsługiwane przez język Adventure Maker}
   \item Kompilacja
   \item Sprawdzenie poprawności zachowania
 \end{itemize}
 
-\section{Pliku AML}
+\section{Plik AML}
 
 Przygotowane pliki AML dla testu NFC i GPS są bardzo podobne. Oba składają się z przykładowej Klasy Postaci oraz dwóch Przygód i Lokacji. W obu przypadkach przygody polegają jedynie na wyświetleniu komunikatu. 
 
 Różnica pojawia się w przypadku definicji Lokacji. W pliku przygotowanym dla GPS, są to dwa znajdujące się niedaleko od siebie obszary o promieniu 10 metrów. W przypadku NFC Lokacje zdefiniowane są przez odpowiednie znaczniki "Test1" i "Test2".
 
-Kod AML przygotowany do przeprowadzenia obydwu testów znajduje się w załączniku.
+Kod Adventure Maker przygotowany do przeprowadzenia obydwu testów znajduje się w załączniku.
 
 \subsection{Sprawdzenie poprawności zachowania}
 
@@ -379,33 +383,33 @@ W przypadku testu GPS przeszedłem się z urządzenie wyposażonym w moduł GPS 
 
 Oba testy zakończyły się sukcesem.  
 
-\chapter{Korzystanie z frameworka}
+\chapter{Pisanie gier w Adventure Maker}
 Pisanie własnej gry przy użyciu Adventure Maker wymaga przygotowania środowiska pracy. W tym rozdziale zawarłem instrukcje dotyczące instalacji, konfiguracji i korzystania z potrzebnych narzędzi. 
 
 \section{Konfiguracja środowika}
 
-Aby móc korzystać z frameworka należy pobrać i zainstalować IDE IntelliJ Idea, JRE\footnote{Java Runtime Enviroment - środowisko uruchomieniowe Java}, JDK\footnote{Java Development Kit - standardowy zestaw narzędzi wykorzystywanych do tworzenia aplikacji w technologii Java} i Android SDK oraz wtyczkę AML.
+Aby móc korzystać z Adventure Maker należy pobrać i zainstalować IDE IntelliJ Idea, JRE\footnote{Java Runtime Enviroment - środowisko uruchomieniowe Java}, JDK\footnote{Java Development Kit - standardowy zestaw narzędzi wykorzystywanych do tworzenia aplikacji w technologii Java} i Android SDK oraz wtyczkę AML.
 
 JDK o raz JRE należy pobrać ze strony Oracje (https://www.java.com) w wesji 1.8 i zainstalować zgodnie z instrukcją producenta.
 
-IDE IntelliJ Idea można pobrać ze strony producenta - JetBrains (https://www.jetbrains.com/idea). Wersja community jest darmowa i wystarczająca do działania frameworka. Podczas instalacji należy pamiętać o włączeniu pluginu obsługującego aplikacje pisane na system Android.
+IDE IntelliJ Idea można pobrać ze strony producenta - JetBrains (https://www.jetbrains.com/idea). Wersja community jest darmowa i wystarczająca do obsługi Adventure Maker. Podczas instalacji należy pamiętać o włączeniu pluginu obsługującego aplikacje pisane na system Android.
 
 Android SDK  należy poprać ze strony (https://developer.android.com) i zainstalować w dowolnej lokalizacji, którą należy następnie skonfigurować w IntelliJ Idea.
 
-Wtyczka AML jest odpowiedzialna za obsługę języka AML, w tym generowanie kodu Java na podstawie pliku ".aml". Do prawidłowego działania wtyczki AML potrzebne są wtyczki Xtext i Xtend, które można pobrać ze strony domowej (https://eclipse.org/Xtext/download.html).
-Wtyczkę AML należy pobrać ze strony (https://adrpieper.github.io/magisterka) i zainstalować ręcznie.
+Wtyczka AML jest odpowiedzialna za obsługę języka Adventure Maker, w tym generowanie kodu Java na podstawie pliku ".aml". Do prawidłowego działania wtyczki potrzebne są wtyczki Xtext i Xtend, które można pobrać ze strony domowej (https://eclipse.org/Xtext/download.html).
+Wtyczkę należy pobrać ze strony (https://adrpieper.github.io/magisterka) i zainstalować ręcznie.
 
 \section{Przygotowanie i kompilacja gry}
 Przed rozpoczęciem pracy na własnym projektem należy poprać repozytorium (https://github.com/adrpieper/magisterka). Znajdujący się w nim projekt ExampleAdventure, jest projektem przykładowej gry. Najłatwiejszym sposobem na jego wykorzystanie jest skopiowanie go i posługiwanie się nim jako szablonem. Należy pamiętać, aby zmienić id aplikacji w pliku Manifestu.
 
-Implementacja własnej gry sprowadza się do edycji jednego pliku, mianowicie "game.aml". Należy w nim umieścić kod w języku AML. Kod musi  zawierać wszystkie niezbędne elementy gry. Pisząc ten kod można posłużyć się dokumentacją języka AML zamieszczoną w niniejszej pracy. Warto też wzorować się na kodzie przykładowej gry, który równiej wchodzi w jej skład.
+Implementacja własnej gry sprowadza się do edycji jednego pliku, mianowicie "game.aml". Należy w nim umieścić kod w języku Adventure Maker. Kod musi  zawierać wszystkie niezbędne elementy gry. Pisząc ten kod można posłużyć się dokumentacją języka zamieszczoną w pracy. Warto też wzorować się na kodzie przykładowej gry, który równiej wchodzi w jej skład.
 
 Projekt jest standardowym projektem Androidowym, tak więc możemy go też uruchomić przyciskiem play dostępnym w IDE IntelliJ Idea. Ważne jest, żeby korzystać z IDE, nawet w przypadku budowania narzędziem gradle, ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko.
 
 \chapter{Dokumentacja języka} 
 Poniżej znajduje się dokumentacja języka Adventure Maker.
 
-\section{Pliku AML} 
+\section{Plik AML} 
 Plik definiuje wszystkie dostępne w grze elementy. Plik może zawierać dowolną ilość Klas Postaci, Typów Przedmiotów, Przeciwników, Lokacji oraz Przygód. Dodatkowo należy w nim umieścić Przygody Początkowe. 
 
 \section{Przygody Początkowe} 
@@ -517,7 +521,7 @@ opponent Dragon {
 Z definicji wynika, że "Dragon" posiada moc o wartości 100, 200 punktów życia. Za pokonanie tego Przeciwnika gracz otrzyma 100 punktów doświadczenia, oraz odpowiednio 50\% i 10\% szansy na zdobycie przedmiotów "MagicSword" oraz "SteelArmor".
 
 \section{Przygody}
-Przygody są najważniejszym i najbardziej rozbudowanym elementem języka AML. Definicja każdej Przygody składa się z słowa kluczowego "adventure", nazwy Przygody, słów "starts from" oraz Zdarzenia Początkowego.
+Przygody są najważniejszym i najbardziej rozbudowanym elementem języka Adventure Maker. Definicja każdej Przygody składa się z słowa kluczowego "adventure", nazwy Przygody, słów "starts from" oraz Zdarzenia Początkowego.
 
 Zdarzenie otoczone jest zawsze nawiasami klamrowymi i może zawierać jedną z definicji:
 \begin{itemize}
@@ -648,11 +652,11 @@ Przygoda "MysteriusManAd" rozpoczyna się od Pytania - "Are you ready to fight?"
 Odpowiedź "Yes" prowadzi do efektu zależnego od statystyk postaci. Postać posiadająca przynajmniej jedną ze statystyk na poziomie powyżej 30 punktów, będzie musiała stoczyć Walkę z "MysteriusMan". Jeżeli gracz zwycięży w walce otrzyma komunikat - "Great. Now, you are ready for fight with Dragon", odblokuje Przygodę "BigDragon" w Lokacji "Hills", a przygoda "MysteriusManAd", nie będzie dłużej dostępna w "OldHause". Postać niespełniająca tych warunków otrzyma po prostu komunikat - "I don't think so". 
 
 \chapter{Przykładowa gra}
-Aby ułatwić zrozumienie i korzystanie z frameworka postanowiłem przygotować przykładową grę. Kod AML, potrzebny do skompilowania gry znajduje się w załączniku.
+Aby ułatwić zrozumienie i korzystanie z Adventure Maker postanowiłem przygotować przykładową grę. Kod potrzebny do skompilowania gry znajduje się w załączniku.
 
 \section{Opis scenariusza}
 
-Ponieważ Adventure Maker powstał w ramach pracy dyplomowej postanowiłem, że tematem gry nie będzie oklepane ratowanie księżniczek i walka ze smokami w świecie fantasy, a studiowanie. Okazało się, że pomimo, iż framework, nie został zaprojektowany z myślą o grach tego typu, bez problemu udało mi się ją napisać w języku AML.
+Ponieważ Adventure Maker powstał w ramach pracy dyplomowej postanowiłem, że tematem gry nie będzie oklepane ratowanie księżniczek i walka ze smokami w świecie fantasy, a studiowanie. Okazało się, że pomimo, że język nie został zaprojektowany z myślą o grach tego typu, bez problemu udało mi się ją napisać.
 
 Akcja gry rozgrywa się na uniwersytecie, a celem gracza jest zdanie egzaminu magisterskiego. Aby to osiągnąć, gracz musi rozwijać umiejętności swojej postaci poprzez zdawanie pomniejszych egzaminów. Kiedy gracz będzie już gotowy do ostatecznej próby, musi udać się do specjalnej sali, w której może podejść do egzaminu i zdobyć uprawniony dyplom.
 
@@ -671,6 +675,41 @@ Po takim przygotowaniu można już swobodnie rozpocząć rozgrywkę.
 
 % załączniki (opcjonalnie):
 \appendix
+
+\chapter{Przykładowy kod Klasy Postaci}
+Poniżej znajdujące się kod prezentujący tworzenie obiektu reprezentującego taką samą klasę postaci na dwa sposoby: z i bez wykorzystania wewnętrznego DSL.
+\section*{Kod niewykorzystujący wewnętrznego DSL}
+\begin{minted}{text}
+Stats statsOnStart = new Stats(10, 20, 30);
+Stats statsPerLevel = new Stats(1, 2, 3);
+
+SkillTree skills = new SkillTree(
+  new SkillNode(
+    BASIC_HIT,
+    new SkillNode(POISON_HIT, BASIC_HIT),
+    new SkillNode(SUPER_POISON_HIT, BASIC_HIT)
+  ),
+  new SkillNode(POISON_HIT)
+);
+
+new CharacterType("Knight",statsOnStart,statsPerLevel,skills);
+\end{minted}
+\section*{Kod wykorzystujący wewnętrzny DSL}
+\begin{minted}{text}
+characterClass("Knight")  
+  .statsOnStart(10, 20, 30)
+  .statsPerLevel(1, 2, 3)
+  .skills(
+    node(
+      BASIC_HIT,
+      node(POISON_HIT),
+      node(SUPER_POISON_HIT)
+  ),
+  node(POISON_HIT)
+)
+\end{minted}
+
+
 \chapter{Kod przykładowej gry}
 
 \begin{minted}{text}
