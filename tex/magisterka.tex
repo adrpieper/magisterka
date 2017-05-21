@@ -219,9 +219,9 @@ Przegląd postaci zawiera informacje o ilości \textit{Punktów} oraz \textit{Po
 \subsection*{Umiejętności}
 Ekran udostępnia \textit{Drzewko Umiejętności} oraz dwa przyciski \textit{Reset} oraz \textit{OK}. Służy zarówno do przeglądania posiadanych, jak i odblokowywania nowych \textit{Umiejętności}. Przycisk \textit{Reset} przywraca graczowi rozdane \textit{Punkty Umiejętności}, natomiast przycisk \textit{OK} zatwierdza wybór odblokowanych \textit{Umiejętności}.
 \subsection*{Przedmioty}
-\textit{Przedmiot} stanowi nagrodę dla gracza i może być wykorzystany w celu podniesienia \textit{Statystyk} jego postaci o wartości przypisane mu jako \textit{Bonusy do Statystyk}.
+\textit{Przedmiot} stanowi nagrodę dla gracza i może być wykorzystany w celu podniesienia \textit{Statystyk} jego postaci o wartości przypisane mu jako \textit{Premie do Statystyk}.
 
-Sekcja zawiera wszystkie posiadane przez gracza \textit{Przedmioty}. Te używane aktualnie znajdują się w górnej części ekranu, natomiast pozostałe w dolnej, zwanej \textit{Plecakiem}. Dodatkowo na środku wyświetlana jest suma \textit{Bonusów do Statystyk} uzyskanych z używanych \textit{Przedmiotów}.
+Sekcja zawiera wszystkie posiadane przez gracza \textit{Przedmioty}. Te używane aktualnie znajdują się w górnej części ekranu, natomiast pozostałe w dolnej, zwanej \textit{Plecakiem}. Dodatkowo na środku wyświetlana jest suma \textit{Premii do Statystyk} uzyskanych z używanych \textit{Przedmiotów}.
 
 \section{Tryb Przygody}
 
@@ -432,10 +432,7 @@ Implementacja własnej gry sprowadza się do edycji jednego pliku, mianowicie "g
 Projekt jest standardowym projektem Androidowym, tak więc możemy go też uruchomić przyciskiem play dostępnym w IDE \textit{IntelliJ IDEA}. Ważne jest, żeby korzystać z IDE, nawet w przypadku budowania narzędziem gradle, ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko.
 
 \chapter{Dokumentacja języka} 
-Poniżej znajduje się dokumentacja języka \textit{Adventure Maker}.
-
-\section{Plik AML} 
-Plik definiuje wszystkie dostępne w grze elementy. Plik może zawierać dowolną ilość \textit{Klas Postaci}, \textit{Typów Przedmiotów}, \textit{Przeciwników}, \textit{Lokacji} oraz \textit{Przygód}. Dodatkowo należy w nim umieścić \textit{Przygody Początkowe}. 
+Kod gier napisane w \textit{Adventure Maker} umieszcza się w pojedynczym pliku z rozszerzeniem \textit{.aml}. Plik definiuje wszystkie dostępne w grze elementy. Może zawierać dowolną ilość \textit{Klas Postaci}, \textit{Typów Przedmiotów}, \textit{Przeciwników}, \textit{Lokacji} oraz \textit{Przygód}. Dodatkowo należy w nim umieścić \textit{Przygody Początkowe}. 
 
 \section{Przygody Początkowe} 
 \textit{Przygody Początkowe} definiują \textit{Przygody} udostępnione graczowi na starcie gry. Definicja rozpoczyna się od słów kluczowych \textit{adventure on start}. Następnie w nawiasach klamrowych znajduje się dowolna liczba deklaracji \textit{Przygód} dostępnych na początku gry.
@@ -451,16 +448,14 @@ adventure on start {
 \end{minted}
 
 \section{Klasy Postaci}
-Definicja Klasy, inaczej typu postaci to informacje na temat statystyk oraz umiejętności dostępnych dla danej \textit{Klasy Postaci}. Statystyki dzielą się na Początkowe, które postać otrzymuje przy starcie gry, oraz Poziomowe, które zwiększają całkowite statystyki postaci z każdym zdobytym poziomem. Umiejętności zostały zorganizowane w postaci drzewa. Aby odblokować daną umiejętność, gracz musi najpierw odblokować wszystkie prowadzące do niej umiejętności.
-
-Definicja typu postaci rozpoczyna się od słów kluczowych \textit{character type}. Następnie należy podać nazwę typu za którą znajdują się nawiasy klamrowe. W nawiasach klamrowych należy umieścić kolejno:
+Definicja \textit{Klasy}, inaczej typu postaci to informacje na temat statystyk oraz umiejętności dostępnych dla danej \textit{Klasy Postaci}. Definicja rozpoczyna się od słów kluczowych \textit{character type}. Następnie należy podać nazwę \textit{Klasy Postaci} za którą znajdują się nawiasy klamrowe. W nawiasach klamrowych należy umieścić kolejno:
 \begin{itemize}
 	\item \textit{Statystyki Początkowe}
 	\item \textit{Statystyki Poziomowe}
 	\item \textit{Drzewo Umiejętności}
 \end{itemize}
 
-Definicja \textit{Statystyk Początkowych} rozpoczyna się od słów kluczowych \textit{stats on start:}. Za tymi słowami umieszczone są ilościowe parametry siły, inteligencji i zwinności oznaczone odpowiednio słowami kluczowymi \textit{str}, \textit{int}, \textit{agi}, będącymi skrótami od angielskich tłumaczeń nazw tych parametrów\footnote{Strength, Intelligence, Agility}.
+Definicja \textit{Statystyk Początkowych} rozpoczyna się od słów kluczowych \textit{stats on start:}. Za tymi słowami umieszczone są ilościowe parametry \textit{Siły}, \textit{Inteligencji}i i \textit{Zwinności} oznaczone odpowiednio słowami kluczowymi \textit{str}, \textit{int}, \textit{agi}, będącymi skrótami od angielskich tłumaczeń nazw tych parametrów\footnote{Strength, Intelligence, Agility}.
 
 Definicja \textit{Statystyk Poziomowych} jest bardzo podobna. Odróżniają je jedynie słowa kluczowe \textit{stats per lvl:} zamiast  \textit{stats on start:} oraz występujący przed każdym parametrem znak plusa, który podkreśla, że są to wartości, które zwiększają statystyki postaci. 
 
@@ -487,21 +482,21 @@ character type Wizard {
       Poisoning
 }
 \end{minted}
-Z definicji można odczytać, że postać typu \textit{Wizard} otrzymuje 10 punktów siły, 20 inteligencji i 15 zwinności na początku gry.
-Jego statystyki zwiększają się o 1 punkt siły, 2 inteligencji i 1 zwinności z każdym zdobytym poziomem doświadczenia.
+Z definicji można odczytać, że postać typu \textit{Wizard} otrzymuje 10 punktów \textit{Siły}, 20 \textit{Inteligencji} i 15 \textit{Zwinności} na początku gry.
+Jego statystyki zwiększają się o 1 punkt \textit{Siły}, 2 \textit{Inteligencji} i 1 \textit{Zwinności} z każdym zdobytym \textit{Poziomem doświadczenia}.
 Na początku może odblokować \textit{Umiejętność} \textit{Fireball} lub \textit{Poisoning}. Zdobycie umiejętności \textit{Fireball} udostępnia ponadto dwie kolejnych: \textit{Wirewall} i \textit{BlackMagic}. 
 
 \section{Typy Przedmiotów}
-Definicja \textit{Przedmiotu} składa się z nazwy, kategorii oraz wartości premii do odpowiednich statystyk. Do wyboru mamy następujące kategorie (w nawiasie podano odpowiadające kategorii słówko kluczowe):
+Definicja \textit{Przedmiotu} składa się z nazwy, kategorii oraz wartości \textit{Premii do Statystyk}. Do wyboru mamy następujące kategorie (w nawiasie podano odpowiadające kategorii słówko kluczowe):
 \begin{itemize}
 	\item Broń (\textit{weapon})
 	\item Hełm (\textit{helmet})
 	\item Zbroja (\textit{armor})
 	\item Rękawice (\textit{gloves})
 \end{itemize}
-Wartości premii umieszczone są w nawiasach klamrowych i składają się z wartości liczbowej poprzedzonej znakiem plus oraz słówka kluczowego \textit{agi}, \textit{str} lub \textit{int} odnoszącego się do odpowiedniego typu statystyk. W przypadku braku zdefiniowania, któregoś z bonusów, wynosi on 0.
+Wartości premii umieszczone są w nawiasach klamrowych i składają się z wartości liczbowej poprzedzonej znakiem plus oraz słówka kluczowego \textit{agi}, \textit{str} lub \textit{int} odnoszącego się do odpowiedniego typu statystyk. W przypadku braku zdefiniowania, któreś z \textit{Premii}, wynosi ona 0.
 
-Poniżej znajduje się przykład definiujący przedmiot typu \textit{Sword}, należący do kategorii \textit{Broń}, zwiększający siłę postaci o 4, a zwinność o 3 punkty.
+Poniżej znajduje się przykład definiujący przedmiot typu \textit{Sword}, należący do kategorii \textit{Broń}, zwiększający \textit{Siłę} postaci o 4, a \textit{Zwinność} o 3 punkty.
 \begin{minted}{text}
 item Sword (weapon) {
    + 4 str
@@ -514,7 +509,7 @@ item Sword (weapon) {
 W przypadku technologii GPS \textit{Lokacje} opisuje okrąg o środku składającym się z współrzędnych geograficznych i promieniu wyrażonym w metrach. Użycie tej technologii zalecane jest do opisu obszarów znajdujących się na otwartej przestrzeni.
 Opisując \textit{Lokacje} za pomocą technologii NFC wystarczy podać odpowiedni tag. Tą technologię należy wykorzystać do opisu przestrzeni zamkniętych jak np. pokoje. Trzeba pamiętać, że odpowiedni znacznik NFC musi znajdować się w tym pomieszczeniu.
 
-Definicja Lokacji rozpoczyna się od słowa kluczowego \textit{location} i jej nazwy. Jeżeli \textit{Lokacja} ma być opisana przez znacznik NFC należy użyć słów kluczowych \textit{tagged as}, a następnie podać tekst, który stanowi zawartość tagu. W przypadku korzystania z technologii GPS używa się słów kluczowych \textit{in radius of} po którym podaje się odległość w metrach. Następnie po słowach \textit{meters from} należy umieścić szerokość i długość geograficzną.
+Definicja \textit{Lokacji} rozpoczyna się od słowa kluczowego \textit{location} i jej nazwy. Jeżeli \textit{Lokacja} ma być opisana przez znacznik NFC należy użyć słów kluczowych \textit{tagged as}, a następnie podać tekst, który stanowi zawartość tagu. W przypadku korzystania z technologii GPS używa się słów kluczowych \textit{in radius of} po którym podaje się odległość w metrach. Następnie po słowach \textit{meters from} należy umieścić szerokość i długość geograficzną.
 
 Poniżej znajdują się przykłady definicji lokacji \textit{OldHouse} i \textit{Forest}. Lokacja \textit{OldHouse} oznaczona jest tagiem \textit{OldHouseLocation}, natomiast \textit{Forest} to obszar o promieniu 100 metrów od punktu o współrzędnych 54°35'45.9"N, 18°14'42.7"E.
 \begin{minted}{text}
@@ -531,7 +526,7 @@ Pierwsze trzy parametry to \textit{power}, \textit{hp}, \textit{exp} to wartośc
 
 Czwarty parametr - \textit{loot}, to lista przedmiotów, który może otrzymać gracz po pokonaniu przeciwnika, oddzielonych przecinkami. Każdy przedmiot na zawiera informacje o typie przedmiotu oraz prawdopodobieństwo jego otrzymania.
 
-Poniższy przykład definiuje przeciwnika o nazwie "Dragon":
+Poniższy przykład definiuje przeciwnika o nazwie \textit{Dragon}:
 
 \begin{minted}{text}
 opponent Dragon {
@@ -545,9 +540,9 @@ opponent Dragon {
 Z definicji wynika, że \textit{Dragon} posiada moc o wartości 100, 200 punktów życia. Za pokonanie tego \textit{Przeciwnika} gracz otrzyma 100 punktów doświadczenia, oraz odpowiednio 50\% i 10\% szansy na zdobycie przedmiotów \textit{MagicSword} oraz \textit{SteelArmor}.
 
 \section{Przygody}
-\textit{Przygody} są najważniejszym i najbardziej rozbudowanym elementem języka \textit{Adventure Maker}. To właśnie poprzez przygody możliwe jest napisanie scenariusza rozgrywki. Definicja składa się z słowa kluczowego \textit{adventure}, nazwy \textit{Przygody}, słów \textit{starts from} oraz \textit{Zdarzenia Początkowego}.
+\textit{Przygody} są najważniejszym i najbardziej rozbudowanym elementem języka \textit{Adventure Maker}. To właśnie poprzez przygody możliwe jest napisanie scenariusza rozgrywki. 
 
-\textit{Zdarzenie} otoczone jest zawsze nawiasami klamrowymi i może zawierać jedną z definicji:
+Definicja \textit{Przygody} składa się z słowa kluczowego \textit{adventure}, nazwy \textit{Przygody}, słów \textit{starts from} oraz \textit{Zdarzenia Początkowego}. \textit{Zdarzenie} otoczone jest zawsze nawiasami klamrowymi i może zawierać jedną z definicji:
 \begin{itemize}
 	\item \textit{Komunikat}
 	\item \textit{Walka}
@@ -601,7 +596,7 @@ If you have no more int than 30
 If you have more agi than 20 or more str than 10
 \end{minted}
 
-Pierwsze \textit{Wyrażenie} sprawdza, czy postać ma nie więcej niż 30 punktów inteligencji. Drugie sprawdza, czy posiada więcej niż 20 punktów siły lub więcej niż 10 punktów zwinności.
+Pierwsze \textit{Wyrażenie} sprawdza, czy postać ma nie więcej niż 30 punktów \textit{Inteligencji}. Drugie sprawdza, czy posiada więcej niż 20 punktów \textit{Siły} lub więcej niż 10 punktów \textit{Zwinności}.
 
 Poniżej znajduje się pełny przykład definicji \textit{Zdarzenia Warunkowego}: 
 \begin{minted}{text}
@@ -628,7 +623,7 @@ Answer "No" to { Show "Your choise." }
 Z powyższej definicji wynika, że graczowi zostanie wyświetlone pytanie - "Do you want a new armor?". Gdy odpowie "Yes", otrzyma przedmiot o nazwie \textit{Armor}. W przeciwnym wypadku ujrzy komunikat - "Your choise.".
 
 \subsection{Modyfikacja Przygód}
-\textit{Modyfikacja Przygód} służy do dodawania lub usuwania \textit{Przygód} z Lokacji. Definicja \textit{Zdarzenia} dodającego nową \textit{Przygodę} rozpoczyna się od słowa \textit{Add}, a usuwającego \textit{Remove}. Następnie należy podać nazwę \textit{Przygody} i opcjonalnie częstość jej występowania w nawiasach (domyślna częstość wynosi 1). Dalej należy podać \textit{Lokację}, której dotyczy edycja poprzedzając ją słowem kluczowym \textit{at}.
+\textit{Modyfikacja Przygód} służy do dodawania lub usuwania \textit{Przygód} z \textit{Lokacji}. Definicja \textit{Zdarzenia} dodającego nową \textit{Przygodę} rozpoczyna się od słowa \textit{Add}, a usuwającego \textit{Remove}. Następnie należy podać nazwę \textit{Przygody} i opcjonalnie częstość jej występowania w nawiasach (domyślna częstość wynosi 1). Dalej należy podać \textit{Lokację}, której dotyczy edycja poprzedzając ją słowem kluczowym \textit{at}.
 
 Poniżej znajduje się kilka przykładów \textit{Modyfikacji Przygód}. 
 \begin{minted}{text}
