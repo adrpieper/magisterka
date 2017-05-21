@@ -150,7 +150,7 @@ Wymagania, jakie postawiłem przed \textit{Adventure Maker} można podzielić na
 \section{Funkcjonalne}
 Do wymagań funkcjonalnych należą:
 \begin{itemize}
-\item Język DSL zawierający elementy takie jak:
+\item Język DSL zawierający elementy:
 \subitem - Klasy Postaci
 \subitem - Przedmioty
 \subitem - Lokacje
@@ -184,23 +184,23 @@ Podstawowym założeniem \textit{Adventure Maker} jest udostępnienie możliwoś
 Język \textit{Adventure Maker} został zaprojektowany tak, aby twórca gry mógł traktować technologie NFC i GPS w sposób bardzo zbliżony nie zważając na ich  całkowicie odmienną techniczną implementację. Z jego punktu widzenia zarówno pomieszczenie oznaczone tagiem NFC, jak i współrzędne geograficzne, stanowią po prostu lokację, w której gracza mogą spotkać dowolnego typu przygody. 
 
 \chapter{Projekt Interfejsu Aplikacji}
-Ważnym elementem każdego współczesnego oprogramowania jest jego graficzny interfejs użytkownika \footnote{GUI - Graphical User Interface - Graficzny interfejs użytkownika}. W przypadku języka do tworzenia gier można mówić o dwóch rodzajach GUI: interfejsie edytora i powstałych w języku gier. 
+Ważnym elementem oprogramowania jest jego graficzny interfejs użytkownika \footnote{GUI - Graphical User Interface - Graficzny interfejs użytkownika}. W przypadku języka do tworzenia gier można mówić o dwóch rodzajach GUI. Pierwszym jest interfejs środowiska służącego do edycji kodu, drugim interfejs gier napisanych w tym języku.
 
 Jako, że \textit{Adventure Maker} został zrealizowany jako wtyczka do istniejącego IDE, sprawa jego GUI jest rozwiązana. IDE \textit{IntelliJ IDEA} dostarcza bardzo wygodny i dopracowany interfejs użytkownika, a dostarczona przeze mnie wtyczka wykorzystuje jego możliwości. 
 
 Język nie pozwala twórcy gry na dostosowanie interfejsu do swoich potrzeb. Tak więc, jako jego projektant, postanowiłem przygotować interfejs prosty, a zarazem uniwersalny i neutralny względem klimatu gry. GUI jest podzielone na trzy części:
 \begin{itemize}
 	\item Menu początkowe
-	\item Tryb zwiedzania
-	\item Tryb przygody
+	\item Tryb Zwiedzania
+	\item Tryb Przygody
 \end{itemize}
 \section{Menu początkowe}
 Ekran pozwala na wybór typu postaci, jaką dany gracz ma zamiar kontrolować. Został podzielony na dwie części: listy klas postaci oraz szczegółów wybranej klasy. Szczegóły zawierają nazwę klasy oraz informacje o jej statystykach.
 
-\section{Tryb zwiedzania}
-Zwiedzanie stanowi główny ekran gry. Jest wyświetlany przez cały czas, w którym gracz porusza się pomiędzy lokacjami w poszukiwaniu przygód. 
+\section{Tryb Zwiedzania}
+Ekran zwiedzania wyświetlany jest przez cały czas, w którym gracz porusza się pomiędzy lokacjami w poszukiwaniu przygód. 
 
-Tryb zwiedzania zawiera dosyć dużo informacji dlatego też został podzielony na następujące części: 
+Tryb zwiedzania zawiera dosyć dużo informacji, dlatego też został podzielony na następujące części: 
 \begin{itemize}
 	\item Przegląd postaci
 	\item Umiejętności
@@ -208,21 +208,21 @@ Tryb zwiedzania zawiera dosyć dużo informacji dlatego też został podzielony 
 \end{itemize}
 Pomiędzy widokami gracz może nawigować swobodnie, przeciągając je w lewo lub w prawo.
 \subsection*{Przegląd postaci}
-Przegląd postaci zawiera informacje o ilości i poziomie doświadczenia sterowanej przez gracza postaci. Dodatkowo wyświetla też statystyki uwzględniające bonusy otrzymane z noszonych przedmiotów.
+Przegląd postaci zawiera informacje o ilości i poziomie doświadczenia sterowanej przez gracza postaci. Dodatkowo wyświetla też statystyki uwzględniające bonusy otrzymane z używanych przedmiotów.
 \subsection*{Umiejętności}
-Ekran udostępnia drzewko umiejętności oraz dwa przyciski \textit{Reset} oraz \textit{OK}. Drzewko służy zarówno do przeglądania posiadanych, jak i odblokowywania nowych umiejętności. Przycisk reset przywraca graczowi rozdane punkty umiejętności, natomiast przycisk \textit{OK} zatwierdza ich wybór.
+Ekran udostępnia drzewko umiejętności oraz dwa przyciski \textit{Reset} oraz \textit{OK}. Drzewko służy zarówno do przeglądania posiadanych, jak i odblokowywania nowych umiejętności. Przycisk \textit{Reset} przywraca graczowi rozdane punkty umiejętności, natomiast przycisk \textit{OK} zatwierdza ich wybór.
 \subsection*{Przedmioty}
-Sekcja przedmiotów, zawiera wszystkie posiadane przez gracza rzeczy. Przedmioty używane aktualnie przez gracza znajdują się w górnej części ekranu, natomiast pozostałe w dolnej, zwanej plecakiem. Dodatkowo na środku wyświetlana jest suma bonusów do statystyk uzyskanych z noszonych przedmiotów.
-\section{Tryb przygody}
+Sekcja zawiera wszystkie posiadane przez gracza przedmioty. Te używane aktualnie znajdują się w górnej części ekranu, natomiast pozostałe w dolnej, zwanej plecakiem. Dodatkowo na środku wyświetlana jest suma bonusów do statystyk uzyskanych z noszonych przedmiotów.
+\section{Tryb Przygody}
 Gracz nie ma swobodnego dostępu do tej części interfejsu. Jest ona wyświetlana dopiero w momencie znalezienia się gracza w lokacji zawierającej jakąś przygodę.
 
-Tryb przygody zawiera kilka ekranów, z których każdy odpowiedzialny jest za wyświetlenie konkretnego zdarzenia. Gracz nie może swobodnie nawigować pomiędzy nimi. Dostępne GUI zależne jest sytuacji, w której znajduje się postać gracza.
+Tryb przygody zawiera kilka ekranów, z których każdy odpowiedzialny jest za wyświetlenie konkretnego zdarzenia. Gracz nie może swobodnie nawigować pomiędzy nimi. Dostępne GUI zależne jest od sytuacji, w której znajduje się postać gracza.
 \subsection*{Decyzja}
-Ekran jest bardzo prosty. Zawiera jedynie pole wyświetlające pytanie skierowane do gracza oraz listę decyzji w postaci przycisków.
+Ekran pozwala graczowi na podjęcie decyzji związanej z dalszym przebiegiem \textit{Przygody}. Zawiera jedynie pole wyświetlające pytanie skierowane do gracza oraz listę decyzji w postaci przycisków. 
 \subsection*{Walka}
-Widok walki odpowiedzialny jest za wyświetlanie oraz sterowanie przebiegiem starcia pomiędzy postacią gracza, a dowolnym przeciwnikiem. Interfejs wyświetla nazwę przeciwnika, kolorowe paski zawierające informacje o punktach życia (tzw. hit points) postaci i przeciwnika oraz o punktach many gracza. W dolnej części znajdują się przyciski akcji pozwalające na użycie standardowego ataku lub dowolnej umiejętności.
+Widok walki służy do wyświetlania oraz sterowania przebiegiem starcia pomiędzy postacią gracza, a dowolnym przeciwnikiem. Interfejs wyświetla nazwę przeciwnika, kolorowe paski zawierające informacje o punktach życia postaci i przeciwnika oraz o punktach many\footnote{W fantastyce rodzaj energii stosowanej np. do rzucania zaklęć \url{https://pl.wikipedia.org/wiki/Mana_(fantasy)}} gracza. W dolnej części znajdują się przyciski akcji pozwalające na użycie standardowego ataku lub dowolnej umiejętności.
 \subsection*{Komunikat}
-Ekran komunikatu składa się z dwóch części. Wiadomości oraz przycisku \textit{OK}, którym gracz potwierdza, że zapoznał się z komunikatem. Wiadomość najczęściej wyświetlana jest w prostym oknie tekstowym, jednak w niektórych przypadkach konieczne jest użycie elementów bardziej rozbudowanych. Jest tak na przykład w przypadku okna wyświetlanego pod koniec przygody, zawierającego między innymi wykaz zdobytych przez gracza przedmiotów w postaci listy.
+Ekran komunikatu składa się z dwóch części: wyświetlanej informacji oraz przycisku \textit{OK}, którym gracz potwierdza, że zapoznał się z komunikatem. Informacja najczęściej wyświetlana jest w prostym oknie tekstowym, jednak w niektórych przypadkach konieczne jest użycie elementów bardziej rozbudowanych. Jest tak na przykład w przypadku okna wyświetlanego pod koniec przygody, zawierającego między innymi wykaz zdobytych przez gracza przedmiotów w postaci listy.
 
 \chapter{Architektura Języka i Aplikacji}
 
