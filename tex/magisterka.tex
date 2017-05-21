@@ -183,24 +183,31 @@ Podstawowym założeniem \textit{Adventure Maker} jest udostępnienie możliwoś
 
 Język \textit{Adventure Maker} został zaprojektowany tak, aby twórca gry mógł traktować technologie NFC i GPS w sposób bardzo zbliżony nie zważając na ich  całkowicie odmienną techniczną implementację. Z jego punktu widzenia zarówno pomieszczenie oznaczone tagiem NFC, jak i współrzędne geograficzne, stanowią po prostu lokację, w której gracza mogą spotkać dowolnego typu przygody. 
 
-\chapter{Projekt Interfejsu Aplikacji}
-Ważnym elementem oprogramowania jest jego graficzny interfejs użytkownika \footnote{GUI - Graphical User Interface - Graficzny interfejs użytkownika}. W przypadku języka do tworzenia gier można mówić o dwóch rodzajach GUI. Pierwszym jest interfejs środowiska służącego do edycji kodu, drugim interfejs gier napisanych w tym języku.
+\chapter{Interfejs Gry i Ogólny Przebieg Rozgrywki}
 
-Jako, że \textit{Adventure Maker} został zrealizowany jako wtyczka do istniejącego IDE, sprawa jego GUI jest rozwiązana. IDE \textit{IntelliJ IDEA} dostarcza bardzo wygodny i dopracowany interfejs użytkownika, a dostarczona przeze mnie wtyczka wykorzystuje jego możliwości. 
+Pomimo, że ostateczny kształt gry będzie zdefiniowany przez jego programistę mieści się w określonych ramach. Niezbędnym elementem gry jest jej interfejs i nie sposób opisać go w oderwaniu od jej zasad. Jako, że \textit{Adventure Maker} nie pozwala w tym momencie na opis GUI, wszystkie napisane w nim gry mają taki sam, neutralny względem jej tematyki wygląd.
 
-Język nie pozwala twórcy gry na dostosowanie interfejsu do swoich potrzeb. Tak więc, jako jego projektant, postanowiłem przygotować interfejs prosty, a zarazem uniwersalny i neutralny względem klimatu gry. GUI jest podzielone na trzy części:
+Celem gry jest rozwój kierowanej przez gracza postaci. Jest to możliwe dzięki tzw. \textit{Przygodom}, czyli wydarzeniom uruchamiającym się w zależności od fizycznej lokalizacji postaci. Miarą rozwoju postaci są \textit{Poziomy Doświadczenia}, które zwiększają się po osiągnięciu określonego progu \textit{Punktów Doświadczenia}.
+
+Rozgrywkę można podzielić na 3 etapy:
 \begin{itemize}
-	\item Menu początkowe
+	\item Wybór Klasy Postaci
 	\item Tryb Zwiedzania
-	\item Tryb Przygody
+	\item Tryb Przygody 
 \end{itemize}
-\section{Menu początkowe}
-Ekran pozwala na wybór typu postaci, jaką dany gracz ma zamiar kontrolować. Został podzielony na dwie części: listy klas postaci oraz szczegółów wybranej klasy. Szczegóły zawierają nazwę klasy oraz informacje o jej statystykach.
+\section{Wybór Klasy Postaci}
+
+Na tym etapie gracz musi dokonać wyboru \textit{Klasy Postaci}. GUI składa się z tylko jednego ekranu podzielonego na dwie części: listy \textit{Klas Postaci} oraz szczegółów wybranej \textit{Klasy}. Lista pozwala na wybór jednej z pośród udostępnionych przez programistę \textit{Klas}. Każda \textit{Klasy Postaci} posiada nazwę, określone \textit{Statystyki} oraz \textit{Drzewo Umiejętności}, którymi powinien kierować się gracz dokonując wyboru.
+
+Na \textit{Statystyki} postaci składają się  jego \textit{Siła}, \textit{Inteligencja} i \textit{Zręczność}. Wartości te wpływają na na przebieg \textit{Przygody} oraz umiejętności bojowe postaci. \textit{Statystyki} można podzielić na \textit{Początkowe}, czyli takie, które gracz otrzymuje na początku rozgrywki oraz \textit{Poziomowe}, które gracz otrzymuje z każdym nowym \textit{Poziomem Doświadczenia}.
+
+\textit{Drzewko Umiejętności} zawiera informację na temat dostępnych dla danej \textit{Klasy Postaci} \textit{Umiejętności}. Gracz korzystać z \textit{Umiejętności} podczas walki, ale dopiero po ich odblokowaniu. Aby odblokować daną \textit{Umiejętność}, musi posiadać wszystkie będące jej przodkami w drzewie \textit{Umiejętności}. Za każdą nową odblokowaną umiejętność gracz musi zapłacić \textit{Punktami Umiejętności}, które zdobywa wraz z nowym \textit{Poziomem Doświadczenia}.
 
 \section{Tryb Zwiedzania}
-Ekran zwiedzania wyświetlany jest przez cały czas, w którym gracz porusza się pomiędzy lokacjami w poszukiwaniu przygód. 
 
-Tryb zwiedzania zawiera dosyć dużo informacji, dlatego też został podzielony na następujące części: 
+Gracz znajduje się w tym trybie od momentu wyboru postaci przez cały czas, w którym gracz porusza się w poszukiwaniu \textit{Przygód}. 
+
+Tryb zwiedzania został podzielony na następujące części: 
 \begin{itemize}
 	\item Przegląd postaci
 	\item Umiejętności
@@ -208,23 +215,43 @@ Tryb zwiedzania zawiera dosyć dużo informacji, dlatego też został podzielony
 \end{itemize}
 Pomiędzy widokami gracz może nawigować swobodnie, przeciągając je w lewo lub w prawo.
 \subsection*{Przegląd postaci}
-Przegląd postaci zawiera informacje o ilości i poziomie doświadczenia sterowanej przez gracza postaci. Dodatkowo wyświetla też statystyki uwzględniające bonusy otrzymane z używanych przedmiotów.
+Przegląd postaci zawiera informacje o ilości \textit{Punktów} oraz \textit{Poziomie Doświadczenia} sterowanej przez gracza postaci. Dodatkowo wyświetla też \textit{Statystyki} uwzględniające bonusy otrzymane z używanych \textit{Przedmiotów}.
 \subsection*{Umiejętności}
-Ekran udostępnia drzewko umiejętności oraz dwa przyciski \textit{Reset} oraz \textit{OK}. Drzewko służy zarówno do przeglądania posiadanych, jak i odblokowywania nowych umiejętności. Przycisk \textit{Reset} przywraca graczowi rozdane punkty umiejętności, natomiast przycisk \textit{OK} zatwierdza ich wybór.
+Ekran udostępnia \textit{Drzewko Umiejętności} oraz dwa przyciski \textit{Reset} oraz \textit{OK}. Służy zarówno do przeglądania posiadanych, jak i odblokowywania nowych \textit{Umiejętności}. Przycisk \textit{Reset} przywraca graczowi rozdane \textit{Punkty Umiejętności}, natomiast przycisk \textit{OK} zatwierdza wybór odblokowanych \textit{Umiejętności}.
 \subsection*{Przedmioty}
-Sekcja zawiera wszystkie posiadane przez gracza przedmioty. Te używane aktualnie znajdują się w górnej części ekranu, natomiast pozostałe w dolnej, zwanej plecakiem. Dodatkowo na środku wyświetlana jest suma bonusów do statystyk uzyskanych z noszonych przedmiotów.
+\textit{Przedmiot} stanowi nagrodę dla gracza i może być wykorzystany w celu podniesienia \textit{Statystyk} jego postaci o wartości przypisane mu jako \textit{Bonusy do Statystyk}.
+
+Sekcja zawiera wszystkie posiadane przez gracza \textit{Przedmioty}. Te używane aktualnie znajdują się w górnej części ekranu, natomiast pozostałe w dolnej, zwanej \textit{Plecakiem}. Dodatkowo na środku wyświetlana jest suma \textit{Bonusów do Statystyk} uzyskanych z używanych \textit{Przedmiotów}.
+
 \section{Tryb Przygody}
-Gracz nie ma swobodnego dostępu do tej części interfejsu. Jest ona wyświetlana dopiero w momencie znalezienia się gracza w lokacji zawierającej jakąś przygodę.
 
-Tryb przygody zawiera kilka ekranów, z których każdy odpowiedzialny jest za wyświetlenie konkretnego zdarzenia. Gracz nie może swobodnie nawigować pomiędzy nimi. Dostępne GUI zależne jest od sytuacji, w której znajduje się postać gracza.
+Gracz przechodzi do tego tryby z \textit{Trybu Zwiedzania}, kiedy znajdzie się w miejscu zawierającego \textit{Przygodę}. Każda przygoda składa się z serii \textit{Zdarzeń} (min. jedno).
+
+GUI trybu składa się kilku ekranów:
+\begin{itemize}
+	\item Decyzja
+	\item Walka
+	\item Komunikat
+\end{itemize}
+
+Każdy odpowiedzialny jest za wyświetlenie konkretnych typów \textit{Zdarzeń}. Gracz nie może swobodnie nawigować pomiędzy nimi, ponieważ wpływa na przebieg \textit{Zdarzeń} w sposób ograniczony, a dostępne GUI zależne jest od sytuacji, w której się aktualnie znajduje.
 \subsection*{Decyzja}
-Ekran pozwala graczowi na podjęcie decyzji związanej z dalszym przebiegiem \textit{Przygody}. Zawiera jedynie pole wyświetlające pytanie skierowane do gracza oraz listę decyzji w postaci przycisków. 
+Ekran zawiera pole wyświetlające pytanie skierowane do gracza oraz listę decyzji w postaci przycisków. Poprzez wybór odpowiedniej decyzji, gracz ma wpływ na dalszy przebieg \textit{Przygody}.
 \subsection*{Walka}
-Widok walki służy do wyświetlania oraz sterowania przebiegiem starcia pomiędzy postacią gracza, a dowolnym przeciwnikiem. Interfejs wyświetla nazwę przeciwnika, kolorowe paski zawierające informacje o punktach życia postaci i przeciwnika oraz o punktach many\footnote{W fantastyce rodzaj energii stosowanej np. do rzucania zaklęć \url{https://pl.wikipedia.org/wiki/Mana_(fantasy)}} gracza. W dolnej części znajdują się przyciski akcji pozwalające na użycie standardowego ataku lub dowolnej umiejętności.
-\subsection*{Komunikat}
-Ekran komunikatu składa się z dwóch części: wyświetlanej informacji oraz przycisku \textit{OK}, którym gracz potwierdza, że zapoznał się z komunikatem. Informacja najczęściej wyświetlana jest w prostym oknie tekstowym, jednak w niektórych przypadkach konieczne jest użycie elementów bardziej rozbudowanych. Jest tak na przykład w przypadku okna wyświetlanego pod koniec przygody, zawierającego między innymi wykaz zdobytych przez gracza przedmiotów w postaci listy.
+Widok \textit{Walki} służy do wyświetlania oraz sterowania przebiegiem starcia pomiędzy postacią gracza, a dowolnym przeciwnikiem. Interfejs wyświetla nazwę przeciwnika, kolorowe paski zawierające informacje o \textit{Punktach Życia} postaci i przeciwnika oraz o \textit{Punktach Many} gracza. 
 
-\chapter{Architektura Języka i Aplikacji}
+Aby wygrać \textit{Walkę} gracz musi zmniejszyć ilość posiadanych przez przeciwnika \textit{Punktach Życia} do zera. Analogicznie, aby nie przegrać, musi utrzywać ilość własnych \textit{Punktów Życia}
+powyżej tego poziomu.
+
+Gracz ma do dyspozycji zdobyte \textit{Umiejętności} oraz \textit{Atak Podstawowy}. Korzystanie z \textit{Umiejętności} wymaga poniesienie kosztu w \textit{Punktach Many}.
+
+Siła \textit{Ataku Podstawowego} oraz \textit{Punktów Życia} i \textit{Many} gracza zależy od \textit{Statystyk} jego postaci.
+
+\subsection*{Komunikat}
+
+Ekran komunikatu służy do wyświetlania wszelkiego rodzaju informacji dotyczącej przebiegu \textit{Przygody}. Dzięki nim możliwe jest wprowadzanie narracji w grze, co stanowi istotny element gier RPG. GUI składa się z wyświetlanej informacji oraz przycisku \textit{OK}, którym gracz potwierdza, że zapoznał się z komunikatem. Informacja najczęściej wyświetlana jest w prostym oknie tekstowym, jednak w czasami konieczne jest wyświetlenie elementów bardziej rozbudowanych. Przykładem jest okno wyświetlane pod koniec \textit{Przygody}, zawierającego między innymi listę zdobytych przez gracza \textit{przedmiotów}.
+
+\chapter{Implemetacja Języka i Aplikacji}
 
 \textit{Adventure Maker} składa się z dwóch projektów. Pierwszy odpowiedzialny jest za implementacje języka. Drugi projekt, to szkielet aplikacji na system Android, będący bazą pod wszystkie gry pisane w \textit{Adventure Maker}. 
 
@@ -465,8 +492,7 @@ Jego statystyki zwiększają się o 1 punkt siły, 2 inteligencji i 1 zwinności
 Na początku może odblokować \textit{Umiejętność} \textit{Fireball} lub \textit{Poisoning}. Zdobycie umiejętności \textit{Fireball} udostępnia ponadto dwie kolejnych: \textit{Wirewall} i \textit{BlackMagic}. 
 
 \section{Typy Przedmiotów}
-\textit{Przedmiot} to element, który stanowi nagrodę dla gracza i może być wykorzystany w celu podniesienia statystyk jego postaci. Definicja składa się z nazwy, kategorii oraz wartości premii do odpowiednich statystyk.
-Do wyboru mamy następujące kategorie (w nawiasie podano odpowiadające kategorii słówko kluczowe):
+Definicja \textit{Przedmiotu} składa się z nazwy, kategorii oraz wartości premii do odpowiednich statystyk. Do wyboru mamy następujące kategorie (w nawiasie podano odpowiadające kategorii słówko kluczowe):
 \begin{itemize}
 	\item Broń (\textit{weapon})
 	\item Hełm (\textit{helmet})
@@ -533,9 +559,7 @@ Z definicji wynika, że \textit{Dragon} posiada moc o wartości 100, 200 punktó
 
 Przed przejściem do przykładowej definicji \textit{Przygody}, należy zapoznać się z dokumentacją poszczególnych \textit{Zdarzeń}.
 \subsection{Komunikat}
-Komunikat to najprostsze ze \textit{Zdarzeń}. Służy wyświetleniu informacji, z którym ma się zapoznać gracz.
-
-Definicja \textit{Komunikatu} składa się ze słowa kluczowego \textit{Show} oraz informacji.
+Komunikat służy wyświetleniu informacji, z którym ma się zapoznać gracz. Definicja składa się ze słowa kluczowego \textit{Show} oraz wyświetlanej informacji.
 
 Poniżej znajduje się przykład kodu wyświetlającego komunikat "Hello World!".
 \begin{minted}{text}
