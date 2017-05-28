@@ -1,6 +1,6 @@
 ## AdventureMaker - Język dla terenowych gier RGP
 
-AdventureMaker powstał, aby ułatwić tworzenie terenowych gier RPG na system Android. Głównych cel, to pozwolić na tworzenie gier osobom obytym z tematem gier RPG, które nie miały wcześniej do czynienia z programowaniem.
+AdventureMaker powstał, aby ułatwić tworzenie terenowych gier RPG na system Android. Główny cel języka to pozwolić na tworzenie gier osobom obytym z tematem gier RPG, które nie miały wcześniej do czynienia z programowaniem.
 
 Poniżej znajduje się przykładowa definicja przedmiotu. Powinna być ona zrozumiała, dla każdego, kto chodź raz grał w typowego RPG.
 
