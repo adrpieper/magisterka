@@ -13,8 +13,8 @@ item Sword (weapon) {
 
 ### Struktura projektu
 
-Projekt składa się z trzech część. Języka (AdventureMakerLanguage, szkieletu aplikacji (ExampleAdventure) i pracy magisterskiej (tex/magisterka.pdf).
+Projekt składa się z trzech część. Języka (*AdventureMakerLanguage*), szkieletu aplikacji (*ExampleAdventure*) i pracy magisterskiej (*tex/magisterka.pdf*).
 
 ### Wtyczka AML
 
-W ramach projektu powstała specjalna wtyczka do IDE IntelliJ Idea. Wtyczka w postaci pliku *aml.zip* znajduje się w folderze *docs/files*.
+W ramach projektu powstała specjalna wtyczka do IDE *IntelliJ Idea*. Wtyczka w postaci pliku *aml.zip* znajduje się w folderze *docs/files*.
