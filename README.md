@@ -18,3 +18,7 @@ Projekt składa się z trzech część. Języka (*AdventureMakerLanguage*), szki
 ### Wtyczka AML
 
 W ramach projektu powstała specjalna wtyczka do IDE *IntelliJ Idea*. Wtyczka w postaci pliku *aml.zip* znajduje się w folderze *docs/files*.
+
+### Wtyczka AML
+
+W ramach projektu powstała przykładowa gra, której akcje odbywa się na uniwersytecie. Pliku *.apk* znajduje się w folderze *docs/files*.
