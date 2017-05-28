@@ -1,4 +1,5 @@
 .*
+zdjecia
 !.gitignore
 *build*
 !*builder*

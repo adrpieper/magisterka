@@ -1,5 +1,16 @@
-*
-!fig/*
+res
+szablony
+*.aux
+*.log
+*.out
+*.lof
+*.lot
+*.bbl
+*.blg
+*.synctex.gz
+*.toc
+*_minted-magisterka*
+!/fig/*
 !.gitignore
 !magisterka.pdf
 
