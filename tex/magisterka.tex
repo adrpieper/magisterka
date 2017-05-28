@@ -37,13 +37,13 @@
 
 % streszczenie
 \begin{abstract}
-  W ramach pracy został zaprojektowany i zaimplementowany \textit{AdventureMaker} - język domenowy\footnote{Domain Specific Language - DSL - język programowania służący do rozwiązywania jednej klasy problemów} służący do opisu terenowych gier RPG\footnote{Role Playing Game - Gra fabularna \url{https://pl.wikipedia.org/wiki/Gra_fabularna}}. Implementacja wykorzystuje technologię \textit{Xtext} \cite{Xtext:2017:Doc}. Narzędzie \textit{Xtext} umożliwiło stworzenie podstawowej infrastruktury języka zawierającej między innymi linker i kompiler. Dodatkowo powstały język zintegrowany jest z IDE \textit{IntelliJ IDEA}\footnote{Zintegrowane środowisko programistyczne \url{https://www.jetbrains.com/idea/}}, co pozwala na podświetlanie, automatyczne uzupełnianie i sprawdzanie składni.
+  W ramach pracy został zaprojektowany i zaimplementowany \textit{AdventureMaker} - DSL (ang. Domain Specific Language) służący do opisu terenowych gier RPG (ang. Role Playing Game). Implementacja wykorzystuje technologię \textit{Xtext} \cite{Xtext:2017:Doc}, która umożliwiła stworzenie podstawowej infrastruktury języka zawierającej między innymi linker i kompiler. Dodatkowo powstały język zintegrowany jest z IDE \textit{IntelliJ IDEA}\footnote{Zintegrowane środowisko programistyczne firmy JetBrains. \url{https://www.jetbrains.com/idea/}}, co pozwala na podświetlanie, automatyczne uzupełnianie i sprawdzanie składni.
   
-  Wygenerowane przez \textit{AdventureMaker} gry działają na platformę \textit{Android} \cite{AndroidSDK:2017:Doc}. W celu lokalizowania graczy zarówno w pomieszczeniach, jak i na otwartym terenie, wykorzystują technologię NFC\footnote{Near Field Communication - wysokoczęstotliwościowy standard komunikacji krótkiego zasięgu. \url{https://pl.wikipedia.org/wiki/Near_Field_Communication}} oraz GPS\footnote{Global Positioning System - globalny system nawigacji satelitarnej \url{https://pl.wikipedia.org/wiki/Global_Positioning_System}} 
+  Wygenerowane przez \textit{AdventureMaker} gry działają na platformę \textit{Android} \cite{AndroidSDK:2017:Doc}. W celu lokalizowania graczy zarówno w pomieszczeniach, jak i na otwartym terenie, wykorzystują technologię NFC\footnote{Near Field Communication - wysokoczęstotliwościowy standard komunikacji krótkiego zasięgu. \url{https://pl.wikipedia.org/wiki/Near_Field_Communication}} oraz GPS (ang. Global Positioning System).
   
   W projekcie zostały wykorzystane popularne narzędzia i biblioteki, z których najważniejsze to \textit{Gradle}\cite{Gradle:2017:Doc}, \textit{JUnit}\cite{JUnit:2017:Doc} i \textit{Dagger 2} \cite{Dagger2:2017:Doc}. Kod został napisany zgodnie z zasadami Clean Code \cite{CleanCode:2005}.
   
-  Praca składa się z dwóch części: implementacji języka \textit{AdventureMaker} oraz szablonu aplikacji, wraz z przykładowym kodem gry. Całość kodu dostępna jest w publicznym repozytorium GIT (pod adresem \url{https://github.com/adrpieper/magisterka}). Przykładowa aplikacja oraz wtyczka do \textit{IDE IntelliJ IDEA} zostały udostępnione na stronie \url{https://adrpieper.github.io/magisterka}.
+  Praca składa się z dwóch części: implementacji języka \textit{AdventureMaker} oraz szablonu aplikacji, wraz z przykładowym kodem gry. Całość kodu dostępna jest w publicznym repozytorium GIT (pod adresem \url{https://github.com/adrpieper/magisterka}). Zostały tam równiej udostępnione aplikacja oraz wtyczka do \textit{IDE IntelliJ IDEA}.
 \end{abstract}
 
 % słowa kluczowe
@@ -80,7 +80,7 @@ Wraz ze specjalnie zaprojektowanym pluginem, \textit{Gradle} stanowi obowiązkow
 Do testów wykorzystałem biblioteki \textit{JUnit} \cite{JUnit:2017:Doc} oraz \textit{Mockito} \cite{Mockito:2017:Doc}. \textit{JUnit} służy pisania testów jednostkowych dla programów napisanych w języku Java. \textit{Mockito} umożliwia tzw. Mockowanie\footnote{Technika testowania polegająca na podmianie obiektu na jego atrapę \url{https://pl.wikipedia.org/wiki/Atrapa_obiektu}}.  Główną zaletą \textit{Mockito} jest bardzo wygodne API, tworzące swego rodzaju wewnętrzny DSL.
 
 Aby móc zapanować nad zależnościami pomiędzy klasami wykorzystałem bibliotekę \textit{Dagger 2}.
-Istnieje wiele bibliotek umożliwiających DI\footnote{Dependency Injection - wstrzykiwanie zależności \url{https://en.wikipedia.org/wiki/Dependency_injection}}, jednak \textit{Dagger 2} cieszy się największą popularnością wśród programistów systemu \textit{Android}. Jego główną zaletą jest rozstrzyganie zależności w czasie kompilacji oraz generacja kodu. Dzięki temu można wykryć wady projektu, takie jak zależności cykliczne jeszcze przed uruchomieniem aplikacji. Dodatkowo wygenerowany kod jest o wiele szybszy niż refleksja, czyli typowe rozwiązanie czasu wykonania. Jest to bardzo ważna cecha w przypadku aplikacji na urządzenia mobilne, ponieważ posiadają one stosunkowo ograniczone zasoby. 
+Istnieje wiele bibliotek umożliwiających DI (ang. Dependency Injection), jednak \textit{Dagger 2} cieszy się największą popularnością wśród programistów systemu \textit{Android}. Jego główną zaletą jest rozstrzyganie zależności w czasie kompilacji oraz generacja kodu. Dzięki temu można wykryć wady projektu, takie jak zależności cykliczne jeszcze przed uruchomieniem aplikacji. Dodatkowo wygenerowany kod jest o wiele szybszy niż refleksja, czyli typowe rozwiązanie czasu wykonania. Jest to bardzo ważna cecha w przypadku aplikacji na urządzenia mobilne, ponieważ posiadają one stosunkowo ograniczone zasoby. 
 
 \chapter{Przegląd istniejących rozwiązań}
 
@@ -316,7 +316,7 @@ Widok to warstwa odpowiedzialna za interfejs użytkownika. W jej skład wchodzą
 
 Warstwa kontrolera odpowiada przede wszystkim za obsługę zdarzeń przychodzących z interfejsu użytkownika, dostarczanie modelu danych dla widoku. Zajmuje się też modyfikacją danych. W prostych przypadkach modyfikuje je bezpośrednio, a w bardziej zaawansowanych deleguje to zadanie do warstwy logiki. Inną ważną odpowiedzialnością tej warstwy jest przełączanie pomiędzy widokami. 
 
-Model odpowiada za przechowywanie danych w uporządkowany sposób. Hermetyzuje dane udostępniając zestaw metod dostępowych (\textit{gettery} i \textit{settery}). Ta warstwa została podzielona na dwa podtypy: model i stan. Modelem nazywam wszystkie klasy, których stan jest obserwowany przez widok (wzorzec obserwator). Stanem (State) nazywam klasy typu POJO \footnote{Plaid Old Java Object - prosty obiekt, nie zależny od zewnetrznego frameworku \url{https://pl.wikipedia.org/wiki/Plain_Old_Java_Object}}, których stan nie może być obserwowany, a ich jedynym zadaniem jest przechowywanie stanu aplikacji. 
+Model odpowiada za przechowywanie danych w uporządkowany sposób. Hermetyzuje dane udostępniając zestaw metod dostępowych (\textit{gettery} i \textit{settery}). Ta warstwa została podzielona na dwa podtypy: model i stan. Modelem nazywam wszystkie klasy, których stan jest obserwowany przez widok (wzorzec obserwator). Stanem (State) nazywam klasy typu POJO (ang. Plaid Old Java Object), których stan nie może być obserwowany, a ich jedynym zadaniem jest przechowywanie stanu aplikacji. 
 
 Logika to warstwa odpowiadająca za wszelkie operacje wykonywane na danych, które nie powinny znaleźć się w warstwie kontrolera ze względu na zbyt duże skomplikowanie, bądź wagę kodu. Wydzielenie tego kodu do osobnych klas w połączeniu z testowaniem jednostkowym pozwala stworzyć kod, co do którego mamy pewność, że jego kluczowe aspekty działają prawidłowo. Usunięcie tego kodu z kontrolera jest zgodne z zasadą pojedynczej odpowiedzialności \cite{CleanCode:2005} i pozwala na jego użycie w wielu miejscach programu. 
 
@@ -375,13 +375,14 @@ Sekcja \textit{When} składa się z pojedynczej linii. Jest to wywołanie testow
 Sekcja \textit{Then} odpowiedzialna jest za sprawdzenie, czy metoda zachowała się w oczekiwany sposób. Zazwyczaj jest to kod składający się z kilku linii zawierających asercje. Asercje służą sprawdzeniu czy, ile razy i z jakimi parametrami zostały wywołane metody klas-zależności. Jeżeli funkcja zwraca jakiś wynik, za pomocą asercji testuje się, czy pokrywa się on z oczekiwanym.
 
 \subsection{Wyniki testów}
-Testy jednostkowe zostały uruchomione przy pomocy narzędzia \textit{Gradle} \cite{Gradle:2017:Doc}. Poniższe zestawienie pokazuje, że wszystkie testy przeszły pomyślnie.
+Testy jednostkowe zostały uruchomione przy pomocy narzędzia \textit{Gradle} \cite{Gradle:2017:Doc}. Zestawienie wyników (rys. \ref{tests:results}) pokazuje, że wszystkie testy przeszły pomyślnie.
 
 \begin{figure}[!tbh]
 	\centering
 	\includegraphics[width=1.0\hsize]{fig/test_summary}
 	\caption{Podsumowanie testów}
 	\source{Wygenerowane przez \textit{Gradle}}
+	\label{tests:results}
 \end{figure}
 
 \section{Testy modułów NFC i GPS}
@@ -417,17 +418,17 @@ Pisanie własnej gry przy użyciu \textit{AdventureMaker} wymaga przygotowania �
 
 Aby móc korzystać z \textit{AdventureMaker} należy pobrać i zainstalować IDE \textit{IntelliJ IDEA}, JRE\footnote{Java Runtime Enviroment - środowisko uruchomieniowe Java}, JDK\footnote{Java Development Kit - standardowy zestaw narzędzi wykorzystywanych do tworzenia aplikacji w technologii Java} i Android SDK oraz wtyczkę AML.
 
-JDK o raz JRE należy pobrać ze strony \textit{Oracle} (https://www.java.com) w wersji 1.8 i zainstalować zgodnie z instrukcją producenta.
+JDK o raz JRE należy pobrać ze strony \textit{Oracle} (\url{https://www.java.com}) w wersji 1.8 i zainstalować zgodnie z instrukcją producenta.
 
-IDE \textit{IntelliJ IDEA} można pobrać ze strony producenta - JetBrains (https://www.jetbrains.com/idea). Wersja community jest darmowa i wystarczająca do obsługi \textit{AdventureMaker}. Podczas instalacji należy pamiętać o włączeniu pluginu obsługującego aplikacje pisane na system Android.
+IDE \textit{IntelliJ IDEA} można pobrać ze strony producenta - JetBrains (\url{https://www.jetbrains.com/idea}). Wersja community jest darmowa i wystarczająca do obsługi \textit{AdventureMaker}. Podczas instalacji należy pamiętać o włączeniu pluginu obsługującego aplikacje pisane na system Android.
 
-Android SDK  należy poprać ze strony (https://developer.android.com) i zainstalować w dowolnej lokalizacji, którą należy następnie skonfigurować w \textit{IntelliJ IDEA}.
+Android SDK  należy poprać ze strony \url{https://developer.android.com} i zainstalować w dowolnej lokalizacji, którą należy następnie skonfigurować w \textit{IntelliJ IDEA}.
 
-Wtyczka AML jest odpowiedzialna za obsługę języka \textit{AdventureMaker}, w tym generowanie kodu Java na podstawie pliku ".aml". Do prawidłowego działania wtyczki potrzebne są wtyczki \textit{Xtext} i \textit{Xtend}, które można pobrać ze strony domowej (https://eclipse.org/Xtext/download.html).
-Wtyczkę należy pobrać ze strony (https://adrpieper.github.io/magisterka) i zainstalować ręcznie.
+Wtyczka AML jest odpowiedzialna za obsługę języka \textit{AdventureMaker}, w tym generowanie kodu Java na podstawie pliku ".aml". Do prawidłowego działania wtyczki potrzebne są wtyczki \textit{Xtext} i \textit{Xtend}, które można pobrać ze strony domowej (\url{https://eclipse.org/Xtext/download.html}).
+Wtyczkę należy pobrać z repozytorium projektu (\url{https://github.com/adrpieper/magisterka}) i zainstalować ręcznie.
 
 \section{Przygotowanie i kompilacja gry}
-Przed rozpoczęciem pracy nad własnym projektem należy pobrać repozytorium (https://github.com/adrpieper/magisterka). Znajdujący się w nim projekt ExampleAdventure, jest projektem przykładowej gry. Najłatwiejszym sposobem na jego wykorzystanie jest skopiowanie go i posługiwanie się nim jako szablonem. Należy pamiętać, aby zmienić id aplikacji w pliku \textit{Manifestu}.
+Przed rozpoczęciem pracy nad własną grą należy pobrać znajdujący się w repozytorium (\url{https://github.com/adrpieper/magisterka}) projekt przykładowej gry (ExampleAdventure). Najłatwiejszym sposobem na jego wykorzystanie jest skopiowanie go i posługiwanie się nim jako szablonem. Należy pamiętać, aby zmienić id aplikacji w pliku \textit{Manifestu}.
 
 Implementacja własnej gry sprowadza się do edycji pliku \textit{game.aml}. Należy w nim umieścić kod w języku \textit{AdventureMaker}. Kod musi  zawierać wszystkie niezbędne elementy gry. Pisząc ten kod można posłużyć się załączoną dokumentacją języka oraz wzorować się na kodzie przykładowej gry.
 
@@ -687,14 +688,35 @@ Gracz może osiągnąć cel obierając jedną z dwóch strategii. Na początku g
 
 \section{Uruchamianie gry}
 
-Grę można pobrać (https://adrpieper.github.io/magisterka) i zainstalować na dowolnym urządzeniu z systemem android w wersji powyżej 4.0, obsługującym komunikację NFC. Przed rozpoczęciem gry należy zaprogramować i umieścić znaczniki NFC zawierające tagi:
-\begin{itemize}
-	\item ExamClassRoom
-	\item PlainClassRoom
-\end{itemize}
-Znaczników "PlainClassRoom" można przygotować dowolną ilość i rozmieścić je w kilku salach uczelni. Znacznik "ExamClassRoom" powinien znajdować się w pojedynczej sali, w której odbywać się będą egzaminy dyplomowe.
+Grę można pobrać z repozytorium  (\url{https://github.com/adrpieper/magisterka}) i zainstalować na dowolnym urządzeniu z systemem \textit{Android} w wersji powyżej 4.0, obsługującym komunikację NFC. 
 
-Po takim przygotowaniu można już swobodnie rozpocząć rozgrywkę.
+Przed rozpoczęciem gry należy zaprogramować i umieścić znaczniki NFC zawierające tagi:
+\begin{itemize}
+	\item ClassRoom
+	\item MasterExamRoom
+\end{itemize}
+Znaczników \textit{ClassRoom} można przygotować dowolną ilość i rozmieścić je w kilku salach uczelni. Znacznik \textit{MasterExamRoom} powinien znajdować się w pojedynczej sali, w której odbywać się będą egzaminy dyplomowe.
+
+Znaczniki można zakupić w sklepie elektronicznym i zaprogramować jedną z wielu dostępnych do tego aplikacji na system \textit{Android}.
+
+Zdjęcie (rys. \ref{game:tag:example}) pokazuje przykład można oznaczyć miejsce ze znacznikiem w widocznych sposób.
+\begin{figure}[!tbh]
+	\centering
+	\includegraphics[width=0.8\hsize]{fig/tag_example}
+	\caption{Przykład umieszczenia znacznika NFC}
+	\source{Własne opracowanie}
+	\label{game:tag:example}
+\end{figure}
+
+Po przyłożeniu urządzenia do znacznika postać gracza przenosi się do sali egzaminacyjnej, a gracz powinien zobaczyć widoczny na zrzucie z ekranu (rys. \ref{game:tag:example}) komunikat.
+
+\begin{figure}[!tbh]
+	\centering
+	\includegraphics[width=0.4\hsize]{fig/exam_message}
+	\caption{Wiadomość wyświetlana przed podejściem do testu}
+	\source{Własne opracowanie}
+	\label{screen:exam:message}
+\end{figure}
 
 % załączniki (opcjonalnie):
 \appendix

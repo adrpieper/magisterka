@@ -115,34 +115,37 @@ opponent MasterDegreeExam{
 }
 
 adventure NotAStudent starts from {
-    Show "You are not a Student"
+    Show "Nie jesteś studentem"
 }
 
 adventure SimpleExamAdventure starts from {
-    Fight with SimpleExam
-    If win {
-        {
-            If you have more int than 30 {
-                {Show "You are ready for MasterDegreeExam" }
-                {Remove SimpleExamAdventure at ClassRoom}
-                {Add MasterExamAdventure at ClassRoom}
+    { Show "Witam na egzaminie." }
+    {
+        Fight with SimpleExam
+        If win {
+            {
+                If you have more int than 30 {
+                    {Show "You are ready for MasterDegreeExam" }
+                    {Remove SimpleExamAdventure at ClassRoom}
+                    {Add MasterExamAdventure at ClassRoom}
+                }
+                else {
+                    Show "You have to pass few more exams."
+                }
             }
-            else {
-                Show "You have to pass few more exams."
-            }
-        }
-        {
-            If you have more agi than 30 {
-                {Show "You was catched on cheating." }
-                {Add NotAStudent at ClassRoom}
-                {Remove SimpleExamAdventure at ClassRoom}
+            {
+                If you have more agi than 30 {
+                    {Show "You was catched on cheating." }
+                    {Add NotAStudent at ClassRoom}
+                    {Remove SimpleExamAdventure at ClassRoom}
+                }
             }
         }
     }
 }
 
 adventure MasterExamAdventure starts from {
-    {Show "Have you passed all exams?"}
+    {Show "Witam na egzaminie magistertkim."}
     {
         Fight with MasterDegreeExam
         If win {
