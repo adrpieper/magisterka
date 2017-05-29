@@ -1,6 +1,6 @@
 ## AdventureMaker - Język dla terenowych gier RGP
 
-AdventureMaker powstał, aby ułatwić tworzenie terenowych gier RPG na system Android. Głównych cel, to pozwolić na tworzenie gier osobom obytym z tematem gier RPG, które nie miały wcześniej do czynienia z programowaniem.
+AdventureMaker powstał, aby ułatwić tworzenie terenowych gier RPG na system Android. Główny cel języka to pozwolić na tworzenie gier osobom obytym z tematem gier RPG, które nie miały wcześniej do czynienia z programowaniem.
 
 Poniżej znajduje się przykładowa definicja przedmiotu. Powinna być ona zrozumiała, dla każdego, kto chodź raz grał w typowego RPG.
 
@@ -18,3 +18,7 @@ Projekt składa się z trzech część. Języka (*AdventureMakerLanguage*), szki
 ### Wtyczka AML
 
 W ramach projektu powstała specjalna wtyczka do IDE *IntelliJ Idea*. Wtyczka w postaci pliku *aml.zip* znajduje się w folderze *docs/files*.
+
+### Przykładowa gra
+
+W ramach projektu powstała przykładowa gra, której akcje odbywa się na uniwersytecie. Pliku *.apk* znajduje się w folderze *docs/files*.
