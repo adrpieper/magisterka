@@ -110,7 +110,7 @@ W świecie gier komputerowych, RPG osiągnęły niekwestionowany sukces. Wydanyc
 
 \section{Domain Specific Language (DSL)}
 
-Domain Specific Languages \cite{DSL:2017}, czyli języki domenowe, projektowane są z myślą o ściśle określonym i z reguły bardzo wąskim zastosowaniu. W odróżnieniu od języków programowania ogólnego przeznaczenia, języki domenowe nie nadają się do rozwiązania większości problemów informatycznych. Sprawdzają się natomiast świetnie w dziedzinie, do której zostały zaprojektowane Dzięki ograniczeniu się jedynie do wąskiej grupy zastosowań, możliwe jest tworzenie języków, które są zrozumiałe dla osób będących ekspertami w danej dziedzinie. Języki domenowe należą zazwyczaj do języków deklaratywnych, gdyż skupiają są wokół tego co, a nie w jaki sposób, chce osiągnąć programista.
+Domain Specific Languages \cite{DSL:2017}, czyli języki domenowe, projektowane są z myślą o ściśle określonym i z reguły bardzo wąskim zastosowaniu. W odróżnieniu od języków programowania ogólnego przeznaczenia, języki domenowe nie nadają się do rozwiązania większości problemów informatycznych. Sprawdzają się natomiast w dziedzinie, do której zostały zaprojektowane Dzięki ograniczeniu się jedynie do wąskiej grupy zastosowań, możliwe jest tworzenie języków, które są zrozumiałe dla osób będących ekspertami w danej dziedzinie. Języki domenowe należą zazwyczaj do języków deklaratywnych, gdyż skupiają są wokół tego co, a nie w jaki sposób, chce osiągnąć programista.
 
 Języki domenowe ze względu na sposób ich implementacji można podzielić na dwie grupy:
 \begin{itemize}
@@ -133,9 +133,7 @@ External DSL to język domenowy z prawdziwego zdarzenia. Język taki posiada śc
 
 \section{Silniki gier}
 
-Silniki gier są doskonałym przykładem korzyści jakie niesie ze sobą popularna zasada \textit{Clean Code} \cite{CleanCode:2005} - DRY (Don't Repeat Yourself), czyli nie powtarzaj się.
- 
-Ideą silnika jest implementacja wszystkich elementów wspólnych dla gier w jednym miejscu i udostępnienie programistom-użytkownikom przyjaznego interfejsu do implementacji mechaniki ich własnej gry. Programista jest oczywiście ograniczony przez możliwości silnika, ale w zamian uzyskuje narzędzie, które pozwala mu skupić się tylko na elementach istotnych dla jego gry.
+Silniki gier są dobrym przykładem korzyści jakie niesie ze sobą popularna zasada \textit{Clean Code} \cite{CleanCode:2005} - DRY (ang. Don't Repeat Yourself), czyli nie powtarzaj się. Ideą silnika jest implementacja wszystkich elementów wspólnych dla gier w jednym miejscu i udostępnienie programistom-użytkownikom przyjaznego interfejsu do implementacji mechaniki ich własnej gry. Programista jest oczywiście ograniczony przez możliwości silnika, ale w zamian uzyskuje narzędzie, które pozwala mu skupić się tylko na elementach istotnych dla jego gry.
 
 Z uwagi na fakt, że gry RPG są bardzo popularne, a jednocześnie do siebie bardzo podobne, naturalnym wydaje się stworzenie oprogramowania pozwalające na łatwe tworzenie takiego typu gier. Narzędzie \textit{RPG Maker} \cite{RPGMaker:2017:Doc} pozwala na proste wytwarzanie dwuwymiarowych gier RPG. Według twórców, tworzenie gier przy pomocy \textit{RPG Maker}, jest możliwe bez jakiejkolwiek wiedzy na temat programowania, jednocześnie dając bardzo duże możliwości doświadczonym użytkownikom. Oprogramowanie udostępnia przyjazne GUI, dzięki któremu można tworzyć w pełni funkcjonalne gry i to na wiele różnych platform. Jedynym, ale bardzo istotnym ograniczeniem jest ściśle narzucony gatunek gier. Jednak właśnie to ograniczenie pozwoliło na stworzenie narzędzia jednocześnie tak prostego i funkcjonalnego. 
 
@@ -424,7 +422,7 @@ IDE \textit{IntelliJ IDEA} można pobrać ze strony producenta - JetBrains (\url
 
 Android SDK  należy poprać ze strony \url{https://developer.android.com} i zainstalować w dowolnej lokalizacji, którą należy następnie skonfigurować w \textit{IntelliJ IDEA}.
 
-Wtyczka AML jest odpowiedzialna za obsługę języka \textit{AdventureMaker}, w tym generowanie kodu Java na podstawie pliku ".aml". Do prawidłowego działania wtyczki potrzebne są wtyczki \textit{Xtext} i \textit{Xtend}, które można pobrać ze strony domowej (\url{https://eclipse.org/Xtext/download.html}).
+Wtyczka AML jest odpowiedzialna za obsługę języka \textit{AdventureMaker}, w tym generowanie kodu Java na podstawie pliku \textit{game.aml}. Do prawidłowego działania wtyczki potrzebne są wtyczki \textit{Xtext} i \textit{Xtend}, które można pobrać ze strony domowej (\url{https://eclipse.org/Xtext/download.html}).
 Wtyczkę należy pobrać z repozytorium projektu (\url{https://github.com/adrpieper/magisterka}) i zainstalować ręcznie.
 
 \section{Przygotowanie i kompilacja gry}
