@@ -43,7 +43,7 @@
   
   W projekcie zostały wykorzystane popularne narzędzia i biblioteki, z których najważniejsze to Gradle\cite{Gradle:2017:Doc}, JUnit\cite{JUnit:2017:Doc} i Dagger 2 \cite{Dagger2:2017:Doc}. Kod został napisany zgodnie z zasadami Clean Code \cite{CleanCode:2005}.
   
-  Praca składa się z dwóch części: implementacji języka AdventureMaker oraz szablonu aplikacji, wraz z przykładowym kodem gry. Całość kodu dostępna jest w publicznym repozytorium GIT (pod adresem \url{https://github.com/adrpieper/magisterka}). Zostały tam również udostępnione aplikacja oraz wtyczka do IDE IntelliJ IDEA.
+  Praca składa się z dwóch części: implementacji języka AdventureMaker oraz szablonu aplikacji, wraz z przykładowym kodem gry. Całość kodu dostępna jest w publicznym repozytorium Git (pod adresem \url{https://github.com/adrpieper/magisterka}). Zostały tam również udostępnione aplikacja oraz wtyczka do IDE IntelliJ IDEA.
 \end{abstract}
 
 % słowa kluczowe
@@ -190,9 +190,9 @@ Celem gry jest rozwój kierowanej przez gracza postaci. Jest on możliwe dzięki
 
 Rozgrywkę można podzielić na 3 etapy:
 \begin{itemize}
-	\item Wybór Klasy postaci
-	\item Tryb Zwiedzania
-	\item Tryb Przygody 
+	\item Wybór Klasy postaci.
+	\item Tryb zwiedzania,
+	\item Tryb przygody.
 \end{itemize}
 \section{Wybór Klasy postaci}
 
@@ -202,7 +202,7 @@ Na \textit{Statystyki} postaci składają się  jego \textit{Siła}, \textit{Int
 
 \textit{Drzewo umiejętności} zawiera informację na temat dostępnych dla danej \textit{Klasy postaci} \textit{Umiejętności}. Gracz może korzystać z \textit{Umiejętności} podczas walki, ale dopiero po ich odblokowaniu. Aby odblokować daną \textit{Umiejętność} musi posiadać wszystkie będące jej przodkami w drzewie \textit{Umiejętności}. Za każdą nową odblokowaną umiejętność gracz musi zapłacić \textit{Punktami umiejętności}, które zdobywa wraz z nowym \textit{Poziomem doświadczenia}.
 
-\section{Tryb Zwiedzania}
+\section{Tryb zwiedzania}
 
 Gracz znajduje się w tym trybie od momentu wyboru postaci przez cały czas, w którym gracz porusza się w poszukiwaniu \textit{Przygód}. 
 
@@ -271,22 +271,22 @@ Projekt to standardowa aplikacja androidowa wykorzystująca AndroidSDK rozbudowa
 Architektura projektu jest dość rozbudowana i można z niej wydzielić następujące moduły:
 
 \begin{itemize}
-	\item Standardowy Kod Aplikacji,
+	\item Standardowy kod aplikacji,
 	\item Zasoby,
 	\item Plik manifestu,
 	\item Pliki Gradle,
 	\item Testy,
 	\item Wewnętrzy DSL,
 	\item Plik game.aml,
-	\item Wygenerowany Kod Implementujący Zasady Gry,
-	\item Testowy Kod Implementujący Zasady Gry.
+	\item Wygenerowany kod implementujący zasady gry,
+	\item Testowy kod implementujący zasady gry.
 \end{itemize}
 
 Pierwszych pięć elementów jest typowych dla aplikacji Android, natomiast pozostałe są specyficzne i wynikają z zastosowania języka AdventureMaker.
 
-\subsection*{Standardowy Kod Aplikacji} 
+\subsection*{Standardowy kod aplikacji} 
 
-Jest to bardzo rozbudowana, ale i najbardziej tradycyjna i oczywista część aplikacji. W jego skład wchodzą pakiety \textit{edu.ug.inf.am.*} umieszczone w folderze \textit{app/src/main/java}. Moduł jest odpowiedzialny za sposób działania i wygląd aplikacji. Korzysta z Kodu Implementującego Zasady Gry oraz Zasobów. Została w nim umieszczona logika związana z systemem Android np. komunikacja z czujnikami NFC i GPS, czy obsługa interfejsu użytkownika. Dodatkowo kod implementuje elementy stałe dla każdej gry takie jak mechanizm walki i rozwoju postaci.
+Jest to bardzo rozbudowana, ale i najbardziej tradycyjna i oczywista część aplikacji. W jego skład wchodzą pakiety \textit{edu.ug.inf.am.*} umieszczone w folderze \textit{app/src/main/java}. Moduł jest odpowiedzialny za sposób działania i wygląd aplikacji. Korzysta z \textit{Kodu implementującego zasady gry} oraz zasobów. Została w nim umieszczona logika związana z systemem Android np. komunikacja z czujnikami NFC i GPS, czy obsługa interfejsu użytkownika. Dodatkowo kod implementuje elementy stałe dla każdej gry takie jak mechanizm walki i rozwoju postaci.
 
 Kod modułu został podzielony na warstwy i komponenty, co zostało odzwierciedlone w strukturze pakietów. 
 Komponenty to zbiory klas realizujące wspólne zadanie. Ich struktura jest hierarchiczna, tzn. w skład konkretnego komponentu wchodzą kolejne, odpowiedzialne za zadania bardziej sprecyzowane. Kompletną strukturę komponentów aplikacji przedstawia drzewo \ref{modules:tree}.
@@ -321,7 +321,7 @@ Logika to warstwa odpowiadająca za wszelkie operacje wykonywane na danych, któ
 Pakiet \textit{dagger} to miejsce, w którym integrowane są wszystkie klasy należące do danego komponentu. W projekcie wykorzystano technikę wstrzykiwania zależności (DI), która pozwala na usunięcie bezpośrednich zależności pomiędzy klasami, aż do momentu ich integracji. Za wstrzykiwanie zależności w moim projekcie odpowiedzialna jest biblioteka Dagger 2, stąd nazwa pakietu w którym to zadanie jest realizowane.
 
 \subsection*{Zasoby}
-Zasoby zostały umieszczone w folderze \textit{app/scr/main/res}. Tutaj definiuje się elementy takie jak layouty, ikonki, animacje itp. Większość zasobów stanowią pliki xml. Dostęp do zasobów możliwy jest z poziomu kodu aplikacji poprzez klasę R. Klasa ta jest generowana automatycznie, a w jej skład wchodzi zestaw stałych, będących identyfikatorami odpowiednich zasobów. AndroidSDK posiada wbudowany system zarządzania zasobami, który pozwala na przygotowanie konkretnego zasobu w kilku wersjach (np. różny layout dla kilku wielkości ekranów). Tak przygotowany zasób jest dostępny pod pojedynczym numerem ID, a o wybór odpowiedniej wersji dba system.
+Zasoby zostały umieszczone w folderze \textit{app/scr/main/res}. Tutaj definiuje się elementy takie jak layouty, ikonki, animacje itp. Większość zasobów stanowią pliki xml. Dostęp do zasobów możliwy jest z poziomu kodu aplikacji poprzez klasę R. Klasa ta jest generowana automatycznie, a w jej skład wchodzi zestaw stałych, będących identyfikatorami odpowiednich zasobów. AndroidSDK posiada wbudowany system zarządzania zasobami, który pozwala na przygotowanie konkretnego zasobu w kilku wersjach (np. różny layout dla kilku wielkości ekranów). Tak przygotowany zasób jest dostępny pod pojedynczym numerem \textit{id}, a o wybór odpowiedniej wersji dba system.
 
 Większość zasobów stanowią layouty, z których znaczna część wykorzystuje Data Binding. Mechanizm pozwala opisać logikę odpowiedzialną za wyświetlanie danych w sposób deklaratywny przy pomocy języka \textit{xml}. AndroidSDK generuje na jego podstawie specjalny kod, który będzie realizował to zadanie. 
 
@@ -338,18 +338,18 @@ Moduł testów odpowiedzialny jest za sprawdzenie, czy kod aplikacji działa pra
 
 W projekcie wykorzystałem zarówno wewnętrzny, jak i zewnętrzny język domenowy. Zastosowanie zewnętrznego DSL pozwala twórcy gry na opisanie jej świata w sposób przyjazny dla osoby znającej tematykę gier RPG.  Wewnętrzny DSL jest odpowiedzialny za dostarczenie wygodnego API do opisu zasad gry w języku Java, co ma na celu uproszczenie implementacji generatorów kodu.
 
-Technicznie rzecz biorąc, moduł stanowi interfejs do komunikacji pomiędzy modułami Standardowy Kod Aplikacji a Kodem Implementującym Zasady Gry. Zarówno dostarczone API, jak i implementacja modułu zostały zrealizowane w języku Java. Dlatego też nazywam go wewnętrznym językiem domenowym. W skład modułu wchodzą wszystkie klasy pakietów \textit{pl.aml.*}.
+Technicznie rzecz biorąc, moduł stanowi interfejs do komunikacji pomiędzy modułami \textit{Standardowy Kod Aplikacji} a \textit{Kodem implementującym zasady gry}. Zarówno dostarczone API, jak i implementacja modułu zostały zrealizowane w języku Java. Dlatego też nazywam go wewnętrznym językiem domenowym. W skład modułu wchodzą wszystkie klasy pakietów \textit{pl.aml.*}.
 
-Istotną częścią tego modułu są klasy pozwalające na wygodne budowanie obiektów (tzw. \textit{Buildery}\footnote{Builder -- Budowniczy  -- wzorzec projektowy  \url{https://pl.wikipedia.org/wiki/Budowniczy_(wzorzec_projektowy)}}) oraz metody statyczne tworzące instancje tych klas. Różnicę pomiędzy kodem pisanym z i bez wykorzystania wewnętrznego DSL zaprezentowałem w dodatku A.
+Istotną częścią tego modułu są klasy pozwalające na wygodne budowanie obiektów (tzw. Buildery\footnote{Builder -- Budowniczy  -- wzorzec projektowy  \url{https://pl.wikipedia.org/wiki/Budowniczy_(wzorzec_projektowy)}}) oraz metody statyczne tworzące instancje tych klas. Różnicę pomiędzy kodem pisanym z i bez wykorzystania wewnętrznego DSL zaprezentowałem w dodatku A.
 
 \subsection*{Plik game.aml}
 Plik znajduje się w folderze \textit{app/src/main/java}. Jest kluczowym elementem całego projektu, bo to właśnie w nim definiuje się w języku AdventureMaker elementy związane z konkretną grą.
 
-\subsection*{Wygenerowany Kod Implementujący Zasady Gry}
-Ten moduł znajduje się w folderze \textit{app/aml-src} i zawiera kod wygenerowany automatycznie na podstawie pliku \textit{game.aml}. Zawarty w nim kod implementuje szczegóły dotyczące konkretnej gry. Wykorzystuje API dostarczone przez Wewnętrzny Język DSL. Wygenerowany tu kod użyty jest w module Kod Aplikacji.
+\subsection*{Wygenerowany kod implementujący zasady gry}
+Ten moduł znajduje się w folderze \textit{app/aml-src} i zawiera kod wygenerowany automatycznie na podstawie pliku \textit{game.aml}. Zawarty w nim kod implementuje szczegóły dotyczące konkretnej gry. Wykorzystuje API dostarczone przez \textit{Wewnętrzny DSL}. Wygenerowany tu kod użyty jest w module Kod Aplikacji.
 
-\subsection*{Testowy Kod Implementujący Zasady Gry}
-Ten moduł zawiera kod analogiczny do Wygenerowanego Kodu Implementującego Zasady Gry, jest jednak napisany ręcznie. Kod został umieszczony w folderze \textit{app/test-src}. Moduł zastępuje kod generowany podczas testowania i rozwijania aplikacji i nie jest wykorzystywany w produkcie finalnym.
+\subsection*{Testowy kod implementujący zasady gry}
+Ten moduł zawiera kod analogiczny do \textit{Wygenerowanego kodu implementującego zasady gry}, jest jednak napisany ręcznie. Kod został umieszczony w folderze \textit{app/test-src}. Moduł zastępuje kod generowany podczas testowania i rozwijania aplikacji i nie jest wykorzystywany w produkcie finalnym.
 
 \chapter{Testy} 
 
@@ -361,16 +361,16 @@ Testy automatyczne są najbardziej praktyczne i wiarygodne. Niestety z przyczyn 
 \subsection{Struktura testów}
 Podczas  automatycznych testów jednostkowych testowane są z osobna działania poszczególnych funkcji w oderwaniu od reszty systemu. Każdy test został podzielony na 3 sekcje, zawierające kod odpowiedniego typu:
 \begin{itemize}
-\item \textit{Given}
-\item \textit{When}
-\item \textit{Then}
+\item Given
+\item When
+\item Then
 \end{itemize}
 
-W sekcji \textit{Given} został umieszczony kod implementujący warunki początkowe. Są to przede wszystkim linie kodu mockującego metody klas zależności klasy testowanej. Mogą to być też wywołania metod dostarczających jakieś dane. 
+W sekcji Given został umieszczony kod implementujący warunki początkowe. Są to przede wszystkim linie kodu mockującego metody klas zależności klasy testowanej. Mogą to być też wywołania metod dostarczających jakieś dane. 
 
-Sekcja \textit{When} składa się z pojedynczej linii. Jest to wywołanie testowanej metody na instancji testowanej klasy.
+Sekcja When składa się z pojedynczej linii. Jest to wywołanie testowanej metody na instancji testowanej klasy.
 
-Sekcja \textit{Then} odpowiedzialna jest za sprawdzenie, czy metoda zachowała się w oczekiwany sposób. Zazwyczaj jest to kod składający się z kilku linii zawierających asercje. Asercje służą sprawdzeniu czy, ile razy i z jakimi parametrami zostały wywołane metody klas-zależności. Jeżeli funkcja zwraca jakiś wynik, za pomocą asercji testuje się, czy pokrywa się on z oczekiwanym.
+Sekcja Then odpowiedzialna jest za sprawdzenie, czy metoda zachowała się w oczekiwany sposób. Zazwyczaj jest to kod składający się z kilku linii zawierających asercje. Asercje służą sprawdzeniu czy, ile razy i z jakimi parametrami zostały wywołane metody klas-zależności. Jeżeli funkcja zwraca jakiś wynik, za pomocą asercji testuje się, czy pokrywa się on z oczekiwanym.
 
 \subsection{Wyniki testów}
 Testy jednostkowe zostały uruchomione przy pomocy narzędzia Gradle \cite{Gradle:2017:Doc}. Zestawienie wyników (rys. \ref{tests:results}) pokazuje, że wszystkie testy przeszły pomyślnie.
@@ -416,7 +416,7 @@ Pisanie własnej gry przy użyciu AdventureMaker wymaga przygotowania środowisk
 
 Aby móc korzystać z AdventureMaker należy pobrać i zainstalować IDE IntelliJ IDEA, JRE\footnote{Java Runtime Enviroment -- środowisko uruchomieniowe Java}, JDK\footnote{Java Development Kit -- standardowy zestaw narzędzi wykorzystywanych do tworzenia aplikacji w technologii Java} i Android SDK oraz wtyczkę AML.
 
-JDK o raz JRE należy pobrać ze strony \textit{Oracle} (\url{https://www.java.com}) w wersji 1.8 i zainstalować zgodnie z instrukcją producenta.
+JDK o raz JRE należy pobrać ze strony Oracle (\url{https://www.java.com}) w wersji 1.8 i zainstalować zgodnie z instrukcją producenta.
 
 IDE IntelliJ IDEA można pobrać ze strony producenta -- JetBrains (\url{https://www.jetbrains.com/idea}). Wersja community jest darmowa i wystarczająca do obsługi AdventureMaker. Podczas instalacji należy pamiętać o włączeniu pluginu obsługującego aplikacje pisane na system Android.
 
@@ -426,7 +426,7 @@ Wtyczka AML jest odpowiedzialna za obsługę języka AdventureMaker, w tym gener
 Wtyczkę należy pobrać z repozytorium projektu (\url{https://github.com/adrpieper/magisterka}) i zainstalować ręcznie.
 
 \section{Przygotowanie i kompilacja gry}
-Przed rozpoczęciem pracy nad własną grą należy pobrać znajdujący się w repozytorium (\url{https://github.com/adrpieper/magisterka}) projekt przykładowej gry (ExampleAdventure). Najłatwiejszym sposobem na jego wykorzystanie jest skopiowanie go i posługiwanie się nim jako szablonem. Należy pamiętać, aby zmienić \textit{ID} aplikacji w pliku \textit{Manifestu}.
+Przed rozpoczęciem pracy nad własną grą należy pobrać znajdujący się w repozytorium (\url{https://github.com/adrpieper/magisterka}) projekt przykładowej gry (ExampleAdventure). Najłatwiejszym sposobem na jego wykorzystanie jest skopiowanie go i posługiwanie się nim jako szablonem. Należy pamiętać, aby zmienić \textit{id} aplikacji w pliku \textit{Manifestu}.
 
 Implementacja własnej gry sprowadza się do edycji pliku \textit{game.aml}. Należy w nim umieścić kod w języku AdventureMaker. Kod musi  zawierać wszystkie niezbędne elementy gry. Pisząc ten kod można posłużyć się załączoną dokumentacją języka oraz wzorować się na kodzie przykładowej gry.
 
@@ -480,10 +480,10 @@ Na początku może odblokować \textit{Umiejętność} \textit{Fireball} lub \te
 \section{Typy przedmiotów}
 Definicja \textit{Przedmiotu} składa się z nazwy, kategorii oraz wartości \textit{Premii do statystyk}. Do wyboru mamy następujące kategorie (w nawiasie podano odpowiadające kategorii słówko kluczowe):
 \begin{itemize}
-	\item Broń (\textit{weapon}),
-	\item Hełm (\textit{helmet}),
-	\item Zbroja (\textit{armor}),
-	\item Rękawice (\textit{gloves}).
+	\item \textit{Broń} (\textit{weapon}),
+	\item \textit{Hełm} (\textit{helmet}),
+	\item \textit{Zbroja} (\textit{armor}),
+	\item \textit{Rękawice} (\textit{gloves}).
 \end{itemize}
 Wartości premii umieszczone są w nawiasach klamrowych i składają się z wartości liczbowej poprzedzonej znakiem plus oraz słówka kluczowego \textit{agi}, \textit{str} lub \textit{int} odnoszącego się do odpowiedniego typu \textit{Statystyk}. W przypadku braku zdefiniowania, któreś z \textit{Premii}, wynosi ona 0.
 
@@ -550,7 +550,7 @@ Przed przejściem do przykładowej definicji \textit{Przygody}, należy zapozna�
 
 Poniżej znajduje się przykład kodu wyświetlającego komunikat ,,Hello World!''.
 \begin{minted}{text}
-Show "Hello World!"
+{ Show "Hello World!" }
 \end{minted}
 
 \subsection*{Walka}
@@ -564,12 +564,12 @@ Poniżej znajduje się przykładowa definicja \textit{Walki}:
 \begin{minted}{text}
 Fight with Troll, Orc
 If win {
-   {Remove VillageInDanger at Forest}
-   {Get MagicSword}
+  { Remove VillageInDanger at Forest }
+  { Get MagicSword }
 }
 If lost {
-   {Remove VillageInDanger at Forest}
-   {Show "Unfortunately, you have not saved the villagers"}
+  { Remove VillageInDanger at Forest }
+  { Show "Unfortunately, you have not saved the villagers" }
 }
 \end{minted}
 
@@ -593,9 +593,9 @@ Pierwsze \textit{Wyrażenie} sprawdza, czy postać ma nie więcej niż 30 punkt�
 Poniżej znajduje się pełny przykład definicji \textit{Zdarzenia warunkowego}: 
 \begin{minted}{text}
 If you have more str than 30 
-   {Fight with Orc}
+  { Fight with Orc }
 else 
-   {Show "The fight will not be necessary"}
+  { Show "The fight will not be necessary" }
 \end{minted}
 
 Z powyższej definicji wynika, że postać o sile większej niż 30 będzie musiała walczyć z przeciwnikiem -- \textit{Orc}, natomiast gracz kontrolujący postać słabszą zobaczy komunikat: ,,The fight will not be necessary''.
@@ -630,9 +630,9 @@ Pierwsze dwie linie dodają odpowiednio \textit{Przygody} \textit{Bandits} i \te
 Poniższy przykład pokazuje blok składający się z 3 zdarzeń.
 \begin{minted}{text}
 {
-   {Remove VillageInDanger at Forest}
-   {Get MagicSword}
-   {Show "Unfortunately, you have not saved the villagers"}
+  { Remove VillageInDanger at Forest }
+  { Get MagicSword }
+  { Show "Unfortunately, you have not saved the villagers" }
 }
 \end{minted}
 
@@ -648,12 +648,12 @@ adventure MysteriusManAd starts from {
       or more agi than 30 {
         Fight with MysteriusMan
         If win {
-          {Show "Great. Now, you are ready for fight with Dragon"}
-          {Add BigDragon at Hills}
-          {Remove MysteriusManAd at OldHause}
+          { Show "Great. Now, you are ready for fight with Dragon" }
+          { Add BigDragon at Hills }
+          { Remove MysteriusManAd at OldHause }
         }
       }
-      else {Show "I don't think so"}
+      else { Show "I don't think so" }
     }
 }
 \end{minted}
@@ -668,8 +668,8 @@ Poniższy przykład zawiera definicje składającą się z dwóch Przygód \text
 
 \begin{minted}{text}
 adventure on start {
-MysteriusMan at OldHouse
-Bandits at Forest
+  MysteriusMan at OldHouse
+  Bandits at Forest
 }
 \end{minted}
 
@@ -747,9 +747,9 @@ characterClass("Knight")
       BASIC_HIT,
       node(POISON_HIT),
       node(SUPER_POISON_HIT)
-  ),
-  node(POISON_HIT)
-)
+    ),
+    node(POISON_HIT)
+  )
 \end{minted}
 
 
