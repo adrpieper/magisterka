@@ -1,8 +1,8 @@
-## AdventureMaker - Język dla terenowych gier RGP
+## AdventureMaker - Język dla terenowych gier RPG
 
-AdventureMaker powstał, aby ułatwić tworzenie terenowych gier RPG na system Android. Główny cel języka to pozwolić na tworzenie gier osobom obytym z tematem gier RPG, które nie miały wcześniej do czynienia z programowaniem.
+*AdventureMaker* powstał, aby ułatwić tworzenie terenowych gier RPG na system Android. Główny cel języka to pozwolenie na tworzenie gier osobom obytym z tematem gier RPG, które nie miały wcześniej do czynienia z programowaniem.
 
-Poniżej znajduje się przykładowa definicja przedmiotu. Powinna być ona zrozumiała, dla każdego, kto chodź raz grał w typowego RPG.
+Poniżej znajduje się przykładowa definicja przedmiotu. Powinna być ona zrozumiała, dla każdego, kto choć raz grał w typową grę RPG.
 
 ```
 item Sword (weapon) {
@@ -13,12 +13,12 @@ item Sword (weapon) {
 
 ### Struktura projektu
 
-Projekt składa się z trzech część. Języka (*AdventureMakerLanguage*), szkieletu aplikacji (*ExampleAdventure*) i pracy magisterskiej (*tex/magisterka.pdf*).
+Projekt składa się z trzech część: języka (*AdventureMakerLanguage*), szkieletu aplikacji (*ExampleAdventure*) i pracy magisterskiej (*tex/magisterka.pdf*).
 
 ### Wtyczka AML
 
-W ramach projektu powstała specjalna wtyczka do IDE *IntelliJ Idea*. Wtyczka w postaci pliku *aml.zip* znajduje się w folderze *docs/files*.
+W ramach projektu powstała specjalna wtyczka do IDE *IntelliJ IDEA*. Wtyczka w postaci pliku *aml.zip* znajduje się w folderze *docs/files*.
 
 ### Przykładowa gra
 
-W ramach projektu powstała przykładowa gra, której akcje odbywa się na uniwersytecie. Pliku *.apk* znajduje się w folderze *docs/files*.
+Przykładowa gra, której akcja odbywa się na uniwersytecie, znajduje się w postaci pliku *.apk* w folderze *docs/files*.
