@@ -22,7 +22,7 @@
 \nralbumu {243\,677}
 \email    {adrpieper@gmail.com.pl}
 
-\title    {AdventureMaker - język dla terenowych gier RPG}
+\title    {AdventureMaker -- język dla terenowych gier RPG}
 \date     {2017}
 \miejsce  {Gdańsk}
 
@@ -37,17 +37,17 @@
 
 % streszczenie
 \begin{abstract}
-  W ramach pracy został zaprojektowany i zaimplementowany \textit{AdventureMaker} - DSL (ang. domain-specific language) służący do opisu terenowych gier RPG (ang. role-playing Game). Implementacja wykorzystuje technologię \textit{Xtext} \cite{Xtext:2017:Doc}, która umożliwiła stworzenie podstawowej infrastruktury języka zawierającej między innymi linker i kompiler. Dodatkowo powstały język zintegrowany jest z IDE \textit{IntelliJ IDEA}\footnote{Zintegrowane środowisko programistyczne firmy JetBrains. \url{https://www.jetbrains.com/idea/}}, co pozwala na podświetlanie, automatyczne uzupełnianie i sprawdzanie składni.
+  W ramach pracy został zaprojektowany i zaimplementowany AdventureMaker -- DSL (ang. \textit{domain-specific language}) służący do opisu terenowych gier RPG (ang. \textit{role-playing game}). Implementacja wykorzystuje technologię Xtext \cite{Xtext:2017:Doc}, która umożliwiła stworzenie podstawowej infrastruktury języka zawierającej między innymi linker i kompiler. Dodatkowo powstały język zintegrowany jest z IDE IntelliJ IDEA\footnote{Zintegrowane środowisko programistyczne firmy JetBrains. \url{https://www.jetbrains.com/idea/}}, co pozwala na podświetlanie, automatyczne uzupełnianie i sprawdzanie składni.
   
-  Wygenerowane przez \textit{AdventureMaker} gry działają na platformie \textit{Android} \cite{AndroidSDK:2017:Doc}. W celu lokalizowania graczy zarówno w pomieszczeniach, jak i na otwartym terenie, wykorzystują technologię NFC\footnote{Near Field Communication - wysokoczęstotliwościowy standard komunikacji krótkiego zasięgu. \url{https://pl.wikipedia.org/wiki/Near_Field_Communication}} oraz GPS (ang. Global Positioning System).
+  Wygenerowane przez AdventureMaker gry działają na platformie Android \cite{AndroidSDK:2017:Doc}. W celu lokalizowania graczy zarówno w pomieszczeniach, jak i na otwartym terenie, wykorzystują technologię NFC\footnote{Near Field Communication -- wysokoczęstotliwościowy standard komunikacji krótkiego zasięgu. \url{https://pl.wikipedia.org/wiki/Near_Field_Communication}} oraz GPS (ang. Global Positioning System).
   
-  W projekcie zostały wykorzystane popularne narzędzia i biblioteki, z których najważniejsze to \textit{Gradle}\cite{Gradle:2017:Doc}, \textit{JUnit}\cite{JUnit:2017:Doc} i \textit{Dagger 2} \cite{Dagger2:2017:Doc}. Kod został napisany zgodnie z zasadami Clean Code \cite{CleanCode:2005}.
+  W projekcie zostały wykorzystane popularne narzędzia i biblioteki, z których najważniejsze to Gradle\cite{Gradle:2017:Doc}, JUnit\cite{JUnit:2017:Doc} i Dagger 2 \cite{Dagger2:2017:Doc}. Kod został napisany zgodnie z zasadami Clean Code \cite{CleanCode:2005}.
   
-  Praca składa się z dwóch części: implementacji języka \textit{AdventureMaker} oraz szablonu aplikacji, wraz z przykładowym kodem gry. Całość kodu dostępna jest w publicznym repozytorium GIT (pod adresem \url{https://github.com/adrpieper/magisterka}). Zostały tam również udostępnione aplikacja oraz wtyczka do \textit{IDE IntelliJ IDEA}.
+  Praca składa się z dwóch części: implementacji języka AdventureMaker oraz szablonu aplikacji, wraz z przykładowym kodem gry. Całość kodu dostępna jest w publicznym repozytorium GIT (pod adresem \url{https://github.com/adrpieper/magisterka}). Zostały tam również udostępnione aplikacja oraz wtyczka do IDE IntelliJ IDEA.
 \end{abstract}
 
 % słowa kluczowe
-\keywords{DSL, Xtext, Location-Based Game, RPG, Android}
+\keywords{DSL, Xtext, location-based game, RPG, Android}
 
 % tytuł i spis treści
 \maketitle
@@ -55,32 +55,32 @@
 % wstęp
 \introduction
 
-Sukces niedawno wydanej gry \textit{Pokemon GO} pokazał, że pomysł by gracz musiał poruszać się po fizycznym świecie jest strzałem w dziesiątkę. Gry tego typu znajdują rzesze odbiorców, czego nie dało się nie zauważyć, gdyż grupy poszukiwaczy tytułowych pokemonów, spotkać można było niemal na każdym kroku. Gry terenowe, czyli aplikacje rozrywkowe, bazujące głównie na fizycznej pozycji gracza, stały się nowym trendem w dziedzinie rozrywki elektronicznej.
+Sukces niedawno wydanej gry Pokemon GO pokazał, że pomysł by gracz musiał poruszać się po fizycznym świecie jest strzałem w dziesiątkę. Gry tego typu znajdują rzesze odbiorców, czego nie dało się nie zauważyć, gdyż grupy poszukiwaczy tytułowych pokemonów, spotkać można było niemal na każdym kroku. Gry terenowe, czyli aplikacje rozrywkowe, bazujące głównie na fizycznej pozycji gracza, stały się nowym trendem w dziedzinie rozrywki elektronicznej.
 
-Pomimo sukcesu \textit{Pokemon GO}, gry terenowe nadal stanowią nieznaczną część rynku rozrywki elektronicznej. Moim zdaniem niewielka ilość aplikacji tego typu, wynika z braku odpowiednich narzędzi do ich tworzenia. Napisanie podobnych gier w tradycyjny sposób jest dość skomplikowane, a przez to kosztowne. Wykorzystanie technologii typu GPS, czy NFC wymaga od programisty wiedzy i znajomości specjalistycznego API oraz sprawia, że testowanie aplikacji jest utrudnione.
+Pomimo sukcesu Pokemon GO, gry terenowe nadal stanowią nieznaczną część rynku rozrywki elektronicznej. Moim zdaniem niewielka ilość aplikacji tego typu, wynika z braku odpowiednich narzędzi do ich tworzenia. Napisanie podobnych gier w tradycyjny sposób jest dość skomplikowane, a przez to kosztowne. Wykorzystanie technologii typu GPS, czy NFC wymaga od programisty wiedzy i znajomości specjalistycznego API oraz sprawia, że testowanie aplikacji jest utrudnione.
 
-Zauważyłem, że spora część elementów gier terenowych jest wspólna, szczególnie jeśli ograniczyć się jedynie do gier RPG. Pomyślałem, że skoro gry tego typu opierają się na podobnych zasadach, powinny one zostać zdefiniowane tylko raz, w myśl zasady programowania - ,,nie powtarzaj się'' \cite{CleanCode:2005}. W ten sposób można by odciążyć projektanta gry od szczegółów implementacyjnych, pozwalając mu skupić się w całości na tym co ważne, czyli zasadach i scenariuszu rozgrywki. Stwierdziłem, że napisanie tego typu gry powinno sprowadzać się jedynie do zdefiniowania miejsc, postaci oraz zasad obowiązujących w wirtualnym świecie. Postanowiłem więc sprawdzić, czy osiągnięcie takiego ideału jest w ogóle możliwe. Okazuje się, że tak, o ile tylko zastosuje się do tego odpowiednie podejście i narzędzia.
+Zauważyłem, że spora część elementów gier terenowych jest wspólna, szczególnie jeśli ograniczyć się jedynie do gier RPG. Pomyślałem, że skoro gry tego typu opierają się na podobnych zasadach, powinny one zostać zdefiniowane tylko raz, w myśl zasady programowania: ,,nie powtarzaj się'' \cite{CleanCode:2005}. W ten sposób można by odciążyć projektanta gry od szczegółów implementacyjnych, pozwalając mu skupić się w całości na tym co ważne, czyli zasadach i scenariuszu rozgrywki. Stwierdziłem, że napisanie tego typu gry powinno sprowadzać się jedynie do zdefiniowania miejsc, postaci oraz zasad obowiązujących w wirtualnym świecie. Postanowiłem więc sprawdzić, czy osiągnięcie takiego ideału jest w ogóle możliwe. Okazuje się, że tak, o ile tylko zastosuje się do tego odpowiednie podejście i narzędzia.
 
 Sam pomysł umieszczenia warstwy wspólnej dla wielu aplikacji nie jest nowy. Istnieje wiele takich rozwiązań. Warstwę tą nazywa się frameworkiem lub silnikiem gry. Większość powstających obecnie gier osadzonych jest właśnie na tego typu rdzeniu. Brak jest natomiast narzędzi wyspecjalizowanych do tworzenia konkretnego typu gier, jakimi są terenowe gry RPG.
 
-Moim celem nie było stworzenie niesamowicie grywalnej, ani popularnej gry. Chciałem pokazać, na ciekawym moim zdaniem przykładzie gier terenowych, jak można rozwiązać problem ,,wynajdywania koła na nowo'' wykorzystując własny język domenowy. Ponieważ wszystkie niezbędne w grze elementy są już zaimplementowane, \textit{AdventureMaker} pozwala na napisanie gry przez osobę niebędącą programistą. Składnia języka jest przyjazna dla osoby zaznajomionej z tematyką gier RPG i nie wymaga znajomości żadnego języka programowania ogólnego przeznaczenia ani dodatkowych technologii.
+Moim celem nie było stworzenie niesamowicie grywalnej, ani popularnej gry. Chciałem pokazać, na ciekawym moim zdaniem przykładzie gier terenowych, jak można rozwiązać problem ,,wynajdywania koła na nowo'' wykorzystując własny język domenowy. Ponieważ wszystkie niezbędne w grze elementy są już zaimplementowane, AdventureMaker pozwala na napisanie gry przez osobę niebędącą programistą. Składnia języka jest przyjazna dla osoby zaznajomionej z tematyką gier RPG i nie wymaga znajomości żadnego języka programowania ogólnego przeznaczenia ani dodatkowych technologii.
 
-Aby osiągnąć ten cel skorzystałem z popularnych i sprawdzonych narzędzi i rozwiązań. Do implementacji samego języka użyłem frameworka \textit{Xtext} oraz języka \textit{Xtend} \cite{Xtend:2017:Doc}. Framework dostarcza na podstawie gramatyki języka całą infrastrukturę języka zawierającą elementy takie jak: parser, linker, typechecker, compiler. Dodatkowo pozwala na integrację zaprojektowanego języka z popularnymi IDE: \textit{Eclipse} oraz \textit{IntelliJ IDEA}. 
+Aby osiągnąć ten cel skorzystałem z popularnych i sprawdzonych narzędzi i rozwiązań. Do implementacji samego języka użyłem frameworka Xtext oraz języka Xtend \cite{Xtend:2017:Doc}. Framework dostarcza na podstawie gramatyki języka całą infrastrukturę języka zawierającą elementy takie jak: parser, linker, typechecker, compiler. Dodatkowo pozwala na integrację zaprojektowanego języka z popularnymi IDE: Eclipse oraz IntelliJ IDEA. 
 
-\textit{Xtend} jest językiem programowania wywodzącym się i składniowo zbliżonym do Java, który został zaprojektowany, aby wyeliminować kilka wad tego języka. Zawiera elementy niedostępne w Java oraz upraszcza niektóre struktury pozwalając na pozbycie się niepotrzebnego kodu. Kodem wynikowym dla języka \textit{Xtend} jest Java, a nie kod binarny. Mamy tu więc do czynienia z transpilacją, czyli przetłumaczeniem jednego kodu źródłowego na inny. Wykorzystanie \textit{Xtend} jest zalecanym sposobem implementacji generatorów dla języków domenowych tworzonych przy użyciu \textit{Xtext}. Główną zaletą języka \textit{Xtend}, w kontekście pisania generatorów kodu, są szablony, które nie są dostępne w języku Java.
+Xtend jest językiem programowania wywodzącym się i składniowo zbliżonym do Java, który został zaprojektowany, aby wyeliminować kilka wad tego języka. Zawiera elementy niedostępne w Java oraz upraszcza niektóre struktury pozwalając na pozbycie się niepotrzebnego kodu. Kodem wynikowym dla języka Xtend jest Java, a nie kod binarny. Mamy tu więc do czynienia z transpilacją, czyli przetłumaczeniem jednego kodu źródłowego na inny. Wykorzystanie Xtend jest zalecanym sposobem implementacji generatorów dla języków domenowych tworzonych przy użyciu Xtext. Główną zaletą języka Xtend, w kontekście pisania generatorów kodu, są szablony, które nie są dostępne w języku Java.
 
-Aplikację napisałem za pomocą \textit{AndroidSDK} \cite{AndroidSDK:2017:Doc}. Jest to zestaw standardowych narzędzi programisty umożliwiający tworzenie aplikacji na platformę Android w języku Java. Przy wykorzystaniu \textit{AndroidSDK} zalecane jest użycie \textit{Gradle} \cite{Gradle:2017:Doc} - narzędzia służącego do automatyzacji budowania projektów informatycznych. Do jego zadań należą między innymi:
+Aplikację napisałem za pomocą AndroidSDK \cite{AndroidSDK:2017:Doc}. Jest to zestaw standardowych narzędzi programisty umożliwiający tworzenie aplikacji na platformę Android w~języku Java. Przy wykorzystaniu AndroidSDK zalecane jest użycie Gradle \cite{Gradle:2017:Doc} -- narzędzia służącego do automatyzacji budowania projektów informatycznych. Do jego zadań należą między innymi:
 \begin{itemize}
 \item zarządzanie zależnościami,
 \item automatyzacja testów,
 \item budowanie i instalacja aplikacji.
 \end{itemize}
-Wraz ze specjalnie zaprojektowanym pluginem, \textit{Gradle} stanowi obowiązkowy element każdego projektu związanego z systemem Android.
+Wraz ze specjalnie zaprojektowanym pluginem, Gradle stanowi obowiązkowy element każdego projektu związanego z systemem Android.
 
-Do testów wykorzystałem biblioteki \textit{JUnit} \cite{JUnit:2017:Doc} oraz \textit{Mockito} \cite{Mockito:2017:Doc}. \textit{JUnit} służy tworzenia testów jednostkowych dla programów napisanych w języku Java. \textit{Mockito} umożliwia tzw. mockowanie\footnote{Technika testowania polegająca na podmianie obiektu na jego atrapę \url{https://pl.wikipedia.org/wiki/Atrapa_obiektu}}.  Główną zaletą \textit{Mockito} jest bardzo wygodne API, tworzące swego rodzaju wewnętrzny DSL.
+Do testów wykorzystałem biblioteki JUnit \cite{JUnit:2017:Doc} oraz Mockito \cite{Mockito:2017:Doc}. JUnit służy tworzenia testów jednostkowych dla programów napisanych w języku Java. Mockito umożliwia tzw. mockowanie\footnote{Technika testowania polegająca na podmianie obiektu na jego atrapę \url{https://pl.wikipedia.org/wiki/Atrapa_obiektu}}.  Główną zaletą Mockito jest bardzo wygodne API, tworzące swego rodzaju wewnętrzny DSL.
 
-Aby móc zapanować nad zależnościami pomiędzy klasami wykorzystałem bibliotekę \textit{Dagger 2}.
-Istnieje wiele bibliotek umożliwiających DI (ang. Dependency Injection), jednak \textit{Dagger 2} cieszy się największą popularnością wśród programistów systemu \textit{Android}. Jego główną zaletą jest rozstrzyganie zależności w czasie kompilacji oraz generacja kodu. Dzięki temu można wykryć wady projektu, takie jak zależności cykliczne jeszcze przed uruchomieniem aplikacji. Dodatkowo wygenerowany kod jest o wiele szybszy niż refleksja, czyli typowe rozwiązanie czasu wykonania. Jest to bardzo ważna cecha w przypadku aplikacji na urządzenia mobilne, ponieważ posiadają one stosunkowo ograniczone zasoby. 
+Aby móc zapanować nad zależnościami pomiędzy klasami wykorzystałem bibliotekę Dagger 2.
+Istnieje wiele bibliotek umożliwiających DI (ang. Dependency Injection), jednak Dagger 2 cieszy się największą popularnością wśród programistów systemu Android. Jego główną zaletą jest rozstrzyganie zależności w czasie kompilacji oraz generacja kodu. Dzięki temu można wykryć wady projektu, takie jak zależności cykliczne jeszcze przed uruchomieniem aplikacji. Dodatkowo wygenerowany kod jest o wiele szybszy niż refleksja, czyli typowe rozwiązanie czasu wykonania. Jest to bardzo ważna cecha w przypadku aplikacji na urządzenia mobilne, ponieważ posiadają one stosunkowo ograniczone zasoby. 
 
 \chapter{Przegląd istniejących rozwiązań}
 
@@ -90,9 +90,9 @@ Tematyka pracy zahacza o cztery zagadnienia: gry terenowe, gry RPG, silniki gier
 
 \section{Gry terenowe}
 
-Rozwój technologii mobilnych sprawił, że parę lat temu na rynku rozrywki elektronicznej pojawił się całkiem nowy pomysł - gry terenowe. W grach tych zrezygnowano ze znanego z tradycyjnych gier wirtualnego świata na rzecz tzw. rzeczywistości rozszerzonej. W grach terenowych gracz nie steruje już postacią za pomocą myszki, czy klawiatury, lecz jest zmuszony do fizycznego przemieszczania się po rzeczywistym świecie. Lokalizacja gracza zostaje przeniesiona do świata gry za pomocą technologii takiej jak np. GPS. Mapa po której porusza się gracz jest więc mapą znaną z lekcji geografii. Elementami które sprawiają, że świat gry nazywa się rzeczywistością rozszerzoną, są pojawiające się w grze, a nie istniejące w rzeczywistości, obiekty lub postaci wpływają w jakiś sposób na przebieg rozgrywki.
+Rozwój technologii mobilnych sprawił, że parę lat temu na rynku rozrywki elektronicznej pojawił się całkiem nowy pomysł -- gry terenowe. W grach tych zrezygnowano ze znanego z tradycyjnych gier wirtualnego świata na rzecz tzw. rzeczywistości rozszerzonej. W grach terenowych gracz nie steruje już postacią za pomocą myszki, czy klawiatury, lecz jest zmuszony do fizycznego przemieszczania się po rzeczywistym świecie. Lokalizacja gracza zostaje przeniesiona do świata gry za pomocą technologii takiej jak np. GPS. Mapa po której porusza się gracz jest więc mapą znaną z lekcji geografii. Elementami które sprawiają, że świat gry nazywa się rzeczywistością rozszerzoną, są pojawiające się w grze, a nie istniejące w rzeczywistości, obiekty lub postaci wpływają w jakiś sposób na przebieg rozgrywki.
 
-Przykładem gry terenowej jest wspomniana we wstępie \textit{Pokemon GO}. Gra zyskała olbrzymią popularność w zaledwie kilka dni, czego efektem były tłumy graczy szturmujących parki i place. Tam właśnie ukrywały się tytułowe Pokemony, których szukanie i kolekcjonowanie, są kluczowymi elementami rozgrywki.
+Przykładem gry terenowej jest wspomniana we wstępie Pokemon GO. Gra zyskała olbrzymią popularność w zaledwie kilka dni, czego efektem były tłumy graczy szturmujących parki i place. Tam właśnie ukrywały się tytułowe Pokemony, których szukanie i kolekcjonowanie, są kluczowymi elementami rozgrywki.
 
 Inny pomysł na wykorzystanie lokalizacji gracza mieli twórcy gry Landlord. Gra przenosi koncepcje znane z popularnej gry Monopoly do świata rzeczywistego. Cel gry pozostał niezmieniony, jest nim oczywiście inwestowanie w nieruchomości. Nie znajdziemy tam natomiast planszy, pionków, ani kostki. Gracze Landlord, by dokonać wirtualnych zakupów, zmuszeni są do podróżowania po rzeczywistym świecie.
 
@@ -108,9 +108,9 @@ Jednym z najpopularniejszych przykładów planszowych gier RPG jest Magia i Miec
 
 W świecie gier komputerowych, RPG osiągnęły niekwestionowany sukces. Wydanych tytułów są całe dziesiątki i nie sposób ich tutaj wymienić. Warto zwrócić uwagę, że typowe elementy tych gier takie jak rozwój i statystyki postaci przedostały się już do prawie każdego gatunku gier komputerowych.
 
-\section{Domain Specific Language (DSL)}
+\section{Domain-specific language (DSL)}
 
-Domain Specific Languages \cite{DSL:2017}, czyli języki domenowe, projektowane są z myślą o ściśle określonym i z reguły bardzo wąskim zastosowaniu. W odróżnieniu od języków programowania ogólnego przeznaczenia, języki domenowe nie nadają się do rozwiązania większości problemów informatycznych. Sprawdzają się natomiast w dziedzinie, do której zostały zaprojektowane Dzięki ograniczeniu się jedynie do wąskiej grupy zastosowań, możliwe jest tworzenie języków, które są zrozumiałe dla osób będących ekspertami w danej dziedzinie. Języki domenowe należą zazwyczaj do języków deklaratywnych, gdyż skupiają są wokół tego co, a nie w jaki sposób, chce osiągnąć programista.
+Domain-specific languages \cite{DSL:2017}, czyli języki domenowe, projektowane są z myślą o ściśle określonym i z reguły bardzo wąskim zastosowaniu. W odróżnieniu od języków programowania ogólnego przeznaczenia, języki domenowe nie nadają się do rozwiązania większości problemów informatycznych. Sprawdzają się natomiast w dziedzinie, do której zostały zaprojektowane Dzięki ograniczeniu się jedynie do wąskiej grupy zastosowań, możliwe jest tworzenie języków, które są zrozumiałe dla osób będących ekspertami w danej dziedzinie. Języki domenowe należą zazwyczaj do języków deklaratywnych, gdyż skupiają są wokół tego co, a nie w jaki sposób, chce osiągnąć programista.
 
 Języki domenowe można podzielić na dwie grupy ze względu na sposób ich implementacji:
 \begin{itemize}
@@ -120,52 +120,52 @@ Języki domenowe można podzielić na dwie grupy ze względu na sposób ich impl
 
 \subsection{Internal DSL}
 
-Internal DSL to język stworzony w ramach innego istniejącego już języka ogólnego przeznaczenia. Technicznie rzecz biorąc, jest to zazwyczaj zbiór klas udostępniających wygodny dla programisty, dający wrażenie pisania w innym języku zbiór metod. Klasy te umieszcza się w bibliotece, którą możemy użyć do rozwiązania ściśle określonego problemu. Główną cechą takich bibliotek jest wyraźne nastawienie na udostępniany interfejs, a nie na samą implementację. O jakości takiego rozwiązania świadczy nie tyle wydajność jego działania, lecz łatwość użycia. Biblioteki takie pozwalają programiście na bardziej czytelne, prostsze i zwięzłe wyrażenie jego intencji. Przykładami taki języków są np. język asercji z biblioteki \textit{AssertJ} lub  biblioteka \textit{Mockito}. 
+Internal DSL to język stworzony w ramach innego istniejącego już języka ogólnego przeznaczenia. Technicznie rzecz biorąc, jest to zazwyczaj zbiór klas udostępniających wygodny dla programisty, dający wrażenie pisania w innym języku zbiór metod. Klasy te umieszcza się w bibliotece, którą możemy użyć do rozwiązania ściśle określonego problemu. Główną cechą takich bibliotek jest wyraźne nastawienie na udostępniany interfejs, a nie na samą implementację. O jakości takiego rozwiązania świadczy nie tyle wydajność jego działania, lecz łatwość użycia. Biblioteki takie pozwalają programiście na bardziej czytelne, prostsze i zwięzłe wyrażenie jego intencji. Przykładami taki języków są np. język asercji z biblioteki AssertJ lub  biblioteka Mockito. 
 
 \subsection{External DSL}
 
 External DSL to język domenowy z prawdziwego zdarzenia. Język taki posiada ściśle określoną gramatykę i od początku jest projektowany w określonym celu. Nie stanowi on części innego języka, chodź często z potrafi z nim współpracować. Przykładem takiej współpracy może być np. komunikacja z bazą danych, gdzie kod programu (napisany np. w języku Java) wywołuje pewne zapytanie w języku SQL. Przykładami zewnętrznych języków domenowych są:
 \begin{itemize}
-	\item SQL - język służący do obsługi relacyjnych baz danych
-	\item CSS - język służący do definiowania stylu stron internetowych 
-	\item HTML - język służący do definiowania struktury strony internetowej
+	\item SQL -- język służący do obsługi relacyjnych baz danych
+	\item CSS -- język służący do definiowania stylu stron internetowych 
+	\item HTML -- język służący do definiowania struktury strony internetowej
 \end{itemize}
 
 \section{Silniki gier}
 
-Silniki gier są dobrym przykładem korzyści jakie niesie ze sobą popularna zasada \textit{Clean Code} \cite{CleanCode:2005} - DRY (ang. Don't Repeat Yourself), czyli nie powtarzaj się. Ideą silnika jest implementacja wszystkich elementów wspólnych dla gier w jednym miejscu i udostępnienie programistom-użytkownikom przyjaznego interfejsu do implementacji mechaniki ich własnej gry. Programista jest oczywiście ograniczony przez możliwości silnika, ale w zamian uzyskuje narzędzie, które pozwala mu skupić się tylko na elementach istotnych dla jego gry.
+Silniki gier są dobrym przykładem korzyści jakie niesie ze sobą popularna zasada Clean Code \cite{CleanCode:2005} -- DRY (ang. \textit{don't repeat yourself}), czyli nie powtarzaj się. Ideą silnika jest implementacja wszystkich elementów wspólnych dla gier w jednym miejscu i udostępnienie programistom-użytkownikom przyjaznego interfejsu do implementacji mechaniki ich własnej gry. Programista jest oczywiście ograniczony przez możliwości silnika, ale w zamian uzyskuje narzędzie, które pozwala mu skupić się tylko na elementach istotnych dla jego gry.
 
-Z uwagi na fakt, że gry RPG są bardzo popularne, a jednocześnie do siebie bardzo podobne, naturalnym wydaje się stworzenie oprogramowania pozwalającego na łatwe tworzenie takiego typu gier. Narzędzie \textit{RPG Maker} \cite{RPGMaker:2017:Doc} pozwala na proste wytwarzanie dwuwymiarowych gier RPG. Według twórców tworzenie gier przy pomocy \textit{RPG Maker} jest możliwe bez jakiejkolwiek wiedzy na temat programowania, jednocześnie dając bardzo duże możliwości doświadczonym użytkownikom. Oprogramowanie udostępnia przyjazne GUI, dzięki któremu można tworzyć w pełni funkcjonalne gry i to na wiele różnych platform. Jedynym, ale bardzo istotnym ograniczeniem jest ściśle narzucony gatunek gier. Jednak właśnie to ograniczenie pozwoliło na stworzenie narzędzia jednocześnie tak prostego i funkcjonalnego. 
+Z uwagi na fakt, że gry RPG są bardzo popularne, a jednocześnie do siebie bardzo podobne, naturalnym wydaje się stworzenie oprogramowania pozwalającego na łatwe tworzenie takiego typu gier. Narzędzie RPG Maker \cite{RPGMaker:2017:Doc} pozwala na proste wytwarzanie dwuwymiarowych gier RPG. Według twórców tworzenie gier przy pomocy RPG Maker jest możliwe bez jakiejkolwiek wiedzy na temat programowania, jednocześnie dając bardzo duże możliwości doświadczonym użytkownikom. Oprogramowanie udostępnia przyjazne GUI, dzięki któremu można tworzyć w pełni funkcjonalne gry i to na wiele różnych platform. Jedynym, ale bardzo istotnym ograniczeniem jest ściśle narzucony gatunek gier. Jednak właśnie to ograniczenie pozwoliło na stworzenie narzędzia jednocześnie tak prostego i funkcjonalnego. 
 
-Warto wspomnieć tu również o istnieniu narzędzi pozwalających na łatwe tworzenie nawet zaawansowanych gier mobilnych i to dowolnego typu. Takim oprogramowanie jest np. \textit{Unity} \cite{Unity3D:2017:Doc}. Unity udostępnia przyjazne GUI, które pozwala na tworzenie świata gry. Elementy fizyki takie jak grawitacja, są już w pełni zaimplementowane w silniku gry. Programista musi natomiast jedynie pamiętać o nadaniu obiektom odpowiednich cech takich jak np. masa. Logikę gry można zaimplementować w jednym z dwóch języków \textit{UnityScript} lub C\#. \textit{UnityScript} jest językiem o składni bardzo zbliżonej do \textit{JavaScript}, natomiast C\# to popularny obiektowy język programowania czerpiący wszystko co dobre z Java i C++. Użycie powszechnie znanych języków oraz wieloplatformowość z pewnością przyczyniły się do olbrzymiej popularności, którą cieszy się \textit{Unity}.
+Warto wspomnieć tu również o istnieniu narzędzi pozwalających na łatwe tworzenie nawet zaawansowanych gier mobilnych i to dowolnego typu. Takim oprogramowanie jest np. Unity \cite{Unity3D:2017:Doc}. Unity udostępnia przyjazne GUI, które pozwala na tworzenie świata gry. Elementy fizyki takie jak grawitacja, są już w pełni zaimplementowane w silniku gry. Programista musi natomiast jedynie pamiętać o nadaniu obiektom odpowiednich cech takich jak np. masa. Logikę gry można zaimplementować w jednym z dwóch języków UnityScript lub C\#. UnityScript jest językiem o składni bardzo zbliżonej do JavaScript, natomiast C\# to popularny obiektowy język programowania czerpiący wszystko co dobre z Java i C++. Użycie powszechnie znanych języków oraz wieloplatformowość z pewnością przyczyniły się do olbrzymiej popularności, którą cieszy się Unity.
 
 
-\chapter{Wymagania języka \textit{AdventureMaker}}
+\chapter{Wymagania języka AdventureMaker}
 
 Jednym z pierwszym kroków, jakie należy podjąć przed przystąpieniem do projektowania oprogramowania jest analiza wymagań. AdventureMaker umożliwia tworzenie gier terenowych o narzuconych z góry, dość wąskich i specyficznych ramach, typowych dla tradycyjnych gier RPG. Napisana w nim gra polega głównie na rozwoju postaci poprzez odwiedzanie lokacji, podejmowanie decyzji oraz pokonywanie przeciwników. Postać sterowana przez gracza zdobywa punkty doświadczenia, dzięki którym gracz może rozwijać postać w wybranym przez siebie kierunku. 
 
-Wymagania, jakie postawiłem przed \textit{AdventureMaker} można podzielić na funkcjonalne i niefunkcjonalne.
+Wymagania, jakie postawiłem przed AdventureMaker można podzielić na funkcjonalne i niefunkcjonalne.
 
 \section{Wymagania funkcjonalne}
 Do wymagań funkcjonalnych należą:
 \begin{itemize}
 \item język DSL zawierający elementy:
-\subitem - Klasy Postaci
-\subitem - Przedmioty
-\subitem - Lokacje
-\subitem - Przygody
-\subitem - Przeciwnicy
-\item integracja ze środowiskiem \textit{IntelliJ IDEA},
+\subitem -- Klasy postaci
+\subitem -- Przedmioty
+\subitem -- Lokacje
+\subitem -- Przygody
+\subitem -- Przeciwnicy
+\item integracja ze środowiskiem IntelliJ IDEA,
 \item kompilacja aplikacji na podstawie pliku DSL .
 \end{itemize}
 
-Zbiór elementów wchodzących w skład zaprojektowanego języka DSL został przeze mnie wybrany, żeby zawierał minimum niezbędne do zaprojektowania gry. Chciałem, aby zaprojektowany język był jednocześnie prosty, ale i pozwalający na implementację nawet dość zawiłej logiki. Oczywiście gra RPG z prawdziwego zdarzenia powinna być bardziej rozbudowana. Uznałem jednak, że dodanie elementów, takich jak np. misje, zbędnie skomplikowały by język. Elementy te prawdopodobnie pojawią się w przypadku wydania kolejnej wersji \textit{AdventureMaker}. Niemniej jednak implementacja stworzona w ramach tej pracy obejmować będzie jedynie wyszczególnione punkty.
+Zbiór elementów wchodzących w skład zaprojektowanego języka DSL został wybrany subiektywnie tak, żeby zawierał minimum niezbędne do zaprojektowania gry. Chciałem, aby zaprojektowany język był jednocześnie prosty, ale i pozwalający na implementację nawet dość zawiłej logiki. Oczywiście gra RPG z prawdziwego zdarzenia powinna być bardziej rozbudowana. Uznałem jednak, że dodanie elementów, takich jak np. misje, zbędnie skomplikowały by język. Elementy te prawdopodobnie pojawią się w przypadku wydania kolejnej wersji AdventureMaker. Niemniej jednak implementacja stworzona w ramach tej pracy obejmować będzie jedynie wyszczególnione punkty.
 
-W celu ułatwienia edycji kodu warto udostępnić użytkownikowi przyjazne IDE. Na szczęście narzędzia takie już istnieją i nie musiałem projektować ich od zera. Popularne narzędzia programistyczne pozwalają na rozszerzanie ich funkcjonalności poprzez tzw. wtyczki, czyli oprogramowanie, które doinstalowuje się do już istniejącego IDE. Postanowiłem więc, że udostępnię obsługującą język \textit{AdventureMaker} wtyczkę do IDE \textit{IntelliJ IDEA}. Wybrałem to środowisko z kilku powodów:
+W celu ułatwienia edycji kodu warto udostępnić użytkownikowi przyjazne IDE. Na szczęście narzędzia takie już istnieją i nie musiałem projektować ich od zera. Popularne narzędzia programistyczne pozwalają na rozszerzanie ich funkcjonalności poprzez tzw. wtyczki, czyli oprogramowanie, które doinstalowuje się do już istniejącego IDE. Postanowiłem więc, że udostępnię obsługującą język AdventureMaker wtyczkę do IDE IntelliJ IDEA. Wybrałem to środowisko z kilku powodów:
 \begin{itemize}	
 \item jest darmowy w wersji Community,
 \item udostępnia integracje z Android SDK,
-\item jest wspierany przez \textit{Xtext} i \textit{Xtend}.
+\item jest wspierany przez Xtext i Xtend.
 \end{itemize}
 
 Przyjazna edycja kodu to za mało, aby język był funkcjonalny. Użytkownikowi należy udostępnić możliwość kompilacji kodu. W tym przypadku będzie to transkompilacja, ponieważ kodem wyjściowym nie będzie kod binarny, a kod Java. Na podstawie wygenerowanego oraz dostarczonego kodu musi być możliwa kompilacja gotowej aplikacji, bez konieczności dopisywania ani jednej linii dodatkowego kodu. 
@@ -178,29 +178,29 @@ Do wymagań niefunkcjonalnych należą:
 	\item ukrycie szczegółów implementacyjnych GPS i NFC przed programistą gry.
 \end{itemize}
 
-Podstawowym założeniem \textit{AdventureMaker} jest udostępnienie możliwości tworzenia gier laikom w programowaniu i technologiach IT. . Abym mógł w ogóle udostępnić im ten język, ważne jest wykorzystanie darmowych narzędzi.
+Podstawowym założeniem AdventureMaker jest udostępnienie możliwości tworzenia gier laikom w programowaniu i technologiach IT. . Abym mógł w ogóle udostępnić im ten język, ważne jest wykorzystanie darmowych narzędzi.
 
-Język \textit{AdventureMaker} został zaprojektowany tak, aby twórca gry mógł traktować technologie NFC i GPS w sposób bardzo zbliżony, nie zważając na ich  całkowicie odmienną techniczną implementację. Z jego punktu widzenia zarówno pomieszczenie oznaczone tagiem NFC, jak i współrzędne geograficzne, stanowią po prostu lokację, w której gracza mogą spotkać dowolnego typu przygody. 
+Język AdventureMaker został zaprojektowany tak, aby twórca gry mógł traktować technologie NFC i GPS w sposób bardzo zbliżony, nie zważając na ich  całkowicie odmienną techniczną implementację. Z jego punktu widzenia zarówno pomieszczenie oznaczone tagiem NFC, jak i współrzędne geograficzne, stanowią po prostu lokację, w której gracza mogą spotkać dowolnego typu przygody. 
 
-\chapter{Interfejs Gry i Ogólny Przebieg Rozgrywki}
+\chapter{Interfejs gry i ogólny przebieg rozgrywki}
 
 Pomimo, że ostateczny kształt gry będzie zdefiniowany przez jego programistę, przebieg każdej rozgrywki jest podobny. Ciężko byłoby go opisać w oderwaniu od jej graficznego interfejsu, jako, że stanowi on jej nieodzowny element. 
 
-Celem gry jest rozwój kierowanej przez gracza postaci. Jest on możliwe dzięki tzw. \textit{Przygodom}, czyli wydarzeniom uruchamiającym się w zależności od fizycznej lokalizacji gracza. Miarą rozwoju postaci są \textit{Poziomy Doświadczenia}, które zwiększają się po osiągnięciu określonego progu \textit{Punktów Doświadczenia}.
+Celem gry jest rozwój kierowanej przez gracza postaci. Jest on możliwe dzięki tzw. \textit{Przygodom}, czyli wydarzeniom uruchamiającym się w zależności od fizycznej lokalizacji gracza. Miarą rozwoju postaci są \textit{Poziomy doświadczenia}, które zwiększają się po osiągnięciu określonego progu \textit{Punktów doświadczenia}.
 
 Rozgrywkę można podzielić na 3 etapy:
 \begin{itemize}
-	\item Wybór Klasy Postaci
+	\item Wybór Klasy postaci
 	\item Tryb Zwiedzania
 	\item Tryb Przygody 
 \end{itemize}
-\section{Wybór Klasy Postaci}
+\section{Wybór Klasy postaci}
 
-Na początku gry gracz musi dokonać wyboru \textit{Klasy Postaci}. GUI składa się pojedynczego ekranu podzielonego na dwie części: listy \textit{Klas Postaci} oraz szczegółów wybranej \textit{Klasy}. Lista pozwala na wybór jednej spośród udostępnionych przez programistę \textit{Klas}. Każda \textit{Klasa Postaci} posiada nazwę, określone \textit{Statystyki} oraz \textit{Drzewo Umiejętności}, którymi powinien kierować się gracz dokonując wyboru.
+Na początku gry gracz musi dokonać wyboru \textit{Klasy postaci}. GUI składa się pojedynczego ekranu podzielonego na dwie części: listy \textit{Klas postaci} oraz szczegółów wybranej \textit{Klasy}. Lista pozwala na wybór jednej spośród udostępnionych przez programistę \textit{Klas}. Każda \textit{Klasa postaci} posiada nazwę, określone \textit{Statystyki} oraz \textit{Drzewo umiejętności}, którymi powinien kierować się gracz dokonując wyboru.
 
-Na \textit{Statystyki} postaci składają się  jego \textit{Siła}, \textit{Inteligencja} i \textit{Zręczność}. Wartości te wpływają na na przebieg \textit{Przygody} oraz umiejętności bojowe postaci. \textit{Statystyki} można podzielić na \textit{Początkowe}, czyli takie, które gracz otrzymuje na początku rozgrywki oraz \textit{Poziomowe}, które gracz otrzymuje z każdym nowym \textit{Poziomem Doświadczenia}.
+Na \textit{Statystyki} postaci składają się  jego \textit{Siła}, \textit{Inteligencja} i \textit{Zręczność}. Wartości te wpływają na na przebieg \textit{Przygody} oraz umiejętności bojowe postaci. \textit{Statystyki} można podzielić na \textit{Początkowe}, czyli takie, które gracz otrzymuje na początku rozgrywki oraz \textit{Poziomowe}, które gracz otrzymuje z każdym nowym \textit{Poziomem doświadczenia}.
 
-\textit{Drzewko Umiejętności} zawiera informację na temat dostępnych dla danej \textit{Klasy Postaci} \textit{Umiejętności}. Gracz może korzystać z \textit{Umiejętności} podczas walki, ale dopiero po ich odblokowaniu. Aby odblokować daną \textit{Umiejętność} musi posiadać wszystkie będące jej przodkami w drzewie \textit{Umiejętności}. Za każdą nową odblokowaną umiejętność gracz musi zapłacić \textit{Punktami Umiejętności}, które zdobywa wraz z nowym \textit{Poziomem Doświadczenia}.
+\textit{Drzewo umiejętności} zawiera informację na temat dostępnych dla danej \textit{Klasy postaci} \textit{Umiejętności}. Gracz może korzystać z \textit{Umiejętności} podczas walki, ale dopiero po ich odblokowaniu. Aby odblokować daną \textit{Umiejętność} musi posiadać wszystkie będące jej przodkami w drzewie \textit{Umiejętności}. Za każdą nową odblokowaną umiejętność gracz musi zapłacić \textit{Punktami umiejętności}, które zdobywa wraz z nowym \textit{Poziomem doświadczenia}.
 
 \section{Tryb Zwiedzania}
 
@@ -214,18 +214,18 @@ Tryb zwiedzania został podzielony na następujące części:
 \end{itemize}
 Pomiędzy widokami gracz może nawigować swobodnie, przeciągając je w lewo lub w prawo.
 \subsection*{Przegląd postaci}
-Przegląd postaci zawiera informacje o ilości \textit{Punktów} oraz \textit{Poziomie Doświadczenia} sterowanej przez gracza postaci. Dodatkowo wyświetla też \textit{Statystyki} uwzględniające \textit{Premie} otrzymane z używanych \textit{Przedmiotów}.
+Przegląd postaci zawiera informacje o ilości \textit{Punktów} oraz \textit{Poziomie doświadczenia} sterowanej przez gracza postaci. Dodatkowo wyświetla też \textit{Statystyki} uwzględniające \textit{Premie} otrzymane z używanych \textit{Przedmiotów}.
 \subsection*{Umiejętności}
-Ekran udostępnia \textit{Drzewko Umiejętności} oraz dwa przyciski \textit{Reset} i \textit{OK}. Służy zarówno do przeglądania posiadanych, jak i odblokowywania nowych \textit{Umiejętności}. Przycisk \textit{Reset} przywraca graczowi rozdane \textit{Punkty Umiejętności}, natomiast przycisk \textit{OK} zatwierdza ostatecznie wybór odblokowanych \textit{Umiejętności}.
+Ekran udostępnia \textit{Drzewo umiejętności} oraz dwa przyciski \textit{Reset} i \textit{OK}. Służy zarówno do przeglądania posiadanych, jak i odblokowywania nowych \textit{Umiejętności}. Przycisk \textit{Reset} przywraca graczowi rozdane \textit{Punkty umiejętności}, natomiast przycisk \textit{OK} zatwierdza ostatecznie wybór odblokowanych \textit{Umiejętności}.
 \subsection*{Przedmioty}
-\textit{Przedmiot} stanowi nagrodę dla gracza i może być wykorzystany w celu podniesienia \textit{Statystyk} jego postaci o wartości przypisane mu jako \textit{Premie do Statystyk}.
+\textit{Przedmiot} stanowi nagrodę dla gracza i może być wykorzystany w celu podniesienia \textit{Statystyk} jego postaci o wartości przypisane mu jako \textit{Premie do statystyk}.
 
-Sekcja zawiera wszystkie posiadane przez gracza \textit{Przedmioty}. Te używane aktualnie znajdują się w górnej części ekranu, natomiast pozostałe w dolnej, zwanej \textit{Plecakiem}. Dodatkowo na środku wyświetlana jest suma \textit{Premii do Statystyk} uzyskanych z używanych \textit{Przedmiotów}.
+Sekcja zawiera wszystkie posiadane przez gracza \textit{Przedmioty}. Te używane aktualnie znajdują się w górnej części ekranu, natomiast pozostałe w dolnej, zwanej \textit{Plecakiem}. Dodatkowo na środku wyświetlana jest suma \textit{Premii do statystyk} uzyskanych z używanych \textit{Przedmiotów}.
 
 \textit{Przedmioty} podzielone są na kategorie, a gracz może używać jednocześnie tylko po jednym \textit{Przedmiocie} każdego typu.
-\section{Tryb Przygody}
+\section{Tryb przygody}
 
-Gracz przechodzi do tego trybu z \textit{Trybu Zwiedzania}, kiedy znajdzie się w miejscu zawierającego \textit{Przygodę}. Każda przygoda składa się z serii \textit{Zdarzeń} (min. jednego).
+Gracz przechodzi do tego trybu z \textit{Trybu zwiedzania}, kiedy znajdzie się w miejscu zawierającego \textit{Przygodę}. Każda przygoda składa się z serii \textit{Zdarzeń} (min. jednego).
 
 GUI trybu składa się kilku ekranów:
 \begin{itemize}
@@ -238,35 +238,35 @@ Każdy ekran odpowiedzialny jest za wyświetlenie konkretnych typów \textit{Zda
 \subsection*{Decyzja}
 Ekran zawiera pole wyświetlające pytanie skierowane do gracza oraz listę decyzji w postaci przycisków. Poprzez wybór odpowiedniej decyzji gracz ma wpływ na dalszy przebieg \textit{Przygody}.
 \subsection*{Walka}
-Widok \textit{Walki} służy do wyświetlania oraz sterowania przebiegiem starcia pomiędzy postacią gracza a dowolnym przeciwnikiem. Interfejs wyświetla nazwę przeciwnika, kolorowe paski zawierające informacje o \textit{Punktach Witalnych} postaci i przeciwnika oraz o \textit{Punktach Many} gracza. 
+Widok \textit{Walki} służy do wyświetlania oraz sterowania przebiegiem starcia pomiędzy postacią gracza a dowolnym przeciwnikiem. Interfejs wyświetla nazwę przeciwnika, kolorowe paski zawierające informacje o \textit{Punktach witalnych} postaci i przeciwnika oraz o \textit{Punktach many} gracza. 
 
-Aby wygrać \textit{Walkę} gracz musi zmniejszyć ilość posiadanych przez przeciwnika \textit{Punktów Witalnych} do zera. Analogicznie, aby nie przegrać, musi utrzywać ilość własnych \textit{Punktów Witalnych}
+Aby wygrać \textit{Walkę} gracz musi zmniejszyć ilość posiadanych przez przeciwnika \textit{Punktów witalnych} do zera. Analogicznie, aby nie przegrać, musi utrzymać ilość własnych \textit{Punktów witalnych}
 powyżej tego poziomu.
 
-Gracz ma do dyspozycji zdobyte \textit{Umiejętności} oraz \textit{Atak Podstawowy}. Korzystanie z \textit{Umiejętności} wymaga poniesienia kosztu w \textit{Punktach Many}.
+Gracz ma do dyspozycji zdobyte \textit{Umiejętności} oraz \textit{Atak podstawowy}. Korzystanie z \textit{Umiejętności} wymaga poniesienia kosztu w \textit{Punktach many}.
 
-Skuteczność \textit{Ataku Podstawowego} oraz ilość \textit{Punktów Witalnych} i \textit{Many} gracza zależy od \textit{Statystyk} jego postaci.
+Skuteczność \textit{Ataku podstawowego} oraz ilość \textit{Punktów witalnych} i \textit{Many} gracza zależy od \textit{Statystyk} jego postaci.
 
 \subsection*{Komunikat}
 
-Ekran komunikatu służy do wyświetlania wszelkiego rodzaju informacji dotyczącej przebiegu \textit{Przygody}. Dzięki nim możliwe jest wprowadzanie narracji w grze, co stanowi istotny element gier RPG. GUI składa się z wyświetlanej informacji oraz przycisku \textit{OK}, którym gracz potwierdza, że zapoznał się z komunikatem. Informacja najczęściej wyświetlana jest w prostym oknie tekstowym, jednak czasami konieczne jest wyświetlenie elementów bardziej rozbudowanych. Przykładem jest okno wyświetlane pod koniec \textit{Przygody}, zawierające listę zdobytych przez gracza \textit{Przedmiotów} oraz \textit{Punktów Doświadczenia}.
+Ekran komunikatu służy do wyświetlania wszelkiego rodzaju informacji dotyczącej przebiegu \textit{Przygody}. Dzięki nim możliwe jest wprowadzanie narracji w grze, co stanowi istotny element gier RPG. GUI składa się z wyświetlanej informacji oraz przycisku \textit{OK}, którym gracz potwierdza, że zapoznał się z komunikatem. Informacja najczęściej wyświetlana jest w prostym oknie tekstowym, jednak czasami konieczne jest wyświetlenie elementów bardziej rozbudowanych. Przykładem jest okno wyświetlane pod koniec \textit{Przygody}, zawierające listę zdobytych przez gracza \textit{Przedmiotów} oraz \textit{Punktów doświadczenia}.
 
-\chapter{Architektura implemetacji języka \textit{AdventureMaker}}
+\chapter{Architektura implemetacji języka AdventureMaker}
 
-\textit{AdventureMaker} składa się z dwóch projektów. Pierwszy odpowiedzialny jest za implementację języka. Drugi projekt to szkielet aplikacji na system Android będący bazą pod wszystkie gry pisane w \textit{AdventureMaker}. 
+AdventureMaker składa się z dwóch projektów. Pierwszy odpowiedzialny jest za implementację języka. Drugi projekt to szkielet aplikacji na system Android będący bazą pod wszystkie gry pisane w AdventureMaker. 
 
-\section{\textit{AdventureMaker} DSL} 
-Projekt powstał w celu implementacji gramatyki i generatora dla języka Andventure Maker. Projekt bazuje na narzędziu \textit{Xtext}\cite{Xtext:2017:Doc}, a produktem wyjściowym jest wtyczka do IDE \textit{IntelliJ IDEA} obsługująca zaprojektowany DSL. 
+\section{AdventureMaker DSL} 
+Projekt powstał w celu implementacji gramatyki i generatora dla języka Andventure Maker. Projekt bazuje na narzędziu Xtext\cite{Xtext:2017:Doc}, a produktem wyjściowym jest wtyczka do IDE IntelliJ IDEA obsługująca zaprojektowany DSL. 
 
 \subsection{Definicja gramatyki} 
 
-Gramatyka języka \textit{AdventureMaker} znajduje w pojedynczym pliku o nazwie \textit{AML.xtext}. Definicja w nim zawarta zawiera opis modelu syntaktycznego i semantycznego tworzonego języka. Innymi słowy definiuje, jaki tekst należy do języka oraz jak będzie on reprezentowany w pamięci komputera. \textit{Xtext} na podstawie tego pliku generuje między innymi parser, który sprawdza, czy dany tekst jest poprawnym programem oraz zwraca jego reprezentację w postaci drzewa obiektów.
+Gramatyka języka AdventureMaker znajduje w pojedynczym pliku o nazwie \textit{AML.xtext}. Definicja w nim zawarta zawiera opis modelu syntaktycznego i semantycznego tworzonego języka. Innymi słowy definiuje, jaki tekst należy do języka oraz jak będzie on reprezentowany w pamięci komputera. Xtext na podstawie tego pliku generuje między innymi parser, który sprawdza, czy dany tekst jest poprawnym programem oraz zwraca jego reprezentację w postaci drzewa obiektów.
 
-\subsection{Generator Kodu}
-Generator odpowiedzialny jest za wygenerowanie kodu (w tym przypadku kodu Java) na podstawie modelu semantycznego zwróconego przez parser w postaci drzewa obiektów. Generator został napisany w języku \textit{Xtend} i składa się z głównej klasy implementującej metodę \textit{doGenerate} oraz klas pomocniczych utworzonych w celu dekompozycji problemu na mniejsze części zgodnie z zasadą pojedynczej odpowiedzialności \cite{CleanCode:2005}.
+\subsection{Generator kodu}
+Generator odpowiedzialny jest za wygenerowanie kodu (w tym przypadku kodu Java) na podstawie modelu semantycznego zwróconego przez parser w postaci drzewa obiektów. Generator został napisany w języku Xtend i składa się z głównej klasy implementującej metodę \textit{doGenerate} oraz klas pomocniczych utworzonych w celu dekompozycji problemu na mniejsze części zgodnie z zasadą pojedynczej odpowiedzialności \cite{CleanCode:2005}.
 
 \section{Aplikacja Android}
-Projekt to standardowa aplikacja androidowa wykorzystująca \textit{AndroidSDK} rozbudowana o język \textit{AdventureMaker}, na podstawie którego generowana jest część kodu aplikacji.
+Projekt to standardowa aplikacja androidowa wykorzystująca AndroidSDK rozbudowana o język AdventureMaker, na podstawie którego generowana jest część kodu aplikacji.
 
 Architektura projektu jest dość rozbudowana i można z niej wydzielić następujące moduły:
 
@@ -274,7 +274,7 @@ Architektura projektu jest dość rozbudowana i można z niej wydzielić następ
 	\item Standardowy Kod Aplikacji,
 	\item Zasoby,
 	\item Plik manifestu,
-	\item Pliki \textit{Gradle},
+	\item Pliki Gradle,
 	\item Testy,
 	\item Wewnętrzy DSL,
 	\item Plik game.aml,
@@ -282,7 +282,7 @@ Architektura projektu jest dość rozbudowana i można z niej wydzielić następ
 	\item Testowy Kod Implementujący Zasady Gry.
 \end{itemize}
 
-Pierwszych pięć elementów jest typowych dla aplikacji Android, natomiast pozostałe są specyficzne i wynikają z zastosowania języka \textit{AdventureMaker}.
+Pierwszych pięć elementów jest typowych dla aplikacji Android, natomiast pozostałe są specyficzne i wynikają z zastosowania języka AdventureMaker.
 
 \subsection*{Standardowy Kod Aplikacji} 
 
@@ -310,7 +310,7 @@ W kodzie wydzieliłem następujące warstwy i odpowiadające im nazwy pakietów:
 	\item Komponent (dagger).
 \end{itemize}
 
-Widok to warstwa odpowiedzialna za interfejs użytkownika. W jej skład wchodzą przede wszystkim klasy dziedziczące po \textit{Activity}, \textit{Fragment} oraz \textit{View}. W większości przypadków zadaniem klasy jest połączenie danych udostępnianych przez warstwę kontrolera z widokiem za pomocą dostępnego w systemie \textit{Android} mechanizmu \textit{Data Binding}\cite{AndroidSDK:2017:Doc}.
+Widok to warstwa odpowiedzialna za interfejs użytkownika. W jej skład wchodzą przede wszystkim klasy dziedziczące po \textit{Activity}, \textit{Fragment} oraz \textit{View}. W większości przypadków zadaniem klasy jest połączenie danych udostępnianych przez warstwę kontrolera z widokiem za pomocą dostępnego w systemie Android mechanizmu Data Binding\cite{AndroidSDK:2017:Doc}.
 
 Warstwa kontrolera odpowiada przede wszystkim za obsługę zdarzeń przychodzących z interfejsu użytkownika, dostarczanie modelu danych dla widoku. Zajmuje się też modyfikacją danych. W prostych przypadkach modyfikuje je bezpośrednio, a w bardziej zaawansowanych deleguje to zadanie do warstwy logiki. Inną ważną odpowiedzialnością tej warstwy jest przełączanie pomiędzy widokami. 
 
@@ -318,21 +318,21 @@ Model odpowiada za przechowywanie danych w uporządkowany sposób. Hermetyzuje d
 
 Logika to warstwa odpowiadająca za wszelkie operacje wykonywane na danych, które nie powinny znaleźć się w warstwie kontrolera ze względu na zbyt duże skomplikowanie bądź wagę kodu. Wydzielenie tego kodu do osobnych klas w połączeniu z testowaniem jednostkowym pozwala stworzyć kod, co do którego mamy pewność, że jego kluczowe aspekty działają prawidłowo. Usunięcie tego kodu z kontrolera jest zgodne z zasadą pojedynczej odpowiedzialności \cite{CleanCode:2005} i pozwala na jego użycie w wielu miejscach programu. 
 
-Pakiet \textit{dagger} to miejsce, w którym integrowane są wszystkie klasy należące do danego komponentu. W projekcie wykorzystano technikę wstrzykiwania zależności (DI), która pozwala na usunięcie bezpośrednich zależności pomiędzy klasami, aż do momentu ich integracji. Za wstrzykiwanie zależności w moim projekcie odpowiedzialna jest biblioteka \textit{Dagger 2}, stąd nazwa pakietu w którym to zadanie jest realizowane.
+Pakiet \textit{dagger} to miejsce, w którym integrowane są wszystkie klasy należące do danego komponentu. W projekcie wykorzystano technikę wstrzykiwania zależności (DI), która pozwala na usunięcie bezpośrednich zależności pomiędzy klasami, aż do momentu ich integracji. Za wstrzykiwanie zależności w moim projekcie odpowiedzialna jest biblioteka Dagger 2, stąd nazwa pakietu w którym to zadanie jest realizowane.
 
 \subsection*{Zasoby}
-Zasoby zostały umieszczone w folderze \textit{app/scr/main/res}. Tutaj definiuje się elementy takie jak layouty, ikonki, animacje itp. Większość zasobów stanowią pliki xml. Dostęp do zasobów możliwy jest z poziomu kodu aplikacji poprzez klasę R. Klasa ta jest generowana automatycznie, a w jej skład wchodzi zestaw stałych, będących identyfikatorami odpowiednich zasobów. \textit{AndroidSDK} posiada wbudowany system zarządzania zasobami, który pozwala na przygotowanie konkretnego zasobu w kilku wersjach (np. różny layout dla kilku wielkości ekranów). Tak przygotowany zasób jest dostępny pod pojedynczym numerem \textit{ID}, a o wybór odpowiedniej wersji dba system.
+Zasoby zostały umieszczone w folderze \textit{app/scr/main/res}. Tutaj definiuje się elementy takie jak layouty, ikonki, animacje itp. Większość zasobów stanowią pliki xml. Dostęp do zasobów możliwy jest z poziomu kodu aplikacji poprzez klasę R. Klasa ta jest generowana automatycznie, a w jej skład wchodzi zestaw stałych, będących identyfikatorami odpowiednich zasobów. AndroidSDK posiada wbudowany system zarządzania zasobami, który pozwala na przygotowanie konkretnego zasobu w kilku wersjach (np. różny layout dla kilku wielkości ekranów). Tak przygotowany zasób jest dostępny pod pojedynczym numerem ID, a o wybór odpowiedniej wersji dba system.
 
-Większość zasobów stanowią layouty, z których znaczna część wykorzystuje \textit{Data Binding}. Mechanizm pozwala opisać logikę odpowiedzialną za wyświetlanie danych w sposób deklaratywny przy pomocy języka \textit{xml}. \textit{AndroidSDK} generuje na jego podstawie specjalny kod, który będzie realizował to zadanie. 
+Większość zasobów stanowią layouty, z których znaczna część wykorzystuje Data Binding. Mechanizm pozwala opisać logikę odpowiedzialną za wyświetlanie danych w sposób deklaratywny przy pomocy języka \textit{xml}. AndroidSDK generuje na jego podstawie specjalny kod, który będzie realizował to zadanie. 
 
 \subsection*{Plik manifestu}
 Plik manifestu jest elementem niezbędnym w każdej aplikacji androidowej. Znajduje się on w folderze \textit{app/scr/main}. W nim zadeklarowane są elementy, takie jak identyfikator aplikacji, zbiór dostępnych aktywności, potrzebne uprawnienia, ikonę startową itp.
 
-\subsection*{\textit{Gradle}}
-\textit{Gradle} jest narzędziem służącym do budowania projektów, który stał się standardem w aplikacjach androidowych. W projekcie znajdują się 2 pliki \textit{Gradle}. Jeden dla modułu aplikacji, drugi dla całego projektu, które zostały umieszczone odpowiednio w folderze \textit{/app} i \textit{/}. W plikach \textit{Gradle} zdefiniowana jest struktura projektu, zadania związane z jego budowaniem oraz potrzebne zależności.
+\subsection*{Gradle}
+Gradle jest narzędziem służącym do budowania projektów, który stał się standardem w aplikacjach androidowych. W projekcie znajdują się 2 pliki Gradle. Jeden dla modułu aplikacji, drugi dla całego projektu, które zostały umieszczone odpowiednio w folderze \textit{/app} i \textit{/}. W plikach Gradle zdefiniowana jest struktura projektu, zadania związane z jego budowaniem oraz potrzebne zależności.
 
 \subsection*{Testy}
-Moduł testów odpowiedzialny jest za sprawdzenie, czy kod aplikacji działa prawidłowo. Ich  kod został umieszczony w folderze \textit{app/scr/test/java}. W jego skład wchodzą klasy implementujące testy jednostkowe wszystkich ważnych elementów aplikacji. Kod testów wykorzystuje zewnętrzne biblioteki \textit{JUnit}, \textit{Mockito} i \textit{AssertJ}.
+Moduł testów odpowiedzialny jest za sprawdzenie, czy kod aplikacji działa prawidłowo. Ich  kod został umieszczony w folderze \textit{app/scr/test/java}. W jego skład wchodzą klasy implementujące testy jednostkowe wszystkich ważnych elementów aplikacji. Kod testów wykorzystuje zewnętrzne biblioteki JUnit, Mockito i AssertJ.
 
 \subsection*{Wewnętrzy DSL}
 
@@ -340,10 +340,10 @@ W projekcie wykorzystałem zarówno wewnętrzny, jak i zewnętrzny język domeno
 
 Technicznie rzecz biorąc, moduł stanowi interfejs do komunikacji pomiędzy modułami Standardowy Kod Aplikacji a Kodem Implementującym Zasady Gry. Zarówno dostarczone API, jak i implementacja modułu zostały zrealizowane w języku Java. Dlatego też nazywam go wewnętrznym językiem domenowym. W skład modułu wchodzą wszystkie klasy pakietów \textit{pl.aml.*}.
 
-Istotną częścią tego modułu są klasy pozwalające na wygodne budowanie obiektów (tzw. \textit{Buildery}\footnote{Builder - Budowniczy  - wzorzec projektowy  \url{https://pl.wikipedia.org/wiki/Budowniczy_(wzorzec_projektowy)}}) oraz metody statyczne tworzące instancje tych klas. Różnicę pomiędzy kodem pisanym z i bez wykorzystania wewnętrznego DSL zaprezentowałem w dodatku A.
+Istotną częścią tego modułu są klasy pozwalające na wygodne budowanie obiektów (tzw. \textit{Buildery}\footnote{Builder -- Budowniczy  -- wzorzec projektowy  \url{https://pl.wikipedia.org/wiki/Budowniczy_(wzorzec_projektowy)}}) oraz metody statyczne tworzące instancje tych klas. Różnicę pomiędzy kodem pisanym z i bez wykorzystania wewnętrznego DSL zaprezentowałem w dodatku A.
 
 \subsection*{Plik game.aml}
-Plik znajduje się w folderze \textit{app/src/main/java}. Jest kluczowym elementem całego projektu, bo to właśnie w nim definiuje się w języku \textit{AdventureMaker} elementy związane z konkretną grą.
+Plik znajduje się w folderze \textit{app/src/main/java}. Jest kluczowym elementem całego projektu, bo to właśnie w nim definiuje się w języku AdventureMaker elementy związane z konkretną grą.
 
 \subsection*{Wygenerowany Kod Implementujący Zasady Gry}
 Ten moduł znajduje się w folderze \textit{app/aml-src} i zawiera kod wygenerowany automatycznie na podstawie pliku \textit{game.aml}. Zawarty w nim kod implementuje szczegóły dotyczące konkretnej gry. Wykorzystuje API dostarczone przez Wewnętrzny Język DSL. Wygenerowany tu kod użyty jest w module Kod Aplikacji.
@@ -353,7 +353,7 @@ Ten moduł zawiera kod analogiczny do Wygenerowanego Kodu Implementującego Zasa
 
 \chapter{Testy} 
 
-W celu sprawdzenia poprawności działania stworzonego oprogramowania konieczne było przetestowanie go.  Testy automatyczne zaimplementowane zostały w postaci mockowanych testów jednostkowych za pomocą bibliotek \textit{JUnit} i \textit{Mockito}.
+W celu sprawdzenia poprawności działania stworzonego oprogramowania konieczne było przetestowanie go.  Testy automatyczne zaimplementowane zostały w postaci mockowanych testów jednostkowych za pomocą bibliotek JUnit i Mockito.
 
 Testy automatyczne są najbardziej praktyczne i wiarygodne. Niestety z przyczyn technicznych nie dało się pokryć nimi wszystkich funkcjonalności. Z tego powodu część kodu została przetestowana w sposób manualny. Elementami przetestowanymi ręcznie są działanie modułu NFC oraz GPS. Do każdego z tych elementów przygotowałem scenariusz testowy, który następnie wykonałem. Sposób przeprowadzenia oraz wyniki tych testów zostały przedstawione poniżej.
 
@@ -373,13 +373,13 @@ Sekcja \textit{When} składa się z pojedynczej linii. Jest to wywołanie testow
 Sekcja \textit{Then} odpowiedzialna jest za sprawdzenie, czy metoda zachowała się w oczekiwany sposób. Zazwyczaj jest to kod składający się z kilku linii zawierających asercje. Asercje służą sprawdzeniu czy, ile razy i z jakimi parametrami zostały wywołane metody klas-zależności. Jeżeli funkcja zwraca jakiś wynik, za pomocą asercji testuje się, czy pokrywa się on z oczekiwanym.
 
 \subsection{Wyniki testów}
-Testy jednostkowe zostały uruchomione przy pomocy narzędzia \textit{Gradle} \cite{Gradle:2017:Doc}. Zestawienie wyników (rys. \ref{tests:results}) pokazuje, że wszystkie testy przeszły pomyślnie.
+Testy jednostkowe zostały uruchomione przy pomocy narzędzia Gradle \cite{Gradle:2017:Doc}. Zestawienie wyników (rys. \ref{tests:results}) pokazuje, że wszystkie testy przeszły pomyślnie.
 
 \begin{figure}[!tbh]
 	\centering
 	\includegraphics[width=1.0\hsize]{fig/test_summary}
 	\caption{Podsumowanie testów}
-	\source{Wygenerowane przez \textit{Gradle}}
+	\source{Wygenerowane przez Gradle}
 	\label{tests:results}
 \end{figure}
 
@@ -388,18 +388,18 @@ Testy jednostkowe zostały uruchomione przy pomocy narzędzia \textit{Gradle} \c
 Testy funkcjonalności NFC i GPS zostały przeprowadzone ręcznie według poniższego scenariusza:
 
 \begin{itemize}
-  \item przygotowanie pliku AML\footnote{AdventureMaker Language - rozszerzenie plików obsługiwane przez język \textit{AdventureMaker}},
+  \item przygotowanie pliku AML\footnote{AdventureMaker Language -- rozszerzenie plików obsługiwane przez język AdventureMaker},
   \item kompilacja,
   \item sprawdzenie poprawności zachowania.
 \end{itemize}
 
 \section{Kod testów}
 
-Przygotowane pliki AML dla testu NFC i GPS są bardzo podobne. Oba składają się z przykładowej \textit{Klasy Postaci} oraz dwóch \textit{Przygód} i \textit{Lokacji}. W obu przypadkach \textit{Przygody} polegają jedynie na wyświetleniu \textit{Komunikatu}. 
+Przygotowane pliki AML dla testu NFC i GPS są bardzo podobne. Oba składają się z przykładowej \textit{Klasy postaci} oraz dwóch \textit{Przygód} i \textit{Lokacji}. W obu przypadkach \textit{Przygody} polegają jedynie na wyświetleniu \textit{Komunikatu}. 
 
 Różnica pojawia się w przypadku definicji \textit{Lokacji}. W pliku przygotowanym dla GPS, są to dwa obszary o promieniu 10 metrów. W przypadku NFC \textit{Lokacje} zdefiniowane są przez odpowiednie tagi \textit{Test1} i \textit{Test2}.
 
-Kod \textit{AdventureMaker} przygotowany do przeprowadzenia obydwu testów znajduje się w dodatkach.
+Kod AdventureMaker przygotowany do przeprowadzenia obydwu testów znajduje się w dodatkach.
 
 \section{Sprawdzenie poprawności zachowania aplikacji}
 
@@ -409,48 +409,48 @@ W przypadku testu GPS urządzenie wyposażone w moduł GPS zostało przeniesione
 
 Oba testy zakończyły się sukcesem.  
 
-\chapter{Pisanie gier w \textit{AdventureMaker}}
-Pisanie własnej gry przy użyciu \textit{AdventureMaker} wymaga przygotowania środowiska pracy. W tym rozdziale zawarłem instrukcje dotyczące instalacji, konfiguracji i korzystania z potrzebnych narzędzi. 
+\chapter{Pisanie gier w AdventureMaker}
+Pisanie własnej gry przy użyciu AdventureMaker wymaga przygotowania środowiska pracy. W tym rozdziale zawarłem instrukcje dotyczące instalacji, konfiguracji i korzystania z potrzebnych narzędzi. 
 
 \section{Konfiguracja środowika}
 
-Aby móc korzystać z \textit{AdventureMaker} należy pobrać i zainstalować IDE \textit{IntelliJ IDEA}, JRE\footnote{Java Runtime Enviroment - środowisko uruchomieniowe Java}, JDK\footnote{Java Development Kit - standardowy zestaw narzędzi wykorzystywanych do tworzenia aplikacji w technologii Java} i Android SDK oraz wtyczkę AML.
+Aby móc korzystać z AdventureMaker należy pobrać i zainstalować IDE IntelliJ IDEA, JRE\footnote{Java Runtime Enviroment -- środowisko uruchomieniowe Java}, JDK\footnote{Java Development Kit -- standardowy zestaw narzędzi wykorzystywanych do tworzenia aplikacji w technologii Java} i Android SDK oraz wtyczkę AML.
 
 JDK o raz JRE należy pobrać ze strony \textit{Oracle} (\url{https://www.java.com}) w wersji 1.8 i zainstalować zgodnie z instrukcją producenta.
 
-IDE \textit{IntelliJ IDEA} można pobrać ze strony producenta - JetBrains (\url{https://www.jetbrains.com/idea}). Wersja community jest darmowa i wystarczająca do obsługi \textit{AdventureMaker}. Podczas instalacji należy pamiętać o włączeniu pluginu obsługującego aplikacje pisane na system Android.
+IDE IntelliJ IDEA można pobrać ze strony producenta -- JetBrains (\url{https://www.jetbrains.com/idea}). Wersja community jest darmowa i wystarczająca do obsługi AdventureMaker. Podczas instalacji należy pamiętać o włączeniu pluginu obsługującego aplikacje pisane na system Android.
 
-Android SDK  należy pobrać ze strony \url{https://developer.android.com} i zainstalować w dowolnej lokalizacji, którą należy następnie skonfigurować w \textit{IntelliJ IDEA}.
+Android SDK  należy pobrać ze strony \url{https://developer.android.com} i zainstalować w dowolnej lokalizacji, którą należy następnie skonfigurować w IntelliJ IDEA.
 
-Wtyczka AML jest odpowiedzialna za obsługę języka \textit{AdventureMaker}, w tym generowanie kodu Java na podstawie pliku \textit{game.aml}. Do prawidłowego działania wtyczki potrzebne są wtyczki \textit{Xtext} i \textit{Xtend}, które można pobrać ze strony domowej (\url{https://eclipse.org/Xtext/download.html}).
+Wtyczka AML jest odpowiedzialna za obsługę języka AdventureMaker, w tym generowanie kodu Java na podstawie pliku \textit{game.aml}. Do prawidłowego działania wtyczki potrzebne są wtyczki Xtext i Xtend, które można pobrać ze strony domowej (\url{https://eclipse.org/Xtext/download.html}).
 Wtyczkę należy pobrać z repozytorium projektu (\url{https://github.com/adrpieper/magisterka}) i zainstalować ręcznie.
 
 \section{Przygotowanie i kompilacja gry}
 Przed rozpoczęciem pracy nad własną grą należy pobrać znajdujący się w repozytorium (\url{https://github.com/adrpieper/magisterka}) projekt przykładowej gry (ExampleAdventure). Najłatwiejszym sposobem na jego wykorzystanie jest skopiowanie go i posługiwanie się nim jako szablonem. Należy pamiętać, aby zmienić \textit{ID} aplikacji w pliku \textit{Manifestu}.
 
-Implementacja własnej gry sprowadza się do edycji pliku \textit{game.aml}. Należy w nim umieścić kod w języku \textit{AdventureMaker}. Kod musi  zawierać wszystkie niezbędne elementy gry. Pisząc ten kod można posłużyć się załączoną dokumentacją języka oraz wzorować się na kodzie przykładowej gry.
+Implementacja własnej gry sprowadza się do edycji pliku \textit{game.aml}. Należy w nim umieścić kod w języku AdventureMaker. Kod musi  zawierać wszystkie niezbędne elementy gry. Pisząc ten kod można posłużyć się załączoną dokumentacją języka oraz wzorować się na kodzie przykładowej gry.
 
-Projekt jest standardowym projektem androidowym, więc można go też uruchomić przyciskiem play dostępnym w IDE \textit{IntelliJ IDEA}. Ważne jest, żeby korzystać z IDE, nawet w przypadku budowania narzędziem \textit{Gradle}, ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko.
+Projekt jest standardowym projektem androidowym, więc można go też uruchomić przyciskiem play dostępnym w IDE IntelliJ IDEA. Ważne jest, żeby korzystać z IDE, nawet w przypadku budowania narzędziem Gradle, ponieważ kod, generowany na podstawie pliku AML, tworzony jest przez samo środowisko.
 
 \chapter{Dokumentacja języka} 
 
-Składnia języka przypomina nieco format \textit{json}\footnote{JavaScript Object Notation - lekki format wymiany danych komputerowych \url{https://pl.wikipedia.org/wiki/JSON}}. Została jednak dostosowana do tego, aby była jak najbardziej czytelna i zrozumiała dla osób zaznajomionych z tematyką gier RPG.
+Składnia języka przypomina nieco format \textit{json}\footnote{JavaScript Object Notation -- lekki format wymiany danych komputerowych \url{https://pl.wikipedia.org/wiki/JSON}}. Została jednak dostosowana do tego, aby była jak najbardziej czytelna i zrozumiała dla osób zaznajomionych z tematyką gier RPG.
 
-Kod gier napisanych w \textit{AdventureMaker} umieszcza się w pojedynczym pliku z rozszerzeniem \textit{.aml}. Plik definiuje wszystkie dostępne w grze elementy. Może zawierać dowolną ilość \textit{Klas Postaci}, \textit{Typów Przedmiotów}, \textit{Przeciwników}, \textit{Lokacji} oraz \textit{Przygód}. Dodatkowo należy w nim umieścić sekcję \textit{Przygody Początkowe}. 
+Kod gier napisanych w AdventureMaker umieszcza się w pojedynczym pliku z rozszerzeniem \textit{.aml}. Plik definiuje wszystkie dostępne w grze elementy. Może zawierać dowolną ilość \textit{Klas postaci}, \textit{Typów przedmiotów}, \textit{Przeciwników}, \textit{Lokacji} oraz \textit{Przygód}. Dodatkowo należy w nim umieścić sekcję \textit{Przygody początkowe}. 
 
-\section{Klasy Postaci}
-Definicja \textit{Klasy}, inaczej typu postaci, to informacje na temat \textit{Statystyk} oraz \textit{Umiejętności} dostępnych dla danej \textit{Klasy Postaci}. Definicja rozpoczyna się od słów kluczowych \textit{character type}. Następnie należy podać nazwę \textit{Klasy Postaci} za którą znajdują się nawiasy klamrowe. W nawiasach klamrowych należy umieścić kolejno:
+\section{Klasy postaci}
+Definicja \textit{Klasy}, inaczej typu postaci, to informacje na temat \textit{Statystyk} oraz \textit{Umiejętności} dostępnych dla danej \textit{Klasy postaci}. Definicja rozpoczyna się od słów kluczowych \textit{character type}. Następnie należy podać nazwę \textit{Klasy postaci} za którą znajdują się nawiasy klamrowe. W nawiasach klamrowych należy umieścić kolejno:
 \begin{itemize}
-	\item \textit{Statystyki Początkowe},
-	\item \textit{Statystyki Poziomowe},
-	\item \textit{Drzewo Umiejętności}.
+	\item \textit{Statystyki początkowe},
+	\item \textit{Statystyki poziomowe},
+	\item \textit{Drzewo umiejętności}.
 \end{itemize}
 
-Definicja \textit{Statystyk Początkowych} rozpoczyna się od słów kluczowych \textit{stats on start:}. Za tymi słowami umieszczone są ilościowe parametry \textit{Siły}, \textit{Inteligencji} i \textit{Zwinności} oznaczone odpowiednio słowami kluczowymi \textit{str}, \textit{int}, \textit{agi}, będącymi skrótami od angielskich tłumaczeń nazw tych parametrów\footnote{Strength, Intelligence, Agility}.
+Definicja \textit{Statystyk początkowych} rozpoczyna się od słów kluczowych \textit{stats on start:}. Za tymi słowami umieszczone są ilościowe parametry \textit{Siły}, \textit{Inteligencji} i \textit{Zwinności} oznaczone odpowiednio słowami kluczowymi \textit{str}, \textit{int}, \textit{agi}, będącymi skrótami od angielskich tłumaczeń nazw tych parametrów\footnote{Strength, Intelligence, Agility}.
 
-Definicja \textit{Statystyk Poziomowych} jest bardzo podobna. Odróżniają je jedynie słowa kluczowe \textit{stats per lvl:} zamiast  \textit{stats on start:} oraz występujący przed każdym parametrem znak plusa, który podkreśla, że są to wartości zwiększające statystyki postaci. 
+Definicja \textit{Statystyk poziomowych} jest bardzo podobna. Odróżniają je jedynie słowa kluczowe \textit{stats per lvl:} zamiast  \textit{stats on start:} oraz występujący przed każdym parametrem znak plusa, który podkreśla, że są to wartości zwiększające statystyki postaci. 
 
-Definicja \textit{Drzewa Umiejętności} rozpoczyna się od słów kluczowych \textit{skills tree:}. Dalej znajduje się dowolna liczba gałęzi drzewa.
+Definicja \textit{Drzewa umiejętności} rozpoczyna się od słów kluczowych \textit{skills tree:}. Dalej znajduje się dowolna liczba gałęzi drzewa.
 Każda gałąź składa się z nazwy \textit{Umiejętności}, której dotyczy oraz opcjonalnie zbioru gałęzi potomnych, które definiują \textit{Umiejętności}, dostępne po odblokowaniu umiejętności-rodzica.
 Zbiór gałęzi potomnych definiuje się w nawiasach klamrowych poprzedzonych symbolem \textit{=>}. 
 
@@ -474,11 +474,11 @@ character type Wizard {
 }
 \end{minted}
 Z definicji można odczytać, że postać typu \textit{Wizard} otrzymuje 10 punktów \textit{Siły}, 20 \textit{Inteligencji} i 15 \textit{Zwinności} na początku gry.
-Jego statystyki zwiększają się o 1 punkt \textit{Siły}, 2 \textit{Inteligencji} i 1 \textit{Zwinności} z każdym zdobytym \textit{Poziomem Doświadczenia}.
+Jego statystyki zwiększają się o 1 punkt \textit{Siły}, 2 \textit{Inteligencji} i 1 \textit{Zwinności} z każdym zdobytym \textit{Poziomem doświadczenia}.
 Na początku może odblokować \textit{Umiejętność} \textit{Fireball} lub \textit{Poisoning}. Zdobycie umiejętności \textit{Fireball} udostępnia dwie kolejne: \textit{Wirewall} i \textit{BlackMagic}. 
 
-\section{Typy Przedmiotów}
-Definicja \textit{Przedmiotu} składa się z nazwy, kategorii oraz wartości \textit{Premii do Statystyk}. Do wyboru mamy następujące kategorie (w nawiasie podano odpowiadające kategorii słówko kluczowe):
+\section{Typy przedmiotów}
+Definicja \textit{Przedmiotu} składa się z nazwy, kategorii oraz wartości \textit{Premii do statystyk}. Do wyboru mamy następujące kategorie (w nawiasie podano odpowiadające kategorii słówko kluczowe):
 \begin{itemize}
 	\item Broń (\textit{weapon}),
 	\item Hełm (\textit{helmet}),
@@ -514,9 +514,9 @@ location Forest in radius of 100
 
 \textit{Przeciwnik} to byt, z którym gracz może stoczyć \textit{Walkę} podczas trwania \textit{Przygody}. Definiując \textit{Przeciwnika} należy użyć słowa kluczowego \textit{opponent}, podać jego nazwę oraz zbiór parametrów otoczonych nawiasami klamrowymi.
 
-Pierwsze trzy parametry: \textit{power}, \textit{hp}, \textit{exp} to wartości liczbowe. Oznaczają one odpowiednio \textit{Moc Przeciwnika}, czyli jego zdolność bojowa, ilość posiadanych przez niego \textit{Punktów Witalnych} oraz ilość \textit{Punktów Doświadczenia}, które gracz zdobywa w nagrodę za jego pokonanie.
+Pierwsze trzy parametry: \textit{power}, \textit{hp}, \textit{exp} to wartości liczbowe. Oznaczają one odpowiednio \textit{Moc przeciwnika}, czyli jego zdolność bojowa, ilość posiadanych przez niego \textit{Punktów witalnych} oraz ilość \textit{Punktów doświadczenia}, które gracz zdobywa w nagrodę za jego pokonanie.
 
-Czwarty parametr - \textit{loot} to lista \textit{Przedmiotów}, które może otrzymać gracz po pokonaniu \textit{Przeciwnika}. Nazwy \textit{Przedmiotów} oddzielone są przecinkami, a każdy z nich zawiera informacje o prawdopodobieństwo jego otrzymania.
+Czwarty parametr -- \textit{loot} to lista \textit{Przedmiotów}, które może otrzymać gracz po pokonaniu \textit{Przeciwnika}. Nazwy \textit{Przedmiotów} oddzielone są przecinkami, a każdy z nich zawiera informacje o prawdopodobieństwo jego otrzymania.
 
 Poniższy przykład definiuje \textit{Przeciwnika} \textit{Dragon}:
 
@@ -529,19 +529,19 @@ opponent Dragon {
 }
 \end{minted}
 
-Z definicji wynika, że \textit{Dragon} posiada \textit{Moc} o wartości 100 oraz 200 \textit{Punktów Witalnych}. Za pokonanie tego \textit{Przeciwnika} gracz otrzyma 100 \textit{Punktów Doświadczenia}, oraz odpowiednio 50\% i 10\% szansy na zdobycie \textit{Przedmiotów} \textit{MagicSword} oraz \textit{SteelArmor}.
+Z definicji wynika, że \textit{Dragon} posiada \textit{Moc} o wartości 100 oraz 200 \textit{Punktów witalnych}. Za pokonanie tego \textit{Przeciwnika} gracz otrzyma 100 \textit{Punktów doświadczenia}, oraz odpowiednio 50\% i 10\% szansy na zdobycie \textit{Przedmiotów} \textit{MagicSword} oraz \textit{SteelArmor}.
 
 \section{Przygody}
-\textit{Przygody} są najważniejszym i najbardziej rozbudowanym elementem języka \textit{AdventureMaker}. Dzięki nim możliwe jest napisanie scenariusza rozgrywki. 
+\textit{Przygody} są najważniejszym i najbardziej rozbudowanym elementem języka AdventureMaker. Dzięki nim możliwe jest napisanie scenariusza rozgrywki. 
 
-Definicja \textit{Przygody} składa się z słowa kluczowego \textit{adventure}, nazwy \textit{Przygody}, słów \textit{starts from} oraz \textit{Zdarzenia Początkowego}. \textit{Zdarzenie} otoczone jest zawsze nawiasami klamrowymi i może zawierać jedną z definicji:
+Definicja \textit{Przygody} składa się z słowa kluczowego \textit{adventure}, nazwy \textit{Przygody}, słów \textit{starts from} oraz \textit{Zdarzenia początkowego}. \textit{Zdarzenie} otoczone jest zawsze nawiasami klamrowymi i może zawierać jedną z definicji:
 \begin{itemize}
 	\item \textit{Komunikat},
 	\item \textit{Walka},
-	\item \textit{Zdarzenie Warunkowe},
+	\item \textit{Zdarzenie warunkowe},
 	\item \textit{Pytanie},
-	\item \textit{Modyfikacja Przygód},
-	\item \textit{Blok Zdarzeń}.
+	\item \textit{Modyfikacja przygód},
+	\item \textit{Blok zdarzeń}.
 \end{itemize}
 
 Przed przejściem do przykładowej definicji \textit{Przygody}, należy zapoznać się z dokumentacją poszczególnych \textit{Zdarzeń}.
@@ -573,16 +573,16 @@ If lost {
 }
 \end{minted}
 
-Z definicji wynika, że gracz będzie musiał się zmierzyć z dwoma \textit{Przeciwnikami}: \textit{Troll} i \textit{Orc}. Jeżeli ich pokona, zdobędzie przedmiot - \textit{MagicSword}, w przeciwnym wypadku zostanie wyświetlony \textit{Komunikat} : ,,Unfortunately, you have not saved the villagers''. W obu przypadkach \textit{Zdarzenie} \textit{VillageInDanger} nie będzie już dłużej dostępne w \textit{Lokacji} \textit{Forest}.
+Z definicji wynika, że gracz będzie musiał się zmierzyć z dwoma \textit{Przeciwnikami}: \textit{Troll} i \textit{Orc}. Jeżeli ich pokona, zdobędzie przedmiot -- \textit{MagicSword}, w przeciwnym wypadku zostanie wyświetlony \textit{Komunikat} : ,,Unfortunately, you have not saved the villagers''. W obu przypadkach \textit{Zdarzenie} \textit{VillageInDanger} nie będzie już dłużej dostępne w \textit{Lokacji} \textit{Forest}.
 
-\subsection*{Zdarzenie Warunkowe}
-\textit{Zdarzenie Warunkowe} służy do zadeklarowania \textit{Zdarzeń}, które wywołane zostaną, tylko w przypadku spełnienia określonych warunków. Dodatkowo można zdefiniować \textit{Zdarzenie} alternatywne, wywołane w przypadku niespełnienia warunków. W aktualnej wersji języka składnia \textit{Zdarzeń Warunkowych} jest dość uboga i pozwala jedynie na sprawdzenie, czy postać sterowana przez gracza posiada odpowiednie statystyki.
+\subsection*{Zdarzenie warunkowe}
+\textit{Zdarzenie warunkowe} służy do zadeklarowania \textit{Zdarzeń}, które wywołane zostaną, tylko w przypadku spełnienia określonych warunków. Dodatkowo można zdefiniować \textit{Zdarzenie} alternatywne, wywołane w przypadku niespełnienia warunków. W aktualnej wersji języka składnia \textit{Zdarzeń warunkowych} jest dość uboga i pozwala jedynie na sprawdzenie, czy postać sterowana przez gracza posiada odpowiednie statystyki.
 
-Definicja \textit{Zdarzenia Warunkowego} rozpoczyna się od słów kluczowych \textit{If you have}, po których pojawia się \textit{Wyrażenie Warunkowe}. Następnie należy podać definicję \textit{Zdarzenia}. Opcjonalnie można dodać definicję \textit{Zdarzenia} alternatywnego poprzedzając je słowem \textit{else}.
+Definicja \textit{Zdarzenia warunkowego} rozpoczyna się od słów kluczowych \textit{If you have}, po których pojawia się \textit{Wyrażenie warunkowe}. Następnie należy podać definicję \textit{Zdarzenia}. Opcjonalnie można dodać definicję \textit{Zdarzenia} alternatywnego poprzedzając je słowem \textit{else}.
 
-\textit{Wyrażenia Warunkowe} składają się ze słówka kluczowego \textit{more} lub \textit{less}, skrótowej nazwy parametru (\textit{str}, \textit{agi} lub \textit{int}), słowa \textit{than} oraz wartości liczbowej. Dodatkowo wyrażenia warunkowe można łączyć za pomocą słówek \textit{and} lub \textit{or} oraz nawiasów. \textit{Wyrażenie Warunkowe} można poprzedzić słowem \textit{no}, które wprowadza negację.
+\textit{Wyrażenia warunkowe} składają się ze słówka kluczowego \textit{more} lub \textit{less}, skrótowej nazwy parametru (\textit{str}, \textit{agi} lub \textit{int}), słowa \textit{than} oraz wartości liczbowej. Dodatkowo wyrażenia warunkowe można łączyć za pomocą słówek \textit{and} lub \textit{or} oraz nawiasów. \textit{Wyrażenie warunkowe} można poprzedzić słowem \textit{no}, które wprowadza negację.
 
-Poniżej znajdują się dwa przykłady \textit{Wyrażeń Warunkowych}.
+Poniżej znajdują się dwa przykłady \textit{Wyrażeń warunkowych}.
 \begin{minted}{text}
 If you have no more int than 30
 If you have more agi than 20 or more str than 10
@@ -590,7 +590,7 @@ If you have more agi than 20 or more str than 10
 
 Pierwsze \textit{Wyrażenie} sprawdza, czy postać ma nie więcej niż 30 punktów \textit{Inteligencji}. Drugie sprawdza, czy posiada więcej niż 20 punktów \textit{Siły} lub więcej niż 10 punktów \textit{Zwinności}.
 
-Poniżej znajduje się pełny przykład definicji \textit{Zdarzenia Warunkowego}: 
+Poniżej znajduje się pełny przykład definicji \textit{Zdarzenia warunkowego}: 
 \begin{minted}{text}
 If you have more str than 30 
    {Fight with Orc}
@@ -598,10 +598,10 @@ else
    {Show "The fight will not be necessary"}
 \end{minted}
 
-Z powyższej definicji wynika, że postać o sile większej niż 30 będzie musiała walczyć z przeciwnikiem - \textit{Orc}, natomiast gracz kontrolujący postać słabszą zobaczy komunikat - "The fight will not be necessary".
+Z powyższej definicji wynika, że postać o sile większej niż 30 będzie musiała walczyć z przeciwnikiem -- \textit{Orc}, natomiast gracz kontrolujący postać słabszą zobaczy komunikat: ,,The fight will not be necessary''.
 
 \subsection*{Pytanie}
-\textit{Pytanie} jest \textit{Zdarzeniem} nieco podobnym do \textit{Zdarzenia Warunkowego}, z tą różnicą, że wybór \textit{Zdarzenia} zależy nie od spełnienia bądź niespełnienia warunków, a od decyzji podjętej przez gracza.
+\textit{Pytanie} jest \textit{Zdarzeniem} nieco podobnym do \textit{Zdarzenia warunkowego}, z tą różnicą, że wybór \textit{Zdarzenia} zależy nie od spełnienia bądź niespełnienia warunków, a od decyzji podjętej przez gracza.
 
 Definicja \textit{Pytania} zawsze rozpoczyna się słowem kluczowym \textit{Ask}, po którym znajduje się treść wyświetlonego pytania. Po pytaniu powinna się znaleźć jedna lub więcej \textit{Odpowiedzi}. \textit{Odpowiedź} składa się ze słów kluczowych \textit{Answer} oraz \textit{to}, pomiędzy którymi należy umieścić treść \textit{Odpowiedzi} oraz \textit{Zdarzenia}, do którego prowadzi dana \textit{Odpowiedź}. 
 
@@ -612,12 +612,12 @@ Answer "Yes" to { Get Armor }
 Answer "No" to { Show "Your choise." }
 \end{minted}
 
-Z powyższej definicji wynika, że graczowi zostanie wyświetlone pytanie - "Do you want a new armor?". Gdy odpowie "Yes", otrzyma przedmiot o nazwie \textit{Armor}. W przeciwnym wypadku ujrzy komunikat - "Your choise.".
+Z powyższej definicji wynika, że graczowi zostanie wyświetlone pytanie: ,,Do you want a new armor?''. Gdy odpowie ,,Yes'', otrzyma przedmiot o nazwie \textit{Armor}. W przeciwnym wypadku ujrzy komunikat: ,,Your choise.''.
 
-\subsection*{Modyfikacja Przygód}
-\textit{Modyfikacja Przygód} służy do dodawania lub usuwania \textit{Przygód} z \textit{Lokacji}. Definicja \textit{Zdarzenia} dodającego nową \textit{Przygodę} rozpoczyna się od słowa \textit{Add}, a usuwającego \textit{Remove}. Następnie należy podać nazwę \textit{Przygody} i opcjonalnie częstość jej występowania w nawiasach (domyślna częstość wynosi 1). Dalej należy podać \textit{Lokację}, której dotyczy edycja, poprzedzając ją słowem kluczowym \textit{at}.
+\subsection*{Modyfikacja przygód}
+\textit{Modyfikacja przygód} służy do dodawania lub usuwania \textit{Przygód} z \textit{Lokacji}. Definicja \textit{Zdarzenia} dodającego nową \textit{Przygodę} rozpoczyna się od słowa \textit{Add}, a usuwającego \textit{Remove}. Następnie należy podać nazwę \textit{Przygody} i opcjonalnie częstość jej występowania w nawiasach (domyślna częstość wynosi 1). Dalej należy podać \textit{Lokację}, której dotyczy edycja, poprzedzając ją słowem kluczowym \textit{at}.
 
-Poniżej znajduje się kilka przykładów \textit{Modyfikacji Przygód}. 
+Poniżej znajduje się kilka przykładów \textit{Modyfikacji przygód}. 
 \begin{minted}{text}
 { Add Bandits (4) at Forest }
 { Add VillageInDanger at Forest }
@@ -625,8 +625,8 @@ Poniżej znajduje się kilka przykładów \textit{Modyfikacji Przygód}.
 \end{minted}
 Pierwsze dwie linie dodają odpowiednio \textit{Przygody} \textit{Bandits} i \textit{VillageInDanger} do \textit{Lokacji} \textit{Forest}. Przygoda \textit{Bandits} będzie występowała czterokrotnie częściej niż \textit{VillageInDanger}. Ostania linia usuwa \textit{Przygodę} \textit{MysteriusMan} z \textit{Lokacji} \textit{OldHouse}.
 
-\subsection*{Blok Zdarzeń}
-\textit{Blok Zdarzeń } to jedno lub więcej \textit{Zdarzeń} umieszczonych w nawiasach klamrowych. Takie zdarzenia wywołują się sekwencyjnie.
+\subsection*{Blok zdarzeń}
+\textit{Blok zdarzeń} to jedno lub więcej \textit{Zdarzeń} umieszczonych w nawiasach klamrowych. Takie zdarzenia wywołują się sekwencyjnie.
 Poniższy przykład pokazuje blok składający się z 3 zdarzeń.
 \begin{minted}{text}
 {
@@ -657,11 +657,11 @@ adventure MysteriusManAd starts from {
     }
 }
 \end{minted}
-Przygoda \textit{MysteriusManAd} rozpoczyna się od \textit{Pytania} - "Are you ready to fight?". Odpowiedź "No" prowadzi do \textit{Walki} z \textit{MysteriusManTraining}.
-\textit{Odpowiedź} "Yes" prowadzi do efektu zależnego od \textit{Statystyk} postaci. Postać posiadająca przynajmniej jedną ze \textit{Statystyk} na poziomie powyżej 30 punktów będzie musiała stoczyć \textit{Walkę} z \textit{MysteriusMan}. Jeżeli gracz zwycięży w walce, otrzyma \textit{Komunikat}: "Great. Now, you are ready for fight with Dragon", odblokuje \textit{Przygodę} \textit{BigDragon} w \textit{Lokacji} \textit{Hills}, a \textit{Przygoda} \textit{MysteriusManAd}, nie będzie dłużej dostępna w \textit{OldHause}. Postać niespełniająca tych warunków otrzyma po prostu \textit{Komunikat}: "I don't think so". 
+Przygoda \textit{MysteriusManAd} rozpoczyna się od \textit{Pytania}: ,,Are you ready to fight?''. Odpowiedź ,,No'' prowadzi do \textit{Walki} z \textit{MysteriusManTraining}.
+\textit{Odpowiedź} ,,Yes'' prowadzi do efektu zależnego od \textit{Statystyk} postaci. Postać posiadająca przynajmniej jedną ze \textit{Statystyk} na poziomie powyżej 30 punktów będzie musiała stoczyć \textit{Walkę} z \textit{MysteriusMan}. Jeżeli gracz zwycięży w walce, otrzyma \textit{Komunikat}: ,,Great. Now, you are ready for fight with Dragon'', odblokuje \textit{Przygodę} \textit{BigDragon} w \textit{Lokacji} \textit{Hills}, a \textit{Przygoda} \textit{MysteriusManAd}, nie będzie dłużej dostępna w \textit{OldHause}. Postać niespełniająca tych warunków otrzyma po prostu \textit{Komunikat}: ,,I don't think so''. 
 
-\section{Przygody Początkowe} 
-\textit{Przygody Początkowe} definiują \textit{Przygody} udostępnione graczowi na starcie gry. Definicja rozpoczyna się od słów kluczowych \textit{adventure on start}. Następnie w nawiasach klamrowych znajduje się dowolna liczba deklaracji \textit{Przygód Początkowych}.
+\section{Przygody początkowe} 
+\textit{Przygody początkowe} definiują \textit{Przygody} udostępnione graczowi na starcie gry. Definicja rozpoczyna się od słów kluczowych \textit{adventure on start}. Następnie w nawiasach klamrowych znajduje się dowolna liczba deklaracji \textit{Przygód początkowych}.
 Każda taka definicja składa się z nazwy \textit{Przygody}, słówka kluczowego \textit{at} i nazwy \textit{Lokacji}.
 
 Poniższy przykład zawiera definicje składającą się z dwóch Przygód \textit{MysteriusMan} i \textit{Bandits}, ulokowanych odpowiednio w \textit{OldHouse} i \textit{Forest}.
@@ -674,11 +674,11 @@ Bandits at Forest
 \end{minted}
 
 \chapter{Przykładowa gra}
-Aby ułatwić zrozumienie i korzystanie z \textit{AdventureMaker} postanowiłem przygotować przykładową grę. Kod potrzebny do skompilowania gry znajduje się w dodatku.
+Aby ułatwić zrozumienie i korzystanie z AdventureMaker postanowiłem przygotować przykładową grę. Kod potrzebny do skompilowania gry znajduje się w dodatku.
 
 \section{Opis scenariusza}
 
-Ponieważ \textit{AdventureMaker} powstał w ramach pracy dyplomowej, tematem gry nie jest ratowanie księżniczek i walka ze smokami w świecie fantasy, a studiowanie. Okazuje się, że pomimo, że język nie został zaprojektowany z myślą o grach tego typu, bez problemu udało się ją napisać.
+Ponieważ AdventureMaker powstał w ramach pracy dyplomowej, tematem gry nie jest ratowanie księżniczek i walka ze smokami w świecie fantasy, a studiowanie. Okazuje się, że pomimo, że język nie został zaprojektowany z myślą o grach tego typu, bez problemu udało się ją napisać.
 
 Akcja gry rozgrywa się na uniwersytecie, a celem gracza jest zdanie egzaminu magisterskiego. Aby to osiągnąć, gracz musi rozwijać umiejętności swojej postaci poprzez zdawanie pomniejszych egzaminów. Kiedy gracz będzie już gotowy do ostatecznej próby, musi udać się do specjalnej sali, w której może podejść do egzaminu i zdobyć upragniony dyplom.
 
@@ -686,7 +686,7 @@ Gracz może osiągnąć cel obierając jedną z dwóch strategii. Na początku g
 
 \section{Uruchamianie gry}
 
-Grę można pobrać z repozytorium  (\url{https://github.com/adrpieper/magisterka}) i zainstalować na dowolnym urządzeniu z systemem \textit{Android} w wersji powyżej 4.0, obsługującym komunikację NFC. 
+Grę można pobrać z repozytorium  (\url{https://github.com/adrpieper/magisterka}) i zainstalować na dowolnym urządzeniu z systemem Android w wersji powyżej 4.0, obsługującym komunikację NFC. 
 
 Przed rozpoczęciem gry należy zaprogramować i umieścić znaczniki NFC zawierające tagi:
 \begin{itemize}
@@ -695,7 +695,7 @@ Przed rozpoczęciem gry należy zaprogramować i umieścić znaczniki NFC zawier
 \end{itemize}
 Znaczników \textit{ClassRoom} można przygotować dowolną ilość i rozmieścić je w kilku salach uczelni. Znacznik \textit{MasterExamRoom} powinien znajdować się w pojedynczej sali, w której odbywać się będą egzaminy dyplomowe.
 
-Znaczniki można zakupić w sklepie elektronicznym i zaprogramować jedną z wielu dostępnych do tego aplikacji na system \textit{Android}.
+Znaczniki można zakupić w sklepie elektronicznym i zaprogramować jedną z wielu dostępnych do tego aplikacji na system Android.
 
 Zdjęcie (rys. \ref{game:tag:example}) pokazuje przykład, jak można oznaczyć miejsce ze znacznikiem w widocznych sposób.
 \begin{figure}[!tbh]
@@ -719,7 +719,7 @@ Po przyłożeniu urządzenia do znacznika postać gracza przenosi się do sali e
 % załączniki (opcjonalnie):
 \appendix
 
-\chapter{Przykładowy kod Klasy Postaci}
+\chapter{Przykładowy kod \textit{Klasy postaci}}
 Poniżej znajduje się kod prezentujący tworzenie obiektu reprezentującego taką samą klasę postaci na dwa sposoby: z i bez wykorzystania wewnętrznego DSL.
 \section*{Kod niewykorzystujący wewnętrznego DSL}
 \begin{minted}{text}
@@ -863,11 +863,11 @@ opponent SimpleExam {
   power : 10
   hp : 20
   exp : 100
-  loot : GoodGrade 50%, FunnyHat 1 %, BrandNewSmartPhone 10%, 
+  loot : GoodGrade 50%, FunnyHat 1%, BrandNewSmartPhone 10%, 
          GoodPen 20%,  WarmGloves 10%
 }
 
-opponent MasterDegreeExam{
+opponent MasterDegreeExam {
   power : 50
   hp : 100
   exp : 1000
@@ -875,42 +875,43 @@ opponent MasterDegreeExam{
 }
 
 adventure NotAStudent starts from {
-  Show "You are not a Student"
+  Show "Sorry. You are not a student."
 }
 
 adventure SimpleExamAdventure starts from {
-  Fight with SimpleExam
-  If win {
-    {
-      If you have more int than 30 {
-        {Show "You are ready for MasterDegreeExam" }
-        {Remove SimpleExamAdventure at ClassRoom}
-        {Add MasterExamAdventure at ClassRoom}
+  { Show "Welcome to the exam." }
+  {
+    Fight with SimpleExam
+    If win {
+      {
+        If you have more int than 30 {
+          { Show "You are ready for the master's degree exam now." }
+          { Remove SimpleExamAdventure at ClassRoom }
+          { Add MasterExamAdventure at ClassRoom }
+        }
+        else { Show "You have to pass few more exams." }
       }
-      else 
-        { Show "You have to pass few more exams." }
-    }
-    {
+      {
       If you have more agi than 30 {
-        {Show "You was catched on cheating." }
-        {Add NotAStudent at ClassRoom}
-        {Remove SimpleExamAdventure at ClassRoom}
+        { Show "You was catched on cheating." }
+        { Add NotAStudent at ClassRoom }
+        { Remove SimpleExamAdventure at ClassRoom }
+        }
       }
     }
   }
 }
 
 adventure MasterExamAdventure starts from {
-  {Show "Have you passed all exams?"}
-  {
+  {Show "Welcome to the master's degree exam."}
+    {
     Fight with MasterDegreeExam
     If win {
-      {Show "Great. You just have gradueted your Master Degree"}
+      {Show "Great. You just have gradueted your master's degree."}
       {Remove MasterExamAdventure at MasterExamRoom}
     }
-    If lost 
-      { Show "You can try another one" }
-    }
+    If lost { Show "You can try one more time." }
+  }
 }
 
 location ClassRoom tagged as ClassRoom
@@ -919,6 +920,7 @@ location MasterExamRoom tagged as MasterExamRoom
 adventure on start {
   SimpleExamAdventure at ClassRoom
 }
+
 
 \end{minted}
 
