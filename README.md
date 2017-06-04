@@ -21,4 +21,4 @@ W ramach projektu powstała specjalna wtyczka do IDE *IntelliJ IDEA*. Wtyczka w 
 
 ### Przykładowa gra
 
-Przykładowa gra, której akcja odbywa się na uniwersytecie znajjduje się w postaci pliku *.apk* w folderze *docs/files*.
+Przykładowa gra, której akcja odbywa się na uniwersytecie, znajduje się w postaci pliku *.apk* w folderze *docs/files*.
