@@ -115,17 +115,17 @@ opponent MasterDegreeExam{
 }
 
 adventure NotAStudent starts from {
-    Show "Nie jesteś studentem"
+    Show "Sorry. You are not a student."
 }
 
 adventure SimpleExamAdventure starts from {
-    { Show "Witam na egzaminie." }
+    { Show "Welcome to the exam." }
     {
         Fight with SimpleExam
         If win {
             {
                 If you have more int than 30 {
-                    {Show "You are ready for MasterDegreeExam" }
+                    {Show "You are ready for the master's degree exam now." }
                     {Remove SimpleExamAdventure at ClassRoom}
                     {Add MasterExamAdventure at ClassRoom}
                 }
@@ -145,15 +145,15 @@ adventure SimpleExamAdventure starts from {
 }
 
 adventure MasterExamAdventure starts from {
-    {Show "Witam na egzaminie magistertkim."}
+    {Show "Welcome to the master's degree exam."}
     {
         Fight with MasterDegreeExam
         If win {
-            {Show "Great. You just have gradueted your Master Degree"}
+            {Show "Great. You just have gradueted your master's degree."}
             {Remove MasterExamAdventure at MasterExamRoom}
         }
         If lost {
-            Show "You can try another one"
+            Show "You can try one more time."
         }
     }
 }
