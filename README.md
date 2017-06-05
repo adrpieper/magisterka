@@ -19,6 +19,8 @@ Projekt składa się z trzech część: języka (*AdventureMakerLanguage*), szki
 
 W ramach projektu powstała specjalna wtyczka do IDE *IntelliJ IDEA*. Wtyczka w postaci pliku *aml.zip* znajduje się w folderze *docs/files*.
 
+![*IntelliJ IDEA* Screenshot](https://github.com/adrpieper/magisterka/idea_screen.png)
+
 ### Przykładowa gra
 
 Przykładowa gra, której akcja odbywa się na uniwersytecie, znajduje się w postaci pliku *.apk* w folderze *docs/files*.
