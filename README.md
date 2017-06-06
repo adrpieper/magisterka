@@ -21,8 +21,13 @@ W ramach projektu powstała specjalna wtyczka do IDE *IntelliJ IDEA*. Wtyczka w 
 
 Poniższy screen prezentuje działanie wtyczki takie jak kolorowanie i autouzupełnianie składni.
 
-![*IntelliJ IDEA* Screenshot](https://github.com/adrpieper/magisterka/blob/master/idea_screen.png?raw=true)
+![*IntelliJ IDEA* Screenshot](https://github.com/adrpieper/magisterka/blob/master/screens/idea_screen.png?raw=true)
 
 ### Przykładowa gra
 
 Przykładowa gra, której akcja odbywa się na uniwersytecie, znajduje się w postaci pliku *.apk* w folderze *docs/files*.
+
+Poniżej znajdują się 3 screeny z gry prezentujące wybór postaci, drzewo umiejętności oraz *walkę* z egzaminem.
+![*Example Game* Screenshot](https://github.com/adrpieper/magisterka/blob/master/screens/game_screen1.png?raw=true)
+![*Example Game* Screenshot](https://github.com/adrpieper/magisterka/blob/master/screens/game_screen2.png?raw=true)
+![*Example Game* Screenshot](https://github.com/adrpieper/magisterka/blob/master/screens/game_screen3.png?raw=true)
